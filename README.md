@@ -7,6 +7,6 @@ This repository provides codes, examples, and tutorials of all the work accompli
 #### IMPORTANT
 All the code presented here is written and tested with [python 3.7](https://www.python.org/), making use of the powerful [Jupyter](https://jupyter.org/). A list of all necessary libraries, their version and their repository is available in [Packages_List](Packages_List.txt). 
 
-Follow the instruction in [here](https://stackoverflow.com/questions/48787250/set-up-virtualenv-using-a-requirements-txt-generated-by-conda) to create a new environment (using either [environment.yml](environment.yml) or [requirement.txt](requirement.txt) or both) with all the needed libraries from the indexed channel to avoid all compatibility issues.
+Follow the instruction in [here](https://stackoverflow.com/questions/48787250/set-up-virtualenv-using-a-requirements-txt-generated-by-conda) to create a new environment (using either [environment.yml](environment.yml) or [requirement.txt](requirements.txt) or both) with all the needed libraries from the indexed channel to avoid all compatibility issues.
 
 
