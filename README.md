@@ -4,4 +4,4 @@ This repository provides codes, examples, and tutorials of all the work accompli
 </br>
 
 #### IMPORTANT
-All the code presented here is written and tested with [python 3.7](https://www.python.org/), making use of the powerful [Jupyter](https://jupyter.org/). A list of all necessary libraries, their version and their repository is available in [package-list](package-list.txt). Install these from the indexed channel to avoid all compatibility issues.
+All the code presented here is written and tested with [python 3.7](https://www.python.org/), making use of the powerful [Jupyter](https://jupyter.org/). A list of all necessary libraries, their version and their repository is available in [Packages_List](Packages_List.txt). Install these from the indexed channel to avoid all compatibility issues.
