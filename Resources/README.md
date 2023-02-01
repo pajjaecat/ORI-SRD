@@ -19,7 +19,7 @@ The available resource is subdivided into five subfolders as follows:
 
 - [Pickle_files](Pickle_files/): Contains
   - The networks to simulate as ``.p`` files. Here we consider ST LAURENT and CIVAUX as respectively the upper and lower Network; 
-  - [simulationResults](pickle_files/simulationResults), a folder where files/dataset associated with the notebooks or results of simulation that can be recall for easy use;
+  - [simulationResults](Pickle_files/simulationResults), a folder where files/dataset associated with the notebooks or results of simulation that can be recall for easy use;
   
   - [RNN](Pickle_files/RNN) a folder where created [Recurrent Neural Network](https://en.wikipedia.org/wiki/Recurrent_neural_network) are saved.
   
