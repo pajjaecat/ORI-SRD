@@ -12,8 +12,10 @@ All the files (data) called within the notebooks described here are located in [
 
 
 ##### [CleanDataSTLaurentDeJourdes](CleanDataSTLaurentDeJourdes.ipynb) 
-> > Clean the network's input data (Hv & Lv Prod, Load demand) and save the result to be recalled when needed.
+> > Clean the network's input data (Hv & Lv Prod, Load demand) and save the results to be recalled when needed.
 
 ##### [STLaurentDeJourdes_2](STLaurentDeJourdes_2.ipynb)
-> > This notebook provides mainly simulation of the Voltage rise on [Civaux's](../Pickle_files/CIVAUX.p) network for 
-  - (1) when the controlled HV producer is not present or not injecting into the network, (2) is present whith no type of controlled implemented, and (3) present 
+> > This notebook provides mainly simulation of the Voltage rise on [Civaux's](../Pickle_files/CIVAUX.p) network when the controlled HV producer is: 
+> > - not injecting into the network;
+> > - injecting into the network with no constraints considered; 
+> > - injecting into the network with a maximum Voltage Rise threshold considered on the HV buses.
