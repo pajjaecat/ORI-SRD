@@ -10,6 +10,7 @@
 
 ## Architecture
 The available resource is subdivided into five subfolders as follows:
+- [Notebooks](Notebooks/): Contains all the Notebooks for the different simulations and tutorials. [NotebooksReadMe](Notebooks/README.md) gives more explanation about them. 
 - [Excel_files](Excel_files/): Contains the the networks' inputs as ``.csv`` files 
   - Each of the Hv Prod must have its own associated files;
   - All of the Lv Prods (i.e. all the LV Prods in the Upper network) must be aggregated  in a unique file;
@@ -18,9 +19,9 @@ The available resource is subdivided into five subfolders as follows:
 - [Figures](Figures/): Contains figures resulting from the simulations.
 
 - [Pickle_files](Pickle_files/): Contains
-  - The networks to simulate as ``.p`` files. Here we consider ST LAURENT and CIVAUX as respectively the upper and lower Network; 
-  - [simulationResults](Pickle_files/simulationResults), a folder where files/dataset associated with the notebooks or results of simulation that can be recall for easy use;
+  - The networks to simulate as ``.p`` files. Here we consider ST LAURENT and CIVAUX as, respectively, the upper and lower Network; 
+  - [simulationResults](Pickle_files/simulationResults), a folder where files/dataset associated with the notebooks or results of simulations that can be recalled for easy use;
   
   - [RNN](Pickle_files/RNN) a folder where created [Recurrent Neural Network](https://en.wikipedia.org/wiki/Recurrent_neural_network) are saved.
   
-- [Modules](Modules/): Contains different modules (classes, functions and variables) that are used in all the notebooks. See [py_filesReadMe](py_files/README.md) for more details
+- [Modules](Modules/): Contains different modules (classes, functions and variables) that are used in all the notebooks. See [ModulesReadMe](Modules/README.md) for more details
