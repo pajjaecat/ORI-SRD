@@ -15,7 +15,11 @@ Make sure to read [Voltage Rise control Block scheme](../Docs/VRiseControlBlockS
 > > Clean the network's input data (Hv & Lv Prod, Load demand) and save the results to be recalled when needed.
 
 ##### [STLaurentDeJourdes_2](STLaurentDeJourdes_2.ipynb)
-> > This notebook provides mainly simulations of the Voltage rise on [Civaux's](../Pickle_files/CIVAUX.p) network when the controlled HV producer is: 
+> > Simulations of the Voltage rise on [Civaux's](../Pickle_files/CIVAUX.p) network when the controlled HV producer is: 
 > > - not injecting into the network;
 > > - injecting into the network with no constraints considered; 
 > > - injecting into the network with a maximum Voltage Rise threshold considered on the HV buses.
+
+
+##### [2021_2022_KnownFuture](2021_2022_KnownFuture.ipynb)
+> > Simulations using the [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) with the block **PRED** having a perfect knowledge of the future in parallel to speed up the process. 
