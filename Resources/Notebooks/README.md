@@ -7,7 +7,7 @@ All the files (data) called within the notebooks described here are located in [
 
 ## Brief description of each  notebook
 
-
+Make sure to read [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) to understand the notebooks well. 
 ***
 
 
@@ -15,7 +15,7 @@ All the files (data) called within the notebooks described here are located in [
 > > Clean the network's input data (Hv & Lv Prod, Load demand) and save the results to be recalled when needed.
 
 ##### [STLaurentDeJourdes_2](STLaurentDeJourdes_2.ipynb)
-> > This notebook provides mainly simulation of the Voltage rise on [Civaux's](../Pickle_files/CIVAUX.p) network when the controlled HV producer is: 
+> > This notebook provides mainly simulations of the Voltage rise on [Civaux's](../Pickle_files/CIVAUX.p) network when the controlled HV producer is: 
 > > - not injecting into the network;
 > > - injecting into the network with no constraints considered; 
 > > - injecting into the network with a maximum Voltage Rise threshold considered on the HV buses.
