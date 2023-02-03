@@ -30,5 +30,8 @@ Make sure to read [Voltage Rise control Block scheme](../Docs/VRiseControlBlockS
 
 
 ##### [2021_2022_PersistenceRob](2021_2022_PersistenceRob.ipynb)
-> > > > Simulations using the [Robust Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) with the block **PRED** using persistence of the previous instant as prediction method.
+> > Simulations using the [Robust Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) with the block **PRED** using persistence of the previous instant as prediction method.
 
+##### [RNN_Train_StLaurentDeJourdes](RNN_Train_StLaurentDeJourdes.ipynb) and [RNN_Sim_StLaurentDeJourdes](RNN_Sim_StLaurentDeJourdes.ipynb)
+> > - Create and Train a Recurrent Neural Network ([RNN](https://en.wikipedia.org/wiki/Recurrent_neural_network)) of type LSTM to predict some values; 
+> > - Use the previously trained RNN to predict the next $\tilde{X}(k)$ and $\tilde{Y}(k)$ based on the sliding history $Z(k)$ of the past twelve daylight hours. [Figures](../Figures) contains several comparison plots of the real variables and their prediction.
