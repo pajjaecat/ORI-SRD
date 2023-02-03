@@ -23,3 +23,7 @@ Make sure to read [Voltage Rise control Block scheme](../Docs/VRiseControlBlockS
 
 ##### [2021_2022_KnownFuture](2021_2022_KnownFuture.ipynb)
 > > Simulations using the [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) with the block **PRED** having a perfect knowledge of the future in parallel to speed up the process.
+
+
+##### [2021_2022_Persistence](2021_2022_Persistence.ipynb) and [2021_2022_Persistence2](2021_2022_Persistence2.ipynb)
+> > Simulations using the [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) with the block **PRED** using persistence of the previous instant as prediction method, respectively for $max\\_ vm\\_ pu = 1.0250$ and $max\\_vm\\_pu = 1.0225$ 
