@@ -22,4 +22,4 @@ Make sure to read [Voltage Rise control Block scheme](../Docs/VRiseControlBlockS
 
 
 ##### [2021_2022_KnownFuture](2021_2022_KnownFuture.ipynb)
-> > Simulations using the [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) with the block **PRED** having a perfect knowledge of the future in parallel to speed up the process. 
+> > Simulations using the [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) with the block **PRED** having a perfect knowledge of the future in parallel to speed up the process.
