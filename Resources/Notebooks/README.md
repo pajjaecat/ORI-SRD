@@ -36,4 +36,5 @@ Make sure to read [Voltage Rise control Block scheme](../Docs/VRiseControlBlockS
 > > - Create and Train a Recurrent Neural Network ([RNN](https://en.wikipedia.org/wiki/Recurrent_neural_network)) of type LSTM to predict some values; 
 > > - Use the previously trained RNN to predict the next $\tilde{X}(k)$ and $\tilde{Y}(k)$ based on the sliding history $Z(k)$ of the past twelve daylight hours. [Figures](../Figures) contains several comparison plots of the real variables and their prediction.
 
-#### [2021_2022_RNN](2021_2022_RNN.ipynb) Simulations using the [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) with the block **PRED** based on the RNN created and trained in [RNN_Train_StLaurentDeJourdes](RNN_Train_StLaurentDeJourdes.ipynb) in parallel.
+#### [2021_2022_RNN](2021_2022_RNN.ipynb) 
+> > Simulations using the [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) with the block **PRED** based on the RNN created and trained in [RNN_Train_StLaurentDeJourdes](RNN_Train_StLaurentDeJourdes.ipynb) in parallel.
