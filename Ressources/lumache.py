@@ -35,30 +35,30 @@ def get_random_ingredients(kind=None):
 
 
 
-# def readAndReshape_excelFile(f_name:str, 
-#                              folder_name=excel_folder, 
-#                              n_row2read:int=None):
-#     """
-#     Read and reshape in a one dimension array (that is returned) the excel file given by f_name
+def readAndReshape_excelFile(f_name:str, 
+                             folder_name:str, 
+                             n_row2read:int=None):
+    """
+    Read and reshape in a one dimension array (that is returned) the excel file given by f_name
     
-#     Parameters: 
-#     ----------- 
-#     f_name: str
-#         Name of the file to load (with the correct extension)
-#     folder_name: str
-#         Location of the folder where the file is present
-#     n_row2read : Int (default=0) 
-#          Numbers of rows to read in the excel file.
-#     """
+    Parameters: 
+    ----------- 
+    f_name: str
+        Name of the file to load (with the correct extension)
+    folder_name: str
+        Location of the folder where the file is present
+    n_row2read : Int (default=0) 
+         Numbers of rows to read in the excel file.
+    """
 
-#     filename = f"{folder_name}{f_name}"
-#     cols_to_read = range(2, 8)  # Define index of columns to read 
-#                                 # 0 10 20 30 40 50 
-#                                 # Where each of the six columns to read represent a period.
-#     input_data = pandas.read_csv(filename,
-#                                  header=None,
-#                                  sep=";",
-#                                  usecols=cols_to_read,
-#                                  nrows=n_row2read)
+    filename = f"{folder_name}{f_name}"
+    cols_to_read = range(2, 8)  # Define index of columns to read 
+                                # 0 10 20 30 40 50 
+                                # Where each of the six columns to read represent a period.
+    input_data = pandas.read_csv(filename,
+                                 header=None,
+                                 sep=";",
+                                 usecols=cols_to_read,
+                                 nrows=n_row2read)
 
-#     return numpy.array(input_data).reshape(-1) / 1000  # /1000 To convert data (MW)
+    return cols_to_read
