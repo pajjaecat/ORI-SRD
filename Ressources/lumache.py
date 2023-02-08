@@ -41,7 +41,7 @@ def readAndReshape_excelFile(f_name:str,
     """
     Read and reshape in a one dimension array (that is returned) the excel file given by f_name
     
-    Parameters: 
+    INPUT: 
     ----------- 
     f_name: str
         Name of the file to load (with the correct extension)
