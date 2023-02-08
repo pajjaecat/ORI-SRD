@@ -38,7 +38,7 @@ def get_random_ingredients(kind=None):
 def readAndReshape_excelFile(f_name:str, 
                              folder_name:str, 
                              n_row2read:int=None):
-      """
+    """
     Load both the lower (network used for opimization) and upper network, after which a configuration 
     of the main  parameters to use for the simulations are done. 
     Namely:
@@ -84,9 +84,11 @@ def readAndReshape_excelFile(f_name:str,
             (1) vm_mu_min_lv: float
                 Minimum authorised voltage rise of lv Buses on the Lower network
 
-    Output:
+    Return:
     -------
-      """
+    
+    
+    """
         
     filename = f"{folder_name}{f_name}"
     cols_to_read = range(2, 8)  # Define index of columns to read 
