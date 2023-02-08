@@ -48,14 +48,17 @@ def readAndReshape_excelFile(f_name:str,
     upperNet_file : str
         The upper Network file, with the approporiate extenxion (Must be present in the network_folder)
         Egg: 'ST LAURENT.p'.
+        
     lowerNet_file : str
         The lower Network file, with the approporiate extenxion (Must be present in the network_folder)
         Egg:'CIVAUX.p'.
+        
     ctrld_hvProdName : str
         Name of the controlled HV producer in the Lower Network. 
         Egg: 'P0100'.
+        
     params_coef_add_bt : tuple 
-        (0) `coef_add_bt` : float
+        (0) coef_add_bt : float
             Value of the added output power for all the LV producers (MW) in the lower Network.
         (1) coef_add_bt_dist: str
             How coef_add_bt is shared among the LV producers. Three choices are possible
@@ -69,6 +72,7 @@ def readAndReshape_excelFile(f_name:str,
             + 'lowNet_rand' ==> coef_add_bt is shared proportionnaly among a randomly selected 
                  set of the LV producers on the lower Network. The randomly selected set consist of 
                  half of all LV producers on the on the lower Network
+                 
     params_vRise : tuple
         (0) params_vRise[0] : tuple
             Voltage Rise threshold associated with Higher voltages buses
