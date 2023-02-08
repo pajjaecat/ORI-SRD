@@ -47,10 +47,15 @@ def readAndReshape_excelFile(f_name:str,
         Name of the file to load (with the correct extension)
     folder_name: str
         Location of the folder where the file is present
+    n_row2read: str
+        Numbers of row to read
          
     Returns:
     -------
-        THins are not still considered
+        Naturally now i'm perplexed by hoa I can mange to include something more interestonn
+        to see the advances I can get y=wxtn
+        fsfsd       fsfs
+                                gfssgf
         
     """
 
