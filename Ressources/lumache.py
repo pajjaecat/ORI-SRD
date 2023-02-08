@@ -49,6 +49,10 @@ def readAndReshape_excelFile(f_name:str,
         Location of the folder where the file is present
     n_row2read : Int (default=0) 
          Numbers of rows to read in the excel file.
+         
+    Return:
+    -------
+        Res
     """
 
     filename = f"{folder_name}{f_name}"
