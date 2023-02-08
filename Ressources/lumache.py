@@ -52,7 +52,8 @@ def readAndReshape_excelFile(f_name:str,
          
     Returns:
     -------
-        Resulting datail of everutyh
+        THins are not still considered
+        
     """
 
     filename = f"{folder_name}{f_name}"
