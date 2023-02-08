@@ -47,26 +47,26 @@ def readAndReshape_excelFile(f_name:str,
     ----------
     upperNet_file: str
         The upper Network file, with the approporiate extenxion (Must be present in the network_folder)
-        Egg: 'ST LAURENT.p'
+        Egg: 'ST LAURENT.p'.
     lowerNet_file : str
         The lower Network file, with the approporiate extenxion (Must be present in the network_folder)
-        Egg:'CIVAUX.p'
+        Egg:'CIVAUX.p'.
     ctrld_hvProdName : str
         Name of the controlled HV producer in the Lower Network. 
-        Egg: 'P0100'
+        Egg: 'P0100'.
     params_coef_add_bt : tuple 
         (0) coef_add_bt: float
-            Value of the added output power for all the LV producers (MW) in the lower Network
+            Value of the added output power for all the LV producers (MW) in the lower Network.
         (1) coef_add_bt_dist: str
             How coef_add_bt is shared among the LV producers. Three choices are possible
-            - None (default) ==> No upscaling is done
-            - 'uppNet' ==> coef_add_bt is added to the Sum of maximum output of all lower 
-                 voltage (LV) producers (MW) in the upper Network. In consequence, the LV producers 
-                 on the lower network receive only a fraction of coef_add_bt.
-            - 'lowNet'==> coef_add_bt is added to the Sum of maximum output of all LV 
+            + None (default) ==> No upscaling is done
+            + 'uppNet' ==> coef_add_bt is added to the Sum of maximum output of all lower voltage (LV) 
+                producers (MW) in the upper Network. In consequence, the LV producers on the lower network 
+                receive only a fraction of coef_add_bt.
+            + 'lowNet'==> coef_add_bt is added to the Sum of maximum output of all LV 
                  producers (MW) in the lower Network. In consequence, coef_add_bt is shared 
                  proportionnaly among all the LV producers on the lower network. 
-            - 'lowNet_rand' ==> coef_add_bt is shared proportionnaly among a randomly selected 
+            + 'lowNet_rand' ==> coef_add_bt is shared proportionnaly among a randomly selected 
                  set of the LV producers on the lower Network. The randomly selected set consist of 
                  half of all LV producers on the on the lower Network
     params_vRise : tuple
@@ -85,7 +85,7 @@ def readAndReshape_excelFile(f_name:str,
 
     Returns
     -------
-    networks: oriClass.InitNetworks
+    networks : oriClass.InitNetworks
         An instance of the class oriClass.InitNetworks
     
     """
