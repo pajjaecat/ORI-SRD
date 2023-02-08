@@ -50,7 +50,7 @@ def readAndReshape_excelFile(f_name:str,
     n_row2read: str
         Numbers of row to read
          
-    Return
+    Returns
     -------
     dare_nae: list
         Naturally now  perplexed by hoa I can mange to include something more interestonn
