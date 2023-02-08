@@ -61,17 +61,21 @@ def readAndReshape_excelFile(f_name:str,
         coef_add_bt : float
             Value of the added output power for all the LV producers (MW) in the lower Network.
         coef_add_bt_dist: str
-            How coef_add_bt is shared among the LV producers. Three choices are possible
-            + None (default) ==> No upscaling is done
-            + 'uppNet' ==> coef_add_bt is added to the Sum of maximum output of all lower voltage (LV) 
-                producers (MW) in the upper Network. In consequence, the LV producers on the lower network 
-                receive only a fraction of coef_add_bt.
-            + 'lowNet'==> coef_add_bt is added to the Sum of maximum output of all LV 
-                 producers (MW) in the lower Network. In consequence, coef_add_bt is shared 
-                 proportionnaly among all the LV producers on the lower network. 
-            + 'lowNet_rand' ==> coef_add_bt is shared proportionnaly among a randomly selected 
-                 set of the LV producers on the lower Network. The randomly selected set consist of 
-                 half of all LV producers on the on the lower Network
+            How coef_add_bt is shared among the LV producers. Three choices are possible.
+            None :  (default)
+                No upscaling is done
+            uppNet :  
+                coef_add_bt is added to the Sum of maximum output of all lower voltage (LV) 
+                producers (MW) in the upper Network. In consequence, the LV producers on the lower
+                network receive only a fraction of coef_add_bt.
+            lowNet:
+                coef_add_bt is added to the Sum of maximum output of all LV producers (MW) in the 
+                lower Network. In consequence, coef_add_bt is shared proportionnaly among all the 
+                LV producers on the lower network. 
+            lowNet_rand
+                coef_add_bt is shared proportionnaly among a randomly selected set of the LV producers 
+                on the lower Network. The randomly selected set consist of half of all LV producers on
+                the lower Network
                  
     params_vRise : tuple
         (0) params_vRise[0] : tuple
