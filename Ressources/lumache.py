@@ -57,10 +57,10 @@ def readAndReshape_excelFile(f_name:str,
         Name of the controlled HV producer in the Lower Network. 
         Egg: 'P0100'.
         
-    params_coef_add_bt : tuple 
-        (0) coef_add_bt : float
+    params_coef_add_bt : tuple
+        coef_add_bt : float
             Value of the added output power for all the LV producers (MW) in the lower Network.
-        (1) coef_add_bt_dist: str
+        coef_add_bt_dist: str
             How coef_add_bt is shared among the LV producers. Three choices are possible
             + None (default) ==> No upscaling is done
             + 'uppNet' ==> coef_add_bt is added to the Sum of maximum output of all lower voltage (LV) 
@@ -80,12 +80,12 @@ def readAndReshape_excelFile(f_name:str,
                 Maximum authorised voltage rise of hv Buses on the Lower network
             (1) vm_mu_min_hv : float
                 Minimum authorised voltage rise of hv Buses on the Lower network
-       (1) params_vRise[1] : tuple
-           Voltage Rise threshold associated with lower voltages buses
-            (0) vm_mu_max_lv : float
-                Maximum authorised voltage rise of lv Buses on the Lower network
-            (1) vm_mu_min_lv : float
-                Minimum authorised voltage rise of lv Buses on the Lower network
+        (1) params_vRise[1] : tuple
+            Voltage Rise threshold associated with lower voltages buses
+                (0) vm_mu_max_lv : float
+                    Maximum authorised voltage rise of lv Buses on the Lower network
+                (1) vm_mu_min_lv : float
+                    Minimum authorised voltage rise of lv Buses on the Lower network
 
     Returns
     -------
