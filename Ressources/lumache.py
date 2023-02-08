@@ -40,9 +40,9 @@ def readAndReshape_excelFile(f_name:str,
                              n_row2read:int=None):
     """
     Read and reshape in a one dimension array (that is returned) the excel file given by f_name    
-    """
-    Parameters: 
-    ----------- 
+
+    Parameters 
+    ---------- 
     f_name: str
         Name of the file to load (with the correct extension)
     folder_name: str
@@ -50,11 +50,11 @@ def readAndReshape_excelFile(f_name:str,
     n_row2read: str
         Numbers of row to read
          
-    Return:
+    Return
     -------
     dare_nae: list
         Naturally now  perplexed by hoa I can mange to include something more interestonn
-
+    """
         
     filename = f"{folder_name}{f_name}"
     cols_to_read = range(2, 8)  # Define index of columns to read 
