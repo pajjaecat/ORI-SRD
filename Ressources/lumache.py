@@ -41,7 +41,7 @@ def readAndReshape_excelFile(f_name:str,
     """
     Read and reshape in a one dimension array (that is returned) the excel file given by f_name
     
-    INPUT: 
+    Parameters: 
     ----------- 
     f_name: str
         Name of the file to load (with the correct extension)
@@ -50,8 +50,8 @@ def readAndReshape_excelFile(f_name:str,
     n_row2read: str
         Numbers of row to read
          
-    OPTIONAL:
-    ----------
+    Return:
+    -------
         dare_nae: list
         Naturally now i'm perplexed by hoa I can mange to include something more interestonn
         to see the advances I can get y=wxtn
