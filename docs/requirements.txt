@@ -57,3 +57,4 @@ sphinxcontrib-serializinghtml==1.1.5
 urllib3==1.26.9
     # via requests
 pandas==1.3.5
+numpydoc==1.5.0
