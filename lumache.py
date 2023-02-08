@@ -61,4 +61,4 @@ def get_random_ingredients(kind=None):
 #                                  usecols=cols_to_read,
 #                                  nrows=n_row2read)
 
-    return numpy.array(input_data).reshape(-1) / 1000  # /1000 To convert data (MW)
+#     return numpy.array(input_data).reshape(-1) / 1000  # /1000 To convert data (MW)
