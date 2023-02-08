@@ -39,8 +39,8 @@ def readAndReshape_excelFile(f_name:str,
                              folder_name:str, 
                              n_row2read:int=None):
     """
-    Read and reshape in a one dimension array (that is returned) the excel file given by f_name
-    
+    Read and reshape in a one dimension array (that is returned) the excel file given by f_name    
+    """
     Parameters: 
     ----------- 
     f_name: str
@@ -52,14 +52,10 @@ def readAndReshape_excelFile(f_name:str,
          
     Return:
     -------
-        dare_nae: list
-        Naturally now i'm perplexed by hoa I can mange to include something more interestonn
-        to see the advances I can get y=wxtn
-        fsfsd       fsfs
-                                gfssgf
-        
-    """
+    dare_nae: list
+        Naturally now  perplexed by hoa I can mange to include something more interestonn
 
+        
     filename = f"{folder_name}{f_name}"
     cols_to_read = range(2, 8)  # Define index of columns to read 
                                 # 0 10 20 30 40 50 
