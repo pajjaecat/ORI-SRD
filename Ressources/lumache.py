@@ -62,9 +62,10 @@ def readAndReshape_excelFile(f_name:str,
             Value of the added output power for all the LV producers (MW) in the lower Network.
         coef_add_bt_dist: str
             How coef_add_bt is shared among the LV producers. Three choices are possible.
-            None :  (default)
-                No upscaling is done
-            uppNet :  
+            
+            None (default)
+                    No upscaling is done
+            uppNet  
                 coef_add_bt is added to the Sum of maximum output of all lower voltage (LV) 
                 producers (MW) in the upper Network. In consequence, the LV producers on the lower
                 network receive only a fraction of coef_add_bt.
