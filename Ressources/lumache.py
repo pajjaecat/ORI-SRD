@@ -58,38 +58,38 @@ def readAndReshape_excelFile(f_name:str,
         Egg: 'P0100'.
         
     params_coef_add_bt : tuple
-        coef_add_bt : float
+        [0] coef_add_bt : float
             Value of the added output power for all the LV producers (MW) in the lower Network.
-        coef_add_bt_dist: str
+        [1] coef_add_bt_dist: str
             How coef_add_bt is shared among the LV producers. Three choices are possible.
             
             None (default)
                     No upscaling is done
-            uppNet  
+            "uppNet"  
                 coef_add_bt is added to the Sum of maximum output of all lower voltage (LV) 
                 producers (MW) in the upper Network. In consequence, the LV producers on the lower
                 network receive only a fraction of coef_add_bt.
-            lowNet:
+            "lowNet":
                 coef_add_bt is added to the Sum of maximum output of all LV producers (MW) in the 
                 lower Network. In consequence, coef_add_bt is shared proportionnaly among all the 
                 LV producers on the lower network. 
-            lowNet_rand
+            "lowNet_rand"
                 coef_add_bt is shared proportionnaly among a randomly selected set of the LV producers 
                 on the lower Network. The randomly selected set consist of half of all LV producers on
                 the lower Network
-                 
+                
+                
     params_vRise : tuple
-        (0) params_vRise[0] : tuple
-            Voltage Rise threshold associated with Higher voltages buses
-            (0) vm_mu_max_hv : float
+        [0] params_vRise[0] : tuple
+            [0] vm_mu_max_hv : float
                 Maximum authorised voltage rise of hv Buses on the Lower network
-            (1) vm_mu_min_hv : float
+            [1] vm_mu_min_hv : float
                 Minimum authorised voltage rise of hv Buses on the Lower network
-        (1) params_vRise[1] : tuple
+        [1] params_vRise[1] : tuple
             Voltage Rise threshold associated with lower voltages buses
-                (0) vm_mu_max_lv : float
+                [0] vm_mu_max_lv : float
                     Maximum authorised voltage rise of lv Buses on the Lower network
-                (1) vm_mu_min_lv : float
+                [1] vm_mu_min_lv : float
                     Minimum authorised voltage rise of lv Buses on the Lower network
 
     Returns
