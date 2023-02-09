@@ -9,9 +9,5 @@ ORI's Functions
   :toctree: generated
   
   oriFunctions
-  
-  
-.. toctree::
-  :maxdepth: 2 
-  
   orifunctions/initLowernet_at
+  
