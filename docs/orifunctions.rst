@@ -5,5 +5,13 @@ ORI's Functions
 
 
 .. autosummary::
-  :toctree: DIRNAME
+  :maxdepth: 2 
+  :toctree: generated
   
+  oriFunctions
+  
+  
+.. toctree::
+  :maxdepth: 2 
+  
+  orifunctions/initLowernet_at
