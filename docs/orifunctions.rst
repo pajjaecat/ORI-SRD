@@ -1,11 +1,11 @@
 
 ###############
-ORI's Functions
+Functions
 ###############
 
 
 .. autosummary::
-  :maxdepth: 3
+  :maxdepth: 2
   :toctree: generated
   
   oriFunctions
