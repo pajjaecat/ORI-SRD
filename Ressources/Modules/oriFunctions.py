@@ -9,7 +9,6 @@ from oriVariables import (network_folder, excel_folder, attr_list,
                           defAuth_lvBus_vRiseMax, defAuth_lvBus_vRiseMin,
                           default_ctrld_hvProd_max, 
                           default_hv_voltage, default_lv_voltage)
-import checker 
 
 pd = pandas
 np = numpy 
@@ -249,9 +248,7 @@ def run_powerflow_at(network:pandapower.auxiliary.pandapowerNet,
     
     """
 
-    # Check variables congruence 
-    checker.check_var_concordance(opf_status, pred_model) 
-    
+  
     # -- GT1
     if pred_model == 'Pers': # if the the prediction model is the persistance,
         cur_period = cur_period-1
