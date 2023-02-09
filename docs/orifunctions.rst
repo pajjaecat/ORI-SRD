@@ -4,4 +4,7 @@ ORI's Functions
 ###############
 
 
-.. autofunction:: oriFunctions
+.. autosummary:: 
+  :toctree:: generated
+  
+  oriFunctions
