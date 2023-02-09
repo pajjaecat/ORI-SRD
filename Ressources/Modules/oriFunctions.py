@@ -1,6 +1,6 @@
 # List of function used in my code
 
-import pandapower, pandas, numpy, ipyparallel, oriClass
+import pandapower, pandas, numpy, ipyparallel
 from tqdm import tqdm  # Profiling
 
 # Import all variables from module oriVariables
@@ -813,82 +813,6 @@ def _upscale_HvLv_prod(prod_hv2upscale_df, prod_lv2upscale_df,
 
 
 
-
-def createDict_prodHtBt_Load(df_pred_in, 
-                             networks_in: oriClass.InitNetworks,
-                             cur_hvProd_max:float,
-                             ctrld_hvProd_max:float = default_ctrld_hvProd_max 
-                            ) -> dict :
-    """
-    Create a dictionary that will be send to the local space of the parallele engines.
-    
-    Parameters: 
-    -----------
-    df_pred_in: pd.dataframe
-        Dataframe (Predicted values) of Total lower voltage producer, load demand and all 
-        the Hihger voltage producer in lower level network.
-    network_in : oriClass.InitNetworks
-        Networks initialized. An instance of oriClass.InitNetworks, especially the 
-        output of the function setNetwork_params()
-    cur_hvProd_max: float
-        Current value of maximum output Power of the controlled HV producer (MW)
-    ctrld_hvProd_max: (float)
-        Maximum fixed output of the Controlled Higher voltage producer (MW)
-
-    Outputs:
-    --------
-    dict_df_sgenLoad: dict of dataframe
-        keys1: 'df_prodHT' 
-            Dataframe containing the upscaled (based on cur_hvProd_max) pv power of the 
-            Hihger voltage  producers in lower level network.
-        keys2: 'df_prod_bt_total' 
-            Dataframe of the upscaled (based on coef_add_bt) total pv power of all lower
-            voltage producer in the lower network
-        keys3: 'df_cons_total'
-            Dataframe of the total load demand (consumption) in the lower level network
-        keys4: 'lowerNet_sgenDf_copy'
-            Dataframe of all the static generator in the lower network
-
-    """
-    # Instancuate parameters
-    upNet_sum_max_lvProd = networks_in.get_upperNet_sum_max_lvProdLoad()[0]
-    params_coef_add_bt = networks_in.get_params_coef_add_bt()
-    ctrld_hvProd_name = networks_in.get_ctrld_hvProdName()
-    
-    # Check if coef_add_bt_dist is authorized
-    checker.check_coef_add_bt_dist(params_coef_add_bt[1])
-    
-    # Check wether the input dataframe columns are in the expected order
-    checker.check_networkDataDf_columnsOrder(df_pred_in)
-    
-    df_pred = df_pred_in.copy(deep=True) # Create a copy of the input dataframe
-    
-    # If the last 2 digits of an elm of df_pred.columns is decimal, therefore the colums is 
-    # that of a HV producer
-    hvProd_columns = [elm for elm in df_pred.columns if elm[-4:].isdecimal()]   
-    df_prodHT = df_pred[hvProd_columns]
-    
-    
-    # Upscale HV production and the LV µ% production
-    df_prodHT[[ctrld_hvProd_name]], df_prod_bt_total = _upscale_HvLv_prod(df_prodHT[[ctrld_hvProd_name]],
-                                                                         df_pred[['Prod_BT']],
-                                                                         ctrld_hvProd_max, upNet_sum_max_lvProd,
-                                                                         cur_hvProd_max, params_coef_add_bt )
-
-    # Define consumption df
-    # TODO : Code a function to check the oreder of the input dataframe
-    df_cons_total = df_pred.iloc[:,[0]]
-
-    # Define a dict 
-    dict_df_sgenLoad = dict({'df_prodHT':df_prodHT, 
-                             'df_prod_bt_total':df_prod_bt_total, 
-                             'df_cons_total':df_cons_total,  
-                             'lowerNet_sgenDf_copy': networks_in.get_lowerNet_sgenDf_copy()} )
-    
-    return dict_df_sgenLoad
-
-
-
 def robustControl(df_out_block_pf_opf:pandas.core.frame.DataFrame ,
                   df_hvProd_noControl: pandas.core.frame.DataFrame,
                   cur_hvProd_max: float, 
@@ -982,112 +906,8 @@ def block_prod(df_out_block_pf_opf: pandas.core.frame.DataFrame,
     
     df_out_block_pf_opf.loc[per_index2[starting_index:], [ctrld_hvProdName]] = (np.minimum(df_hvProd_noControl_upscaled,
                                                                                   df_P0100_controled)
-                                                                      )
+                                                                               )
         
 
         
         
-        
-def setNetwork_params(upperNet_file:str, 
-                      lowerNet_file:str, 
-                      ctrld_hvProdName:str,
-                      params_coef_add_bt:tuple=(None, None), 
-                      params_vRise:tuple=((defAuth_hvBus_vRiseMax, defAuth_hvBus_vRiseMin), 
-                                          (defAuth_lvBus_vRiseMax, defAuth_lvBus_vRiseMin))
-                     ) -> oriClass.InitNetworks :
-    
-    """
-    Load both the lower (network used for opimization) and upper network, after which a configuration 
-    of the main  parameters to use for the simulations are done. 
-    Namely:
- 
-    Parameters: 
-    -----------
-    upperNet_file:
-        The upper Network file, with the approporiate extenxion (Must be present in the network_folder)
-        Egg: 'ST LAURENT.p'
-    lowerNet_file :
-        The lower Network file, with the approporiate extenxion (Must be present in the network_folder)
-        Egg:'CIVAUX.p'
-    ctrld_hvProdName :
-        Name of the controlled HV producer in the Lower Network. 
-        Egg: 'P0100'
-    params_coef_add_bt: 
-        (0) coef_add_bt: float
-            Value of the added output power for all the LV producers (MW) in the lower Network
-        (1) coef_add_bt_dist: str
-            How coef_add_bt is shared among the LV producers. 
-            Three choices are possible
-            (0): None (default) ==> No upscaling is done
-            (1): 'uppNet' ==> coef_add_bt is added to the Sum of maximum output of all lower 
-                 voltage (LV) producers (MW) in the upper Network. In consequence, the LV producers 
-                 on the lower network receive only a fraction of coef_add_bt.
-            (2): 'lowNet'==> coef_add_bt is added to the Sum of maximum output of all LV 
-                 producers (MW) in the lower Network. In consequence, coef_add_bt is shared 
-                 proportionnaly among all the LV producers on the lower network. 
-            (3) 'lowNet_rand' ==> coef_add_bt is shared proportionnaly among a randomly selected 
-                 set of the LV producers on the lower Network. The randomly selected set consist of 
-                 half of all LV producers on the on the lower Network
-    params_vRise:tuple 
-        params_vRise[0]: tuple 
-        Voltage Rise threshold associated with Higher voltages buses
-            (0) vm_mu_max_hv: float
-                Maximum authorised voltage rise of hv Buses on the Lower network
-            (1) vm_mu_min_hv: float
-                Minimum authorised voltage rise of hv Buses on the Lower network
-        params_vRise[1]:tuple
-        Voltage Rise threshold associated with lower voltages buses
-            (0) vm_mu_max_lv: float
-                Maximum authorised voltage rise of lv Buses on the Lower network
-            (1) vm_mu_min_lv: float
-                Minimum authorised voltage rise of lv Buses on the Lower network
-
-    Output:
-    -------
-    
-    """
-    
-    # Extracts parameters
-    coef_add_bt, coef_add_bt_dist = params_coef_add_bt
-    vm_mu_max_hvBus, vm_mu_min_hvBus = params_vRise[0]
-    vm_mu_max_lvBus, vm_mu_min_lvBus = params_vRise[1]
-    
-    # Check if coef_add_bt_dist is authorized
-    checker.check_coef_add_bt_dist(coef_add_bt_dist)
-    
-    #Load lower and upper Network
-    lowerNet=pp.from_pickle(f'{network_folder+lowerNet_file}')
-    upperNet=pp.from_pickle(f'{network_folder+upperNet_file}')
-    
-    networks = oriClass.InitNetworks(upperNet, lowerNet, coef_add_bt, coef_add_bt_dist )  # Initialize networks
-    
-    networks.init_controled_hvProd(ctrld_hvProdName) # Initialize the controlled HVProd in the lowerNetwork
-    
-    # Extract HV and LV buses in the Lower Network
-    lowerNet_hv_bus_df = networks.get_lowerNet_hv_bus_df(hvBus_voltage=default_hv_voltage)
-    lowerNet_lv_bus_df = networks.get_lowerNet_lv_bus_df(lvBus_voltage=default_lv_voltage)
-    
-    uppNet_sum_max_lvProdLoad = networks.get_upperNet_sum_max_lvProdLoad() # To use later in functions 
-    
-    # Extract the actives HV buses in the lower Network
-    lowerNet_hv_activBus = networks.get_lowerNet_hvActivatedBuses(lowerNet_hv_bus_df.index)
-    lowerNet_lv_activBus = networks.get_lowerNet_lvActivatedBuses(lowerNet_lv_bus_df.index)
-    
-    # Set the voltage rise threshold (both on Lv and HV buses) on the lower Network
-    networks.lowerNet_set_vrise_threshold(lowerNet_hv_activBus, vm_mu_min_hvBus, vm_mu_max_hvBus)
-    if coef_add_bt_dist in ['lowNet', 'lowNet_rand']: # Set Vrise on lv buses only if coef_add_bt_dist is in list
-        networks.lowerNet_set_vrise_threshold(lowerNet_lv_activBus, vm_mu_min_lvBus, vm_mu_max_lvBus)
-
-    # Add negative cost to usability of controlled Sgen so its usage can be maximized while 
-    # respecting the constraints on the network
-    # HV PROD
-    ctrld_hvProd_index = networks.get_ctrld_hvProdName(return_index=True)[1]
-    cost_sgen_p0100 = pp.create_poly_cost(lowerNet, ctrld_hvProd_index,'sgen', cp1_eur_per_mw=-1)
-    # LV PROD
-    ctrld_lvProd_index = networks.get_ctrld_lvProdName(return_index=True)[1]
-    [pp.create_poly_cost(lowerNet, cur_ctrld_lvProd_ind, 'sgen',cp1_eur_per_mw=-2) 
-                                                     for cur_ctrld_lvProd_ind in ctrld_lvProd_index ]
-    
-    networks.create_lowerNet_sgenDf_copy() # Create a copy of the Sgens in the lower networks
-    
-    return networks
