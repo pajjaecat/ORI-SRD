@@ -5,6 +5,7 @@ ORI's Functions
 
 
 .. autosummary::
+  :maxdepth: 3
   :toctree: generated
   
   oriFunctions
