@@ -6,8 +6,4 @@ THis section defines all the default variables used in the different notebooks. 
 
 
 
-.. autosummary::
-   :toctree: generated
-   
-   oriVariables
-
+.. automodule:: oriVariables
