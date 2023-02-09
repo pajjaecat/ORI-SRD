@@ -1,3 +1,3 @@
-Trying initLowerNet_at
+initLowerNet_at
 -------------------------
 .. autofunction:: oriFunctions.initLowerNet_at
