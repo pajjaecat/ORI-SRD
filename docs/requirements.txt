@@ -56,5 +56,13 @@ sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 urllib3==1.26.9
     # via requests
+    
+# My own packages. Versions are extracted from "../environment.yml"
 pandas==1.3.5
+pandapower==2.8.0
+ipyparallel==8.4.0
+tqdm==4.64.1
+
+# Needed so sphinx can render python's docs as intended and not as 
+# restructured text 
 numpydoc==1.5.0
