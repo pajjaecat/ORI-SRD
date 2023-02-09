@@ -9,5 +9,5 @@ ORI's Functions
   :toctree: generated
   
   oriFunctions
-  orifunctions/initLowernet_at
+  
   
