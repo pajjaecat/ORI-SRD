@@ -6,6 +6,6 @@ List of Functions
 
 .. autosummary::
   :toctree: generated
-  :maxdepth: 1
+  :maxdepth: 2
   
   oriFunctions
