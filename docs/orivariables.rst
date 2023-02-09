@@ -30,7 +30,7 @@ This section defines all the default variables used in the different notebooks. 
   defAuth_lvBus_vRiseMax = 1.075  
   defAuth_lvBus_vRiseMin = 0.95
 
-  # Default Authorised voltage on hv and Lv Bus on lower Network (in KV)
+  # Default voltage on hv and Lv Buses on lower Network (in KV)
   default_hv_voltage = 20.6      
   default_lv_voltage = 0.4
   
