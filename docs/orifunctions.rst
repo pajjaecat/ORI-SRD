@@ -8,6 +8,11 @@ Functions
   :toctree: generated
   
   oriFunctions
-  orifunctions/initLowernet_at
-  
-  
+
+
+
+Im defenitely sure that this should be possible
+
+.. toctree:: 
+    orifunctions/initLowernet_at
+
