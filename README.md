@@ -1,7 +1,7 @@
 # ORI-SRD
 This repository provides codes, examples, and tutorials of all the work accomplished as a Control-Command Data-Scientist in [SRD](https://www.srd-energies.fr/). Everything is related to the  [ODRI project](https://www.s2e2.fr/projets/odri/) fifth axe ORI (Offre de Racordement Intelligente) or Flexible connexion proposal. The main goal is to provide tools to help SRD decide in which specificities an ORI should be proposed to new renewable energy producers demanding to be connected to the electric distribution Network. 
 
-[Resources](Resources/) contains more explanations and tutorials about the said work. 
+[Resources](Resources/) contains more explanations and tutorials about the said work and [docs](docs/) contains the files related to the [documentation](https://ori-srd.readthedocs.io/en/stable/).
 </br>
 
 #### IMPORTANT
