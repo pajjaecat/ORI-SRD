@@ -4,10 +4,6 @@ Functions
 ###############
 
 
-.. autosummary::
-  :toctree: generated
-  
-  oriFunctions
 
 
 
