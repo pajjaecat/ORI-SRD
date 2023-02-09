@@ -1,5 +1,2 @@
-
 Ori Classes
 ===========
-
-.. _Howto:
