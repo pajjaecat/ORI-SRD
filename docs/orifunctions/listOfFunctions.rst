@@ -1,8 +1,8 @@
 
 
-====================
-List of functions
-===================
+============================
+List of Functions
+============================
 
 .. autosummary::
   :toctree: generated
