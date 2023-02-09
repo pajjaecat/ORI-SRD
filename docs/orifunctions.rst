@@ -1,15 +1,11 @@
 
 ###############
-Functions
+ORI's Functions
 ###############
 
 
-
-
-
-Im defenitely sure that this should be possible
-
 .. toctree:: 
+    :maxdepth: 2
     
     orifunctions/listOfFunctions.rst
     orifunctions/initLowernet_at
