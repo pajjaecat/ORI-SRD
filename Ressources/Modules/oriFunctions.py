@@ -1,5 +1,5 @@
 """ 
-OriFunctions - Python library with List of all function used in the _`tutorials <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`
+OriFunctions - Python library with List of all function used in the `tutorials <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`_
 
 .. code-block:: python
     # Import oriFunctions
