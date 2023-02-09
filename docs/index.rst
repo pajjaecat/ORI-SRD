@@ -22,7 +22,7 @@ Contents
    :maxdepth: 2
 
    Home <self>
-   OriVariables
-   OriFunctions
-   OriClasses
+   orivariables
+   orifunctions
+   oriclasses
    api
