@@ -1,4 +1,11 @@
-""" List of all function used in The tutorials"""
+""" 
+OriFunctions - Python library with List of all function used in the _`tutorials <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`
+
+.. code-block:: python
+    # Import oriFunctions
+    import oriFunctions
+
+"""
  
 import pandapower, pandas, numpy, ipyparallel
 from tqdm import tqdm  # Profiling
@@ -26,8 +33,8 @@ def readAndReshape_excelFile(f_name:str,
     Read and reshape in a one dimension array (that is returned) the excel file given by f_name
 
 
-    Parameters: 
-    ----------- 
+    Parameters 
+    ---------- 
     f_name: str
         Name of the file to load (with the correct extension)
     folder_name: str
@@ -58,7 +65,7 @@ def check_bus_connection(network, bus_number, attr_list_in:dict=attr_list):
     """
     Check and print the connection between a bus number and all the elements in the lower network.
 
-    Parameters:
+    Parameters
     ----------
     network: pandapower network
         The network that has to be investigated
@@ -97,7 +104,7 @@ def run_powerflow(network: pandapower.auxiliary.pandapowerNet,
 
     Initialise the parameters of the network
 
-    Parameters:
+    Parameters
     ----------
     network: Pandapower network
         The network to beimulation consider ;
@@ -181,7 +188,7 @@ def run_powerflow_at(network:pandapower.auxiliary.pandapowerNet,
     """
     Run Power flow or optimal power flow depending on 'opf_status'
 
-    Parameters:
+    Parameters
     ----------
     network: Pandapower network
         The network to consider ;
@@ -219,7 +226,7 @@ def run_powerflow_at(network:pandapower.auxiliary.pandapowerNet,
         + None: No prediction model is used,
         + Pers  =>  Persistence model i.e. val(k)= val(k-1)
         
-    Output: 
+    Returns 
     -------
     Depends on 'ofp_status' 
     False ==>                cur_max_VriseHvBus
@@ -238,9 +245,10 @@ def run_powerflow_at(network:pandapower.auxiliary.pandapowerNet,
             satisfy the auth_max_VriseHvBus.
         cur_period: panda peridod
             the period at which the pf/OPF is run
-            
-    ------------------------------------------------------------------------------------------       
-    NOTE : For the moment auth_max_VriselvBus i.e. the authorised voltage rise on the lv
+             
+    Notes
+    -----
+    For the moment auth_max_VriselvBus i.e. the authorised voltage rise on the lv
     buses constraint is  considered only when the Voltage rise on the hv buses  is greater 
     than auth_max_VriseHvBus. Simply put, as long as no voltage rise above auth_max_VriseHvBus
     is detected one does not care about the value of the voltage rise on the lv buses.
@@ -331,7 +339,7 @@ def initLowerNet_at(network: pandapower.auxiliary.pandapowerNet,
 
     Initialise the parameters of the network at the current period
 
-    Parameters:
+    Parameters
     ----------
     network: Pandapower network
         The lower level network concerned ;
@@ -402,7 +410,7 @@ def max_vm_pu_at(network: pandapower.auxiliary.pandapowerNet,
     Return the maximum voltage over all the higher voltages active buses in the network for the current 
     period.
 
-    Parameters:
+    Parameters
     ----------
     network: Pandapower network
         The network
@@ -428,10 +436,12 @@ def max_vm_pu_at(network: pandapower.auxiliary.pandapowerNet,
                      flow run.
                      
 --------------------------------------------------------------------------------------------------------
-    TODO : Return the maximum voltage rise over all the LV buses in the lower network for the current 
-        instant. In this case one needs to add as input to the function the  net_lv_activBus 
-        list as well. Hence one can replace the lowNet_hv_activBus by a tuple 
-        of (lowNet_hv_activBus, uppNet_lv_activBus). 
+    Notes
+    ------
+    Return the maximum voltage rise over all the LV buses in the lower network for the current 
+    instant. In this case one needs to add as input to the function the  net_lv_activBus 
+    list as well. Hence one can replace the lowNet_hv_activBus by a tuple 
+    of (lowNet_hv_activBus, uppNet_lv_activBus). 
 
     
     """
@@ -516,10 +526,11 @@ def improve_persinstence(per_extracted_res_df: pandas.core.frame.DataFrame,
         Threshold of maximum voltage allowed on the network. 
 
 
-    Output:
+    Returns
     -------
     per_improved_res: dataframe
     Output the improve persistence model improve by the previoulsy described strategy
+    
     """
     
     # Copy the results of the persistence model 
@@ -560,7 +571,7 @@ def prediction_bloc(rnn_model, fitting_scaler, history, scaler_features=None ):
     Prediction bloc: Predict the values () of the next period based on the RNN (LSTM). 
 
 
-    Prameters: 
+    Prameters 
     ----------
     rnn_model: Recurent neural network; 
         The model that will be used to predict the value at the next period. 
@@ -573,9 +584,11 @@ def prediction_bloc(rnn_model, fitting_scaler, history, scaler_features=None ):
 
 
 
-    Output: List 
-    (1): Prediction of the interest variable 
-    (2): Period for wich the prediction is done
+    Returns
+    ------
+    List
+     (1): Prediction of the interest variable 
+     (2): Period for wich the prediction is done
 
     
     """
@@ -608,7 +621,7 @@ def predictionBin_bloc(rnn_model, fitting_scaler, history, sig_thresh=0.5):
     Prediction bloc: Predict the values () of the next period based on the RNN (LSTM). 
 
 
-    Prameters: 
+    Prameters 
     ----------
     rnn_model: Recurent neural network; 
         The model that will be used to predict the value at the next period. 
@@ -622,9 +635,11 @@ def predictionBin_bloc(rnn_model, fitting_scaler, history, sig_thresh=0.5):
 
 
 
-    Output: List 
-    (1): Prediction of the interest variable 
-    (2): Period for wich the prediction is done
+    Returns
+    -------
+    List 
+     (1): Prediction of the interest variable 
+     (2): Period for wich the prediction is done
 
     
     """
@@ -658,7 +673,7 @@ def robustPred(model_Vrise_dict, hvProd_noControl, P0100_opt_model1,
     Define Robust prediction bloc: 
 
 
-    Prameters:
+    Prameters
     ----------
     model_Vrise_dict: Dict
         Dictionary of the voltage rise for each model 
@@ -680,8 +695,8 @@ def robustPred(model_Vrise_dict, hvProd_noControl, P0100_opt_model1,
                 'Modelx' where x in {1,2,3}
 
 
-    Output: 
-    ---------
+    Returns 
+    -------
     new_p0100_df: panda dataframe
         y_optimal after combined model
 
@@ -754,7 +769,7 @@ def _upscale_HvLv_prod(prod_hv2upscale_df, prod_lv2upscale_df,
     all the Added BT prod
 
 
-    Parameters: 
+    Parameters 
     -----------
     prod_hv2upscale_df: pd.dataframe
         dataframe of the HV prod to upscale i.e. P0100
@@ -773,7 +788,7 @@ def _upscale_HvLv_prod(prod_hv2upscale_df, prod_lv2upscale_df,
         (1): coef_add_bt 
         (2): coef_add_bt_dist
         
-    Output:
+    Returns
     -------
         The upscaled version of the HV producer and LV
 
@@ -872,8 +887,8 @@ def block_prod(df_out_block_pf_opf: pandas.core.frame.DataFrame,
     Implement bloc prod i.e. make sure the controlled HV producer can't inject into the lower network 
     more than its actual production. Modify in place the input dataframe df_out_block_pf_opf
     
-    Parameters:
-    -----------
+    Parameters
+    ----------
     df_out_block_pf_opf: (Dataframe)
         Output of the block pf opf that has been send to the robust persitence
     df_hvProd_noControl : Dataframe
