@@ -1,5 +1,5 @@
-# List of function used in my code
-
+""" List of all function used in The tutorials"""
+ 
 import pandapower, pandas, numpy, ipyparallel
 from tqdm import tqdm  # Profiling
 
