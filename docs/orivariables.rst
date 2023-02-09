@@ -8,6 +8,7 @@ This section defines all the default variables used in the different notebooks. 
 
 
 .. code:: python 
+
   # Create an attribute list to use in functions
   attr_list = [('bus', 'name'),
                ('load', 'bus'),
@@ -16,4 +17,4 @@ This section defines all the default variables used in the different notebooks. 
                ('line', 'to_bus'),
                ('trafo', 'hv_bus'),
                ('trafo', 'lv_bus')]
-                 
+     
