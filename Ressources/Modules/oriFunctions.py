@@ -31,7 +31,7 @@ def readAndReshape_excelFile(file_name: str,
     Read and reshape in a one dimension array the excel file given by file_name.
 
     Parameters 
-    -----------
+    ----------
     file_name : str
         Name of the file to load (with the correct extension).
     folder_name : str, optional, default = `excel_folder`
@@ -252,7 +252,7 @@ def run_powerflow_at(network,
                 Persistence model i.e. val(k)= val(k-1)
 
     Returns
-    --------
+    -------
     Depends on `ofp_status`
         `ofp_status` = False
             cur_max_VriseHvBus
@@ -275,7 +275,7 @@ def run_powerflow_at(network,
             The period at which the pf/OPF is run.
 
     Raises
-    -------
+    ------
     ValueErrorExeption
         If `opf_status` is not in [True, False, "Both"]
 
@@ -476,12 +476,12 @@ def max_vm_pu_at(network,
                 Buses `max_vm_pu` > `auth_max_VriseHvBus`, is the  optimal  power flow run.
 
     Returns
-    --------
+    -------
     max_vm_pu :
         Maximum voltage rise over all the HV buses in the lower network at the `cur_period`.
                      
     Warns
-    ------
+    -----
     TODO
     Return the maximum voltage rise over all the LV buses in the lower network for the current
     instant. In this case one needs to add as input to the function the  net_lv_activBus
@@ -619,7 +619,8 @@ def prediction_bloc(rnn_model,
         The model that will be used to predict the value at the next period.
     fitting_scaler : Scaler
         Scaler parameters that are used to transform the training data set
-        fed to the `rnn_model`
+        fed to the `rnn_model` 
+        
     history :
         Non scaled history of the Electrical network.
     scaler_features : Scaler, optional, default = None
@@ -672,7 +673,8 @@ def predictionBin_bloc(rnn_model,
         The binary trained Recurent Neural network
     fitting_scaler : Scaler
         Scaler parameters that are used to transform the training data set
-        fed to the `rnn_model`.
+        fed to the `rnn_model` 
+        
     history :
         Non scaled history of the Electrical network:
     sig_thresh : float, optional, default = 0.5
@@ -954,7 +956,7 @@ def createDict_prodHtBt_Load(df_pred_in,
     space of the parallele engines.
 
     Parameters
-    -----------
+    ----------
     df_pred_in:   pandas.DataFrame
         Dataframe (Predicted values) of Total lower voltage producer, load demand and all
         the Hihger voltage producer in lower level network.
@@ -967,7 +969,7 @@ def createDict_prodHtBt_Load(df_pred_in,
         Maximum fixed output of the Controlled Higher voltage producer (MW)
 
     Returns
-    --------
+    -------
     dict of dataframe
         The created dictionary with the its keys being
         `df_prodHT` :  pandas.DataFrame
@@ -1033,7 +1035,7 @@ def robustControl(df_out_block_pf_opf ,
     place i.e. in the `df_out_block_pf_opf` .
     
     Parameters
-    -----------
+    ----------
     df_out_block_pf_opf:  pandas.DataFrame
         Output of the block pf/opf
     df_hvProd_noControl : Dataframe
