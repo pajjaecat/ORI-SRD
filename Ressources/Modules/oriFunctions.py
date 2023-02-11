@@ -28,6 +28,7 @@ def readAndReshape_excelFile(file_name: str,
                              n_row2read: int = None
                             ) -> numpy.array :
     """
+    
     Read and reshape in a one dimension array the excel file given by file_name.
 
     Parameters 
@@ -61,6 +62,7 @@ def check_bus_connection(network,
                          attr_list_in: dict = attr_list 
                         ):
     """
+    
     Check and print the connection between a bus number and all the elements in the lower network.
 
     Parameters
@@ -97,6 +99,7 @@ def run_powerflow(network,
                   opf_status=False 
                  ):
     """
+    
     Return a list of maximum voltage on the network for each period given by the index
     of element in
 
@@ -201,6 +204,7 @@ def run_powerflow_at(network,
                      pred_model: str = None 
                     ):
     """
+    
     Run Power flow or optimal power flow at `cur_period` depending on 'opf_status'.
 
     Parameters
@@ -359,6 +363,7 @@ def initLowerNet_at(network,
                     dict_df_sgenLoad: dict
                    ):
     """
+    
     Initialise the parameters of the network at the `cur_period`.
 
     Parameters
