@@ -757,7 +757,7 @@ def robustPred(model_Vrise_dict,
     bin_thresh_df :  pandas.DataFrame
 
     Raises
-    -------
+    ------
     ValueErrorExeption
         If `n_models` is the wrong type or the wrong value.
 
@@ -889,6 +889,7 @@ def _upscale_HvLv_prod(prod_hv2upscale_df,
                        params_coef_add_bt: tuple = (None, None)
                        ):
     """
+    
     Upscale  both the controled Higher voltage(HV) producer (P0100) in the lower network (civeaux)
     and the total Lower voltage (LV) production. `coef_add_bt_dist` allow to choose how the upscaling
     is done on the LV production.
@@ -898,7 +899,7 @@ def _upscale_HvLv_prod(prod_hv2upscale_df,
 
 
     Parameters
-    -----------
+    ----------
     prod_hv2upscale_df :  pandas.DataFrame
         dataframe of the HV prod to upscale i.e. P0100
     prod_lv2upscale_df :  pandas.DataFrame
