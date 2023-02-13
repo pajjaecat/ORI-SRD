@@ -490,13 +490,11 @@ def max_vm_pu_at(network,
     max_vm_pu :
         Maximum voltage rise over all the HV buses in the lower network at the ``cur_period``.
                      
-    Warns
+    Note
     -----
-    TODO
-    Return the maximum voltage rise over all the LV buses in the lower network for the current
-    instant. In this case one needs to add as input to the function the  net_lv_activBus
-    list as well. Hence one can replace the lowNet_hv_activBus by a tuple
-    of (lowNet_hv_activBus, uppNet_lv_activBus).
+    TODO : Return the maximum voltage rise over all the LV buses in the lower network for the current
+    instant. In this case one needs to add as input to the function the ``net_lv_activBus`` list as  
+    well. Hence one can replace the ``lowNet_hv_activBus`` by a tuple of ``(lowNet_hv_activBus, uppNet_lv_activBus)`` .
 
 
     """
@@ -979,7 +977,7 @@ def createDict_prodHtBt_Load(df_pred_in,
         the Hihger voltage producer in lower level network.
     network_in : oriClass.InitNetworks
         Networks initialized. An instance of :py:func:`oriClass.InitNetworks`, especially the
-        output of the function :py:func:`oriFunction.setNetwork_params`
+        output of the function :py:func:`oriFunctions.setNetwork_params`
     cur_hvProd_max : float
         Current value of maximum output Power of the controlled HV producer (MW)
     ctrld_hvProd_max : float
