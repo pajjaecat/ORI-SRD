@@ -12,7 +12,7 @@ Description
   description/max_vm_pu_at
   description/predictionBin_bloc
   description/prediction_bloc
-  description/readAndReshape_excelFiles
+  description/readAndReshape_excelFile
   description/robustControl
   description/robustPred
   description/run_powerflow
