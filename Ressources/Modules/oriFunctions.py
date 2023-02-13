@@ -967,7 +967,7 @@ def createDict_prodHtBt_Load(df_pred_in,
     space of the parallele engines.
 
     Parameters
-    -----------
+    ----------
     df_pred_in : pandas.DataFrame
         Dataframe (Predicted values) of Total lower voltage producer, load demand and all
         the Hihger voltage producer in lower level network.
@@ -980,7 +980,7 @@ def createDict_prodHtBt_Load(df_pred_in,
         Maximum fixed output of the Controlled Higher voltage producer (MW)
 
     Returns
-    --------
+    -------
     dict of dataframe
         The created dictionary with the its keys being
         `df_prodHT` :  pandas.DataFrame
