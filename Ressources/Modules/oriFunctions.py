@@ -581,6 +581,7 @@ def improve_persinstence(per_extracted_res_df,
     -------
     per_improved_res :  pandas.DataFrame
         Output the improve persistence model improve by the previoulsy described strategy.
+        
     """
 
     # Copy the results of the persistence model 
@@ -836,6 +837,7 @@ def extractParRes_asDf(parallel_result,
 
     .. deprecated:: 1.0.1
         Will be removed in the next version. Use `CreateParEngines.get_results_asDf()`
+        
     """
 
     # Get df_prodHT colums name [] from one of the engines 
@@ -1032,57 +1034,57 @@ def createDict_prodHtBt_Load(df_pred_in,
 
   # ____________________________________________________________________________________________________________
   # ____________________________________________________________________________________________________________
+  
+def robustControl(df_out_block_pf_opf ,
+                df_hvProd_noControl,
+                cur_hvProd_max: float,
+                ctrld_hvProd_max: int,
+                auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax ):
 
-  def robustControl(df_out_block_pf_opf ,
-                    df_hvProd_noControl,
-                    cur_hvProd_max: float,
-                    ctrld_hvProd_max: int,
-                    auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax ):
+    """ Robust control
 
-      """ Robust control
+    Implement Robust control by letting the controlled Hv Producer inject all its production 
+    when no voltage rise above the predefined threshold is detected. Replacement is done in
+    place i.e. in the `df_out_block_pf_opf` .
 
-      Implement Robust control by letting the controlled Hv Producer inject all its production 
-      when no voltage rise above the predefined threshold is detected. Replacement is done in
-      place i.e. in the `df_out_block_pf_opf` .
+    Parameters
+    ----------
+    df_out_block_pf_opf : pandas.DataFrame
+      Output of the block pf/opf
+    df_hvProd_noControl : Dataframe
+      Dataframe of controlled HV Prod  with no control
+    cur_hvProd_max : float
+      Current maximum output Power of the HV producer (MW)
+    ctrld_hvProd_max : int
+      Maximum fixed output of the Controlled Higher voltage producer (MW)
+    auth_max_VriseHvBus : float, optional default = `defAuth_hvBus_vRiseMax`
+      Threshold of maximum voltage allowed on the HV buses of `network`.
 
-      Parameters
-      ----------
-      df_out_block_pf_opf : pandas.DataFrame
-          Output of the block pf/opf
-      df_hvProd_noControl : Dataframe
-          Dataframe of controlled HV Prod  with no control
-      cur_hvProd_max : float
-          Current maximum output Power of the HV producer (MW)
-      ctrld_hvProd_max : int
-          Maximum fixed output of the Controlled Higher voltage producer (MW)
-      auth_max_VriseHvBus : float, optional default = `defAuth_hvBus_vRiseMax`
-          Threshold of maximum voltage allowed on the HV buses of `network`.
+    """
 
-      """
+    # Basically, we replace the value of the controled HvProd by its own 
+    # value with No control when no voltage rise above the defined threshold is detected.
 
-      # Basically, we replace the value of the controled HvProd by its own 
-      # value with No control when no voltage rise above the defined threshold is detected.
+    # create new period index mask spaning from 08Am to 6PM
+    per_index2 = df_out_block_pf_opf.index.to_timestamp().to_series().between_time('07:10',
+                                                                                 '18:50').index.to_period('10T')
+    ctrld_hvProdName = df_out_block_pf_opf.columns[0]
 
-      # create new period index mask spaning from 08Am to 6PM
-      per_index2 = df_out_block_pf_opf.index.to_timestamp().to_series().between_time('07:10',
-                                                                                     '18:50').index.to_period('10T')
-      ctrld_hvProdName = df_out_block_pf_opf.columns[0]
+    # Create a new df for hvProd
+    hvProd_robust_df = pd.DataFrame(index=per_index2, columns=['hvProd_robust'])
 
-      # Create a new df for hvProd
-      hvProd_robust_df = pd.DataFrame(index=per_index2, columns=['hvProd_robust'])
+    # Get into the dataframe data of hvProdWhen there is no control
+    hvProd_robust_df.loc[per_index2, ['hvProd_robust']] = (df_hvProd_noControl.loc[per_index2].P0100
+                                                         * cur_hvProd_max / ctrld_hvProd_max)
 
-      # Get into the dataframe data of hvProdWhen there is no control
-      hvProd_robust_df.loc[per_index2, ['hvProd_robust']] = (df_hvProd_noControl.loc[per_index2].P0100
-                                                             * cur_hvProd_max / ctrld_hvProd_max)
+    # Get a mask for the periods where a voltage rise above the threshold is predicted 
+    mask_vrise_per = df_out_block_pf_opf.loc[per_index2, 'max_vm_pu_pf'] > auth_max_VriseHvBus
 
-      # Get a mask for the periods where a voltage rise above the threshold is predicted 
-      mask_vrise_per = df_out_block_pf_opf.loc[per_index2, 'max_vm_pu_pf'] > auth_max_VriseHvBus
+    # Replace the values of periods given by the mask by the value of hvProd given by the persistence model
+    hvProd_robust_df[mask_vrise_per] = df_out_block_pf_opf.loc[per_index2].loc[mask_vrise_per, [ctrld_hvProdName]]
 
-      # Replace the values of periods given by the mask by the value of hvProd given by the persistence model
-      hvProd_robust_df[mask_vrise_per] = df_out_block_pf_opf.loc[per_index2].loc[mask_vrise_per, [ctrld_hvProdName]]
-
-      # Replace the values of hvProdin df_out_block_pf_opf
-      df_out_block_pf_opf.loc[per_index2, [ctrld_hvProdName]] = hvProd_robust_df.loc[per_index2, 'hvProd_robust']
+    # Replace the values of hvProdin df_out_block_pf_opf
+    df_out_block_pf_opf.loc[per_index2, [ctrld_hvProdName]] = hvProd_robust_df.loc[per_index2, 'hvProd_robust']
 
 
 # ____________________________________________________________________________________________________________
@@ -1130,6 +1132,9 @@ def block_prod(df_out_block_pf_opf,
     df_out_block_pf_opf.loc[per_index2[starting_index:], [ctrld_hvProdName]] = (np.minimum(df_hvProd_noControl_upscaled,
                                                                                            df_P0100_controled)
                                                                                 )
+
+# ____________________________________________________________________________________________________________
+# ____________________________________________________________________________________________________________
 
 
 def setNetwork_params(upperNet_file: str,
