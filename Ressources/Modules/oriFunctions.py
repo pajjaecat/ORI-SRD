@@ -957,39 +957,37 @@ def createDict_prodHtBt_Load(df_pred_in,
                              cur_hvProd_max: float,
                              ctrld_hvProd_max: float = default_ctrld_hvProd_max
                              ) -> dict :
-    """ Create a specific dictionary
-    
-    Containing variable that will be send to the local space of the parallele engines.
+  
+  """ Create a specific dictionary for parallel Engines
 
-    Parameters
-    ----------
-    df_pred_in : pandas.DataFrame
-        Dataframe (Predicted values) of Total lower voltage producer, load demand and all
-        the Hihger voltage producer in lower level network.
-    network_in : oriClass.InitNetworks
-        Networks initialized. An instance of oriClass.InitNetworks, especially the
-        output of the function `setNetwork_params(args)`
-    cur_hvProd_max : float
-        Current value of maximum output Power of the controlled HV producer (MW)
-    ctrld_hvProd_max : float
-        Maximum fixed output of the Controlled Higher voltage producer (MW)
+  Parameters
+  ----------
+  df_pred_in : pandas.DataFrame
+    Dataframe (Predicted values) of Total lower voltage producer, load demand and all
+    the Hihger voltage producer in lower level network.
+  network_in : oriClass.InitNetworks
+    Networks initialized. An instance of oriClass.InitNetworks, especially the output 
+    of the function `setNetwork_params(args)`
+  cur_hvProd_max : float
+    Current value of maximum output Power of the controlled HV producer (MW)
+  ctrld_hvProd_max : float
+    Maximum fixed output of the Controlled Higher voltage producer (MW)
 
-    Returns
-    -------
-    dict of dataframe
-        The created dictionary with the its keys being
-        `df_prodHT` : pandas.DataFrame
-            Dataframe containing the upscaled (based on cur_hvProd_max) pv power of the
-            Hihger voltage  producers in lower level network.
-        `df_prod_bt_total` : pandas.DataFrame
-            Dataframe of the upscaled (based on coef_add_bt) total pv power of all lower
-            voltage producer in the lower network
-        `df_cons_total` : pandas.DataFrame
-            Dataframe of the total load demand (consumption) in the lower level network
-        `lowerNet_sgenDf_copy` : pandas.DataFrame
-            Dataframe of all the static generator in the lower network
+  Returns
+  -------
+  dict of dataframe
+    The created dictionary with the its keys being
+    `df_prodHT` : pandas.DataFrame
+      Dataframe containing the upscaled (based on cur_hvProd_max) pv power of the
+      Hihger voltage  producers in lower level network.
+    `df_prod_bt_total` : pandas.DataFrame
+      Dataframe of the upscaled (based on coef_add_bt) total pv power of all lower
+      voltage producer in the lower network
+    `df_cons_total` : pandas.DataFrame
+      Dataframe of the total load demand (consumption) in the lower level network
+    `lowerNet_sgenDf_copy` : pandas.DataFrame
 
-    """
+  """
     # Instancuate parameters
     upNet_sum_max_lvProd = networks_in.get_upperNet_sum_max_lvProdLoad()[0]
     params_coef_add_bt = networks_in.get_params_coef_add_bt()
