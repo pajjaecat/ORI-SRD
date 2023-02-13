@@ -444,7 +444,7 @@ def max_vm_pu_at(network,
                  lowNet_hv_activBus: list,
                  dict_df_sgenLoad: dict,
                  opf_status: (bool or str) = False):
-    """
+     """
 
     Extract the maximum voltage over all the higher voltages active buses in the network at the current
     period.
@@ -460,38 +460,36 @@ def max_vm_pu_at(network,
      dict_df_sgenLoad : dict
         Dictionary of dataframe. For the first three keys, the corresponding df must indexed by the
         periods of the considered year. The keys must be the following:
-            `df_prodHT` :  pandas.DataFrame
+            `df_prodHT` : pandas.DataFrame
                 Power of all Higher voltage producers in the lower network. The colums represent
                 each Hv producer.
-            `df_prod_bt_total` :  pandas.DataFrame
+            `df_prod_bt_total` : pandas.DataFrame
                 Total power of all lower voltage producers seen  from  the upper Network.
-            `df_cons_total` :  pandas.DataFrame
+            `df_cons_total` : pandas.DataFrame
                 Total Load demand seen from the upper Network.
-            `lowerNet_sgenDf_copy` :  pandas.DataFrame
+            `lowerNet_sgenDf_copy` : pandas.DataFrame
                 Copy of all the static generator (hv & lV) in the lower network.
     ofp_status: bool or str, optional, default=False
         Optimal power flow status. Whether the maximum voltage rise on the lower network HV buses
         is extracted after a power flow, an optimal power flow  or both. Three values are possible:
-            `ofp_status` = False :
-                Run a simple power flow i.e., `pandapower.runpp(network)`
-            `ofp_status` = True :
-                Run an optimal power flow i.e., `pandapower.runopp(network)`
-            `ofp_status` = "Both" :
+            ``ofp_status`` = False :
+                Run a simple power flow i.e., `pandapower.runpp(network)` 
+            ``ofp_status`` = True :
+                Run an optimal power flow i.e., `pandapower.runopp(network)` 
+            ``ofp_status`` = "Both" :
                 A power flow is run. Only when the result i.e. the voltage rise detected on hv Prod
-                Buses `max_vm_pu` > `auth_max_VriseHvBus`, is the  optimal  power flow run.
+                Buses ``max_vm_pu`` > ``auth_max_VriseHvBus``, is the  optimal  power flow run.
 
     Returns
-    --------
+    -------
     max_vm_pu :
-        Maximum voltage rise over all the HV buses in the lower network at the `cur_period`.
+        Maximum voltage rise over all the HV buses in the lower network at the ``cur_period``.
                      
-    Warns
-    ------
-    TODO
-    Return the maximum voltage rise over all the LV buses in the lower network for the current
-    instant. In this case one needs to add as input to the function the  net_lv_activBus
-    list as well. Hence one can replace the lowNet_hv_activBus by a tuple
-    of (lowNet_hv_activBus, uppNet_lv_activBus).
+    Notes
+    -----
+    TODO : Return the maximum voltage rise over all the LV buses in the lower network for the current
+    instant. In this case one needs to add as input to the function the ``net_lv_activBus`` list as  
+    well. Hence one can replace the ``lowNet_hv_activBus`` by a tuple of ``(lowNet_hv_activBus, uppNet_lv_activBus)`` .
 
 
     """
