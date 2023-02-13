@@ -35,8 +35,8 @@ def readAndReshape_excelFile(file_name: str,
     ----------
     file_name : str
         Name of the file to load (with the correct extension).
-    folder_name : str, optional, default = `excel_folder`
-        Location of the folder where `file_name` is present.
+    folder_name : str, optional, default = :py:func:`oriVariables.network_folder`
+        Location of the folder where the file ``file_name`` is present.
     n_row2read : int, optional, default=0
          Numbers of rows to read in the excel file.
          
@@ -151,8 +151,8 @@ def run_powerflow(network,
 
     Notes
     -----
-    It is not recommended to use ``run_powerflow(args)`` since its implementaion is not optimal for use with
-    parallel engines created with `ipyparallel <https://ipyparallel.readthedocs.io/en/latest/>`_ .
+    It is not recommended to use ``run_powerflow(args)`` since its implementaion is not optimal for 
+    use with parallel engines created with `ipyparallel <https://ipyparallel.readthedocs.io/en/latest/>`_ .
     We recommand :py:func:`oriFunctions.run_powerflow_at` .
 
     """
@@ -284,11 +284,11 @@ def run_powerflow_at(network,
 
     Notes
     -----
-    For the moment `auth_max_VriselvBus` i.e. the authorised voltage rise on the lv buses
+    For the moment ``auth_max_VriselvBus`` i.e. the authorised voltage rise on the lv buses
     constraint is considered only when the Voltage rise on the hv buses  is greater
-    than auth_max_VriseHvBus. Simply put, as long as no voltage rise above auth_max_VriseHvBus
+    than ``auth_max_VriseHvBus``. Simply put, as long as no voltage rise above ``auth_max_VriseHvBus``
     is detected one does not care about the value of the voltage rise on the lv buses.
-    TODO :Considered the auth_max_VriselvBus to run an opf.   
+    TODO : Considered the auth_max_VriselvBus to run an opf.   
     
     """
 
@@ -918,7 +918,7 @@ def _upscale_HvLv_prod(prod_hv2upscale_df,
         Current value of maximum output Power of the HV producer (MW)
     params_coef_add_bt : tuple
         Parameters associated with how the upscaling of the total LV production is done. See
-        doc `oriClass.InitNetworks(*args) ` for more information
+        doc :py:func:`oriClass.InitNetworks` for more information
             coef_add_bt :
             coef_add_bt_dist :
 
@@ -972,8 +972,8 @@ def createDict_prodHtBt_Load(df_pred_in,
         Dataframe (Predicted values) of Total lower voltage producer, load demand and all
         the Hihger voltage producer in lower level network.
     network_in : oriClass.InitNetworks
-        Networks initialized. An instance of oriClass.InitNetworks, especially the
-        output of the function `setNetwork_params(args)`
+        Networks initialized. An instance of :py:func:`oriClass.InitNetworks`, especially the
+        output of the function :py:func:`oriFunctionetNetwork_params`
     cur_hvProd_max : float
         Current value of maximum output Power of the controlled HV producer (MW)
     ctrld_hvProd_max : float
@@ -1045,7 +1045,7 @@ def robustControl(df_out_block_pf_opf ,
 
     Implement Robust control by letting the controlled Hv Producer inject all its production 
     when no voltage rise above the predefined threshold is detected. Replacement is done in
-    place i.e. in the `df_out_block_pf_opf` .
+    place i.e. in the ``df_out_block_pf_opf`` .
 
     Parameters
     ----------
@@ -1058,7 +1058,7 @@ def robustControl(df_out_block_pf_opf ,
     ctrld_hvProd_max : int
       Maximum fixed output of the Controlled Higher voltage producer (MW)
     auth_max_VriseHvBus : float, optional default = ``defAuth_hvBus_vRiseMax``
-      Threshold of maximum voltage allowed on the HV buses of `network`.
+      Threshold of maximum voltage allowed on the HV buses of ``network``.
 
     """
 
