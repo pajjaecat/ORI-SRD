@@ -973,7 +973,7 @@ def createDict_prodHtBt_Load(df_pred_in,
         the Hihger voltage producer in lower level network.
     network_in : oriClass.InitNetworks
         Networks initialized. An instance of :py:func:`oriClass.InitNetworks`, especially the
-        output of the function :py:func:`oriFunctionetNetwork_params`
+        output of the function :py:func:`oriFunction.setNetwork_params`
     cur_hvProd_max : float
         Current value of maximum output Power of the controlled HV producer (MW)
     ctrld_hvProd_max : float
