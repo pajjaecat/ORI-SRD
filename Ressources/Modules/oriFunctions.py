@@ -743,10 +743,13 @@ def robustPred(model_Vrise_dict,
     n_models : int or str, optional, default=None
         Number of models which must agree on voltage rise above threshold before
         a command is set to the controlled HV producer.
-            1 : At Least one of the models
-            2 : At least two of the models
-            3 : All three models
-            "Modelx": 
+            1 : 
+              At Least one of the models
+            2 : 
+              At least two of the models
+            3 : 
+              All three models
+            "Modelx" : 
                 Name of the Model which voltage rise above threshold prediction is considered
                 whith x in {1,2,3}
 
@@ -814,7 +817,7 @@ def robustPred(model_Vrise_dict,
 
 def extractParRes_asDf(parallel_result,
                        df_prodHT) :
-    """
+    """ Extract Parallel Engines Results.
     
     Extract and save the result of the parallel computation in a dataframe that is output
 
@@ -957,113 +960,128 @@ def createDict_prodHtBt_Load(df_pred_in,
                              cur_hvProd_max: float,
                              ctrld_hvProd_max: float = default_ctrld_hvProd_max
                              ) -> dict :
-  
-  """ Create a specific dictionary for parallel Engines
-
-  Parameters
-  ----------
-  df_pred_in : pandas.DataFrame
-    Dataframe (Predicted values) of Total lower voltage producer, load demand and all
-    the Hihger voltage producer in lower level network.
-  network_in : oriClass.InitNetworks
-    Networks initialized. An instance of oriClass.InitNetworks, especially the output 
-    of the function `setNetwork_params(args)`
-  cur_hvProd_max : float
-    Current value of maximum output Power of the controlled HV producer (MW)
-  ctrld_hvProd_max : float
-    Maximum fixed output of the Controlled Higher voltage producer (MW)
-
-
-  """
-  # Instancuate parameters
-  upNet_sum_max_lvProd = networks_in.get_upperNet_sum_max_lvProdLoad()[0]
-  params_coef_add_bt = networks_in.get_params_coef_add_bt()
-  ctrld_hvProd_name = networks_in.get_ctrld_hvProdName()
-
-  # Check if coef_add_bt_dist is authorized
-  checker.check_coef_add_bt_dist(params_coef_add_bt[1])
-
-  # Check wether the input dataframe columns are in the expected order
-  checker.check_networkDataDf_columnsOrder(df_pred_in)
-
-  df_pred = df_pred_in.copy(deep=True)  # Create a copy of the input dataframe
-
-  # If the last 2 digits of an elm of df_pred.columns is decimal, therefore the colums is 
-  # that of a HV producer
-  hvProd_columns = [elm for elm in df_pred.columns if elm[-4:].isdecimal()]
-  df_prodHT = df_pred[hvProd_columns]
-
-  # Upscale HV production and the LV µ% production
-  df_prodHT[[ctrld_hvProd_name]], df_prod_bt_total = _upscale_HvLv_prod(df_prodHT[[ctrld_hvProd_name]],
-                                                                        df_pred[['Prod_BT']],
-                                                                        ctrld_hvProd_max, upNet_sum_max_lvProd,
-                                                                        cur_hvProd_max, params_coef_add_bt)
-
-  # Define consumption df
-  # TODO : Code a function to check the oreder of the input dataframe
-  df_cons_total = df_pred.iloc[:, [0]]
-
-  # Define a dict 
-  dict_df_sgenLoad = dict({'df_prodHT': df_prodHT,
-                           'df_prod_bt_total': df_prod_bt_total,
-                           'df_cons_total': df_cons_total,
-                           'lowerNet_sgenDf_copy': networks_in.get_lowerNet_sgenDf_copy()})
-
-  return dict_df_sgenLoad
-
-
-# ____________________________________________________________________________________________________________
-# ____________________________________________________________________________________________________________
-
-def robustControl(df_out_block_pf_opf ,
-                  df_hvProd_noControl,
-                  cur_hvProd_max: float,
-                  ctrld_hvProd_max: int,
-                  auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax ):
-    """ Robust control
-    
-    Implement Robust control by letting the controlled Hv Producer inject all its production 
-    when no voltage rise above the predefined threshold is detected. Replacement is done in
-    place i.e. in the `df_out_block_pf_opf` .
-    
-    Parameters
-    ----------
-    df_out_block_pf_opf : pandas.DataFrame
-        Output of the block pf/opf
-    df_hvProd_noControl : Dataframe
-        Dataframe of controlled HV Prod  with no control
-    cur_hvProd_max : float
-        Current maximum output Power of the HV producer (MW)
-    ctrld_hvProd_max : int
-        Maximum fixed output of the Controlled Higher voltage producer (MW)
-    auth_max_VriseHvBus : float, optional default = `defAuth_hvBus_vRiseMax`
-        Threshold of maximum voltage allowed on the HV buses of `network`.
-        
     """
+    Create a specific dictionary containing variable that will be send to the local
+    space of the parallele engines.
 
-    # Basically, we replace the value of the controled HvProd by its own 
-    # value with No control when no voltage rise above the defined threshold is detected.
+    Parameters
+    -----------
+    df_pred_in : pandas.DataFrame
+        Dataframe (Predicted values) of Total lower voltage producer, load demand and all
+        the Hihger voltage producer in lower level network.
+    network_in : oriClass.InitNetworks
+        Networks initialized. An instance of oriClass.InitNetworks, especially the
+        output of the function `setNetwork_params(args)`
+    cur_hvProd_max : float
+        Current value of maximum output Power of the controlled HV producer (MW)
+    ctrld_hvProd_max : float
+        Maximum fixed output of the Controlled Higher voltage producer (MW)
 
-    # create new period index mask spaning from 08Am to 6PM
-    per_index2 = df_out_block_pf_opf.index.to_timestamp().to_series().between_time('07:10',
-                                                                                   '18:50').index.to_period('10T')
-    ctrld_hvProdName = df_out_block_pf_opf.columns[0]
+    Returns
+    --------
+    dict of dataframe
+        The created dictionary with the its keys being
+        `df_prodHT` :  pandas.DataFrame
+            Dataframe containing the upscaled (based on cur_hvProd_max) pv power of the
+            Hihger voltage  producers in lower level network.
+        `df_prod_bt_total` :  pandas.DataFrame
+            Dataframe of the upscaled (based on coef_add_bt) total pv power of all lower
+            voltage producer in the lower network
+        `df_cons_total` :  pandas.DataFrame
+            Dataframe of the total load demand (consumption) in the lower level network
+        `lowerNet_sgenDf_copy` :  pandas.DataFrame
+            Dataframe of all the static generator in the lower network
 
-    # Create a new df for hvProd
-    hvProd_robust_df = pd.DataFrame(index=per_index2, columns=['hvProd_robust'])
+    """
+    # Instancuate parameters
+    upNet_sum_max_lvProd = networks_in.get_upperNet_sum_max_lvProdLoad()[0]
+    params_coef_add_bt = networks_in.get_params_coef_add_bt()
+    ctrld_hvProd_name = networks_in.get_ctrld_hvProdName()
 
-    # Get into the dataframe data of hvProdWhen there is no control
-    hvProd_robust_df.loc[per_index2, ['hvProd_robust']] = (df_hvProd_noControl.loc[per_index2].P0100
-                                                           * cur_hvProd_max / ctrld_hvProd_max)
+    # Check if coef_add_bt_dist is authorized
+    checker.check_coef_add_bt_dist(params_coef_add_bt[1])
 
-    # Get a mask for the periods where a voltage rise above the threshold is predicted 
-    mask_vrise_per = df_out_block_pf_opf.loc[per_index2, 'max_vm_pu_pf'] > auth_max_VriseHvBus
+    # Check wether the input dataframe columns are in the expected order
+    checker.check_networkDataDf_columnsOrder(df_pred_in)
 
-    # Replace the values of periods given by the mask by the value of hvProd given by the persistence model
-    hvProd_robust_df[mask_vrise_per] = df_out_block_pf_opf.loc[per_index2].loc[mask_vrise_per, [ctrld_hvProdName]]
+    df_pred = df_pred_in.copy(deep=True)  # Create a copy of the input dataframe
 
-    # Replace the values of hvProdin df_out_block_pf_opf
-    df_out_block_pf_opf.loc[per_index2, [ctrld_hvProdName]] = hvProd_robust_df.loc[per_index2, 'hvProd_robust']
+    # If the last 2 digits of an elm of df_pred.columns is decimal, therefore the colums is 
+    # that of a HV producer
+    hvProd_columns = [elm for elm in df_pred.columns if elm[-4:].isdecimal()]
+    df_prodHT = df_pred[hvProd_columns]
+
+    # Upscale HV production and the LV µ% production
+    df_prodHT[[ctrld_hvProd_name]], df_prod_bt_total = _upscale_HvLv_prod(df_prodHT[[ctrld_hvProd_name]],
+                                                                          df_pred[['Prod_BT']],
+                                                                          ctrld_hvProd_max, upNet_sum_max_lvProd,
+                                                                          cur_hvProd_max, params_coef_add_bt)
+
+    # Define consumption df
+    # TODO : Code a function to check the oreder of the input dataframe
+    df_cons_total = df_pred.iloc[:, [0]]
+
+    # Define a dict 
+    dict_df_sgenLoad = dict({'df_prodHT': df_prodHT,
+                             'df_prod_bt_total': df_prod_bt_total,
+                             'df_cons_total': df_cons_total,
+                             'lowerNet_sgenDf_copy': networks_in.get_lowerNet_sgenDf_copy()})
+
+    return dict_df_sgenLoad
+
+
+  # ____________________________________________________________________________________________________________
+  # ____________________________________________________________________________________________________________
+
+  def robustControl(df_out_block_pf_opf ,
+                    df_hvProd_noControl,
+                    cur_hvProd_max: float,
+                    ctrld_hvProd_max: int,
+                    auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax ):
+      """ Robust control
+
+      Implement Robust control by letting the controlled Hv Producer inject all its production 
+      when no voltage rise above the predefined threshold is detected. Replacement is done in
+      place i.e. in the `df_out_block_pf_opf` .
+
+      Parameters
+      ----------
+      df_out_block_pf_opf : pandas.DataFrame
+          Output of the block pf/opf
+      df_hvProd_noControl : Dataframe
+          Dataframe of controlled HV Prod  with no control
+      cur_hvProd_max : float
+          Current maximum output Power of the HV producer (MW)
+      ctrld_hvProd_max : int
+          Maximum fixed output of the Controlled Higher voltage producer (MW)
+      auth_max_VriseHvBus : float, optional default = `defAuth_hvBus_vRiseMax`
+          Threshold of maximum voltage allowed on the HV buses of `network`.
+
+      """
+
+      # Basically, we replace the value of the controled HvProd by its own 
+      # value with No control when no voltage rise above the defined threshold is detected.
+
+      # create new period index mask spaning from 08Am to 6PM
+      per_index2 = df_out_block_pf_opf.index.to_timestamp().to_series().between_time('07:10',
+                                                                                     '18:50').index.to_period('10T')
+      ctrld_hvProdName = df_out_block_pf_opf.columns[0]
+
+      # Create a new df for hvProd
+      hvProd_robust_df = pd.DataFrame(index=per_index2, columns=['hvProd_robust'])
+
+      # Get into the dataframe data of hvProdWhen there is no control
+      hvProd_robust_df.loc[per_index2, ['hvProd_robust']] = (df_hvProd_noControl.loc[per_index2].P0100
+                                                             * cur_hvProd_max / ctrld_hvProd_max)
+
+      # Get a mask for the periods where a voltage rise above the threshold is predicted 
+      mask_vrise_per = df_out_block_pf_opf.loc[per_index2, 'max_vm_pu_pf'] > auth_max_VriseHvBus
+
+      # Replace the values of periods given by the mask by the value of hvProd given by the persistence model
+      hvProd_robust_df[mask_vrise_per] = df_out_block_pf_opf.loc[per_index2].loc[mask_vrise_per, [ctrld_hvProdName]]
+
+      # Replace the values of hvProdin df_out_block_pf_opf
+      df_out_block_pf_opf.loc[per_index2, [ctrld_hvProdName]] = hvProd_robust_df.loc[per_index2, 'hvProd_robust']
 
 
 # ____________________________________________________________________________________________________________
@@ -1078,7 +1096,7 @@ def block_prod(df_out_block_pf_opf,
     """ Bloc Prod 
     
     Implement bloc prod i.e. make sure the controlled HV producer can't inject into the lower network
-    more than its actual production. Modify in place the input dataframe `df_out_block_pf_opf`.
+    more than its actual production. Modify in place the input dataframe ``df_out_block_pf_opf``.
 
     Parameters
     ----------
