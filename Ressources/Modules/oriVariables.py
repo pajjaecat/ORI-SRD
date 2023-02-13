@@ -3,7 +3,7 @@
 # Copyright (c) 2022-2023 by Jesse-James PRINCE AGBODJAN for SRD-Energies (https://www.srd-energies.fr/) 
 # All rights reserved.
 
-""" List of all defaut Variables used in the tutorials present in `<https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`_ .
+""" List of all defaut Variables used in the tutorials present in the  `tutorials <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`_ .
 
 This module holds a list of all the variables used in the ORI package.
 
