@@ -198,7 +198,7 @@ def check_opf_status(opf_status:bool or str ):
 
 
 
-def check_clean(clean:bool)
+def check_clean(clean:bool): 
     """ Check whether ``clean`` is authorised"""
     if clean not in [True, False]: 
         raise valueError ('``clean`` must be a ``bool``')
