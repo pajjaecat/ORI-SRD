@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2022-2023 by Jesse-James PRINCE AGBODJAN for SRD-Energies (https://www.srd-energies.fr/) 
+# All rights reserved.
+
 """ Modules where all the checking functions are defined """
 
 
@@ -173,17 +178,33 @@ def check_networkDataDf_columnsOrder(netInput_data_df:pandas.core.frame.DataFram
 def _check_resTables_existing(self):
     """ Check if the result tables are present in the _lowerNet pandapower table. 
     
-    Return :
-            True  ==> Meaning the lowerNet is already run once using power flow, hence the res_bus and res_sgen 
-                     tables exists and have a length not equal to 0
-            False ==> Results tables have length 0 
-            
+    Returns
+    -------
+        True  
+            Meaning the lowerNet is already run once using power flow, hence the res_bus and res_sgen 
+            tables exists and have a length not equal to 0
+        False 
+            Results tables have length 0 
+
     """
-    
     return (len(self._lowerNet.res_bus)!=0) & (len(self._lowerNet.res_sgen)!=0) 
 
 
 
+def check_opf_status(opf_status:bool or str ):
+    """  Check whether the ``opf_status`` is authorised. """
+    if opf_status not in ['Both', False]:
+         raise valueError ('``opf_status`` must be either of [False, ''Both'']')
 
 
 
+def check_clean(clean:bool)
+    """ Check whether ``clean`` is authorised"""
+    if clean not in [True, False]: 
+        raise valueError ('``clean`` must be a ``bool``')
+
+        
+def check_parResultsNames(par_result_name:str):
+    """ Check whether ``par_result_name`` is a string """
+    if type(par_result_name) is not str: 
+        raise TypeError(' ``gather_results()`` can only handle string as argument')
