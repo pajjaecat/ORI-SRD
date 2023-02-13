@@ -973,19 +973,6 @@ def createDict_prodHtBt_Load(df_pred_in,
   ctrld_hvProd_max : float
     Maximum fixed output of the Controlled Higher voltage producer (MW)
 
-  Returns
-  -------
-  dict of dataframe
-    The created dictionary with the its keys being
-    `df_prodHT` : pandas.DataFrame
-      Dataframe containing the upscaled (based on cur_hvProd_max) pv power of the
-      Hihger voltage  producers in lower level network.
-    `df_prod_bt_total` : pandas.DataFrame
-      Dataframe of the upscaled (based on coef_add_bt) total pv power of all lower
-      voltage producer in the lower network
-    `df_cons_total` : pandas.DataFrame
-      Dataframe of the total load demand (consumption) in the lower level network
-    `lowerNet_sgenDf_copy` : pandas.DataFrame
 
   """
   # Instancuate parameters
