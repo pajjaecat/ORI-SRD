@@ -1038,6 +1038,7 @@ def createDict_prodHtBt_Load(df_pred_in,
                     cur_hvProd_max: float,
                     ctrld_hvProd_max: int,
                     auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax ):
+
       """ Robust control
 
       Implement Robust control by letting the controlled Hv Producer inject all its production 
