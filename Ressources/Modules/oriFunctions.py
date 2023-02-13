@@ -988,41 +988,41 @@ def createDict_prodHtBt_Load(df_pred_in,
     `lowerNet_sgenDf_copy` : pandas.DataFrame
 
   """
-    # Instancuate parameters
-    upNet_sum_max_lvProd = networks_in.get_upperNet_sum_max_lvProdLoad()[0]
-    params_coef_add_bt = networks_in.get_params_coef_add_bt()
-    ctrld_hvProd_name = networks_in.get_ctrld_hvProdName()
+  # Instancuate parameters
+  upNet_sum_max_lvProd = networks_in.get_upperNet_sum_max_lvProdLoad()[0]
+  params_coef_add_bt = networks_in.get_params_coef_add_bt()
+  ctrld_hvProd_name = networks_in.get_ctrld_hvProdName()
 
-    # Check if coef_add_bt_dist is authorized
-    checker.check_coef_add_bt_dist(params_coef_add_bt[1])
+  # Check if coef_add_bt_dist is authorized
+  checker.check_coef_add_bt_dist(params_coef_add_bt[1])
 
-    # Check wether the input dataframe columns are in the expected order
-    checker.check_networkDataDf_columnsOrder(df_pred_in)
+  # Check wether the input dataframe columns are in the expected order
+  checker.check_networkDataDf_columnsOrder(df_pred_in)
 
-    df_pred = df_pred_in.copy(deep=True)  # Create a copy of the input dataframe
+  df_pred = df_pred_in.copy(deep=True)  # Create a copy of the input dataframe
 
-    # If the last 2 digits of an elm of df_pred.columns is decimal, therefore the colums is 
-    # that of a HV producer
-    hvProd_columns = [elm for elm in df_pred.columns if elm[-4:].isdecimal()]
-    df_prodHT = df_pred[hvProd_columns]
+  # If the last 2 digits of an elm of df_pred.columns is decimal, therefore the colums is 
+  # that of a HV producer
+  hvProd_columns = [elm for elm in df_pred.columns if elm[-4:].isdecimal()]
+  df_prodHT = df_pred[hvProd_columns]
 
-    # Upscale HV production and the LV µ% production
-    df_prodHT[[ctrld_hvProd_name]], df_prod_bt_total = _upscale_HvLv_prod(df_prodHT[[ctrld_hvProd_name]],
-                                                                          df_pred[['Prod_BT']],
-                                                                          ctrld_hvProd_max, upNet_sum_max_lvProd,
-                                                                          cur_hvProd_max, params_coef_add_bt)
+  # Upscale HV production and the LV µ% production
+  df_prodHT[[ctrld_hvProd_name]], df_prod_bt_total = _upscale_HvLv_prod(df_prodHT[[ctrld_hvProd_name]],
+                                                                        df_pred[['Prod_BT']],
+                                                                        ctrld_hvProd_max, upNet_sum_max_lvProd,
+                                                                        cur_hvProd_max, params_coef_add_bt)
 
-    # Define consumption df
-    # TODO : Code a function to check the oreder of the input dataframe
-    df_cons_total = df_pred.iloc[:, [0]]
+  # Define consumption df
+  # TODO : Code a function to check the oreder of the input dataframe
+  df_cons_total = df_pred.iloc[:, [0]]
 
-    # Define a dict 
-    dict_df_sgenLoad = dict({'df_prodHT': df_prodHT,
-                             'df_prod_bt_total': df_prod_bt_total,
-                             'df_cons_total': df_cons_total,
-                             'lowerNet_sgenDf_copy': networks_in.get_lowerNet_sgenDf_copy()})
+  # Define a dict 
+  dict_df_sgenLoad = dict({'df_prodHT': df_prodHT,
+                           'df_prod_bt_total': df_prod_bt_total,
+                           'df_cons_total': df_cons_total,
+                           'lowerNet_sgenDf_copy': networks_in.get_lowerNet_sgenDf_copy()})
 
-    return dict_df_sgenLoad
+  return dict_df_sgenLoad
 
 
 # ____________________________________________________________________________________________________________
