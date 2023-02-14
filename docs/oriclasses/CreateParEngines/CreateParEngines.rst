@@ -1,6 +1,20 @@
 
-CreateParEngines
-================
+Lis of ORI's Classes
+====================
 
-.. automodule:: oriClass
+The ``CreateParEngines`` Class
+******************************
+
+.. autoclass:: oriClass.CreateParEngines
   :members:
+  :undoc-members:
+  :show-inheritance:
+  
+  
+  
+The ``InitNetworks`` Class
+**************************
+.. autoclass:: oriclass.InitNetworks
+  :members:
+  :undoc-members:
+  :show-inheritance: 
