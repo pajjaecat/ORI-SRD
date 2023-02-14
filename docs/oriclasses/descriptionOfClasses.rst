@@ -5,6 +5,7 @@
 ============================
 
 .. autosummary::
+   :recursive: 
    :toctree: generated
   
   
