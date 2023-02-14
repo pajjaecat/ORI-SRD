@@ -6,12 +6,6 @@ This section focuses on the classes described in `oriClass <https://github.com/p
   :maxdepth: 2 
 
 
-  oriClasses/list
-  oriClasses/description
-
-
-
-  
-I'm trying to introduce a new section
-*************************************
+  oriClasses/listOfClasses
+  oriClasses/descriptionOfClasses
   
