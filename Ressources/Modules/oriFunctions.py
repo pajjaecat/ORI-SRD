@@ -575,7 +575,7 @@ def improve_persinstence(per_extracted_res_df,
         Result given by the persistence model. Output of :py:func:`oriFunctions.extract_par_results`.
     df_prodHT :  pandas.DataFrame
         Dataframe containing data of all the HT producers in the network.
-    auth_max_VriseHvBus: float, Optional, Default = ``defAuth_hvBus_vRiseMax`` ``defAuth_hvBus_vRiseMax``
+    auth_max_VriseHvBus : float, Optional, Default = ``py:func:`oriVariables.defAuth_hvBus_vRiseMax` ``
         Threshold of maximum voltage allowed on the HV buses.
     h_start_end : list of str, optional, default = ['11:00', '14:00']
         Hour between which the HV can inject all is production into the network
