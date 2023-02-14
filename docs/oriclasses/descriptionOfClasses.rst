@@ -1,7 +1,7 @@
 
 
 ============================
-          Description
+   Description of Classes
 ============================
 
 .. autosummary::
