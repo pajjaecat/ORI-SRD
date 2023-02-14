@@ -2,7 +2,7 @@ Ori Classes
 ===========
 
 .. autosummary::
-  :toctree: oriclasses
+  :toctree: oriclasses/CreateParEngines
 
   oriClass
     oriClass.CreateParEngines
