@@ -2,13 +2,14 @@ Ori Classes
 ===========
 
 .. autosummary::
+  :recursive:
   :toctree:
 
   oriClass
-    oriClass.CreateParEngines
-    oriClass.InitNetworks
-    oriClass.SensAnlysisResult
-    oriClass.SensAnlysisResults
+  oriClass.CreateParEngines
+  oriClass.InitNetworks
+  oriClass.SensAnlysisResult
+  oriClass.SensAnlysisResults
 
 
 
