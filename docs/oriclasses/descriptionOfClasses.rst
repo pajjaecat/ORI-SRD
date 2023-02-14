@@ -6,5 +6,4 @@
 
 .. toctree:: 
   
-  oriClass.CreateParEngines
-  oriClass.InitNetworks
+  CreateParEngines/CreateParEngines
