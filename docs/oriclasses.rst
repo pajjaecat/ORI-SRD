@@ -6,6 +6,6 @@ This section focuses on the classes described in `oriClass <https://github.com/p
   :maxdepth: 2 
 
 
-  oriclasses/listOfClasses
+  oriclasses/listofClasses
   oriclasses/descriptionOfClasses
   
