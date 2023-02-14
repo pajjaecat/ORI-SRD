@@ -1,15 +1,13 @@
-Ori Classes
-===========
+ORI's Classes
+=============
+This section focuses on the classes described in `oriClass <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Modules/oriClass.py>`_ . The first subsection gives a brief overview while the second zoom in on each class.
 
-.. autosummary::
-  :recursive:
-  :toctree:
+.. toctree::
+  :maxdepth: 2 
 
-  oriClass
-  oriClass.CreateParEngines
-  oriClass.InitNetworks
-  oriClass.SensAnlysisResult
-  oriClass.SensAnlysisResults
+
+  oriClasses/list
+  oriClasses/description
 
 
 
