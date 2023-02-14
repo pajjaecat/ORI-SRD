@@ -1,7 +1,8 @@
 Ori Classes
 ===========
 
-.. autosummary:: 
+.. autosummary::
+  :toctree: generated
 
   oriClass
   oriClass.CreateParEngines
