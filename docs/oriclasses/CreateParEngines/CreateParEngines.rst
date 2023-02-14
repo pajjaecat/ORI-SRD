@@ -2,4 +2,5 @@
 CreateParEngines
 ================
 
-.. autoclass:: oriClass.CreateParEngines
+.. automodule:: oriClass
+  :members:
