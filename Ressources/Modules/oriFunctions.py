@@ -835,12 +835,12 @@ def extractParRes_asDf(parallel_result,
 
     Returns
     -------
-     pandas.DataFrame
+    pandas.DataFrame
         Parallel results extracted as a dataframe.
-
-
-    .. deprecated:: 1.0.1
-        Will be removed in the next version. Use :py:func:`oriClass.CreateParEngines.get_results_asDf`
+        
+    Warnings
+    --------
+    Will be removed in the next version. Use :py:func:`oriClass.CreateParEngines.get_results_asDf`
         
     """
 
