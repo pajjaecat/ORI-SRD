@@ -5,8 +5,6 @@
 ============================
 
 .. autosummary::
-  :recursive:  
-  :toctree: generated
   
   
   oriClass.CreateParEngines
