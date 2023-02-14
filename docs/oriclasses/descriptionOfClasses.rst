@@ -4,10 +4,7 @@
    Description of Classes
 ============================
 
-.. autosummary::
-   :recursive: 
-   :toctree: generated
-  
+.. toctree:: 
   
   oriClass.CreateParEngines
   oriClass.InitNetworks
