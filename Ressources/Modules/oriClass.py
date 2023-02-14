@@ -246,7 +246,7 @@ class InitNetworks:
         """ Initialize both the upper and lower level  Networks
         
         Parameters 
-        -----------
+        ----------
         upperNet : :obj:`pandapower.pandapowerNet`
             Upper level network.
         lowerNet : pandapower.pandapowerNet 
@@ -371,8 +371,8 @@ class InitNetworks:
         ``lowNet_activatedBus_list`` MUST be the list  of lowNet_lv_activatedBus.
         
             
-        Parameters: 
-        -----------
+        Parameters 
+        ----------
         lowNet_activatedBus_list : list
             List of all the activated buses on the lower Network
         min_vm_mu : float, Default = ``defAuth_hvBus_vRiseMin``
@@ -454,7 +454,7 @@ class InitNetworks:
         """ Provide a list of all LV activated buses (vn_kv=0.4) on the lower Network
         
         Parameters
-        ---------
+        ----------
         lowerNet_lv_bus_list : list
             List of all lv buses in the lower Network.
             
