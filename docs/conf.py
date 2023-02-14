@@ -12,7 +12,7 @@
 #
 import os
 import sys
-# sys.path.insert(0, os.path.abspath('.'))
+# Add Modules location in path
 sys.path.insert(0, os.path.abspath('../Ressources/Modules/'))
 
 
