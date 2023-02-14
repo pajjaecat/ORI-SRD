@@ -2,4 +2,4 @@
 CreateParEngines
 ================
 
-.. autofunction:: oriClass.CreateParEngines
+.. autoclass:: oriClass.CreateParEngines
