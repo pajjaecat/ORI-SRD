@@ -487,10 +487,9 @@ def max_vm_pu_at(network,
                      
     Notes
     -----
-    TODO : Return the maximum voltage rise over all the LV buses in the lower network for the current
+    TODO. Return the maximum voltage rise over all the LV buses in the lower network for the current
     instant. In this case one needs to add as input to the function the ``net_lv_activBus`` list as  
     well. Hence one can replace the ``lowNet_hv_activBus`` by a tuple of ``(lowNet_hv_activBus, uppNet_lv_activBus)`` .
-
 
     """
 
