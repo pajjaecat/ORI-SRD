@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2022-2023 by Jesse-James PRINCE AGBODJAN for SRD-Energies (https://www.srd-energies.fr/) 
+# All rights reserved.
+
+
 """
 OriFunctions - Python library with List of all functions used in the `tutorials <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`_
 
@@ -27,18 +33,19 @@ def readAndReshape_excelFile(file_name: str,
                              folder_name: str = excel_folder,
                              n_row2read: int = None
                             ) -> numpy.array :
-    """
+    """ Read and reshape in one dimension an excel file
     
     Read and reshape in a one dimension array the excel file given by file_name.
 
     Parameters 
-    -----------
+    ----------
     file_name : str
         Name of the file to load (with the correct extension).
-    folder_name : str, optional, default = `excel_folder`
-        Location of the folder where `file_name` is present.
+    folder_name : str, optional, default = :py:func:`oriVariables.network_folder`
+        Location of the folder where the file ``file_name`` is present.
     n_row2read : int, optional, default=0
          Numbers of rows to read in the excel file.
+         
 
     """
 
@@ -98,12 +105,10 @@ def run_powerflow(network,
                   dict_df_sgenLoad: dict,
                   opf_status=False 
                  ):
-    """
+    """ Initialise the parameters of the network
     
     Return a list of maximum voltage on the network for each period given by the index
     of element in
-
-    Initialise the parameters of the network
 
     Parameters
     ----------
@@ -114,9 +119,9 @@ def run_powerflow(network,
     sum_max_p_mw_upperNet: tuple
         Sum of maximum power seen from the upper network (here, saint laurent
         compared to the lower network civaux)
-            `sum_max_p_mw_upperNet[0]` :
+            ``sum_max_p_mw_upperNet[0]`` :
                 Of all Lower voltage producers.
-            `sum_max_p_mw_upperNet[1]` :
+            ``sum_max_p_mw_upperNet[1]`` :
                 Of all Load in the upper network.
     dict_df_sgenLoad : dict
         Dictionary of dataframe. For the first three keys, the corresponding df must indexed by the
@@ -133,18 +138,18 @@ def run_powerflow(network,
     ofp_status: bool or str, optional, default=False
         Optimal power flow status. Whether the maximum voltage rise on the lower network HV buses
         is extracted after a power flow, an optimal power flow  or both. Three values are possible:
-            `ofp_status` = False :
+            ``ofp_status`` = False :
                 Run a simple power flow i.e., `pandapower.runpp(network)`
-            `ofp_status` = True :
+            ``ofp_status`` = True :
                 Run an optimal power flow i.e., `pandapower.runopp(network)`
-            `ofp_status` = "Both" :
+            ``ofp_status`` = "Both" :
                 A power flow is run. Only when the result i.e. the voltage rise detected on hv Prod
-                Buses `max_vm_pu` > `auth_max_VriseHvBus`, is the  optimal  power flow run.
+                Buses ``max_vm_pu`` > ``auth_max_VriseHvBus``, is the  optimal  power flow run.
                 
     Returns
     -------
     tuple or list
-        The return value depends on `ofp_status`
+        The return value depends on ``ofp_status``
 
     See Also
     --------
@@ -152,9 +157,9 @@ def run_powerflow(network,
 
     Notes
     -----
-    It is not recommended to use `run_powerflow(args)` since its implementaion is not optimal for use with
-    parallel engines created with `ipyparallel <https://ipyparallel.readthedocs.io/en/latest/>`_ .
-    We recommand `run_powerflow_at(args)` .
+    It is not recommended to use ``run_powerflow(args)`` since its implementaion is not optimal for 
+    use with parallel engines created with `ipyparallel <https://ipyparallel.readthedocs.io/en/latest/>`_ .
+    We recommand :py:func:`oriFunctions.run_powerflow_at` .
 
     """
 
@@ -218,33 +223,33 @@ def run_powerflow_at(network,
     sum_max_p_mw_upperNet : tuple
         Sum of maximum power seen from the upper network (here, saint laurent
         compared to the lower network civaux).
-            `sum_max_p_mw_upperNet[0]` :
+            ``sum_max_p_mw_upperNet[0]`` :
                 Of all Lower voltage producers.
-            `sum_max_p_mw_upperNet[1]` :
+            ``sum_max_p_mw_upperNet[1]`` :
                 Of all Load in the upper network.
     dict_df_sgenLoad : dict
         Dictionary of dataframe. For the first three keys, the corresponding df must indexed by the
         periods of the considered year. The keys must be the following:
-            `df_prodHT` :  pandas.DataFrame
+            `df_prodHT` : pandas.DataFrame
                 Power of all Higher voltage producers in the lower network. The colums represent
                 each Hv producer.
-            `df_prod_bt_total` :  pandas.DataFrame
+            `df_prod_bt_total` : pandas.DataFrame
                 Total power of all lower voltage producers seen  from  the upper Network.
-            `df_cons_total` :  pandas.DataFrame
+            `df_cons_total` : pandas.DataFrame
                 Total Load demand seen from the upper Network.
-            `lowerNet_sgenDf_copy` :  pandas.DataFrame
+            `lowerNet_sgenDf_copy` : pandas.DataFrame
                 Copy of all the static generator (hv & lV) in the lower network.
     auth_max_VriseHvBus: float, optional default = `defAuth_hvBus_vRiseMax`
         Threshold of maximum voltage allowed on the HV buses of `network`. This parameter is used
-        only when `ofp_status` = `"Both"`
+        only when ``ofp_status`` = `"Both"`
     ofp_status: bool or str, optional, default=False
         Optimal power flow status. Whether the maximum voltage rise on the lower network HV buses
         is extracted after a power flow, an optimal power flow  or both. Three values are possible:
-            `ofp_status` = False :
+            ``ofp_status`` = False :
                 Run a simple power flow i.e., `pandapower.runpp(network)`
-            `ofp_status` = True :
+            ``ofp_status`` = True :
                 Run an optimal power flow i.e., `pandapower.runopp(network)`
-            `ofp_status` = "Both" :
+            ``ofp_status`` = "Both" :
                 A power flow is run. Only when the result i.e. the voltage rise detected on hv Prod
                 Buses `max_vm_pu` > `auth_max_VriseHvBus`, is the  optimal  power flow run.
     pred_model: str, optional, default = None
@@ -256,13 +261,13 @@ def run_powerflow_at(network,
                 Persistence model i.e. val(k)= val(k-1)
 
     Returns
-    --------
-    Depends on `ofp_status`
-        `ofp_status` = False
+    -------
+    Depends on ``ofp_status`` 
+        ``ofp_status`` = False
             cur_max_VriseHvBus
-        `ofp_status` = True
+        ``ofp_status`` = True
             cur_max_VriseHvBus, (hvProd_afterOPF, lvProd_afterOPF), cur_period
-        `ofp_status` = "Both"
+        ``ofp_status`` = "Both"
             [max_vm_pu_pf, cur_max_VriseHvBus],(hvProd_afterOPF, lvProd_afterOPF), cur_period
     where
         cur_max_VriseHvBus : float
@@ -276,20 +281,20 @@ def run_powerflow_at(network,
             the optimal power that each lv producer on the lower net must inject in order  to
             satisfy the `auth_max_VriseHvBus`.
         cur_period : pandas.Period
-            The period at which the pf/OPF is run.
+            The period at which the PF/OPF is run.
 
     Raises
-    -------
+    ------
     ValueErrorExeption
-        If `opf_status` is not in [True, False, "Both"]
+        If ``ofp_status`` is not in [True, False, "Both"]
 
     Notes
     -----
-    For the moment `auth_max_VriselvBus` i.e. the authorised voltage rise on the lv buses
+    For the moment ``auth_max_VriselvBus`` i.e. the authorised voltage rise on the lv buses
     constraint is considered only when the Voltage rise on the hv buses  is greater
-    than auth_max_VriseHvBus. Simply put, as long as no voltage rise above auth_max_VriseHvBus
+    than ``auth_max_VriseHvBus``. Simply put, as long as no voltage rise above ``auth_max_VriseHvBus``
     is detected one does not care about the value of the voltage rise on the lv buses.
-    TODO :Considered the auth_max_VriselvBus to run an opf.   
+    TODO : Considered the auth_max_VriselvBus to run an opf.   
     
     """
 
@@ -371,13 +376,13 @@ def initLowerNet_at(network,
     network : Pandapower network
         The lower level network to initialize.
     cur_period : pandas.Period
-        The period at which `network` must be initialize.
+        The period at which ``network`` must be initialize.
     sum_max_p_mw_upperNet : tuple
         Sum of maximum power seen from the upper network (here, saint laurent
         compared to the lower network civaux).
-            `sum_max_p_mw_upperNet[0]` :
+            ``sum_max_p_mw_upperNet[0]`` :
                 Of all Lower voltage producers.
-            `sum_max_p_mw_upperNet[1]` :
+            ``sum_max_p_mw_upperNet[1]`` :
                 Of all Load in the upper network.
     dict_df_sgenLoad : dict
         Dictionary of dataframe. For the first three keys, the corresponding df must indexed by the
@@ -444,7 +449,7 @@ def max_vm_pu_at(network,
                  lowNet_hv_activBus: list,
                  dict_df_sgenLoad: dict,
                  opf_status: (bool or str) = False):
-     """
+    """
 
     Extract the maximum voltage over all the higher voltages active buses in the network at the current
     period.
@@ -487,9 +492,10 @@ def max_vm_pu_at(network,
                      
     Notes
     -----
-    TODO. Return the maximum voltage rise over all the LV buses in the lower network for the current
+    TODO : Return the maximum voltage rise over all the LV buses in the lower network for the current
     instant. In this case one needs to add as input to the function the ``net_lv_activBus`` list as  
     well. Hence one can replace the ``lowNet_hv_activBus`` by a tuple of ``(lowNet_hv_activBus, uppNet_lv_activBus)`` .
+
 
     """
 
@@ -553,6 +559,7 @@ def improve_persinstence(per_extracted_res_df,
     # Implement : * Inject all the production as long as max_vm_pu_pf < vm_mu_max, i.e.
     # no voltage rise is detected
     """
+    
     Improve the results given by the persistence model.
     If a voltage rise is not predicted by the persistence model at a certain period, the controllable
     sgens is allowed to inject all its power into the grid. Otherwise the energy producer can inject
@@ -565,10 +572,10 @@ def improve_persinstence(per_extracted_res_df,
     Parameters
     ----------
     per_extracted_res_df :  pandas.DataFrame
-        Result given by the persistence model. Output of extract_par_results(par_results_pers, *args).
+        Result given by the persistence model. Output of :py:func:`oriFunctions.extract_par_results`.
     df_prodHT :  pandas.DataFrame
         Dataframe containing data of all the HT producers in the network.
-    auth_max_VriseHvBus: float, optional default = `defAuth_hvBus_vRiseMax`
+    auth_max_VriseHvBus : float, Optional, Default = ``:py:func:`oriVariables.defAuth_hvBus_vRiseMax` ``
         Threshold of maximum voltage allowed on the HV buses.
     h_start_end : list of str, optional, default = ['11:00', '14:00']
         Hour between which the HV can inject all is production into the network
@@ -578,6 +585,7 @@ def improve_persinstence(per_extracted_res_df,
     -------
     per_improved_res :  pandas.DataFrame
         Output the improve persistence model improve by the previoulsy described strategy.
+        
     """
 
     # Copy the results of the persistence model 
@@ -613,6 +621,7 @@ def prediction_bloc(rnn_model,
                     scaler_features=None 
                    ):
     """
+    
     Prediction bloc Using a RNN (LSTM).  Predict the values for the the next period.
 
     Parameters
@@ -621,7 +630,7 @@ def prediction_bloc(rnn_model,
         The model that will be used to predict the value at the next period.
     fitting_scaler : Scaler
         Scaler parameters that are used to transform the training data set
-        fed to the `rnn_model`
+        fed to the ``rnn_model`` 
     history :
         Non scaled history of the Electrical network.
     scaler_features : Scaler, optional, default = None
@@ -632,9 +641,9 @@ def prediction_bloc(rnn_model,
     -------
     tuple of list
         var_predicted : list of float
-            Prediction of the interest variables at `pred_period`
-        pred_periods :  pandas.Period or str
-            Period for wich the prediction is done.
+            Prediction of the interest variables at ``pred_period``
+        pred_period :  pandas.Period or str
+            Period for which the prediction is done.
 
     """
 
@@ -664,7 +673,9 @@ def predictionBin_bloc(rnn_model,
                        history,
                        sig_thresh:float = 0.5
                       ):
-    """
+  
+    """ Binary prediction
+    
     Binary prediction bloc Using a RNN (LSTM). Predict whether a voltage above the defined
     threshold will occurs at the next period.
 
@@ -674,7 +685,7 @@ def predictionBin_bloc(rnn_model,
         The binary trained Recurent Neural network
     fitting_scaler : Scaler
         Scaler parameters that are used to transform the training data set
-        fed to the `rnn_model`.
+        fed to the `rnn_model` 
     history :
         Non scaled history of the Electrical network:
     sig_thresh : float, optional, default = 0.5
@@ -685,10 +696,10 @@ def predictionBin_bloc(rnn_model,
     -------
     tuple of list
         var_predicted : {0, 1}
-            Prediction of voltage rise above the defined threshols. `1` and `0` predicted
+            Prediction of voltage rise above the defined threshols. ``1`` and ``0`` predicted
             implies respectively that the defined threshold is and is not respected.
         pred_periods :  pandas.Period or str
-            Period for wich the prediction is done.
+            Period for  which the prediction is done.
     
     """
 
@@ -714,14 +725,12 @@ def robustPred(model_Vrise_dict,
                ctrlHvProd_opt_model1,
                auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
                n_models=None):
-    """
-    Combine the prediction of Three RNN to get a robust prediction bloc.
+    """ Combine the prediction of Three RNN to get a robust prediction bloc.
 
 
     .. deprecated:: 1.0.1
         This function is deprecated. Will be removed in the next version. Develloping a more robust
         approach using an RNN that combines directly all the three models during training.
-
 
     Parameters
     ----------
@@ -730,19 +739,22 @@ def robustPred(model_Vrise_dict,
     hvProd_noControl :  pandas.DataFrame
         Values of the controlled Generator (P0100) when no controled is applied.
     ctrlHvProd_opt_model1 :  pandas.DataFrame
-        Partial output of the function `extract_par_results(args)` that is the  Optimal
+        Partial output of the function :py:func:`oriFunctions.extract_par_results` that is the  Optimal
         value of ctrlHvProd at the output of bloc PF/OPF of model1. This is the command
         value to send to the said Hv producer when the `robustPred` predicts a  voltage
         rise above the defined threshold `auth_max_VriseHvBus`.
-    auth_max_VriseHvBus : float, optional default = `defAuth_hvBus_vRiseMax`
+    auth_max_VriseHvBus : float, optional default = ``defAuth_hvBus_vRiseMax``
         Threshold of maximum voltage allowed on the HV buses of `network`.
     n_models : int or str, optional, default=None
         Number of models which must agree on voltage rise above threshold before
         a command is set to the controlled HV producer.
-            1 : At Least one of the models
-            2 : At least two of the models
-            3 : All three models
-            "Modelx": 
+            1 : 
+              At Least one of the models
+            2 : 
+              At least two of the models
+            3 : 
+              All three models
+            "Modelx" : 
                 Name of the Model which voltage rise above threshold prediction is considered
                 whith x in {1,2,3}
 
@@ -753,9 +765,9 @@ def robustPred(model_Vrise_dict,
     bin_thresh_df :  pandas.DataFrame
 
     Raises
-    -------
+    ------
     ValueErrorExeption
-        If `n_models` is the wrong type or the wrong value.
+        If ``n_models`` is the wrong type or the wrong value.
 
     """
 
@@ -810,24 +822,26 @@ def robustPred(model_Vrise_dict,
 
 def extractParRes_asDf(parallel_result,
                        df_prodHT) :
-    """
+    """ Extract Parallel Engines Results.
+    
     Extract and save the result of the parallel computation in a dataframe that is output
 
     Parameters
     ----------
     parallel_result : list
-        Parallel engine results, i.e. dview.gather(*args)
+        Parallel engine results, i.e. ``dview.gather(*args)``
     df_prodHT :  pandas.DataFrame
         Dataframe of all the Higher voltage sgen in the lower network
 
     Returns
     -------
-     pandas.DataFrame
+    pandas.DataFrame
         Parallel results extracted as a dataframe.
-
-
-    .. deprecated:: 1.0.1
-        Will be removed in the next version. Use `CreateParEngines.get_results_asDf()`
+        
+    Warnings
+    --------
+    Will be removed in the next version. Use :py:func:`oriClass.CreateParEngines.get_results_asDf`
+        
     """
 
     # Get df_prodHT colums name [] from one of the engines 
@@ -884,6 +898,7 @@ def _upscale_HvLv_prod(prod_hv2upscale_df,
                        params_coef_add_bt: tuple = (None, None)
                        ):
     """
+    
     Upscale  both the controled Higher voltage(HV) producer (P0100) in the lower network (civeaux)
     and the total Lower voltage (LV) production. `coef_add_bt_dist` allow to choose how the upscaling
     is done on the LV production.
@@ -893,7 +908,7 @@ def _upscale_HvLv_prod(prod_hv2upscale_df,
 
 
     Parameters
-    -----------
+    ----------
     prod_hv2upscale_df :  pandas.DataFrame
         dataframe of the HV prod to upscale i.e. P0100
     prod_lv2upscale_df :  pandas.DataFrame
@@ -907,7 +922,7 @@ def _upscale_HvLv_prod(prod_hv2upscale_df,
         Current value of maximum output Power of the HV producer (MW)
     params_coef_add_bt : tuple
         Parameters associated with how the upscaling of the total LV production is done. See
-        doc `oriClass.InitNetworks(*args) ` for more information
+        doc :py:func:`oriClass.InitNetworks` for more information
             coef_add_bt :
             coef_add_bt_dist :
 
@@ -956,32 +971,32 @@ def createDict_prodHtBt_Load(df_pred_in,
     space of the parallele engines.
 
     Parameters
-    -----------
-    df_pred_in:   pandas.DataFrame
+    ----------
+    df_pred_in : pandas.DataFrame
         Dataframe (Predicted values) of Total lower voltage producer, load demand and all
         the Hihger voltage producer in lower level network.
     network_in : oriClass.InitNetworks
-        Networks initialized. An instance of oriClass.InitNetworks, especially the
-        output of the function `setNetwork_params(args)`
+        Networks initialized. An instance of :py:func:`oriClass.InitNetworks`, especially the
+        output of the function :py:func:`oriFunctions.setNetwork_params`
     cur_hvProd_max : float
         Current value of maximum output Power of the controlled HV producer (MW)
     ctrld_hvProd_max : float
         Maximum fixed output of the Controlled Higher voltage producer (MW)
 
     Returns
-    --------
+    -------
     dict of dataframe
         The created dictionary with the its keys being
-        `df_prodHT` :  pandas.DataFrame
-            Dataframe containing the upscaled (based on cur_hvProd_max) pv power of the
-            Hihger voltage  producers in lower level network.
-        `df_prod_bt_total` :  pandas.DataFrame
-            Dataframe of the upscaled (based on coef_add_bt) total pv power of all lower
-            voltage producer in the lower network
-        `df_cons_total` :  pandas.DataFrame
-            Dataframe of the total load demand (consumption) in the lower level network
-        `lowerNet_sgenDf_copy` :  pandas.DataFrame
-            Dataframe of all the static generator in the lower network
+          `df_prodHT` :  pandas.DataFrame
+              Dataframe containing the upscaled (based on cur_hvProd_max) pv power of the
+              Hihger voltage  producers in lower level network.
+          `df_prod_bt_total` :  pandas.DataFrame
+              Dataframe of the upscaled (based on coef_add_bt) total pv power of all lower
+              voltage producer in the lower network
+          `df_cons_total` :  pandas.DataFrame
+              Dataframe of the total load demand (consumption) in the lower level network
+          `lowerNet_sgenDf_copy` :  pandas.DataFrame
+              Dataframe of all the static generator in the lower network
 
     """
     # Instancuate parameters
@@ -1021,31 +1036,34 @@ def createDict_prodHtBt_Load(df_pred_in,
     return dict_df_sgenLoad
 
 
-# ____________________________________________________________________________________________________________
-# ____________________________________________________________________________________________________________
-
+  # ____________________________________________________________________________________________________________
+  # ____________________________________________________________________________________________________________
+  
 def robustControl(df_out_block_pf_opf ,
-                  df_hvProd_noControl,
-                  cur_hvProd_max: float,
-                  ctrld_hvProd_max: int,
-                  auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax ):
-    """
+                df_hvProd_noControl,
+                cur_hvProd_max: float,
+                ctrld_hvProd_max: int,
+                auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax ):
+
+    """ Robust control
+
     Implement Robust control by letting the controlled Hv Producer inject all its production 
     when no voltage rise above the predefined threshold is detected. Replacement is done in
-    place i.e. in the `df_out_block_pf_opf` .
-    
+    place i.e. in the ``df_out_block_pf_opf`` .
+
     Parameters
-    -----------
-    df_out_block_pf_opf:  pandas.DataFrame
-        Output of the block pf/opf
+    ----------
+    df_out_block_pf_opf : pandas.DataFrame
+      Output of the block pf/opf
     df_hvProd_noControl : Dataframe
-        Dataframe of controlled HV Prod  with no control
+      Dataframe of controlled HV Prod  with no control
     cur_hvProd_max : float
-        Current maximum output Power of the HV producer (MW)
+      Current maximum output Power of the HV producer (MW)
     ctrld_hvProd_max : int
-        Maximum fixed output of the Controlled Higher voltage producer (MW)
-    auth_max_VriseHvBus : float, optional default = `defAuth_hvBus_vRiseMax`
-        Threshold of maximum voltage allowed on the HV buses of `network`.
+      Maximum fixed output of the Controlled Higher voltage producer (MW)
+    auth_max_VriseHvBus : float, Optional, Default = ``defAuth_hvBus_vRiseMax``
+      Threshold of maximum voltage allowed on the HV buses of ``network``.
+
     """
 
     # Basically, we replace the value of the controled HvProd by its own 
@@ -1053,7 +1071,7 @@ def robustControl(df_out_block_pf_opf ,
 
     # create new period index mask spaning from 08Am to 6PM
     per_index2 = df_out_block_pf_opf.index.to_timestamp().to_series().between_time('07:10',
-                                                                                   '18:50').index.to_period('10T')
+                                                                                 '18:50').index.to_period('10T')
     ctrld_hvProdName = df_out_block_pf_opf.columns[0]
 
     # Create a new df for hvProd
@@ -1061,7 +1079,7 @@ def robustControl(df_out_block_pf_opf ,
 
     # Get into the dataframe data of hvProdWhen there is no control
     hvProd_robust_df.loc[per_index2, ['hvProd_robust']] = (df_hvProd_noControl.loc[per_index2].P0100
-                                                           * cur_hvProd_max / ctrld_hvProd_max)
+                                                         * cur_hvProd_max / ctrld_hvProd_max)
 
     # Get a mask for the periods where a voltage rise above the threshold is predicted 
     mask_vrise_per = df_out_block_pf_opf.loc[per_index2, 'max_vm_pu_pf'] > auth_max_VriseHvBus
@@ -1082,9 +1100,10 @@ def block_prod(df_out_block_pf_opf,
                ctrld_hvProd_max: float,
                starting_index: int = 0
                ) :
-    """
+    """ Bloc Prod 
+    
     Implement bloc prod i.e. make sure the controlled HV producer can't inject into the lower network
-    more than its actual production. Modify in place the input dataframe `df_out_block_pf_opf`.
+    more than its actual production. Modify in place the input dataframe ``df_out_block_pf_opf``.
 
     Parameters
     ----------
@@ -1094,9 +1113,9 @@ def block_prod(df_out_block_pf_opf,
         Dataframe of hvProd with no control
     cur_hvProd_max : float
         Value of maximum output Power of the HV producer (MW)
-    ctrld_hvProd_max: float
+    ctrld_hvProd_max : float
         Maximum fixed output of the Controlled Higher voltage producer (MW)
-    starting_index: int, optional, default = 0
+    starting_index : int, optional, default = 0
         Starting index. Important to use this starting index and set it to the lenght of a day in the case
         of the RNN. This is due to the fact that the prediction needs a whole day of data
         to be produced. Especially the first prediction must be that of the the first index
@@ -1118,6 +1137,9 @@ def block_prod(df_out_block_pf_opf,
                                                                                            df_P0100_controled)
                                                                                 )
 
+# ____________________________________________________________________________________________________________
+# ____________________________________________________________________________________________________________
+
 
 def setNetwork_params(upperNet_file: str,
                       lowerNet_file: str,
@@ -1127,6 +1149,7 @@ def setNetwork_params(upperNet_file: str,
                                              (defAuth_lvBus_vRiseMax, defAuth_lvBus_vRiseMin))
                       ) -> oriClass.InitNetworks:
     """
+    
     Load both the lower (network used for opimization) and upper network, after which a configuration
     of the main  parameters to use for the simulations are done.
 
@@ -1140,12 +1163,12 @@ def setNetwork_params(upperNet_file: str,
         Egg, 'CIVAUX.p'.
     ctrld_hvProdName : str
         Name of the controlled HV producer in the Lower Network.
-        Egg'P, 0100'.
+        Egg'P0100'.
     params_coef_add_bt : tuple
         coef_add_bt : float
             Value of the added output power for all the LV producers (MW) in the lower Network.
         coef_add_bt_dist : str
-            How `coef_add_bt` is shared among the LV producers. Three choices are possible.
+            How ``coef_add_bt`` is shared among the LV producers. Three choices are possible.
             None : default
                 No upscaling is done
             "uppNet" :
@@ -1161,12 +1184,12 @@ def setNetwork_params(upperNet_file: str,
                 on the lower Network. The randomly selected set consist of half of all LV producers on
                 the lower Network
     params_vRise : tuple
-        params_vRise[0] : tuple
+        ``params_vRise[0]`` : tuple
             vm_mu_max_hv : float
                 Maximum authorised voltage rise of hv Buses on the Lower network
             vm_mu_min_hv : float
                 Minimum authorised voltage rise of hv Buses on the Lower network
-        params_vRise[1] : tuple
+        ``params_vRise[1]`` : tuple
             Voltage Rise threshold associated with lower voltages buses
                 vm_mu_max_lv : float
                     Maximum authorised voltage rise of lv Buses on the Lower network
@@ -1176,11 +1199,11 @@ def setNetwork_params(upperNet_file: str,
     Returns
     -------
     networks : oriClass.InitNetworks
-        An instance of the class oriClass.InitNetworks
+        An instance of the class :py:func:`oriClass.InitNetworks`
 
     Notes
     -----
-    The option "lowNet_rand" of `coef_add_bt_dist` is not implemented yet.
+    The option "lowNet_rand" of ``coef_add_bt_dist`` is not implemented yet.
 
 
     """
