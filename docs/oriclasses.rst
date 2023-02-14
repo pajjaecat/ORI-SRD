@@ -6,4 +6,11 @@ Ori Classes
 
   oriClass
   oriClass.CreateParEngines
+  oriClass.InitNetworks
+  oriClass.SensAnlysisResult
+  oriClass.SensAnlysisResults
+  
+  
+  
+.. toctree::
   oriClasses/CreateParEngines/CreateParEngines
