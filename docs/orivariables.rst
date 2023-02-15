@@ -12,7 +12,14 @@ This section defines all the default variables used in the different notebooks. 
 
 Trying the module stuf on variables
 ***********************************
-In the presence of :py:data: oriVariables.attr_list
+In the presence of :py:data:`oriVariables.attr_list`
+
+
+Autodata
+**********
+
+.. autodata:: oriVariables.attr_list
+  :annotation: 
 
 
 The place for the modules
