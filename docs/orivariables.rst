@@ -10,6 +10,20 @@ This section defines all the default variables used in the different notebooks. 
   oriVariables
 
 
+Trying the module stuf on variables
+***********************************
+In the presence of :py:data: oriVariables.attr_list
+
+
+The place for the modules
+****************************
+
+.. automodule:: oriVariables 
+  :members:
+  :undoc-members:
+  :show-inheritance:
+
+
 
 .. code:: python 
 
