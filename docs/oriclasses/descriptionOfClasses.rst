@@ -15,8 +15,8 @@ The ``CreateParEngines`` Class
   
   
   
-The ``InitNetworks`` Class
-**************************
+:Class:`oriClass.InitNetworks`
+******************************
 .. autoclass:: oriClass.InitNetworks
   :members:
   :undoc-members:
