@@ -4,8 +4,8 @@
    Description of Classes
 ============================
 
-**oriClass.CreateParEngines**
-**********************************
+oriClass.CreateParEngines
+*************************
 
 .. ``oriClass.InitNetworks``
 
@@ -19,8 +19,8 @@
   
 .. :class:`oriClass.InitNetworks`
 
-**oriClass.InitNetworks**
-**************************
+oriClass.InitNetworks
+********************
 
 .. autoclass:: oriClass.InitNetworks
   :members:
@@ -31,8 +31,8 @@
 
 
 .. :class:`oriClass.SensAnlysisResult`
-**oriClass.SensAnlysisResult**
-************************
+oriClass.SensAnlysisResult
+**************************
 
 .. autoclass:: oriClass.SensAnlysisResult
   :members:
@@ -45,8 +45,8 @@
 .. 
    :class:`oriClass.SensAnlysisResults`
    
-**oriClass.SensAnlysisResults**
-*******************************
+oriClass.SensAnlysisResults
+***************************
 
 .. autoclass:: oriClass.SensAnlysisResults
   :members:
