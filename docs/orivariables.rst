@@ -1,37 +1,39 @@
 
 #############################
-Default variables
+     Default variables
 #############################
-This section defines all the default variables used in the different notebooks. You may changed them globally in `oriVariables <https://github.com/pajjaecat/ORI-SRD/blob/1.0.2/Ressources/Modules/oriVariables.py>`_ depending on the problem specifities. 
-
-.. autosummary:: 
-  :toctree: generated
-  
-  oriVariables
+This section lists all the default variables used in the different `notebooks <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`_. You may changed them globally in `oriVariables <https://github.com/pajjaecat/ORI-SRD/blob/1.0.2/Ressources/Modules/oriVariables.py>`_ according the problem specifities. 
 
 
-Trying the module stuf on variables
-***********************************
-In the presence of :py:data:`oriVariables.attr_list`
-
-
-Autodata
-**********
-
-.. autodata:: oriVariables.attr_list
-  :annotation: 
-
-
-The place for the modules
-****************************
 
 .. automodule:: oriVariables 
   :members:
   :undoc-members:
   :show-inheritance:
+  
+  
+.. 
+.. autosummary:: 
+  :toctree: generated
+  
+  oriVariables
+  
+  Trying the module stuf on variables
+  ***********************************
+  In the presence of :py:data:`oriVariables.attr_list`
 
 
+  Autodata
+  **********
 
+  .. autodata:: oriVariables.attr_list
+    :annotation: 
+
+
+  The place for the modules
+  ****************************
+  
+.. 
 .. code:: python 
 
   # Create an attribute list to use in functions
