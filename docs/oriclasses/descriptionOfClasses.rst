@@ -31,7 +31,7 @@
 
 
 .. :class:`oriClass.SensAnlysisResult`
-**oriClass.SensAnlysisResult **
+**oriClass.SensAnlysisResult**
 ************************
 
 .. autoclass:: oriClass.SensAnlysisResult
