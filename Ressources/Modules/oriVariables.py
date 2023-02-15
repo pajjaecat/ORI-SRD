@@ -31,7 +31,7 @@ py_folder = '../Modules/'
 
 Notes
 -----
-    This file MUST be present in the `` :py:data: `oriVariables.py_folder` ``
+    This file MUST be present in the :py:data: `oriVariables.py_folder`
 
 """
 
