@@ -15,5 +15,5 @@
 oriFunction.initLowerNet_at
 ****************************
 
-.. autoclass:: oriFunctions.initLowerNet_at
+.. autofunction:: oriFunctions.initLowerNet_at
     :members:
