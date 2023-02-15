@@ -27,7 +27,7 @@
 
 
 :class:`oriClass.SensAnlysisResult`
-************************************
+***********************************
 
 .. autoclass:: oriClass.SensAnlysisResult
   :members:
@@ -38,7 +38,7 @@
 
 
 :class:`oriClass.SensAnlysisResults`
-*********************************** 
+************************************ 
 
 .. autoclass:: oriClass.SensAnlysisResults
   :members:
