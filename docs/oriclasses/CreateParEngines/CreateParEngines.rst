@@ -1,7 +1,4 @@
 
-List of ORI's Classes
-====================
-
 The ``CreateParEngines`` Class
 ******************************
 
@@ -14,7 +11,7 @@ The ``CreateParEngines`` Class
   
 The ``InitNetworks`` Class
 **************************
-.. autoclass:: oriclass.InitNetworks
+.. autoclass:: oriClass.InitNetworks
   :members:
   :undoc-members:
   :show-inheritance: 
