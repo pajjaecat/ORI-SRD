@@ -1,15 +1,16 @@
 Tring
 =========
 
-:py:func:`oriFunctions.block_prod`
-***********************************
+
+
+block_prod
+***********
 
 .. autofunction:: oriFunctions.block_prod
 
 
-
-``oriFunctions.robustControl``
+robustControl
 ***********************************
-
+Let us tring something new in here. 
 .. autofunction:: oriFunctions.robustControl
 
