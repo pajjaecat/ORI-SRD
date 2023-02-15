@@ -3,6 +3,16 @@ Description of Functions
 We provide a succint list of the Main functions.
 
 
+LISI
+*********
+
+.. automodule:: oriFunctions
+  :members:
+  :undoc-members:
+  :show-inheritance:
+
+
+
 
 block_prod
 ***********
@@ -73,6 +83,13 @@ readAndReshape_excelFile
 *************************
 
 .. autofunction:: oriFunctions.readAndReshape_excelFile
+
+
+
+robustControl
+*************
+
+.. autofunction:: oriFunctions.robustControl
 
 
 
