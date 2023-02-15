@@ -4,7 +4,7 @@
    Description of Classes
 ============================
 
-:class:`oriClass.CreateParEngines`
+``oriClass.CreateParEngines``
 **********************************
 
 .. autoclass:: oriClass.CreateParEngines
