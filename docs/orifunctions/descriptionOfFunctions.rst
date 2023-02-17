@@ -131,7 +131,7 @@ Parameters
         'Pers' ==> Using persistence model
 
 
-.. codeblock:: python
+.. code-block:: python
 
     def par_block_pfOpf(par_engines,
                     pred_model_f=None
