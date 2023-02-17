@@ -110,28 +110,30 @@ setNetwork_params
 .. autofunction:: oriFunctions.setNetwork_params
 
 
+.. par_block_pfOpf:
+
 par_block_pfOpf
 ****************
 Block PF/OPF using parallels engines.
 
-Execute a power flow, an optimal power flow or both depending on ``opf_status`` that is  extracted from the parallel
-engine object ``par_engines``.  If ``opf_status`` is "Both", the function is used as the block PF/OPF. If ``opf_status``
+Execute a power flow, an optimal power flow, or both depending on ``opf_status``extracted from the parallel
+engine object ``par_engines``. If ``opf_status`` is "Both", the function is used as the block PF/OPF. If ``opf_status``
 is  ``False``, the function is used as the block PF.
 
 
-Due to the fact that this function uses an `Ipython <https://ipython.org/>`_ magic function, it cannot be added to a module. The function **MUST**
-therefore be implemented in the local space of each notebook that make use of it as done in
+Since this function uses an `Ipython's <https://ipython.org/>`_ magic function, it cannot be added to a module. The
+function **MUST** therefore be implemented in the local space of each notebook that makes use of it as done in
 `VoltageRiseBinaryUpdated <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_.
 
 Parameters
-^^^^^^^^^^^
+-----------
     par_engines: ``ipyparallel.cluster``
         Parallel engines object, Instance of :py:class:`oriClass.CreateParEngines`.
     pred_model_f: str, Optional, Default =  None
         'Pers' ==> Using persistence model
 
 Returns
-^^^^^^^^^
+-------
    pandas.DataFrame
         ``opf_status`` is "Both":
             Result at the output of the block get_results_asDf()
@@ -146,10 +148,9 @@ Returns
                        ):
     """ Block PF/OPF using parallels engines.
 
-    Execute a power flow, an optimal power flow or both depending on ``opf_status`` that is
-    extracted from the parallel engine object ``par_engines``.  If ``opf_status`` is ``"Both"``,
-    the function is used as the block PF/OPF. If ``opf_status`` is  ``False``, the function
-    is used as the block PF.
+    Execute a power flow, an optimal power flow, or both depending on ``opf_status``extracted from the parallel
+    engine object ``par_engines``. If ``opf_status`` is "Both", the function is used as the block PF/OPF. If ``opf_status``
+    is  ``False``, the function is used as the block PF..
 
     Parameters
     ----------
