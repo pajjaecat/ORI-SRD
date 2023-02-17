@@ -124,31 +124,39 @@ therefore be implemented in the local space of each notebook that make use of it
 `VoltageRiseBinaryUpdated <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_.
 
 Parameters
-----------
-    par_engines: :py:class:`oriClass.CreateParEngines`
-        Parallel engines object.
+^^^^^^^^^^^
+    par_engines: ``ipyparallel.cluster``
+        Parallel engines object, Instance of :py:class:`oriClass.CreateParEngines`.
     pred_model_f: str, Optional, Default =  None
         'Pers' ==> Using persistence model
+
+Returns
+^^^^^^^^^
+   pandas.DataFrame
+        ``opf_status`` is "Both":
+            Result at the output of the block get_results_asDf()
+        ``opf_status`` is ``False``:
+            The maximum voltage rise observed on the network after the control is implemented.
 
 
 .. code-block:: python
 
     def par_block_pfOpf(par_engines,
-                    pred_model_f=None
-                   ):
+                        pred_model_f=None
+                       ):
     """ Block PF/OPF using parallels engines.
 
     Execute a power flow, an optimal power flow or both depending on ``opf_status`` that is
-    extracted from the parallel engine object ``par_engines``.  If ``opf_status`` is "Both",
+    extracted from the parallel engine object ``par_engines``.  If ``opf_status`` is ``"Both"``,
     the function is used as the block PF/OPF. If ``opf_status`` is  ``False``, the function
     is used as the block PF.
 
     Parameters
     ----------
-    par_engines: :py:class:`oriClass.CreateParEngines`
-        Parallel engines object.
+    par_engines:  ipyparallel.cluster
+        Parallel engines object,, Instance of  :py:class:`oriClass.CreateParEngines`.
     pred_model_f: str, Optional, Default =  None
-        'Pers' ==> Using persistence model
+        'Pers' ==> Using persistence model.
 
     Returns
     -------
@@ -158,11 +166,6 @@ Parameters
         ``opf_status`` is False:
             The maximum voltage rise observed on the network after the control is implemented.
 
-    Warnings
-    ---------
-    DO NOT CALL this function from the module :py:mod:`oriFunctions`. This function **Must**
-    be implemented in the local space of each notebook that use it as done in
-    `VoltageRiseBinaryUpdated<https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_
 
     """
 
