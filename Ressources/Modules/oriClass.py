@@ -98,7 +98,7 @@ class CreateParEngines:
 
         """
 
-    checker.check_opf_status(opf_status) # Raise Error if the OPF type is not well defined
+        checker.check_opf_status(opf_status) # Raise Error if the OPF type is not well defined
         checker.check_clean(clean)           # Raise error if clean Not a bool
         
         # Set variables
