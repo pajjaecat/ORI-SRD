@@ -119,12 +119,20 @@ engine object ``par_engines``.  If ``opf_status`` is "Both", the function is use
 is  ``False``, the function is used as the block PF.
 
 
-Due to the fact that this function uses an `Ipython<https://ipython.org/>`_ magic function, it cannot be added to a module. The function **MUST**
+Due to the fact that this function uses an `Ipython <https://ipython.org/>`_ magic function, it cannot be added to a module. The function **MUST**
 therefore be implemented in the local space of each notebook that make use of it as done in
-`VoltageRiseBinaryUpdated<https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_.
+`VoltageRiseBinaryUpdated <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_.
+
+Parameters
+----------
+    par_engines: :py:class:`oriClass.CreateParEngines`
+        Parallel engines object.
+    pred_model_f: str, Optional, Default =  None
+        'Pers' ==> Using persistence model
 
 
 .. codeblock:: python
+
     def par_block_pfOpf(par_engines,
                     pred_model_f=None
                    ):
