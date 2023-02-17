@@ -121,7 +121,7 @@ engine object ``par_engines``. If ``opf_status`` is "Both", the function is used
 is  ``False``, the function is used as the block PF.
 
 
-Since this function uses an `Ipython's <https://ipython.org/>`_ magic function, it cannot be added to a module. The
+Since this function uses an `Ipython  <https://ipython.org/>`_ magic function, it cannot be added to a module. The
 function **MUST** therefore be implemented in the local space of each notebook that makes use of it as done in
 `VoltageRiseBinaryUpdated <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_.
 
