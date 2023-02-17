@@ -3,11 +3,7 @@
 # Copyright (c) 2022-2023 by Jesse-James PRINCE AGBODJAN for SRD-Energies (https://www.srd-energies.fr/) 
 # All rights reserved.
 
-""" List of all defaut Variables used in the tutorials present in `<https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`_ .
-
-This module holds a list of all the variables used in the ORI package.
-
-
+"""This module holds a list of all the variables used in the ORI package.
 
 
 """
@@ -28,13 +24,7 @@ excel_folder = '../Excel_files/'
 """str : Relative location of the network to study input's. """
 
 py_folder = '../Modules/'
-"""str: relative location of the modules to be use.
-
-Notes
------
-    This file MUST be present in the ``py_folder``
-
-"""
+"""str: relative location of the modules to be use."""
 
 Δt = 1/6  # Time frequency 10mn ==> 1Hour/6
 """int:  Time frequency"""

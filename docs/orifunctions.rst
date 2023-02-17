@@ -10,5 +10,5 @@ This section focus on the functions described in `oriFunctions <https://github.c
     :maxdepth: 2
     
     orifunctions/list
-    orifunctions/description
+    orifunctions/descriptionOfFunctions
 
