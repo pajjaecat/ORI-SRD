@@ -41,7 +41,7 @@ def readAndReshape_excelFile(file_name: str,
     ----------
     file_name : str
         Name of the file to load (with the correct extension).
-    folder_name : str, optional, default = :py:func:`oriVariables.network_folder`
+    folder_name : str, optional, default = :py:data:`oriVariables.network_folder`
         Location of the folder where the file ``file_name`` is present.
     n_row2read : int, optional, default=0
          Numbers of rows to read in the excel file.
@@ -575,7 +575,7 @@ def improve_persinstence(per_extracted_res_df,
         Result given by the persistence model. Output of :py:func:`oriFunctions.extract_par_results`.
     df_prodHT :  pandas.DataFrame
         Dataframe containing data of all the HT producers in the network.
-    auth_max_VriseHvBus : float, Optional, Default = ``:py:func:`oriVariables.defAuth_hvBus_vRiseMax` ``
+    auth_max_VriseHvBus : float, Optional, Default = :py:data:`oriVariables.defAuth_hvBus_vRiseMax`
         Threshold of maximum voltage allowed on the HV buses.
     h_start_end : list of str, optional, default = ['11:00', '14:00']
         Hour between which the HV can inject all is production into the network
@@ -1061,7 +1061,7 @@ def robustControl(df_out_block_pf_opf ,
       Current maximum output Power of the HV producer (MW)
     ctrld_hvProd_max : int
       Maximum fixed output of the Controlled Higher voltage producer (MW)
-    auth_max_VriseHvBus : float, Optional, Default = ``defAuth_hvBus_vRiseMax``
+    auth_max_VriseHvBus : float, Optional, Default = :py:data:`oriVariables.defAuth_hvBus_vRiseMax`
       Threshold of maximum voltage allowed on the HV buses of ``network``.
 
     """
@@ -1198,8 +1198,8 @@ def setNetwork_params(upperNet_file: str,
 
     Returns
     -------
-    networks : oriClass.InitNetworks
-        An instance of the class :py:func:`oriClass.InitNetworks`
+    networks : :py:class:`oriClass.InitNetworks`
+        An instance of the class :py:class:`oriClass.InitNetworks`
 
     Notes
     -----

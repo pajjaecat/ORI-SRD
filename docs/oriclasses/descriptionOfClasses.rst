@@ -22,7 +22,7 @@ oriClass.CreateParEngines
 .. :class:`oriClass.InitNetworks`
 
 oriClass.InitNetworks
-********************
+*********************
 
 .. autoclass:: oriClass.InitNetworks
   :members:

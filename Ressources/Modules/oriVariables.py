@@ -27,7 +27,7 @@ py_folder = '../Modules/'
 """str: relative location of the modules to be use."""
 
 Δt = 1/6  # Time frequency 10mn ==> 1Hour/6
-"""int:  Time frequency"""
+"""float:  Time frequency"""
 
 
 defAuth_hvBus_vRiseMax = 1.025

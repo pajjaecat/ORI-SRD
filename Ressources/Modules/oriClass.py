@@ -55,49 +55,50 @@ class CreateParEngines:
         self.dview = self._rc[:]                 # Create a direct view of all engine 
         """ ipp.DirectView : Direct view for parallel Engines."""                                       
 
+
     def sendVar_to_localSpace(self, 
                               run_periodIndex, 
                               opf_status, 
                               dict_df_sgenLoad, 
-                              parameters_dict, 
-                              clean ):
-        """Send variables to the local space of each parallel engine. 
-        
-        
+                              parameters_dict,
+                              clean: bool = True):
+        """Send variables to the local space of each parallel engine.
+
+
         Parameters
         ----------
         run_periodIndex : pandas.PeriodIndex
-            Total number of periods to run simulation for. The number of period each engine 
-            will work on is therfore given by ``len(run_periodIndex)/n_e`` where ``n_e`` is the number of 
+            Total number of periods to run simulation for. The number of period each engine
+            will work on is therfore given by ``len(run_periodIndex)/n_e`` where ``n_e`` is the number of
             engines.
         ofp_status : bool or str
-            Optimal power flow status. Whether the maximum voltage rise on the lower network HV buses
+            Optimal power flow status. Whether the maximum voltage rise on the ``lowerNet`` HV buses
             is extracted after a power flow, an optimal power flow  or both. Two values are possible:
                 ``ofp_status`` = False :
-                    Run a simple power flow i.e., `pandapower.runpp(network)` 
+                    Run a simple power flow i.e., `pandapower.runpp(network)`
                 ``ofp_status`` = "Both" :
                     A power flow is run. Only when the result i.e. the voltage rise detected on hv Prod
                     Buses ``max_vm_pu`` > ``auth_max_VriseHvBus``, is the  optimal  power flow run.
-        dict_df_sgenLoad : dict 
+        dict_df_sgenLoad : dict
             TOWRITE
-        parameters_dict : dict 
+        parameters_dict : dict
             TOWRITE
-        clean : bool
+        clean : bool, Optional
             Whether the local space of the parallel engines should be clean or not.
-                True : 
-                    Clear all the variable in the localspace of each engine.
-                False : 
-                    Keep all the variable in the localspace of each engine.
-                    
+                True :
+                    Clear all the variables in the localspace of each engine and reload all needed pachages.
+                False :
+                    Keep all the variable and packages in the localspace of each engine.
+
         Raises
         ------
-        ValueErrorExeption : 
+        ValueErrorExeption :
             If ``opf_status`` or ``clean`` are the wrong type or have wrong value.
-        
-        
+
+
         """
-         
-        checker.check_opf_status(opf_status) # Raise Error if the OPF type is not well defined 
+
+        checker.check_opf_status(opf_status) # Raise Error if the OPF type is not well defined
         checker.check_clean(clean)           # Raise error if clean Not a bool
         
         # Set variables
@@ -258,32 +259,32 @@ class InitNetworks:
     """ Initialize both the upper and lower level  Networks.
     
     
-        Parameters 
-        ----------
-        upperNet : :obj:`pandapower.pandapowerNet`
-            Upper level network.
-        lowerNet : pandapower.pandapowerNet 
-            Lower level Network 
-        coef_add_bt : float, Default = None 
-            Value of the added output power for all the LV producers (MW).
-        coef_add_bt_dist : str, Default = None 
-            How the upscaling of the maximum output of all lower Voltage producers is
-            done. Three choices are possible
-                None 
-                    No upscaling is done
-                "uppNet" 
-                    ``coef_add_bt`` is added to the Sum of maximum output of all lower 
-                     voltage (LV) producers (MW) in the upper Network. In consequence, 
-                     the LV producers on the lower network receive only a fraction of 
-                     coef_add_bt.
-                "lowNet"
-                    ``coef_add_bt`` is added to the Sum of maximum output of all LV 
-                    producers (MW) in the lower Network. In consequence, coef_add_bt 
-                    is shared proportionnaly among all the LV producers on the lower network. 
-                "lowNet_rand"
-                    ``coef_add_bt`` is shared proportionnaly among a randomly selected set of
-                    the LV  producers on the lower Network. The randomly selected set consist 
-                    of half of all LV producers on the on the lower Network
+    Parameters
+    ----------
+    upperNet : :obj:`pandapower.pandapowerNet`
+        Upper level network.
+    lowerNet : pandapower.pandapowerNet
+        Lower level Network
+    coef_add_bt : float, Default = None
+        Value of the added output power for all the LV producers (MW).
+    coef_add_bt_dist : str, Default = None
+        How the upscaling of the maximum output of all lower Voltage producers is
+        done. Three choices are possible
+            None
+                No upscaling is done
+            "uppNet"
+                ``coef_add_bt`` is added to the Sum of maximum output of all lower
+                 voltage (LV) producers (MW) in the upper Network. In consequence,
+                 the LV producers on the lower network receive only a fraction of
+                 coef_add_bt.
+            "lowNet"
+                ``coef_add_bt`` is added to the Sum of maximum output of all LV
+                producers (MW) in the lower Network. In consequence, coef_add_bt
+                is shared proportionnaly among all the LV producers on the lower network.
+            "lowNet_rand"
+                ``coef_add_bt`` is shared proportionnaly among a randomly selected set of
+                the LV  producers on the lower Network. The randomly selected set consist
+                of half of all LV producers on the on the lower Network
   
     Attributes
     ----------
@@ -332,27 +333,29 @@ class InitNetworks:
                     of half of all LV producers on the on the lower Network
          
          """
-        
-        
+
+        # initiate private attribute
         self._upperNet = upperNet
-        self._lowerNet  = lowerNet
+        self._lowerNet = lowerNet
         self._coef_add_bt = coef_add_bt
         self._coef_add_bt_dist = coef_add_bt_dist
-        
+
+        # Checking
         checker._check_network_order(self)
         checker._check_coef_add_bt_and_dist(self)
-        
-        lowerNet_sgenCopy = lowerNet.sgen.copy(deep=True) # Create a copy of the lower netSgens
-        
-        self._lowerNet_sgenLvCopy = lowerNet_sgenCopy[lowerNet_sgenCopy.name.isna()]# Extract LowerVoltage Producers
-        
+
+        self._lowerNet_sgenCopy = lowerNet.sgen.copy(deep=True)  # Create a copy of the lower netSgens
+
+        self._lowerNet_sgenLvCopy = self._lowerNet_sgenCopy[
+            self._lowerNet_sgenCopy.name.isna()]  # Extract LowerVoltage Producers
+
         # Get sum of maximum output of all the LV producers on the lower network before update
         self._lowerNet_nonUpdated_sum_max_lvProd = self._lowerNet_sgenLvCopy.max_p_mw.sum()
-    
-        self.lowerNet_update_max_p_mw() # Update the maximum output of LV producers given _coef_add_bt and 
-                                         # _coef_add_bt_dist
-        
-        
+
+        self.lowerNet_update_max_p_mw()  # Update the maximum output of LV producers given _coef_add_bt and
+        # _coef_add_bt_dist
+
+
     def lowerNet_update_max_p_mw(self):
         """ Update or upscale the maximum output of the all LV producers on the Lower Network. 
         
@@ -713,7 +716,7 @@ class InitNetworks:
         
     def get_lowerNet_sgenDf_copy(self):
         """ Extract a copy of the initial static generator (i.e. both the Lower higher voltages Producers) """
-        return self._lowerNet_sgenDf_copy
+        return self._lowerNet_sgenCopy
     
      
 

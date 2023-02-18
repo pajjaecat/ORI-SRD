@@ -38,3 +38,6 @@ Make sure to read [Voltage Rise control Block scheme](../Docs/VRiseControlBlockS
 
 ##### [2021_2022_RNN](2021_2022_RNN.ipynb) 
 > > Simulations using the [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) with the block **PRED** based on the RNN created and trained in [RNN_Train_StLaurentDeJourdes](RNN_Train_StLaurentDeJourdes.ipynb) in parallel.
+
+#### [VoltageRiseBinaryUpdated](VoltageRiseBinaryUpdated.ipynb)
+> >  Using a power flow in parallel, compute the maximum voltage rise on the lower network (and convert it into a binary variable) from Jan-01-2020 to  June-01-2022. 
