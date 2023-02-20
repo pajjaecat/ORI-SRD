@@ -40,4 +40,12 @@ Make sure to read [Voltage Rise control Block scheme](../Docs/VRiseControlBlockS
 > > Simulations using the [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) with the block **PRED** based on the RNN created and trained in [RNN_Train_StLaurentDeJourdes](RNN_Train_StLaurentDeJourdes.ipynb) in parallel.
 
 #### [VoltageRiseBinaryUpdated](VoltageRiseBinaryUpdated.ipynb)
-> >  Using a power flow in parallel, compute the maximum voltage rise on the lower network (and convert it into a binary variable) from Jan-01-2020 to  June-01-2022. 
+> >  Using a power flow in parallel, compute the maximum voltage rise on the lower network (and convert it into a binary variable) from Jan-01-2020 to  June-01-2022.
+
+##### Numerical Voltage Rise  
+> > - [VoltageRiseNum_Train](VoltageRiseNum_Train.ipynb) - Create and Train a RNN to predict the value of the maximum Voltage rise. 
+> > - [VoltageRiseNum_Pred](VoltageRiseNum_Pred.ipynb) - Use the previously trained RNN to predict the maximum Voltage rise and compare the results to that of a simple power flow. 
+
+##### Binary Voltage Rise  
+> > - [VoltageRiseBin_Train](VoltageRiseBin_Train.ipynb) - Create and train a RNN to Predict a binary variable (1 or 0), whether a voltage rise (above a predefined threshold i.e. 1.0250 ) will occur or not.
+> > - [VoltageRiseBin_Pred](VoltageRiseBin_Pred.ipynb) - Use the previously trained RNN to predict whether a voltage rise will occur or not in the next period
