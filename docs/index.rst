@@ -1,6 +1,17 @@
 ..
    .. include:: ../README.rst
 
+
+.. image:: ../Ressources/Figures/SrdLogo.svg 
+         :width: 250em
+         :align: left
+         
+.. |br| raw:: html
+    <br />
+    
+
+         
+
 Welcome to SRD-ORI documentation!
 =================================
 
