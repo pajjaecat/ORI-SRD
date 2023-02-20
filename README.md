@@ -1,6 +1,6 @@
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/37332216/220094855-791c6663-b83c-45ea-a7a7-25b4078b71f4.png" width="300" height="250">
+    <img src=Ressources/Figures/SrdLogo.svg width="300" height="250">
 </p>
 
 
