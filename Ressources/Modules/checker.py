@@ -5,7 +5,9 @@
 
 """ Modules where all the checking functions are defined """
 
+
 import pandas
+
 
 
 def _check_input_concordance(self):
@@ -13,6 +15,7 @@ def _check_input_concordance(self):
     and raise an exception otherwise """
     if len(self._models_folder_location) != len(self._models_name):
         raise Exception('The inputs must have the same size')
+
 
 
 def _check_numberOf_plk_Files_in_folders(self):
@@ -38,11 +41,16 @@ def _check_numberOf_plk_Files_in_folders(self):
     # not present and the folder associated
 
 
+
+
 def _check_network_order(self):
     """ Make sure the upper network is bigger than the lower one"""
     if len(self._upperNet.bus) < len(self._lowerNet.bus):
         raise Exception('The first input (upper network) has a lower number of bus'
                         'compared to the second input (lower network). ')
+
+
+
 
 
 def _check_boxplot_inputs(self, ht_in, bt_in):
@@ -57,6 +65,7 @@ def _check_boxplot_inputs(self, ht_in, bt_in):
                             in arange(0., 4., 0.2)""")
 
 
+
 def _check_countDictAsDf_input_inLocalSpace(self, input_var):
     """ Check if input_var that must be either of (1)self._vrise_count_dict or
     (2)self._capping_count_dict is already present in the local space of the instance,
@@ -69,10 +78,13 @@ def _check_countDictAsDf_input_inLocalSpace(self, input_var):
                         calling .*countplot(*args)""")
 
 
+
 def _check_countplot_inputs(self, dict_name):
     """ Check if the input given by the user for countplot(*args) is authorised """
     if dict_name not in self._dict_vars:
         raise Exception(f' The input must be either of {list(self._dict_vars.keys())} ')
+
+
 
 
 def check_coef_add_bt_dist(coef_add_bt_dist, includeNone=True):
@@ -86,6 +98,7 @@ def check_coef_add_bt_dist(coef_add_bt_dist, includeNone=True):
         raise Exception(f' The parameter \'coef_add_bt_dist\' must be either of {authorised_list}')
 
 
+
 def _check_coef_add_bt_and_dist(self):
     """ check the condordance between coef_add_bt_and coef_add_bt_dist """
     if type(self._coef_add_bt) == type(self._coef_add_bt_dist):
@@ -95,6 +108,7 @@ def _check_coef_add_bt_and_dist(self):
         raise Exception(' The parameter \'coef_add_bt\' must be a float')
     elif type(self._coef_add_bt) is float:
         check_coef_add_bt_dist(self._coef_add_bt_dist, includeNone=False)
+
 
 
 def _check_hvProdName_in_lowerNet(self, controlled_hvProdName):
@@ -138,20 +152,21 @@ def check_var_concordance(opf_status=False, pred_model=None):
             raise ValueError('Given that <pred_mod> is defined, <ofp_status>  must be  set to <\'Both\'> ')
 
 
+
 def check_networkDataDf_columnsOrder(netInput_data_df: pandas.DataFrame):
     """  Check if the input dataframe column are in the expected order.
 
     The columns order **MUST** be  ['Cons', 'Prod_BT', 'P0_n', ...., 'P0_z'] \;
-    where 'Cons'    ==> The total demand, load or consumption on the upper network; \n
-          'Prod_BT' ==> The total production of all lower voltage producers  on the upper network; \n
-          'P0_n'    ==> The name of the first higher voltage producer on the lower Network; \n
-           ...      ==> The name of the other Higher voltage producer on the lower network; \n
+    where 'Cons'    ==> The total demand, load or consumption on the upper network;
+          'Prod_BT' ==> The total production of all lower voltage producers  on the upper network;
+          'P0_n'    ==> The name of the first higher voltage producer on the lower Network;
+           ...      ==> The name of the other Higher voltage producer on the lower network;
            'P0_z'   ==> The name of the last Higher voltage producer on the lower network
 
 
     """
     if netInput_data_df.columns[0] != 'Cons':
-        raise Exception(f'The first column of the input dataframe MUST be the consumtion or load and NAMED \'Cons\' ')
+        raise Exception(f'The first column of the input dataframe MUST be the consumption or load and NAMED \'Cons\' ')
 
     if netInput_data_df.columns[1] != 'Prod_BT':
         raise Exception(f'The second column of the input dataframe MUST be the total production of all lower voltage '
@@ -159,6 +174,7 @@ def check_networkDataDf_columnsOrder(netInput_data_df: pandas.DataFrame):
 
     if not netInput_data_df.columns[2:].str.startswith('P').all():
         raise Exception(f'All of the higher voltage producers name MUST start by \'P\' ')
+
 
 
 def _check_resTables_existing(self):
@@ -176,16 +192,19 @@ def _check_resTables_existing(self):
     return (len(self._lowerNet.res_bus) != 0) & (len(self._lowerNet.res_sgen) != 0)
 
 
+
 def check_opf_status(opf_status: bool or str):
     """  Check whether the ``opf_status`` is authorised. """
     if opf_status not in ['Both', False]:
         raise ValueError('``opf_status`` must be either of [False, ''Both'']')
 
 
+
 def check_clean(clean: bool):
     """ Check whether ``clean`` is authorised"""
     if type(clean) is not bool:
         raise ValueError('``clean`` must be a ``bool``')
+
 
 
 def check_parResultsNames(par_result_name: str):
