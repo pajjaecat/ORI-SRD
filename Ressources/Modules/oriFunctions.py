@@ -720,11 +720,11 @@ def predictionBin_bloc(rnn_model,
 # ____________________________________________________________________________________________________________
 # ____________________________________________________________________________________________________________
 
-def robustPred(model_Vrise_dict,
-               hvProd_noControl,
-               ctrlHvProd_opt_model1,
-               auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
-               n_models=None):
+def combRnnRobustPred(model_Vrise_dict,
+                      hvProd_noControl,
+                      ctrlHvProd_opt_model1,
+                      auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
+                      n_models=None):
     """ Combine the prediction of Three RNN to get a robust prediction bloc.
 
 
@@ -732,17 +732,21 @@ def robustPred(model_Vrise_dict,
         This function is deprecated. Will be removed in the next version. Develloping a more robust
         approach using an RNN that combines directly all the three models during training.
 
+    .. versionchanged:: 1.0.2
+        This function was previously name :py:func:`robustPred`
+
+
     Parameters
     ----------
     model_Vrise_dict : Dict
-        Dictionary of the voltage rise for each model 
+        Dictionary of the voltage rise for each model
     hvProd_noControl :  pandas.DataFrame
         Values of the controlled Generator (P0100) when no controled is applied.
     ctrlHvProd_opt_model1 :  pandas.DataFrame
         Partial output of the function :py:func:`oriFunctions.extract_par_results` that is the  Optimal
         value of ctrlHvProd at the output of bloc PF/OPF of model1. This is the command
-        value to send to the said Hv producer when the `robustPred` predicts a  voltage
-        rise above the defined threshold `auth_max_VriseHvBus`.
+        value to send to the said Hv producer when the `combRnnRobustPred` predicts an exceeding of the
+        the defined threshold `auth_max_VriseHvBus`.
     auth_max_VriseHvBus : float, optional default = ``defAuth_hvBus_vRiseMax``
         Threshold of maximum voltage allowed on the HV buses of `network`.
     n_models : int or str, optional, default=None

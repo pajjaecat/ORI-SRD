@@ -344,16 +344,14 @@ class InitNetworks:
         checker._check_network_order(self)
         checker._check_coef_add_bt_and_dist(self)
 
-        self._lowerNet_sgenCopy = lowerNet.sgen.copy(deep=True)  # Create a copy of the lower netSgens
-
-        self._lowerNet_sgenLvCopy = self._lowerNet_sgenCopy[
-            self._lowerNet_sgenCopy.name.isna()]  # Extract LowerVoltage Producers
+        # Extract LowerVoltage Producers # Their names is None i.e. nan is the _lowerNet.sgen
+        self._lowerNet_sgenLvCopy = self._lowerNet.sgen[self._lowerNet.sgen.name.isna()]
 
         # Get sum of maximum output of all the LV producers on the lower network before update
         self._lowerNet_nonUpdated_sum_max_lvProd = self._lowerNet_sgenLvCopy.max_p_mw.sum()
 
         self.lowerNet_update_max_p_mw()  # Update the maximum output of LV producers given _coef_add_bt and
-        # _coef_add_bt_dist
+                                         # _coef_add_bt_dist
 
 
     def lowerNet_update_max_p_mw(self):
@@ -708,20 +706,19 @@ class InitNetworks:
         """
         return self._lowerNet_lv_bus_df(lvBus_voltage)
 
-    
-    def _create_lowerNet_sgenDf_copy(self):    
-        """Create a copy of ALL the Producer in the lower network"""
+
+    def create_lowerNet_sgenDf_copy(self):
+        """Create a copy of ALL the Producer in the ``lowerNet``"""
         self._lowerNet_sgenDf_copy = self._lowerNet.sgen.copy(deep=True)
 
-        
-    def get_lowerNet_sgenDf_copy(self):
-        """ Extract a copy of the initial static generator (i.e. both the Lower higher voltages Producers) """
-        return self._lowerNet_sgenCopy
-    
-     
 
-        
-        
+    def get_lowerNet_sgenDf_copy(self):
+        """Return a copy of the initial sgen (both the Lv and HV Prod) on the ``lowerNet``"""
+        return self.create_lowerNet_sgenDf_copy()
+
+
+
+
 class SensAnlysisResult:
     """
     Initiate the Sensitivity analysis with the folder_location.
