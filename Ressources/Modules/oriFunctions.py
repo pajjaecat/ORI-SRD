@@ -979,7 +979,7 @@ def createDict_prodHtBt_Load(df_pred_in,
     network_in : oriClass.InitNetworks
         Networks initialized. An instance of :py:func:`oriClass.InitNetworks`, especially the
         output of the function :py:func:`oriFunctions.setNetwork_params`
-    cur_hvProd_max : float, Optional, default = :py:data:`oriVariables.default_ctrld_hvProd_max`
+    cur_hvProd_max : float, Optional, default = :data:`oriVariables.default_ctrld_hvProd_max`
         Current value of maximum output Power of the controlled HV producer (MW)
     ctrld_hvProd_max : float, Optional, default = :py:data:`oriVariables.default_ctrld_hvProd_max`
         Maximum fixed output of the Controlled Higher voltage producer (MW)
