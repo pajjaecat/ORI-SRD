@@ -27,7 +27,8 @@ py_folder = '../Modules/'
 """str: relative location of the modules to be use."""
 
 Δt = 1/6  # Time frequency 10mn ==> 1Hour/6
-"""float:  Time frequency"""
+"""float:  Time frequency,  10mn ==> 1Hour/6"""
+
 
 
 defAuth_hvBus_vRiseMax = 1.025
@@ -36,14 +37,13 @@ defAuth_hvBus_vRiseMax = 1.025
 defAuth_hvBus_vRiseMin = 0.95
 """float : Default min authorised voltage rise on Hv Buses on Lower network."""
 
-defAuth_lvBus_vRiseMax = 1.075  
+defAuth_lvBus_vRiseMax = 1.075
 """float : Default max authorised voltage rise on Lv Buses on Lower network."""
 
 defAuth_lvBus_vRiseMin = 0.95
 """float :  Default min authorised voltage rise on Lv Buses on Lower network."""
 
-
-default_hv_voltage = 20.6      
+default_hv_voltage = 20.6
 """float : Default voltage (kV) of Hv buses on Lower Network."""
 
 default_lv_voltage = 0.4
@@ -55,10 +55,26 @@ default_ctrld_hvProd_max = 4.0
 h_start_end = ('07:00','18:50')
 """tuple : Daylight period."""
 
+trainVal_split_date = '2021 12 31 23:50'  # Date of training+Validation split data Lower bond
+"""str : Training + validation set split date """
 
-train_split_date = '2021 12 31 23:50' # Date of training+Validation split data Lower bond 
-trainVal_split_date = '2021 06 01'     # lower date to split training and validation data
+train_split_date = '2021 06 01'        # lower date to split training and validation data
+"""str : Training set split date """
+
 testSet_end_date = '2022 06 02'
+"""str : Test set end split data """
+
 testSet_start_date = '2021 06 03'
+"""str : Test set start split data """
+
+testSet_start_date_M2 = '2021 06 01'
+"""str : Test set start split data minus two days """
+
+
+
+
+
+
+
 
 
