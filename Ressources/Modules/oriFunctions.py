@@ -360,7 +360,7 @@ def run_powerflow_at(network,
             return [max_vm_pu_pf, cur_max_VriseHvBus], (hvProd_afterOPF, lvProd_afterOPF), cur_period
 
     elif opf_status == False:  # Run normal power flow  ***************************************************
-        return max_vm_pu_at(network, cur_period, lowNet_hv_activBus, dict_df_sgenLoad, opf_status)
+        return max_vm_pu_at(network, cur_period, lowNet_hv_activBus, dict_df_sgenLoad, opf_status), cur_period
 
     else:
         raise ValueError('<opf_status> must be either of [True, False, "Both"]')

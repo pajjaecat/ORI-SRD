@@ -22,9 +22,13 @@ sbn = seaborn
 
 
 
-from oriVariables import (defAuth_hvBus_vRiseMax, defAuth_hvBus_vRiseMin, 
-                          defAuth_lvBus_vRiseMax, defAuth_lvBus_vRiseMin,
-                          default_hv_voltage, default_lv_voltage, Δt
+from oriVariables import (defAuth_hvBus_vRiseMax,
+                          defAuth_hvBus_vRiseMin,
+                          defAuth_lvBus_vRiseMax,
+                          defAuth_lvBus_vRiseMin,
+                          default_hv_voltage,
+                          default_lv_voltage,
+                          Δt
                          )
 
 ##############################         Class          #########################################
@@ -154,75 +158,110 @@ class CreateParEngines:
         self._gathered_results = self.dview.gather(par_result_name)
         
         return self._gathered_results
-    
-    
-    
+
+
+
     def get_results_asDf(self):
         """ Extract the result of the parallel engine  in a dataframe.
 
         Returns
         -------
         df : pandas.Dataframe
-        Where the collumns are
-                max_vm_pu : 
-                    Maximum voltage recorded over all the bus at the instants given 
-                    by the ``df.index``.
-                Other columns :
-                    THe injected power of the respective HT producers.
+            The returned dataframe depends on the ``opf_status`` send to the parallel engines
+            via :py:func:`sendVar_to_localSpace`. It's index are the instants associated with the
+            recorded variables in the columns which are the following :
+            ``opf_status = True or "Both" `` :
+                The df columns are
+                    max_vm_pu_pf :
+                        Using power flow, maximum voltage recorded over all the bus at the instants given
+                        by the ``df.index``
+                    max_vm_pu :
+                        Using optimal power flow, maximum voltage recorded over all the bus at the instants
+                        given  by the ``df.index``. Note that  ``max_vm_pu = max_vm_pu_pf`` when the
+                        voltage rise constraint ``max_vm_pu`` < py:data:`oriVariables.defAuth_hvBus_vRiseMax` holds.
+                    [P0xxa, P0xxb, ..., P0..n] :
+                        The injected power of the respective HV producers.
+                    SumLv :
+                        Sum of the injected power of all lower voltage producers.
+
+            ``opf_status = False `` :
+                The df columns is:
+                    vm_pu_max_pf
+                        Using power flow, maximum voltage recorded over all the bus at the instants given
+                        by the ``df.index``
 
         See Also
         --------
         gather_results
             Gather in one variable the result of the parallel engines.
-        
+
         Warnings
         --------
         Make sure to run :py:func:`gather_results` before :py:func:`get_results_asDf`
 
         """
 
-        # Get df_prodHT colums name [] from one of the engines 
-        df_prodHT_colName = self.dview['dict_df_sgenLoad'][-1]['df_prodHT'].columns
-        
-        # Get all the elements from the parallel result in a list
-        # elm[0]      : Maximum voltage on all the line 
-        # elm[1]      : Power injected into the network by all the Sgen in the network
-        # elm[1][0][0]: Power injected into the network by the first HV producer 
-        # ...
-        # elm[1][0][n]: Power injected into the network by the last HV producer i.e. P0100 
-        # elm[1][1][0]: Power injected into the network by the first LV producer 
-        # ...
-        # elm[1][1][n]: Power injected into the network by the Lasr LV producer 
-        # elm[2]   : Period index associated to all the previous output variable
-
-        # elm[0] can either be a list of [max_vm_pu_pf : max voltage  before opf
-        #                                 max_vm_pu : maximum voltage after opf] 
-        # or a single float which is  max_vm_pu : maximum voltage after opf. 
-        # See the function run_powerflow_at (*args, ofp_status='both', pred_model= 'Pers')
-        
+        # Collect the parallel results from gather_results(*args)
         parallel_result = self._gathered_results
-        SumLv_colName = ['SumLv'] # sum of the injected power of all lower voltage producers
-                                         # in the network 
-        if type(parallel_result[0][0]) is list: 
-            sep_list = [(*elm[0], *elm[1][0], np.array(elm[1][1]).sum(), elm[2]) 
-                                                            for elm in parallel_result]
-            # Create a colums using 'vm_pu_max' and add the HT producers name
-            colls = ['max_vm_pu_pf', 'max_vm_pu']+df_prodHT_colName.to_list()+SumLv_colName
-        else:
-            sep_list = [(elm[0], *elm[1][0], np.array(elm[1][1]).sum(), elm[2]) 
-                                                            for elm in parallel_result]
-            # Create a colums using 'vm_pu_max' and add the HT producers name
-            colls = ['max_vm_pu'] + df_prodHT_colName.to_list()+SumLv_colName
 
-        # Create a data based on all the cols of sep_list except the last one that is the index
-        data_input = np.array(np.array(sep_list)[:, :-1], dtype=float)
-        index_list = np.array(sep_list)[:, -1]# extract the last col that is the index
+        if self._opf_status:  # If the opf is True or "Both" ----------------------------------------------
 
-        # create new  dataframe based on previous unpack data
-        df = pd.DataFrame(data=data_input, index=index_list, columns=colls)
+            # Get df_prodHT colums name [] from one of the engines
+            df_prodHT_colName = self.dview['dict_df_sgenLoad'][-1]['df_prodHT'].columns
 
-        # return the newly create dataFrame with the index sorted 
-        return df.sort_index()
+            # Get all the elements from the parallel result in a list
+            # elm[0]      : Maximum voltage on all the line
+            # elm[1]      : Power injected into the network by all the Sgen in the network
+            # elm[1][0][0]: Power injected into the network by the first HV producer
+            # ...
+            # elm[1][0][n]: Power injected into the network by the last HV producer i.e. P0100
+            # elm[1][1][0]: Power injected into the network by the first LV producer
+            # ...
+            # elm[1][1][n]: Power injected into the network by the Lasr LV producer
+            # elm[2]      : Period index associated to all the previous output variable
+
+            # elm[0] can either be a list of [max_vm_pu_pf : max voltage  before opf
+            #                                 max_vm_pu : maximum voltage after opf]
+            # or a single float which is  max_vm_pu : maximum voltage after opf.
+            # See the function run_powerflow_at (*args, ofp_status='both', pred_model= 'Pers')
+
+            SumLv_colName = ['SumLv']  # sum of the injected power of all lower voltage producers
+            # in the network
+            if type(parallel_result[0][0]) is list:
+                sep_list = [(*elm[0], *elm[1][0], np.array(elm[1][1]).sum(), elm[2])
+                            for elm in parallel_result]
+                # Create a colums using 'vm_pu_max' and add the HT producers name
+                colName = ['max_vm_pu_pf', 'max_vm_pu'] + df_prodHT_colName.to_list() + SumLv_colName
+            else:
+                sep_list = [(elm[0], *elm[1][0], np.array(elm[1][1]).sum(), elm[2])
+                            for elm in parallel_result]
+                # Create a colums using 'vm_pu_max' and add the HT producers name
+                colName = ['max_vm_pu'] + df_prodHT_colName.to_list() + SumLv_colName
+
+            # Create a data based on all the cols of sep_list except the last one that is the index
+            data_input = np.array(np.array(sep_list)[:, :-1], dtype=float)
+            index_list = np.array(sep_list)[:, -1]  # extract the last col that is the index
+
+        else:  # Opf status is False  ------------------------------------------------------------------
+
+            # Get all the elements from the parallel result in a list
+            # elm[0]   : Maximum voltage using power flow
+            # elm[1]   : Period index associated with elm[0]
+            sep_list = [(elm[0], elm[1]) for elm in parallel_result]
+
+            # Create a data input and index
+            data_input = np.array(np.array(sep_list)[:, 0], dtype=float)
+            index_list = np.array(sep_list)[:, 1]
+
+            colName = ['max_vm_pu_pf']  # column's name
+
+        # create Output dataframe  new  dataframe based on previous unpack data
+        df = pd.DataFrame(data=data_input,
+                          index=index_list,
+                          columns=colName)
+
+        return df.sort_index()  # return the newly create dataFrame with the index sorted
+
 
 
 
@@ -397,7 +436,8 @@ class InitNetworks:
         return sum_max_lvProd, sum_max_load
     
     
-    def _lowerNet_hv_bus_df(self, hvBus_voltage):
+    def _lowerNet_hv_bus_df(self,
+                            hvBus_voltage):
         """ Extract the higher Voltage buses in the lower network: These are buses for which 
             the parameter \'hvBus_voltage\' equals 20.6 kV
         """
@@ -418,7 +458,8 @@ class InitNetworks:
         pp.runpp(self._lowerNet)
         
         
-    def lowerNet_set_vrise_threshold(self, lowNet_activatedBus_list:list, 
+    def lowerNet_set_vrise_threshold(self,
+                                     lowNet_activatedBus_list:list,
                                      min_vm_mu:float=defAuth_hvBus_vRiseMin, 
                                      max_vm_mu:float=defAuth_hvBus_vRiseMax):
         """ Set min and max voltage rise threshold on the Lower Network.
@@ -448,7 +489,8 @@ class InitNetworks:
                        
             
             
-    def init_controlled_hvProd(self, controlled_hvProdName:str):
+    def init_controlled_hvProd(self,
+                               controlled_hvProdName:str):
         """ Initialize the controlled higher and lower voltage producers in the lower network.
         
         The initialization implies adding a <controllable> table to the lower network' sgen in the 
@@ -490,7 +532,8 @@ class InitNetworks:
 
             
             
-    def get_lowerNet_hvActivatedBuses(self, lowerNet_hvBuses_list:list):
+    def get_lowerNet_hvActivatedBuses(self,
+                                      lowerNet_hvBuses_list:list):
         """ Return a list of all HV activated buses (vn_kv=20.6) on the lower Network.
         
         Parameters
@@ -521,7 +564,8 @@ class InitNetworks:
 
     
     
-    def get_lowerNet_lvActivatedBuses(self, lowerNet_lvBuses_list:list) -> list:
+    def get_lowerNet_lvActivatedBuses(self,
+                                      lowerNet_lvBuses_list:list) -> list:
         """ Return a list of all LV activated buses (vn_kv=0.4) on the lower Network
         
         Parameters
@@ -561,7 +605,8 @@ class InitNetworks:
         return self._lowerNet.sgen.name[self._lowerNet.sgen.name.isna()]
     
             
-    def get_lowerNet_hvProducersName(self, return_index=False):
+    def get_lowerNet_hvProducersName(self,
+                                     return_index=False):
         """Return the name (and if needed the index) of all the Higher voltage producers on the lower net.
         
         Parameters
@@ -581,7 +626,8 @@ class InitNetworks:
             return list(self._get_lowerNet_hvProducersName_df().values)
     
     
-    def get_lowerNet_lvProducersName(self, return_index=False):
+    def get_lowerNet_lvProducersName(self,
+                                     return_index=False):
         """Return the name of all the Lower voltage producers on the lower net.
         
         Parameters
@@ -607,7 +653,8 @@ class InitNetworks:
         return self._coef_add_bt, self._coef_add_bt_dist
         
         
-    def get_ctrld_hvProdName(self, return_index=False) :
+    def get_ctrld_hvProdName(self,
+                             return_index=False) :
         """Return the name (and if needed the index) of the Controlled HV producer on the lower net.
         
         Parameters
@@ -630,7 +677,8 @@ class InitNetworks:
         
         
         
-    def get_ctrld_lvProdName(self, return_index=False) :
+    def get_ctrld_lvProdName(self,
+                             return_index=False) :
         """Return the name (and if needed the index) of the Controlled LV producers on the lower net.
         
         Parameters
@@ -681,7 +729,8 @@ class InitNetworks:
         return self._lowerNet_sum_max_lvProdLoad()
     
     
-    def get_lowerNet_hv_bus_df(self, hvBus_voltage:float=default_hv_voltage):
+    def get_lowerNet_hv_bus_df(self,
+                               hvBus_voltage:float=default_hv_voltage):
         """ Return a list of the higher Voltage buses (vn_kv=20.6 kV) in the lower network.
         
             
@@ -694,7 +743,8 @@ class InitNetworks:
         return self._lowerNet_hv_bus_df(hvBus_voltage)
     
     
-    def get_lowerNet_lv_bus_df(self, lvBus_voltage:float=default_lv_voltage):
+    def get_lowerNet_lv_bus_df(self,
+                               lvBus_voltage:float=default_lv_voltage):
         """ Return a list of the lower Voltage buses (vn_kv=0.4 kV) in the lower network.
         
         
@@ -738,7 +788,8 @@ class SensAnlysisResult:
         self._sortedPlkFiles_in_folder_list = self._sort_plkFiles_in_folder(self._plkFiles_in_folder_list)
         
         
-    def _check_fileName_Format(self, plkFiles_in_folder_list):
+    def _check_fileName_Format(self,
+                               plkFiles_in_folder_list):
         # Check if the files name are in the expected format. The Expected format ougth to be 
         # modelName_btRangeName_SimNumber.plk such that the split length ==3 
         len_splited = len(plkFiles_in_folder_list[0].split('_'))
@@ -747,13 +798,15 @@ class SensAnlysisResult:
             raise Exception('The *.plk files in '+ self._folder_location+'are not in the expected format. \n'
                             +'\t   Make sure they are named such as modelName_btRangeName_SimNumber.plk')
     
-    def _extractPlkFiles(self, files_in_folder_list):
+    def _extractPlkFiles(self,
+                         files_in_folder_list):
         # Extract only the plk files in folderlocation
         plk_files_list = [cur_file for cur_file in files_in_folder_list if cur_file.endswith('.plk')]
         return plk_files_list;
     
 
-    def _sort_plkFiles_in_folder(self, plkFiles_in_folder_list):
+    def _sort_plkFiles_in_folder(self,
+                                 plkFiles_in_folder_list):
         
         first_plkFile_in_folder_name = plkFiles_in_folder_list[0]
                 
@@ -777,7 +830,9 @@ class SensAnlysisResult:
           
         
         
-    def in_dataFrame(self, start_date=None, end_date=None):
+    def in_dataFrame(self,
+                     start_date=None,
+                     end_date=None):
         """Transform all the saved results from multivariate simulation in a dataframe 
         
         Each element in the resulting dataFrame is the curtailed energy for that particular simulation.
@@ -916,7 +971,11 @@ class SensAnlysisResults(SensAnlysisResult):#This class inherits super propertie
     
     """
 
-    def __init__(self, models_folder_location, models_name, testSet_date, p_Hv_Lv_range):
+    def __init__(self,
+                 models_folder_location,
+                 models_name,
+                 testSet_date,
+                 p_Hv_Lv_range):
         """
         Parameters
         ----------
@@ -967,7 +1026,9 @@ class SensAnlysisResults(SensAnlysisResult):#This class inherits super propertie
         
         
  
-    def _read_files_at(self, bt_file_index:int, ht_file_index_list:list):
+    def _read_files_at(self,
+                       bt_file_index:int,
+                       ht_file_index_list:list):
         """ 
         For each model_name in _sortedPlkFiles_in_folder_list_dict[model_name], read the file 
         at bt_file_index to extract both : 
@@ -1003,7 +1064,10 @@ class SensAnlysisResults(SensAnlysisResult):#This class inherits super propertie
         return voltage_rise_df_dict, power_df_dict
     
     
-    def _vRise_dict_as_dataFrame(self, voltageRise_df_dict, power_df_dict, v_rise_thresh):
+    def _vRise_dict_as_dataFrame(self,
+                                 voltageRise_df_dict,
+                                 power_df_dict,
+                                 v_rise_thresh):
         """ Transform the voltageRise_df_dict (dictionary of dataframe, each key being the result of 
         a simulation) in a dataframe that will be used for plotting,  create var vrise_count_dict 
         ( a dictionnary of the total number of voltage rise above the threshold for each keys in
@@ -1071,7 +1135,8 @@ class SensAnlysisResults(SensAnlysisResult):#This class inherits super propertie
         
         
         
-    def _compute_capping_count(self, injected_power_df):
+    def _compute_capping_count(self,
+                               injected_power_df):
         """ Compute and return the number of capping that occured given 
         the input power dataframe """
         
@@ -1095,7 +1160,10 @@ class SensAnlysisResults(SensAnlysisResult):#This class inherits super propertie
         
 
         
-    def vRise_boxplot(self, ht=0., bt=0., v_rise_thresh=1.025,
+    def vRise_boxplot(self,
+                      ht=0.,
+                      bt=0.,
+                      v_rise_thresh=1.025,
                      fig_params=None
                      ):
         """ Create a box plot of voltage rise above the defined threshold for simulations where the controlled
@@ -1179,7 +1247,8 @@ class SensAnlysisResults(SensAnlysisResult):#This class inherits super propertie
              
             
         
-    def _count_dict_as_dataFrame(self, var_count_dict):
+    def _count_dict_as_dataFrame(self,
+                                 var_count_dict):
         """ Transform the variable indexed by var_count_dict  into a dataframe. 
         Note that var_count_dict is either <<_vrise_count_dict>> or <<_capping_count_dict>> 
         """
@@ -1214,7 +1283,9 @@ class SensAnlysisResults(SensAnlysisResult):#This class inherits super propertie
     
     
             
-    def countplot(self, count_dict_name, fig_params=None):
+    def countplot(self,
+                  count_dict_name,
+                  fig_params=None):
         """ Plot the total number of :
             voltage rise above the defined threshold 
             or the total number of capping commands 
