@@ -108,97 +108,119 @@ def run_powerflow(network: pandapower.auxiliary.pandapowerNet,
 # ------------------------------------------------------------------------------------------------------------------
 # ___________________________________________________________________________________________________________________
 
-def run_powerflow_at(network: pandapower.auxiliary.pandapowerNet,
-                     cur_period: (str or pandas.Period),
+def run_powerflow_at(network,
+                     cur_period,
                      lowNet_hv_activBus: list,
                      sum_max_p_mw_upperNet: tuple,
                      dict_df_sgenLoad: dict,
-                     auth_max_VriseHvBus: float= defAuth_hvBus_vRiseMax,
-                     opf_status: (bool or str) =False,
-                     pred_model: str=None ):
+                     auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
+                     opf_status: (bool or str) = False,
+                     pred_model: str = None
+                     ):
     """
-    Run Power flow or optimal power flow depending on 'opf_status'
 
-    Parameters:
+    Run Power flow or optimal power flow at `cur_period` depending on 'opf_status'.
+
+    Parameters
     ----------
-    network: Pandapower network
-        The network to consider ;
-    cur_period: Pandas period
-        The current period to investigate
-    lowNet_hv_activBus: list
-        list of all Hv buses activated in the concerned network
-    sum_max_p_mw_upperNet: tuple
-        Sum of maximum power seen from the upper network (here, saint laurent 
-        compared to the lower network civaux)
-        + Of all BT energy producers => sum_max_input[0]
-        + of all Load in the network => sum_max_input[1] 
-    dict_df_sgenLoad: dict 
-        Dictionary containing data (as dataframe i.e indexed by each period of 
-        the considered year for the first 3 imputs) of the 
-        + df_prodHT            => Power of all Higher voltage producers in the lower network 
-        + df_prod_bt_total     => Total power of all lower voltage producers seen  from  the 
-                                  upper Network
-        + df_cons_total        => Total Load demand seen from the upper Network
-        + lowerNet_sgenDf_copy => Copy of all the static generator (hv & lV) in the lower net
-    auth_max_VriseHvBus: float, optional
-        Threshold of maximum voltage allowed on  the network. Is used only when `ofp_status` 
-        is 'Both';
-    ofp_status: Boolean, optional, default False
-        Wether the maximum voltage rise on the lower network buses  is computed after a power 
-        flow, an optimal power flow  or both
-        + False  =>  **pandapower.runpp(net)**
-        + True   =>  **pandapower.runopp(net)**, ofp_status = True
-        + 'Both' =>  A power flow is run. Only when the result i.e. the voltage rise detected 
-                     on hv Prod Buses max_vm_pu > auth_max_VriseHvBus, is the  optimal  power 
-                     flow run.
-    pred_model: str, optional
-        Which kind of prediction model to use for the all the variables to predict at current 
+    network : Pandapower network
+        The lower network to consider.
+    cur_period : str or pandas.Period
+        The period at which the pf/opf must be run.
+    lowNet_hv_activBus : list
+        list of all Hv buses activated in the concerned network.
+    sum_max_p_mw_upperNet : tuple
+        Sum of maximum power seen from the upper network (here, saint laurent
+        compared to the lower network civaux).
+            ``sum_max_p_mw_upperNet[0]`` :
+                Of all Lower voltage producers.
+            ``sum_max_p_mw_upperNet[1]`` :
+                Of all Load in the upper network.
+    dict_df_sgenLoad : dict
+        Dictionary of dataframe. For the first three keys, the corresponding df must indexed by the
+        periods of the considered year. The keys must be the following:
+            `df_prodHT` : pandas.DataFrame
+                Power of all Higher voltage producers in the lower network. The colums represent
+                each Hv producer.
+            `df_prod_bt_total` : pandas.DataFrame
+                Total power of all lower voltage producers seen  from  the upper Network.
+            `df_cons_total` : pandas.DataFrame
+                Total Load demand seen from the upper Network.
+            `lowerNet_sgenDf_copy` : pandas.DataFrame
+                Copy of all the static generator (hv & lV) in the lower network.
+    auth_max_VriseHvBus: float, optional default = :py:data: `oriVariables.defAuth_hvBus_vRiseMax`
+        Threshold of maximum voltage allowed on the HV buses of `network`. This parameter is used
+        only when ``ofp_status`` = `"Both"`
+    ofp_status: bool or str, optional, default=False
+        Optimal power flow status. Whether the maximum voltage rise on the lower network HV buses
+        is extracted after a power flow, an optimal power flow  or both. Three values are possible:
+            ``ofp_status`` = False :
+                Run a simple power flow i.e., `pandapower.runpp(network)`
+            ``ofp_status`` = True :
+                Run an optimal power flow i.e., `pandapower.runopp(network)`
+            ``ofp_status`` = "Both" :
+                A power flow is run. Only when the result i.e. the voltage rise detected on hv Prod
+                Buses ``max_vm_pu`` > :py:data:`oriVariables.defAuth_hvBus_vRiseMax`, is the  optimal
+                power flow run.
+    pred_model: str, optional, default = None
+        Which kind of prediction model to use for the all the variables to predict at current
         period.
-        + None: No prediction model is used,
-        + Pers  =>  Persistence model i.e. val(k)= val(k-1)
-        
-    Output: 
+            None :
+                No prediction model is used
+            "Pers" :
+                Persistence model i.e. val(k)= val(k-1)
+
+    Returns
     -------
-    Depends on 'ofp_status' 
-    False  ==>                cur_max_VriseHvBus
-    True   ==>                cur_max_VriseHvBus, (hvProd_afterOPF, lvProd_afterOPF), cur_period
-    'Both' ==> [max_vm_pu_pf, cur_max_VriseHvBus], (hvProd_afterOPF, lvProd_afterOPF), cur_period
-    where
-        cur_max_VriseHvBus: float 
-            Maximum voltage rise detected on all the Hv buses on the lower Network
-        hvProd_afterOPF: list 
-            List (in the order  in which they appear in the pandapower network sgen table) of 
-            the optimal power that each hv producer on the lower net must inject in order  to 
-            satisfy  the auth_max_VriseHvBus.
-        lvProd_afterOPF: list
-            List (in the order  in which they appear in the pandapower network sgen table) of 
-            the optimal power that each lv producer on the lower net must inject in order  to 
-            satisfy the auth_max_VriseHvBus.
-        cur_period: panda peridod
-            the period at which the pf/OPF is run
-            
-    ------------------------------------------------------------------------------------------       
-    NOTE : For the moment auth_max_VriselvBus i.e. the authorised voltage rise on the lv
-    buses constraint is  considered only when the Voltage rise on the hv buses  is greater 
-    than auth_max_VriseHvBus. Simply put, as long as no voltage rise above auth_max_VriseHvBus
+    Depends on ``ofp_status``
+        ``ofp_status`` = False
+            max_vm_pu_pf
+        ``ofp_status`` = True
+            cur_max_VriseHvBus, (hvProd_afterOPF, lvProd_afterOPF), cur_period
+        ``ofp_status`` = "Both"
+            [max_vm_pu_pf, cur_max_VriseHvBus],(hvProd_afterOPF, lvProd_afterOPF), cur_period \n
+            where
+                max_vm_pu_pf : float
+                    Maximum voltage given by the power flow
+                cur_max_VriseHvBus : float
+                    Maximum voltage rise detected on all the Hv buses on the lower Network, given by OPF.
+                hvProd_afterOPF : list
+                    List (in the order  in which they appear in the pandapower network sgen table) of
+                    the optimal power that each hv producer on the lower net must inject in order  to
+                    satisfy  the `auth_max_VriseHvBus`.
+                lvProd_afterOPF: list
+                    List (in the order  in which they appear in the pandapower network sgen table) of
+                    the optimal power that each lv producer on the lower net must inject in order  to
+                    satisfy the `auth_max_VriseHvBus`.
+                cur_period : pandas.Period
+                    The period at which the PF/OPF is run.
+
+    Raises
+    ------
+    ValueErrorExeption
+        If ``ofp_status`` is not in [True, False, "Both"]
+
+    Notes
+    -----
+    For the moment ``auth_max_VriselvBus`` i.e. the authorised voltage rise on the lv buses
+    constraint is considered only when the Voltage rise on the hv buses  is greater
+    than ``auth_max_VriseHvBus``. Simply put, as long as no voltage rise above ``auth_max_VriseHvBus``
     is detected one does not care about the value of the voltage rise on the lv buses.
-    TODO :Considered the auth_max_VriselvBus to run an opf.   
-    
+    TODO : Considered the auth_max_VriselvBus to run an opf.
+
     """
 
-    # Check variables congruence 
-    check_var_concordance(opf_status, pred_model) 
-    
-    
+    # Check variables congruence
+    check_var_concordance(opf_status, pred_model)
+
     # -- GT1
-    if pred_model == 'Pers': # if the the prediction model is the persistance,
-        cur_period = cur_period-1
-        
-        
+    if pred_model == 'Pers':  # if the the prediction model is the persistance,
+        cur_period = cur_period - 1
+
     # Initialize the network. See the corresponding function for more explanation
     initLowerNet_at(network, cur_period, sum_max_p_mw_upperNet, dict_df_sgenLoad)
 
-    # Get the maximum voltage magnitude of all activated bus to a list. See the 
+    # Get the maximum voltage magnitude of all activated bus to a list. See the
     #                               corresponding function for more explanation
     if opf_status == True:  # Run optimal power flow ******************************************
 
@@ -207,52 +229,47 @@ def run_powerflow_at(network: pandapower.auxiliary.pandapowerNet,
                                           lowNet_hv_activBus,
                                           dict_df_sgenLoad, opf_status)
 
-        # Get the value of HT producer after optimal flow. 
+        # Get the value of HT producer after optimal flow.
         hvProd_afterOPF = list(network.res_sgen[network.sgen.name.notna()].p_mw)
         lvProd_afterOPF = list(network.res_sgen[network.sgen.name.isna()].p_mw)
-        
+
         # Depending on the prediction model parameter the return is different ----------------
         # For <pred_model = 'Pers'> given that at GT1 the <cur_period = cur_period-1> one must
         #  reset cur_period to its initial value using <cur_period+1> before ruturning the results
-        if pred_model == 'Pers': 
-            return cur_max_VriseHvBus, (hvProd_afterOPF, lvProd_afterOPF), cur_period+1
+        if pred_model == 'Pers':
+            return cur_max_VriseHvBus, (hvProd_afterOPF, lvProd_afterOPF), cur_period + 1
         else:
             return cur_max_VriseHvBus, (hvProd_afterOPF, lvProd_afterOPF), cur_period
 
-    elif opf_status == 'Both':# Run normal and depending on the situation, also optimal power flow  **
-        # run power flow first 
+    elif opf_status == 'Both':  # Run normal and depending on the situation, also optimal power flow  **
+        # run power flow first
         cur_max_VriseHvBus = max_vm_pu_at(network, cur_period, lowNet_hv_activBus,
                                           dict_df_sgenLoad, False)
-        max_vm_pu_pf = cur_max_VriseHvBus # Save the maximum voltage given by the power flow 
-                                          # before optimizing
+        max_vm_pu_pf = cur_max_VriseHvBus  # Save the maximum voltage given by the power flow
+        # before optimizing
         # If the maximum voltage on buses is above the authorized threshold, run optimal power flow
         if cur_max_VriseHvBus > auth_max_VriseHvBus:
             cur_max_VriseHvBus = max_vm_pu_at(network, cur_period, lowNet_hv_activBus,
-                                                                    dict_df_sgenLoad, True)
+                                              dict_df_sgenLoad, True)
 
-        # Get the value of HV and LV producers after optimal flow. 
+        # Get the value of HV and LV producers after optimal flow.
         hvProd_afterOPF = list(network.res_sgen[network.sgen.name.notna()].p_mw)
         lvProd_afterOPF = list(network.res_sgen[network.sgen.name.isna()].p_mw)
-
 
         # Depending on the prediction model parameter the return is different ----------------
         # For <pred_model = 'Pers'> given that at GT1 the <cur_period = cur_period-1> one must
         #  reset cur_period to its initial value using <cur_period+1> before ruturning the results
-        if pred_model == 'Pers': 
-            return [max_vm_pu_pf, cur_max_VriseHvBus], (hvProd_afterOPF, lvProd_afterOPF), cur_period+1
+        if pred_model == 'Pers':
+            return [max_vm_pu_pf, cur_max_VriseHvBus], (hvProd_afterOPF, lvProd_afterOPF), cur_period + 1
         else:
             return [max_vm_pu_pf, cur_max_VriseHvBus], (hvProd_afterOPF, lvProd_afterOPF), cur_period
 
-    elif opf_status == False :  # Run normal power flow  ***************************************************
-        return max_vm_pu_at(network, cur_period, lowNet_hv_activBus, dict_df_sgenLoad, opf_status)
-    
-    else : 
-        raise ValueError('<opf_status> must be either of [True, False, ''Both'']' )      
+    elif opf_status == False:  # Run normal power flow  ***************************************************
+        return max_vm_pu_at(network, cur_period, lowNet_hv_activBus, dict_df_sgenLoad, opf_status), cur_period
 
-        
+    else:
+        raise ValueError('<opf_status> must be either of [True, False, "Both"]')
 
-        
-        
 
 # __________________________________________________________________________________________________________________
 # -----------------------------------------------------------------------------------------------------------------
