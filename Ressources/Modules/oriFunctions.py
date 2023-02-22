@@ -726,12 +726,12 @@ def predictionBin_bloc(rnn_model,
 # ____________________________________________________________________________________________________________
 # ____________________________________________________________________________________________________________
 
-def combRnnRobustPred(model_Vrise_dict,
+def combineRnnPred(model_Vrise_dict,
                       hvProd_noControl,
                       ctrlHvProd_opt_model1,
                       auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
                       n_models=None):
-    """ Combine the prediction of Three RNN to get a robust prediction bloc.
+    """ Combine the prediction of Three RNN to get a better prediction as an `Ensemble model <https://en.wikipedia.org/wiki/Ensemble_learning>`_.
 
 
     .. deprecated:: 1.0.1
@@ -751,7 +751,7 @@ def combRnnRobustPred(model_Vrise_dict,
     ctrlHvProd_opt_model1 :  pandas.DataFrame
         Partial output of the function :py:func:`oriFunctions.extract_par_results` that is the  Optimal
         value of ctrlHvProd at the output of bloc PF/OPF of model1. This is the command
-        value to send to the said Hv producer when the `combRnnRobustPred` predicts an exceeding of the
+        value to send to the said Hv producer when the `combineRnnPred` predicts an exceeding of the
         the defined threshold `auth_max_VriseHvBus`.
     auth_max_VriseHvBus : float, optional default = ``defAuth_hvBus_vRiseMax``
         Threshold of maximum voltage allowed on the HV buses of `network`.
@@ -778,6 +778,16 @@ def combRnnRobustPred(model_Vrise_dict,
     ------
     ValueErrorExeption
         If ``n_models`` is the wrong type or the wrong value.
+
+
+    Notes
+    ------
+    In the future versions, the function **MUST** be recoded such that it follows exactly the block scheme
+    described is section 2.1 of `VRiseControlBlockScheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_.
+    For the moment it has been implemented differently i.e. the block PF in Model 1 computes both PF and OPF.
+    To change it, compute solely PF in model 1 and based on the combination of the three models in the
+    block Comb, compute OPF solely for the interest periods. The interest periods are the periods where the
+    combination of Models agree on non-respect of the :py:data:`oriVariables.defAuth_hvBus_vRiseMax`.
 
     """
 
@@ -1054,7 +1064,9 @@ def robustControl(df_out_block_pf_opf,
                   df_hvProd_noControl,
                   cur_hvProd_max: float,
                   ctrld_hvProd_max: int,
-                  auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax):
+                  auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
+                  combRnn_in: tuple = (None, None)
+                  ):
     """ Robust control
 
     Implement Robust control by letting the controlled Hv Producer inject all its production
@@ -1064,15 +1076,25 @@ def robustControl(df_out_block_pf_opf,
     Parameters
     ----------
     df_out_block_pf_opf : pandas.DataFrame
-      Output of the block pf/opf
+        Output of the block pf/opf when the function is applied to a unique prediction model
+        or when the function is applied to a combination of RNN. In this case ``combRnn_in``
+        **MUST** be include.
     df_hvProd_noControl : Dataframe
-      Dataframe of controlled HV Prod  with no control
+        Dataframe of controlled HV Prod  with no control
     cur_hvProd_max : float
-      Current maximum output Power of the HV producer (MW)
+        Current maximum output Power of the HV producer (MW)
     ctrld_hvProd_max : int
-      Maximum fixed output of the Controlled Higher voltage producer (MW)
+        Maximum fixed output of the Controlled Higher voltage producer (MW)
     auth_max_VriseHvBus : float, Optional, Default = :py:data:`oriVariables.defAuth_hvBus_vRiseMax`
-      Threshold of maximum voltage allowed on the HV buses of ``network``.
+        Threshold of maximum voltage allowed on the HV buses of ``network``.
+    combRnn_in: tuple, Optional, Default =(None, None)
+        A tuple of parameter to use when applying the robustControl to a combination of RNN.
+        ``combRnn_in[0]`` : pandas.Dataframe,
+            Dataframe of binary threshold i.e the second output of :py:func:`combineRnnPred`.
+        ``combRnn_in[1]`` : int or str
+            Number of models which must agree on voltage rise above threshold before a command is
+            sent to the controlled HV producer. This is the fifth input of :py:func:`combineRnnPred`.
+
 
     """
 
@@ -1091,8 +1113,22 @@ def robustControl(df_out_block_pf_opf,
     hvProd_robust_df.loc[per_index2, ['hvProd_robust']] = (df_hvProd_noControl.loc[per_index2].P0100
                                                            * cur_hvProd_max / ctrld_hvProd_max)
 
-    # Get a mask for the periods where a voltage rise above the threshold is predicted
-    mask_vrise_per = df_out_block_pf_opf.loc[per_index2, 'max_vm_pu_pf'] > auth_max_VriseHvBus
+    if (combRnn_in[0] is None) and (combRnn_in[1] is None):  # If combRnn_in is not defined
+        # Get a mask for the periods where a voltage rise above the threshold is predicted
+        mask_vrise_per = df_out_block_pf_opf.loc[per_index2, 'max_vm_pu_pf'] > auth_max_VriseHvBus
+
+    else:  # If combRnn_in is defined the robustControl is beeing applied to a combination of RNN
+
+        # Define variables names as in :py:func:`combineRnnPred`
+        bin_thresh_df = combRnn_in[0]
+        n_models = combRnn_in[1]
+
+        if type(n_models) is str:  # If n_models  is a string
+            mask_vrise_per = bin_thresh_df.loc[per_index2, [n_models]] == 1  # Create the mask based on the model's name
+
+        if type(n_models) is int:  # If n_model is int
+            # Create the mask based on number of models that must agree
+            mask_vrise_per = bin_thresh_df.Model_All.loc[per_index2] >= n_models
 
     # Replace the values of periods given by the mask by the value of hvProd given by the persistence model
     hvProd_robust_df[mask_vrise_per] = df_out_block_pf_opf.loc[per_index2].loc[mask_vrise_per, [ctrld_hvProdName]]
