@@ -83,10 +83,10 @@ robustControl
 
 
 
-combRnnRobustPred
-******************
+combineRnnPred
+**************
 
-.. autofunction:: oriFunctions.combRnnRobustPred
+.. autofunction:: oriFunctions.combineRnnPred
 
 
 
