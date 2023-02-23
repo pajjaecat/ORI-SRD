@@ -211,3 +211,21 @@ def check_parResultsNames(par_result_name: str):
     """ Check whether ``par_result_name`` is a string """
     if type(par_result_name) is not str:
         raise TypeError(' ``gather_results()`` can only handle string as argument')
+
+
+def check_robustControlParams(df_out_block_pf_opf, combRnn_param):
+    """Check the concordance between ``df_out_block_pf_opf`` and ``combRnn_param`` """
+
+    # When ``df_out_block_pf_opf`` has only one column, it implies that it is the first
+    # output of :py:func:`oriFunctions.combineRnnPred`. In this case the last input of
+    # :py:func:oriFunctions.robustControl must be included.
+
+    if (df_out_block_pf_opf.shape[1] == 1
+            and (combRnn_param[0] is None
+                 or combRnn_param[1] is None
+            )
+    ):
+        raise Exception('Since the input ``df_out_block_pf_opf`` has only one collumn, i.e. is'
+                        'the first output of :py:func:`oriFunctions.combineRnnPred`, the input'
+                        ' ``combRnn_param``  **MUST** also be included.')
+

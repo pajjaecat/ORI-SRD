@@ -727,10 +727,10 @@ def predictionBin_bloc(rnn_model,
 # ____________________________________________________________________________________________________________
 
 def combineRnnPred(model_Vrise_dict,
-                      hvProd_noControl,
-                      ctrlHvProd_opt_model1,
-                      auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
-                      n_models=None):
+                   hvProd_noControl,
+                   ctrlHvProd_opt_model1,
+                   auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
+                   n_models=None):
     """ Combine the prediction of Three RNN to get a better prediction as an `Ensemble model <https://en.wikipedia.org/wiki/Ensemble_learning>`_.
 
 
@@ -1062,38 +1062,44 @@ def createDict_prodHtBt_Load(df_pred_in,
 
 def robustControl(df_out_block_pf_opf,
                   df_hvProd_noControl,
-                  cur_hvProd_max: float,
-                  ctrld_hvProd_max: int,
+                  cur_hvProd_max: float = default_ctrld_hvProd_max,
+                  ctrld_hvProd_max: float = default_ctrld_hvProd_max,
                   auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
-                  combRnn_in: tuple = (None, None)
+                  combRnn_param: tuple = (None, None)
                   ):
-    """ Robust control
+    """ Implements Robust control
 
-    Implement Robust control by letting the controlled Hv Producer inject all its production
-    when no voltage rise above the predefined threshold is detected. Replacement is done in
-    place i.e. in the ``df_out_block_pf_opf`` .
+    This is done by letting the controlled Hv Producer inject all its production in the network
+    when no exceeding of :data:`oriVariables.defAuth_hvBus_vRiseMax` is predicted. Replacement
+    is done in place i.e. in  ``df_out_block_pf_opf`` .
 
     Parameters
     ----------
     df_out_block_pf_opf : pandas.DataFrame
-        Output of the block pf/opf when the function is applied to a unique prediction model
-        or when the function is applied to a combination of RNN. In this case ``combRnn_in``
-        **MUST** be include.
+        Output of the block pf/opf when the function is applied to a unique prediction model.
+        First input of :py:func:`combineRnnPred` when the function is applied to a combination
+        of RNN. In this case ``combRnn_param`` **MUST** be included.
     df_hvProd_noControl : Dataframe
         Dataframe of controlled HV Prod  with no control
-    cur_hvProd_max : float
+    cur_hvProd_max : float, Optional
         Current maximum output Power of the HV producer (MW)
-    ctrld_hvProd_max : int
+    ctrld_hvProd_max : float, Optional
         Maximum fixed output of the Controlled Higher voltage producer (MW)
     auth_max_VriseHvBus : float, Optional, Default = :py:data:`oriVariables.defAuth_hvBus_vRiseMax`
         Threshold of maximum voltage allowed on the HV buses of ``network``.
-    combRnn_in: tuple, Optional, Default =(None, None)
+    combRnn_param: tuple, Optional, Default =(None, None)
         A tuple of parameter to use when applying the robustControl to a combination of RNN.
-        ``combRnn_in[0]`` : pandas.Dataframe,
+        ``combRnn_param[0]`` : pandas.Dataframe,
             Dataframe of binary threshold i.e the second output of :py:func:`combineRnnPred`.
-        ``combRnn_in[1]`` : int or str
+        ``combRnn_param[1]`` : int or str
             Number of models which must agree on voltage rise above threshold before a command is
             sent to the controlled HV producer. This is the fifth input of :py:func:`combineRnnPred`.
+
+    Raises
+    ------
+    Exception
+        When ``df_out_block_pf_opf`` and ``combRnn_param`` do not concorde.
+
 
 
     """
@@ -1101,39 +1107,49 @@ def robustControl(df_out_block_pf_opf,
     # Basically, we replace the value of the controled HvProd by its own
     # value with No control when no voltage rise above the defined threshold is detected.
 
-    # create new period index mask spaning from 08Am to 6PM
-    per_index2 = df_out_block_pf_opf.index.to_timestamp().to_series().between_time('07:10',
-                                                                                   '18:50').index.to_period('10T')
+    # Check input concordance
+    checker.check_robustControlParams(df_out_block_pf_opf, combRnn_param)
+
+    # create new period index mask spaning from 07Am to 6PM
+    per_index2 = (df_out_block_pf_opf.index
+                  .to_timestamp()
+                  .to_series()
+                  .between_time('07:10', '18:50')
+                  .index.to_period('10T'))
+
+    # Get controled HV prod Name
     ctrld_hvProdName = df_out_block_pf_opf.columns[0]
 
     # Create a new df for hvProd
     hvProd_robust_df = pd.DataFrame(index=per_index2, columns=['hvProd_robust'])
 
     # Get into the dataframe data of hvProdWhen there is no control
-    hvProd_robust_df.loc[per_index2, ['hvProd_robust']] = (df_hvProd_noControl.loc[per_index2].P0100
+    hvProd_robust_df.loc[per_index2, ['hvProd_robust']] = (df_hvProd_noControl.loc[per_index2, ctrld_hvProdName]
                                                            * cur_hvProd_max / ctrld_hvProd_max)
 
-    if (combRnn_in[0] is None) and (combRnn_in[1] is None):  # If combRnn_in is not defined
+    if (combRnn_param[0] is None) and (combRnn_param[1] is None):  # If combRnn_param is not defined
         # Get a mask for the periods where a voltage rise above the threshold is predicted
         mask_vrise_per = df_out_block_pf_opf.loc[per_index2, 'max_vm_pu_pf'] > auth_max_VriseHvBus
 
-    else:  # If combRnn_in is defined the robustControl is beeing applied to a combination of RNN
+    else:  # If combRnn_param is defined the robustControl is beeing applied to a combination of RNN
 
-        # Define variables names as in :py:func:`combineRnnPred`
-        bin_thresh_df = combRnn_in[0]
-        n_models = combRnn_in[1]
+        # Define variables' name as in :py:func:`combineRnnPred`.See the said function for more about
+        # the parameters
+        bin_thresh_df = combRnn_param[0]  # Binary threshold
+        n_models = combRnn_param[1]  # Type of model to use
 
         if type(n_models) is str:  # If n_models  is a string
-            mask_vrise_per = bin_thresh_df.loc[per_index2, [n_models]] == 1  # Create the mask based on the model's name
+            # Create the mask based on the model's name
+            mask_vrise_per = bin_thresh_df.loc[per_index2, [n_models]] == 1
 
         if type(n_models) is int:  # If n_model is int
             # Create the mask based on number of models that must agree
             mask_vrise_per = bin_thresh_df.Model_All.loc[per_index2] >= n_models
 
-    # Replace the values of periods given by the mask by the value of hvProd given by the persistence model
+    # Replace the values of periods given by the mask by the value of hvProd with No control
     hvProd_robust_df[mask_vrise_per] = df_out_block_pf_opf.loc[per_index2].loc[mask_vrise_per, [ctrld_hvProdName]]
 
-    # Replace the values of hvProdin df_out_block_pf_opf
+    # Replace the values of hvProd_robust_df in the inpu df_out_block_pf_opf
     df_out_block_pf_opf.loc[per_index2, [ctrld_hvProdName]] = hvProd_robust_df.loc[per_index2, 'hvProd_robust']
 
 
