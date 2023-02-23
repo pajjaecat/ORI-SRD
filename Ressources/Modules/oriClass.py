@@ -75,7 +75,7 @@ class CreateParEngines:
             Total number of periods to run simulation for. The number of period each engine
             will work on is therfore given by ``len(run_periodIndex)/n_e`` where ``n_e`` is the number of
             engines.
-        ofp_status : bool or str
+        opf_status : bool or str
             Optimal power flow status. Whether the maximum voltage rise on the ``lowerNet`` HV buses
             is extracted after a power flow, an optimal power flow  or both. Two values are possible:
                 ``ofp_status`` = False :
@@ -108,7 +108,7 @@ class CreateParEngines:
         # Set variables
         self._run_periodIndex = run_periodIndex 
         self._pred_model = parameters_dict['pred_model']
-        self._opf_status = opf_status;
+        self._opf_status = opf_status
         
         if clean :  # Clear the localspace of all engines if clean is True and reaload modules
 
@@ -140,7 +140,7 @@ class CreateParEngines:
         Returns
         -------
         gathered_results : ipyparallel.AsyncMapResult
-            Reust of all parallel engine.
+            Resust of all parallel engine.
             
         Raises
         ------
@@ -167,35 +167,38 @@ class CreateParEngines:
         Returns
         -------
         df : pandas.Dataframe
-            The returned dataframe depends on the ``opf_status`` send to the parallel engines 
-            via :py:func:`sendVar_to_localSpace`. It's index are the instants associated with the 
-            recorded variables in the columns which are the following :
-            
+            The returned dataframe depends on the ``opf_status`` send to the parallel
+            engines via :py:func:`sendVar_to_localSpace`. It's index are the instants
+            associated with the  recorded variables in the columns which are the
+            following :
+
             ``opf_status`` = True or "Both" :
-                The df columns are :
+                The df columns are
                     max_vm_pu_pf :
-                        Using power flow, maximum voltage recorded over all the bus at the instants given 
-                        by the ``df.index``
+                        Using power flow, maximum voltage recorded over all the bus
+                        at the instants given  by the ``df.index``
                     max_vm_pu :
-                        Using optimal power flow, maximum voltage recorded over all the bus at the instants given 
-                        by the ``df.index``. Note that  ``max_vm_pu = max_vm_pu_pf`` when the voltage rise constraint
-                        ``max_vm_pu`` < py:data:`oriVariables.defAuth_hvBus_vRiseMax` holds.
-                    [P0xxa, P0xxb, ..., P0..n] :  
+                        Using optimal power flow, maximum voltage recorded over all
+                        the bus at the instants given  by the ``df.index``. Note that
+                        ``max_vm_pu = max_vm_pu_pf`` when the voltage rise constraint
+                        ``max_vm_pu`` < :py:data:`oriVariables.defAuth_hvBus_vRiseMax`
+                        holds.
+                    [P0xxa, P0xxb, ..., P0..n] :
                         The injected power of the respective HV producers.
                     SumLv :
                         Sum of the injected power of all lower voltage producers.
-                    
+
             ``opf_status`` = False :
-                The df columns is: 
-                    vm_pu_max_pf 
-                        Using power flow, maximum voltage recorded over all the bus at the instants given 
-                        by the ``df.index``
-                        
+                The df columns is:
+                    vm_pu_max_pf
+                        Using power flow, maximum voltage recorded over all the bus
+                        at the instants given by the ``df.index``
+
         See Also
         --------
         gather_results
             Gather in one variable the result of the parallel engines.
-        
+
         Warnings
         --------
         Make sure to run :py:func:`gather_results` before :py:func:`get_results_asDf`
@@ -297,81 +300,85 @@ class CreateParEngines:
 
 class InitNetworks:
     """ Initialize both the upper and lower level  Networks.
-    
-    
-    Parameters
-    ----------
-    upperNet : :obj:`pandapower.pandapowerNet`
-        Upper level network.
-    lowerNet : pandapower.pandapowerNet
-        Lower level Network
-    coef_add_bt : float, Default = None
-        Value of the added output power for all the LV producers (MW).
-    coef_add_bt_dist : str, Default = None
-        How the upscaling of the maximum output of all lower Voltage producers is
-        done. Three choices are possible
-            None
-                No upscaling is done
-            "uppNet"
-                ``coef_add_bt`` is added to the Sum of maximum output of all lower
-                 voltage (LV) producers (MW) in the upper Network. In consequence,
-                 the LV producers on the lower network receive only a fraction of
-                 coef_add_bt.
-            "lowNet"
-                ``coef_add_bt`` is added to the Sum of maximum output of all LV
-                producers (MW) in the lower Network. In consequence, coef_add_bt
-                is shared proportionnaly among all the LV producers on the lower network.
-            "lowNet_rand"
-                ``coef_add_bt`` is shared proportionnaly among a randomly selected set of
-                the LV  producers on the lower Network. The randomly selected set consist
-                of half of all LV producers on the on the lower Network
-  
+
+
+        Parameters
+        ----------
+        upperNet : :obj:`pandapower.pandapowerNet`
+            Upper level network.
+        lowerNet : `pandapower.pandapowerNet `
+            Lower level Network
+        coef_add_bt : float, Default = None
+            Value of the added output power for all the LV producers (MW).
+        coef_add_bt_dist : str, Default = None
+            How the upscaling of the maximum output of all lower Voltage producers is
+            done. Three choices are possible
+                None
+                    No upscaling is done.
+                "uppNet"
+                    ``coef_add_bt`` is added to the Sum of maximum output of all
+                    lower   voltage (LV) producers (MW) in the upper Network. In
+                    consequence, the LV producers on the ``lowerNet`` receive only a
+                    fraction of coef_add_bt.
+                "lowNet"
+                    ``coef_add_bt`` is added to the Sum of maximum output of all LV
+                    producers (MW) in the ``lowerNet``. In consequence, coef_add_bt
+                    is shared proportionnaly among all the LV producers on the
+                    ``lowerNet``.
+                "lowNet_rand"
+                    ``coef_add_bt`` is shared proportionnaly among a randomly
+                    selected et of the LV  producers on the ``lowerNet``. The
+                    randomly selected set consist  of half of all LV producers on the
+                    on the ``lowerNet``
+
     Attributes
     ----------
-    
+
     Raises
     ------
     Exception
-        If ``upperNet`` has less buses that ``lowerNet`` or if ``coef_add_bt`` and 
+        If ``upperNet`` has less buses that ``lowerNet`` or if ``coef_add_bt`` and
         ``coef_add_bt_dist`` are the wrong type.
-    
-    
+
+
     """
-    
+
     def __init__(self, 
                  upperNet, 
                  lowerNet, 
                  coef_add_bt:float=None, 
                  coef_add_bt_dist:str=None):
         """ Initialize both the upper and lower level  Networks
-        
-        Parameters 
+
+        Parameters
         ----------
         upperNet : :obj:`pandapower.pandapowerNet`
             Upper level network.
-        lowerNet : pandapower.pandapowerNet 
-            Lower level Network 
-        coef_add_bt : float, Default = None 
+        lowerNet : pandapower.pandapowerNet
+            Lower level Network
+        coef_add_bt : float, Default = None
             Value of the added output power for all the LV producers (MW).
-        coef_add_bt_dist : str, Default = None 
+        coef_add_bt_dist : str, Default = None
             How the upscaling of the maximum output of all lower Voltage producers is
             done. Three choices are possible
-                None 
+                None
                     No upscaling is done
-                "uppNet" 
-                    ``coef_add_bt`` is added to the Sum of maximum output of all lower 
-                     voltage (LV) producers (MW) in the upper Network. In consequence, 
-                     the LV producers on the lower network receive only a fraction of 
-                     coef_add_bt.
+                "uppNet"
+                    ``coef_add_bt`` is added to the Sum of maximum output of all
+                    lower voltage (LV) producers (MW) in the upper Network. In
+                    consequence, the LV producers on the ``lowerNet`` receive only a
+                    fraction of coef_add_bt.
                 "lowNet"
-                    ``coef_add_bt`` is added to the Sum of maximum output of all LV 
-                    producers (MW) in the lower Network. In consequence, coef_add_bt 
-                    is shared proportionnaly among all the LV producers on the lower network. 
+                    ``coef_add_bt`` is added to the Sum of maximum output of all LV
+                    producers (MW) in the ``lowerNet``. In consequence, coef_add_bt
+                    is shared proportionnaly among all the LV producers on the
+                    ``lowerNet``.
                 "lowNet_rand"
-                    ``coef_add_bt`` is shared proportionnaly among a randomly selected set of
-                    the LV  producers on the lower Network. The randomly selected set consist 
-                    of half of all LV producers on the on the lower Network
-         
+                    ``coef_add_bt`` is shared proportionnaly among a randomly
+                    selected set of the LV  producers on the ``lowerNet``. The
+                    randomly selected set consists of half of all LV producers on the
+                    on the ``lowerNet``
+
          """
 
         # initiate private attribute
@@ -463,28 +470,30 @@ class InitNetworks:
                                      lowNet_activatedBus_list:list,
                                      min_vm_mu:float=defAuth_hvBus_vRiseMin, 
                                      max_vm_mu:float=defAuth_hvBus_vRiseMax):
-        """ Set min and max voltage rise threshold on the Lower Network.
-        
-        The minimum and the maximum  authorised thresholds  are set on  the list of buses 
-        given by ``lowNet_activatedBus_list`` on the lower Network.
-        
-        This method can be utilised to set the authorized voltage rise on both the higher and 
-        lower voltage Buses.  If the desire is to set the authorized  voltage rise on the hv 
-        buses, ``lowNet_activatedBus_list`` **MUST** be the list of lowNet_hv_activatedBus. If 
-        the desire is to set the authorized voltage rise on the lv buses, parameter
-        ``lowNet_activatedBus_list`` **MUST** be the list  of lowNet_lv_activatedBus.
-        
-            
-        Parameters 
+        """ Set min and max voltage rise threshold on the ``lowerNet``.
+
+        The minimum and the maximum  authorised thresholds  are set on  the list of
+        buses  given by ``lowNet_activatedBus_list`` on the ``lowerNet``.
+
+        This method can be utilised to set the authorized voltage rise on both the
+        higher and  lower voltage Buses.  If the desire is to set the authorized
+        voltage rise on the hv buses, ``lowNet_activatedBus_list`` **MUST** be the
+        list of lowNet_hv_activatedBus. If the desire is to set the authorized
+        voltage rise on the lv buses, parameter `lowNet_activatedBus_list`` **MUST**
+        be the list  of lowNet_lv_activatedBus.
+
+
+        Parameters
         ----------
         lowNet_activatedBus_list : list
-            List of all the activated buses on the lower Network
-        min_vm_mu : float, Default = ``defAuth_hvBus_vRiseMin``
-            Minimum authorized voltage rise on the given buses.
-        max_vm_mu : float, Default = ``defAuth_hvBus_vRiseMax`` 
-            Maximum authorized voltage rise on the given buses.
+            List of all the activated buses on the ``lowerNet``
+        min_vm_mu : float, Default = :py:data:`oriVariables.defAuth_hvBus_vRiseMin`
+            Minimum authorized voltage rise on ``lowNet_activatedBus_list``.
+        max_vm_mu : float, Default = :py:data:`oriVariables.defAuth_hvBus_vRiseMax`
+            Maximum authorized voltage rise on ``lowNet_activatedBus_list``.
 
         """
+
         self._lowerNet.bus.max_vm_pu[lowNet_activatedBus_list] = max_vm_mu
         self._lowerNet.bus.min_vm_pu[lowNet_activatedBus_list] = min_vm_mu
                        
@@ -492,22 +501,23 @@ class InitNetworks:
             
     def init_controlled_hvProd(self,
                                controlled_hvProdName:str):
-        """ Initialize the controlled higher and lower voltage producers in the lower network.
-        
-        The initialization implies adding a <controllable> table to the lower network' sgen in the 
-        and setting the controlled producers to ``True``.
-        
+        """ Initialize the controlled higher and lower voltage producers in the ``lowerNet``.
+
+        The initialization implies adding a <<controllable>> column to the sgen's in
+        the ``lowerNet`` and setting the controlled producers to ``True``.
+
         Parameters
         ----------
         controlled_hvProdName : str
-            Name of the controlled HV producer on the lower Network
-            
+            Name of the controlled HV producer on the ``lowerNet``
+
         Raises
         ------
         Exception
-            If ``controlled_hvProdName`` is not present in the list of HV producer in the lower network.
+            If ``controlled_hvProdName`` is not present in the list of HV producer in
+            the ``lowerNet``.
         """
-        
+
         # Check the existence of the controlled_hvProdName
         checker._check_hvProdName_in_lowerNet(self, controlled_hvProdName)
         
@@ -534,12 +544,12 @@ class InitNetworks:
             
             
     def get_lowerNet_hvActivatedBuses(self,
-                                      lowerNet_hvBuses_list:list):
+                                      lowerNet_hvBuses_list : list):
         """ Return a list of all HV activated buses (vn_kv=20.6) on the lower Network.
         
         Parameters
         ----------
-        lowerNet_hv_bus_list : list
+        lowerNet_hvBuses_list : list
             List of all hv buses in the lower Network.
             
         Returns 
@@ -566,12 +576,12 @@ class InitNetworks:
     
     
     def get_lowerNet_lvActivatedBuses(self,
-                                      lowerNet_lvBuses_list:list) -> list:
+                                      lowerNet_lvBuses_list : list) -> list:
         """ Return a list of all LV activated buses (vn_kv=0.4) on the lower Network
         
         Parameters
         ----------
-        lowerNet_lv_bus_list : list
+        lowerNet_lvBuses_list : list
             List of all lv buses in the lower Network.
             
         Returns 
@@ -751,7 +761,7 @@ class InitNetworks:
         
         Parameters
         ----------
-        hvBus_voltage : float, Optional, Default = ``default_lv_voltage``
+        lvBus_voltage : float, Optional, Default = ``default_lv_voltage``
             Voltage of High voltage buses on Lower Network.
 
         """
@@ -803,7 +813,7 @@ class SensAnlysisResult:
                          files_in_folder_list):
         # Extract only the plk files in folderlocation
         plk_files_list = [cur_file for cur_file in files_in_folder_list if cur_file.endswith('.plk')]
-        return plk_files_list;
+        return plk_files_list
     
 
     def _sort_plkFiles_in_folder(self,
@@ -834,27 +844,30 @@ class SensAnlysisResult:
     def in_dataFrame(self,
                      start_date=None,
                      end_date=None):
-        """Transform all the saved results from multivariate simulation in a dataframe 
-        
-        Each element in the resulting dataFrame is the curtailed energy for that particular simulation.
-        The df's index represent the variation of the maximum output of the controlled HV producer while 
-        the columns represent the added BT production in the network.
-        
-        
+        """Transform all the saved results from multivariate simulation in a dataframe.
+
+        Each element in the resulting dataFrame is the curtailed energy for that
+        particular simulation. The df's index represent the variation of the maximum
+        output of the controlled HV producer while the columns represent the added BT
+        production in the network.
+
+
         Parameters
         ----------
         start_date : str or pandas.Period, optional
-            First day (included) to consider in the testing set for the simulation. 
-            If the argument `is given, the curtailed energy (each element of the df) considers the 
-            simulation starting from the given date. 
-            else the whole data is considered
+            First day (included) to consider in the testing set for the simulation.
+            If the argument `is given, the curtailed energy (each element of the df)
+            considers the simulation starting from the given date. Else the whole
+            data is considered
         end_date : (str) optional
-            Last day (not included) to consider in the testing set for the simulation. 
-            If the argument `is given, the curtailed energy (each element of the df) considers the 
-            simulation up to the given date. 
-            else the whole data is considered
-        
+            Last day (not included) to consider in the testing set for the
+            simulation.
+            If the argument `is given, the curtailed energy (each element of the df)
+            considers the simulation up to the given date. Else the whole data is
+            considered
+
         """
+
         res_dict = {} # Dictionary to save variables
         
         for curFileName in self._sortedPlkFiles_in_folder_list:
@@ -988,12 +1001,14 @@ class SensAnlysisResults(SensAnlysisResult):#This class inherits super propertie
             (0) test_set_starting date included
             (1) test set stopind date not includes
         p_Hv_Lv_range : (tuple of array)
-            IMPORTANT : Make sure that these parameters are the same that are used in the 
-            notebook Sensitivity analysis simulation 
+            IMPORTANT : Make sure that these parameters are the same that are used in
+            the  notebook Sensitivity analysis simulation
             (0) P_Hv_max_range : Range of Maximum Power for the controlled Producer
-            (1) P_Lv_max_range : Range of Maximum Power added for all the Lower voltage producer
+            (1) P_Lv_max_range : Range of Maximum Power added for all the Lower
+            voltage producer
 
         """
+
 
         self._models_folder_location = models_folder_location
         self._models_name = models_name
@@ -1031,14 +1046,15 @@ class SensAnlysisResults(SensAnlysisResult):#This class inherits super propertie
                        bt_file_index:int,
                        ht_file_index_list:list):
         """ 
-        For each model_name in _sortedPlkFiles_in_folder_list_dict[model_name], read the file 
-        at bt_file_index to extract both : 
-            (1) the voltage rise dataframe ('maxV_rise_df') 
-            (2) the Power injected dataframe with and without control ('Power Sgen') 
-        for the simulation indexed by each elm in ht_file_index_list. Save each extracted variable   
-        in the corresponding dictionary that are output
-        
+        For each model_name in _sortedPlkFiles_in_folder_list_dict[model_name], read
+        the file at bt_file_index to extract both :
+            (1) the voltage rise dataframe ('maxV_rise_df')
+            (2) the Power injected dataframe with and without control ('Power Sgen')
+        for the simulation indexed by each elm in ht_file_index_list. Save each
+        extracted variable in the corresponding dictionary that are output
+
         """
+
         voltage_rise_df_dict = {}
         power_df_dict = {}
         show_exeption_message=True 
@@ -1069,22 +1085,23 @@ class SensAnlysisResults(SensAnlysisResult):#This class inherits super propertie
                                  voltageRise_df_dict,
                                  power_df_dict,
                                  v_rise_thresh):
-        """ Transform the voltageRise_df_dict (dictionary of dataframe, each key being the result of 
-        a simulation) in a dataframe that will be used for plotting,  create var vrise_count_dict 
-        ( a dictionnary of the total number of voltage rise above the threshold for each keys in
-        voltageRise_df_dict) and var caping_count_dict  ( a dictionnary of the total number of capping
+        """ Transform the voltageRise_df_dict (dictionary of dataframe, each key
+        being the result of a simulation) in a dataframe that will be used for
+        plotting,  create var vrise_count_dict ( a dictionnary of the total number of
+        voltage rise above the threshold for each keys in voltageRise_df_dict) and
+        var caping_count_dict  ( a dictionnary of the total number of capping
         for each keys in voltageRise_df_dict)
-            
+
         Parameters
         ----------
         voltageRise_df_dict: dict of dataframe
-            Each key has the following format: '{model_name} BT+={bt} P0100={ht}' 
-            where {model_name} is self._models_name 
+            Each key has the following format: '{model_name} BT+={bt} P0100={ht}'
+            where {model_name} is self._models_name
                   {bt}         is bt argument in vRise_boxplot(**)
                   {ht}         is ht argument in vRise_boxplot(**)
         v_rise_thresh: optional, float
             Voltage rise threshold
-        
+
         Returns
         -------
         df2use : dataframe
@@ -1167,23 +1184,26 @@ class SensAnlysisResults(SensAnlysisResult):#This class inherits super propertie
                       v_rise_thresh=1.025,
                      fig_params=None
                      ):
-        """ Create a box plot of voltage rise above the defined threshold for simulations where the controlled
-        HT producer maximum power is arg(ht) and the added maximum bt power is arg(bt)
-        
+        """ Create a box plot of voltage rise above the defined threshold.
+
+        This for simulations where the controlled HT producer maximum power is ``ht``
+        and the added maximum bt power is arg(bt)
+
         Parameters
         ----------
         ht : (float, default = 0)
             Maximum Power of the controlled HT producer
         ht : (str,  'All')
            Range of all variation of the Maximum Power of the controlled HT producer
-        bt : (float, default = 0) 
+        bt : (float, default = 0)
             Added Power to the BT producers in the network
         v_rise_thresh : (float, default = 1.025)
             Maximum authorised threshold
         fig_params : (Figure axis, optionnal)
             Figure axis where to plot the current box plots
-            
+
         """
+
         self._bt = bt
         self._ht = ht
         checker._check_boxplot_inputs(self, ht, bt) # Check if boxplot inputs are authorised
@@ -1290,16 +1310,18 @@ class SensAnlysisResults(SensAnlysisResult):#This class inherits super propertie
         """ Plot the total number of :
             voltage rise above the defined threshold 
             or the total number of capping commands 
-        for the simulation defined by the parameters of the last call of *.vRise_boxplot(*args) 
-            
+        for the simulation defined by the parameters of the last call of
+        *.vRise_boxplot(*args)
+
         Parameters
         ----------
-        count_dict_name : str 
-            'v_rise' : Plot of the total number of voltage rise above the defined threshold,
-            'capping': Plot the total number of capping command sent to the energy producer
+        count_dict_name : str
+            'v_rise' : Plot of the total number of voltage rise above the defined
+            threshold, 'capping': Plot the total number of capping command sent to
+            the energy producer
         fig_params : (Figure axis, optionnal)
             Figure axis where to plot the current box plots
-             
+
         """
 
         # _vrise_count_dict and _capping_count_dict are 2 dict created in 
