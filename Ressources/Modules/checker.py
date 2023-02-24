@@ -47,7 +47,7 @@ def _check_network_order(self):
 
 def _check_boxplot_inputs(self, ht_in, bt_in):
     """ Check if the inputs ht_in and bt_in are in the list of authorised value and
-        raise and exeption otherwise  """
+        raise and exception otherwise  """
     ht_authorised_values = list(self._P0100_max_range) + ['All']
     if ht_in not in ht_authorised_values:
         raise Exception(""" The ht argument input is not authorised. Make sure the argument is 
@@ -116,7 +116,7 @@ def check_var_concordance(opf_status=False, pred_model=None):
     Parameters
     ----------
     ofp_status: bool, optional, default = False
-        Wether the maximum voltage is computed after a normal or optimal power flow or both
+        Whether the maximum voltage is computed after a normal or optimal power flow or both
         + Normal  =>  **pandapower.runpp(net)**,  ofp_status = False
         + Optimal =>  **pandapower.runopp(net)**, ofp_status = True
         + Both    =>  A normal power flow is run. Only when the result i.e. max_vm_pu > threshold,
@@ -205,7 +205,7 @@ def check_robustnessParams(df_out_block_pfOpf, combRnn_param):
             and (combRnn_param[0] is None
                  or combRnn_param[1] is None
             )):
-        raise Exception(f'Since the input ``df_out_block_pfOpf`` has only one collumn, i.e. is'
+        raise Exception(f'Since the input ``df_out_block_pfOpf`` has only one column, i.e. is'
                         f' the first output of :py:func:`oriFunctions.combineRnnPred`, the input'
                         f' ``combRnn_param``  **MUST** also be included.')
 

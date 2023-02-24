@@ -4,13 +4,21 @@
 # All rights reserved.
 
 """
-OriClass - Python library with List of all classes used in the `tutorials <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`_
+OriClass - Python library with List of all classes used in the
+`tutorials <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`_
 
 
 
 """
-import pandapower, pandas, numpy, ipyparallel, os, joblib, seaborn, importlib
+import ipyparallel
+import joblib
 import matplotlib.pyplot as plt
+import numpy
+import os
+import pandapower
+import pandas
+import seaborn
+
 import checker
 
 pd = pandas
@@ -44,7 +52,7 @@ class CreateParEngines:
     """
 
     def __init__(self, n_e=2):
-        """ Create an istance of parallel engines.
+        """ Create an instance of parallel engines.
 
         Parameters
         ----------
@@ -73,7 +81,7 @@ class CreateParEngines:
         ----------
         run_periodIndex : pandas.PeriodIndex
             Total number of periods to run simulation for. The number of period each
-            engine will work on is therfore given by ``len(run_periodIndex)/n_e``
+            engine will work on is therefore given by ``len(run_periodIndex)/n_e``
             where ``n_e`` is the number of engines.
         opf_status : bool or str
             Optimal power flow status. Whether the maximum voltage rise on the
@@ -93,10 +101,10 @@ class CreateParEngines:
         clean : bool, Optional
             Whether the local space of the parallel engines should be clean or not.
                 True :
-                    Clear all the variables in the localspace of each engine and
-                    reload all needed pachages.
+                    Clear all the variables in the local space of each engine and
+                    reload all needed packages.
                 False :
-                    Keep all the variable and packages in the localspace of each
+                    Keep all the variable and packages in the local space of each
                     engine.
 
         Raises
@@ -222,7 +230,7 @@ class CreateParEngines:
             # elm[1][0][n]: Power injected into the network by the last HV producer i.e. P0100
             # elm[1][1][0]: Power injected into the network by the first LV producer
             # ...
-            # elm[1][1][n]: Power injected into the network by the Lasr LV producer
+            # elm[1][1][n]: Power injected into the network by the Last LV producer
             # elm[2]      : Period index associated to all the previous output variable
 
             # elm[0] can either be a list of [max_vm_pu_pf : max voltage  before opf
@@ -365,7 +373,7 @@ class InitNetworks:
                 "lowNet_rand"
                     ``coef_add_bt`` is shared proportionally among a randomly
                     selected set of the LV  producers on the ``lowerNet``. The
-                    randomly selected set consists of half of all LV producers on the
+                    randomly selected set consists of half of all LV producers
                     on the ``lowerNet``
 
          """
@@ -398,7 +406,8 @@ class InitNetworks:
         if self._coef_add_bt_dist == 'lowNet':  #
             updated_lowerNet_sum_max_lvProd = self._lowerNet_nonUpdated_sum_max_lvProd + self._coef_add_bt
             self._lowerNet.sgen.max_p_mw[self._lowerNet.sgen.name.isna()] = (updated_lowerNet_sum_max_lvProd
-                                                                             * self._lowerNet_sgenLvCopy.max_p_mw / self._lowerNet_nonUpdated_sum_max_lvProd)
+                                                                             * self._lowerNet_sgenLvCopy.max_p_mw
+                                                                             / self._lowerNet_nonUpdated_sum_max_lvProd)
         elif self._coef_add_bt_dist == 'lowNet_rand':
             # -----------------------              TODO: CODE                ------------------------------
             pass
@@ -742,7 +751,7 @@ class InitNetworks:
         return self._lowerNet_sgenDf_copy  # return the created copy
 
 
-class SensAnlysisResult:
+class SensAnalysisResult:
     """
     Initiate the Sensitivity analysis with the folder_location.
 
@@ -763,7 +772,7 @@ class SensAnlysisResult:
 
     def _check_fileName_Format(self,
                                plkFiles_in_folder_list):
-        # Check if the files name are in the expected format. The Expected format ougth to be
+        # Check if the files name are in the expected format. The Expected format ought to be
         # modelName_btRangeName_SimNumber.plk such that the split length ==3
         len_splited = len(plkFiles_in_folder_list[0].split('_'))
 
@@ -782,7 +791,7 @@ class SensAnlysisResult:
 
         first_plkFile_in_folder_name = plkFiles_in_folder_list[0]
 
-        # cur_file.split('_')[-1] is used to get the the last elm wich is somethink like 'n.plk'
+        # cur_file.split('_')[-1] is used to get the the last elm which is something like 'n.plk'
         #                                                                          where  n is an integer
         files_indexAndExtenxion_list = [cur_file.split('_')[-1] for cur_file in plkFiles_in_folder_list]
 
@@ -838,7 +847,7 @@ class SensAnlysisResult:
                 data_df = cur_file_data[cur_key]['Power Sgen']
 
                 # data_df.iloc[:,0] => Power injected when there is  no control
-                # data_df.iloc[:,1] => Power injected using current controler
+                # data_df.iloc[:,1] => Power injected using current controller
                 if end_date is None:
                     power_curt = (data_df.iloc[:, 0] - data_df.iloc[:, 1]).sum()
                 else:
@@ -931,7 +940,7 @@ class SensAnlysisResult:
             axx.set(ylabel='P0100 Maximum Prod (MWh)', );
 
 
-class SensAnlysisResults(SensAnlysisResult):  # This class inherits super properties from the  SensAnlysisResult
+class SensAnalysisResults(SensAnalysisResult):  # This class inherits super properties from the  SensAnalysisResult
     """
     Initiate the Sensitivity analysis with the folder's (location) associated
     with  each model to consider.
@@ -952,7 +961,7 @@ class SensAnlysisResults(SensAnlysisResult):  # This class inherits super proper
             The name of each model to consider
         testSet_date : (tuple of str)
             (0) test_set_starting date included
-            (1) test set stopind date not includes
+            (1) test set stopping date not includes
         p_Hv_Lv_range : (tuple of array)
             IMPORTANT : Make sure that these parameters are the same that are used in
             the  notebook Sensitivity analysis simulation
@@ -1005,7 +1014,7 @@ class SensAnlysisResults(SensAnlysisResult):  # This class inherits super proper
 
         voltage_rise_df_dict = {}
         power_df_dict = {}
-        show_exeption_message = True
+        show_exception_message = True
 
         for cur_ht_file_index in ht_file_index_list:
             for cur_model_name, cur_model_folder in zip(self._models_name, self._models_folder_location):
@@ -1018,13 +1027,13 @@ class SensAnlysisResults(SensAnlysisResult):  # This class inherits super proper
                 name2use = cur_model_name + ' ' + key2use
                 voltage_rise_df_dict.update({name2use: bt_file_dict.get(key2use)['maxV_rise_df']})
 
-                try:  # catch exception If the collumn 'Power Sgen' is not present in the read dataFrame
+                try:  # catch exception If the column 'Power Sgen' is not present in the read dataFrame
                     power_df_dict.update({name2use: bt_file_dict.get(key2use)['Power Sgen']})
                 except KeyError:
-                    if show_exeption_message:  # show exeption message only once
-                        print(f'The collumn [\'Power Sgen\'] is not present in',
+                    if show_exception_message:  # show exception message only once
+                        print(f'The column [\'Power Sgen\'] is not present in',
                               f'files located in {cur_model_folder}')
-                        show_exeption_message = False
+                        show_exception_message = False
 
         return voltage_rise_df_dict, power_df_dict
 
@@ -1034,9 +1043,9 @@ class SensAnlysisResults(SensAnlysisResult):  # This class inherits super proper
                                  v_rise_thresh):
         """ Transform the voltageRise_df_dict (dictionary of dataframe, each key
         being the result of a simulation) in a dataframe that will be used for
-        plotting,  create var vrise_count_dict ( a dictionnary of the total number of
+        plotting,  create var vrise_count_dict ( a dictionary of the total number of
         voltage rise above the threshold for each keys in voltageRise_df_dict) and
-        var caping_count_dict  ( a dictionnary of the total number of capping
+        var caping_count_dict  ( a dictionary of the total number of capping
         for each keys in voltageRise_df_dict)
 
         Parameters
@@ -1057,8 +1066,8 @@ class SensAnlysisResults(SensAnlysisResult):  # This class inherits super proper
 
         df2use = pd.DataFrame(columns=['V_rise', 'Model', 'Power'])  # Create an empty dataframe with following column
 
-        self._vrise_count_dict = {}  # Create empty dictionnary
-        self._capping_count_dict = {}  # Create empty dictionnary
+        self._vrise_count_dict = {}  # Create empty dictionary
+        self._capping_count_dict = {}  # Create empty dictionary
 
         for cur_key in voltageRise_df_dict.keys():  # For each key in voltageRise_df_dict
             # the same keys are in power_df_dict
@@ -1095,21 +1104,21 @@ class SensAnlysisResults(SensAnlysisResult):  # This class inherits super proper
             # Create an intermediate dataframe
             df = pd.DataFrame(cur_vRise_df_filtered.dropna().values, columns=['V_rise'])
             df[['Model', 'Power']] = cur_key.split()[0], cur_key.split()[1] + ' ' + cur_key.split()[2]
-            df2use = pd.concat([df2use, df])  # Concatanate created dataframe with the exsisting dataframe
+            df2use = pd.concat([df2use, df])  # Concatenate created dataframe with the existing dataframe
 
         return df2use
 
     def _compute_capping_count(self,
                                injected_power_df):
-        """ Compute and return the number of capping that occured given
+        """ Compute and return the number of capping that occurred given
         the input power dataframe """
 
         # injected_power_df.iloc[:,0] => Power injected when there is  no control
-        # injected_power_df.iloc[:,1] => Power injected using controler
+        # injected_power_df.iloc[:,1] => Power injected using controller
 
-        # Create a lambda function named equality_check that will verifiy if for the current row,
+        # Create a lambda function named equality_check that will verify if for the current row,
         # the power injected with controlled On is the same as when no control is applied.
-        # When both values are not equal (output True i.e. a capping or curtailement is occuring)
+        # When both values are not equal (output True i.e. a capping or curtailment is occurring)
         #                          equal (output False i.e. a no capping)
         # equality_check = lambda cur_row: True if cur_row[1]!=cur_row[0] else False
         equality_check = lambda cur_row: cur_row[1] != cur_row[0]
@@ -1140,7 +1149,7 @@ class SensAnlysisResults(SensAnlysisResult):  # This class inherits super proper
             Added Power to the BT producers in the network
         v_rise_thresh : (float, default = 1.025)
             Maximum authorised threshold
-        fig_params : (Figure axis, optionnal)
+        fig_params : (Figure axis, optional)
             Figure axis where to plot the current box plots
 
         """
@@ -1256,7 +1265,7 @@ class SensAnlysisResults(SensAnlysisResult):  # This class inherits super proper
             'v_rise' : Plot of the total number of voltage rise above the defined
             threshold, 'capping': Plot the total number of capping command sent to
             the energy producer
-        fig_params : (Figure axis, optionnal)
+        fig_params : (Figure axis, optional)
             Figure axis where to plot the current box plots
 
         """
