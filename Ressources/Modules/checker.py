@@ -199,9 +199,9 @@ def check_robustnessParams(df_out_block_pfOpf, combRnn_param):
 
     # When ``df_out_block_pf_opf`` has only one column, it implies that it is the first
     # output of :py:func:`oriFunctions.combineRnnPred`. In this case the last input of
-    # :py:func:oriFunctions.robustControl must be included.
+    # :py:func:oriFunctions.robustness must be included.
 
-    if (df_out_block_pf_opf.shape[1] == 1
+    if (df_out_block_pfOpf.shape[1] == 1
             and (combRnn_param[0] is None
                  or combRnn_param[1] is None
             )):

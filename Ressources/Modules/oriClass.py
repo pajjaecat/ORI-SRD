@@ -101,7 +101,7 @@ class CreateParEngines:
 
         Raises
         ------
-        ValueErrorExeption :
+        ValueErrorException :
             If ``opf_status`` or ``clean`` are the wrong type or have wrong value.
 
 
@@ -147,7 +147,7 @@ class CreateParEngines:
 
         Raises
         ------
-        ValueErrorExeption
+        ValueErrorException
             If ``par_result_name`` is not a `str`.
 
         See Also
@@ -211,7 +211,7 @@ class CreateParEngines:
 
         if self._opf_status:  # If the opf is True or "Both" ----------------------------------------------
 
-            # Get df_prodHT colums name [] from one of the engines
+            # Get df_prodHT columns name [] from one of the engines
             df_prodHT_colName = self.dview['dict_df_sgenLoad'][-1]['df_prodHT'].columns
 
             # Get all the elements from the parallel result in a list
@@ -235,12 +235,12 @@ class CreateParEngines:
             if type(parallel_result[0][0]) is list:
                 sep_list = [(*elm[0], *elm[1][0], np.array(elm[1][1]).sum(), elm[2])
                             for elm in parallel_result]
-                # Create a colums using 'vm_pu_max' and add the HT producers name
+                # Create a columns using 'vm_pu_max' and add the HT producers name
                 colName = ['max_vm_pu_pf', 'max_vm_pu'] + df_prodHT_colName.to_list() + SumLv_colName
             else:
                 sep_list = [(elm[0], *elm[1][0], np.array(elm[1][1]).sum(), elm[2])
                             for elm in parallel_result]
-                # Create a colums using 'vm_pu_max' and add the HT producers name
+                # Create a columns using 'vm_pu_max' and add the HT producers name
                 colName = ['max_vm_pu'] + df_prodHT_colName.to_list() + SumLv_colName
 
             # Create a data based on all the cols of sep_list except the last one that is the index
@@ -312,10 +312,10 @@ class InitNetworks:
                 "lowNet"
                     ``coef_add_bt`` is added to the Sum of maximum output of all LV
                     producers (MW) in the ``lowerNet``. In consequence, coef_add_bt
-                    is shared proportionnaly among all the LV producers on the
+                    is shared proportionally among all the LV producers on the
                     ``lowerNet``.
                 "lowNet_rand"
-                    ``coef_add_bt`` is shared proportionnaly among a randomly
+                    ``coef_add_bt`` is shared proportionally among a randomly
                     selected et of the LV  producers on the ``lowerNet``. The
                     randomly selected set consist  of half of all LV producers on the
                     on the ``lowerNet``
@@ -360,10 +360,10 @@ class InitNetworks:
                 "lowNet"
                     ``coef_add_bt`` is added to the Sum of maximum output of all LV
                     producers (MW) in the ``lowerNet``. In consequence, coef_add_bt
-                    is shared proportionnaly among all the LV producers on the
+                    is shared proportionally among all the LV producers on the
                     ``lowerNet``.
                 "lowNet_rand"
-                    ``coef_add_bt`` is shared proportionnaly among a randomly
+                    ``coef_add_bt`` is shared proportionally among a randomly
                     selected set of the LV  producers on the ``lowerNet``. The
                     randomly selected set consists of half of all LV producers on the
                     on the ``lowerNet``
