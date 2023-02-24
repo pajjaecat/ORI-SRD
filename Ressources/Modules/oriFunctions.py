@@ -5,12 +5,19 @@
 
 
 """
-OriFunctions - Python library with List of all functions used in the `tutorials <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`_
+OriFunctions - Python library with List of all functions used in the
+`tutorials <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`_
 
 """
 
-import pandapower, pandas, numpy, ipyparallel, oriClass
+import ipyparallel
+import numpy
+import oriClass
+import pandapower
+import pandas
 from tqdm import tqdm  # Profiling
+
+import checker
 
 # Import all variables from module oriVariables
 from oriVariables import (network_folder,
@@ -24,7 +31,6 @@ from oriVariables import (network_folder,
                           default_hv_voltage,
                           default_lv_voltage
                           )
-import checker
 
 pd = pandas
 np = numpy
@@ -183,7 +189,7 @@ def run_powerflow(network,
 
     # Creating empty list
     list_max_vm_pu = []  # Maximum vm_pu at each period considered
-    list_sgen_HT = []  # Actual HT generators power after optimal flow
+    list_sgen_HT = []    # Actual HT generators power after optimal flow
 
     # Initiate parameters from inputs
     df_prodHT = dict_df_sgenLoad['df_prodHT']
@@ -200,10 +206,12 @@ def run_powerflow(network,
             list_sgen_HT.append(hvProd_afterOPF)
 
         else:  # Run simple power flow
-            hvProd_pf, lvProd_pf = run_powerflow_at(network, cur_period,
+            hvProd_pf, lvProd_pf = run_powerflow_at(network,
+                                                    cur_period,
                                                     lowNet_hv_activBus,
                                                     sum_max_p_mw_upperNet,
-                                                    dict_df_sgenLoad, opf_status)
+                                                    dict_df_sgenLoad,
+                                                    opf_status)
 
             list_max_vm_pu.append(hvProd_pf)
 
@@ -446,7 +454,7 @@ def initLowerNet_at(network,
     df_cons_total = dict_df_sgenLoad['df_cons_total']
     df_lowNetSgen_cp = dict_df_sgenLoad['lowerNet_sgenDf_copy']
 
-    # Initalise HT producers
+    # Initialise HT producers
     network.sgen.p_mw[network.sgen.name.notna()] = df_prodHT.loc[cur_period].values
 
     # Mask Lower voltage producers
@@ -552,10 +560,10 @@ def max_vm_pu_at(network,
         ctrld_hvProd_ind = list(hvSgen_df[hvSgen_df.controllable].index)[0]
 
         # update
-        # For optimal flow, given that the sgen P0100 is contollable the optimization
+        # For optimal flow, given that the sgen P0100 is controllable the optimization
         # result is to draw the maximum power  with no regard to the actual power provided
-        # at each instant. To eliavate this problem we would rather initialize the maximum
-        # power of the said  producer with the actual prooduction.
+        # at each instant. To alleviate this problem we would rather initialize the maximum
+        # power of the said  producer with the actual production.
         network.sgen.at[ctrld_hvProd_ind, 'max_p_mw'] = df_prodHT[ctrld_hvProd_name][cur_period]
 
         # Same process for the controlled LV producers as for the controlled HV Sgen
@@ -620,7 +628,7 @@ def improve_persinstence(per_extracted_res_df,
     Returns
     -------
     per_improved_res :  pandas.DataFrame
-        Output the improve persistence model improve by the previoulsy described
+        Output the improve persistence model improve by the previously described
         strategy.
 
     """
@@ -639,10 +647,10 @@ def improve_persinstence(per_extracted_res_df,
     working_df = per_improved_res.between_time(h_start_end[1], h_start_end[0])
 
     # Extract index of instances where no voltage rise is detected ignoring the last one
-    # because not present in the inital df df_prodHT
+    # because not present in the initial df df_prodHT
     var_index = working_df[working_df.max_vm_pu_pf <= auth_max_VriseHvBus].index.to_period('10T')[:-1]
 
-    # remplace the prediction from the persistence model with the actual production since
+    # Replace the prediction from the persistence model with the actual production since
     # no voltage rise is detected at these periods
     per_improved_res_out.P0100[var_index] = df_prodHT.P0100[var_index]
 
@@ -663,7 +671,7 @@ def prediction_bloc(rnn_model,
 
     Parameters
     ----------
-    rnn_model : Recurent neural network
+    rnn_model : Recurrent neural network
         The model that will be used to predict the value at the next period.
     fitting_scaler : Scaler
         Scaler parameters that are used to transform the training data set
@@ -713,12 +721,12 @@ def predictionBin_bloc(rnn_model,
     """ Binary prediction
 
     Binary prediction bloc Using a RNN (LSTM). Predict whether a voltage above the
-    defined threshold will occurs at the next period.
+    defined threshold will occur at the next period.
 
     Parameters
     ----------
-    rnn_model : Recurent neural network;
-        The binary trained Recurent Neural network
+    rnn_model : Recurrent neural network;
+        The binary trained Recurrent Neural network
     fitting_scaler : Scaler
         Scaler parameters that are used to transform the training data set
         fed to the `rnn_model`
@@ -732,7 +740,7 @@ def predictionBin_bloc(rnn_model,
     -------
     tuple of list
         var_predicted : {0, 1}
-            Prediction of voltage rise above the defined threshols. ``1`` and ``0``
+            Prediction of voltage rise above the defined thresholds. ``1`` and ``0``
             predicted implies respectively that the defined threshold is and is not
             respected.
         pred_periods :  pandas.Period or str
@@ -766,7 +774,7 @@ def combineRnnPred(model_Vrise_dict,
 
 
     .. deprecated:: 1.0.1
-        Will be removed in the next version. Develloping a more robust
+        Will be removed in the next version. Developing a more robust
         approach using an RNN that combines directly all the three models during
         training.
 
@@ -782,7 +790,7 @@ def combineRnnPred(model_Vrise_dict,
         Partial output of :py:class:`oriClass.CreateParEngines.get_results_asDf`
         that is :math:`\\tilde{Y}(k)` the predicted value by model1 of the
         ctrlHvProd. This is the command value to send to the said Hv Prod when
-        the function predicts an exceeding of the  the defined threshold
+        the function predicts an exceeding of   the defined threshold
         ``auth_max_VriseHvBus``.
     auth_max_VriseHvBus : float, optional default = :py:data:`oriVariables.defAuth_hvBus_vRiseMax`
         Threshold of maximum voltage allowed on the HV buses of `network`.
@@ -797,7 +805,7 @@ def combineRnnPred(model_Vrise_dict,
               All three models
             "Modelx" :
                 Name of the Model which voltage rise above threshold prediction is
-                considered whith x in {1,2,3}
+                considered with x in {1,2,3}
 
     Returns
     -------
@@ -813,7 +821,8 @@ def combineRnnPred(model_Vrise_dict,
     Notes
     ------
     In the future versions, the function **MUST** be recoded such that it follows
-    exactly the block scheme  described is section 2.1 of `VRiseControlBlockScheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_.
+    exactly the block scheme  described is section 2.1 of
+    `VRiseControlBlockScheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_.
     For the moment it has been implemented differently i.e. the block PF in Model 1
     computes both PF and OPF.
     To change it, compute solely PF in model 1 and based on the combination of the
@@ -831,7 +840,7 @@ def combineRnnPred(model_Vrise_dict,
     mask_per2work = model1_Vrise.index  # Get index of the considered period
     vect_int = np.vectorize(int)  # vectorized version of int
 
-    # Get controled HV prod Name
+    # Get controlled HV prod Name
     ctrld_hvProdName = ctrlHvProd_model1_out.columns[0]
 
     # Create an empty dataframe i.e. binary threshold
@@ -958,7 +967,7 @@ def _upscale_HvLv_prod(prod_hv2upscale_df,
                        ):
     """
 
-    Upscale  both the controled Higher voltage(HV) producer (P0100) in the lower
+    Upscale  both the controlled Higher voltage(HV) producer (P0100) in the lower
     network (civeaux) and the total Lower voltage (LV) production. `coef_add_bt_dist`
     allow to choose how the upscaling is done on the LV production. This mean the BT
     producer on the lower network receives only a fraction of the added BT production.
@@ -1029,13 +1038,13 @@ def createDict_prodHtBt_Load(df_pred_in,
     """ Create a Dict of variables that will be send to the parallel engines.
 
     Create a specific dictionary containing variable that will be send to the local
-    space of the parallele engines.
+    space of the parallel engines.
 
     Parameters
     ----------
     df_pred_in : pandas.DataFrame
         Dataframe (Predicted values) of Total lower voltage producer, load demand and
-        all the Hihger voltage producer in lower level network.
+        all the Higher voltage producer in lower level network.
     networks_in : oriClass.InitNetworks
         Networks initialized. An instance of :func:`oriClass.InitNetworks`, especially
         the output of the function :py:func:`oriFunctions.setNetwork_params`
@@ -1061,7 +1070,7 @@ def createDict_prodHtBt_Load(df_pred_in,
               Dataframe of all the static generator in the lower network.
 
     """
-    # Instancuate parameters
+    # Instantiate parameters
     upNet_sum_max_lvProd = networks_in.get_upperNet_sum_max_lvProdLoad()[0]
     params_coef_add_bt = networks_in.get_params_coef_add_bt()
     ctrld_hvProd_name = networks_in.get_ctrld_hvProdName()
@@ -1069,7 +1078,7 @@ def createDict_prodHtBt_Load(df_pred_in,
     # Check if coef_add_bt_dist is authorized
     checker.check_coef_add_bt_dist(params_coef_add_bt[1])
 
-    # Check wether the input dataframe columns are in the expected order
+    # Check whether the input dataframe columns are in the expected order
     checker.check_networkDataDf_columnsOrder(df_pred_in)
 
     df_pred = df_pred_in.copy(deep=True)  # Create a copy of the input dataframe
@@ -1086,7 +1095,7 @@ def createDict_prodHtBt_Load(df_pred_in,
                                                                           cur_hvProd_max, params_coef_add_bt)
 
     # Define consumption df
-    # TODO : Code a function to check the oreder of the input dataframe
+    # TODO : Code a function to check the order of the input dataframe
     df_cons_total = df_pred.iloc[:, [0]]
 
     # Define a dict
@@ -1148,20 +1157,20 @@ def robustness(df_out_block_pfOpf,
 
     """
 
-    # Basically, we replace the value of the controled HvProd by its own
+    # Basically, we replace the value of the controlled HvProd by its own
     # value with No control when no voltage rise above the defined threshold is detected.
 
     # Check input concordance
     checker.check_robustnessParams(df_out_block_pfOpf, combRnn_param)
 
-    # create new period index mask spaning from 07Am to 6PM
+    # create new period index mask spanning from 07Am to 6PM
     per_index2 = (df_out_block_pfOpf.index
                   .to_timestamp()
                   .to_series()
                   .between_time('07:10', '18:50')
                   .index.to_period('10T'))
 
-    # Get controled HV prod Name
+    # Get controlled HV prod Name
     ctrld_hvProdName = df_hvProd_noControl.columns[0]
 
     # Create a new df for hvProd
@@ -1175,7 +1184,7 @@ def robustness(df_out_block_pfOpf,
         # Get a mask for the periods where a voltage rise above the threshold is predicted
         mask_vrise_per = df_out_block_pfOpf.loc[per_index2, 'max_vm_pu_pf'] > auth_max_VriseHvBus
 
-    else:  # If combRnn_param is defined the robustness is beeing applied to a combination of RNN
+    else:  # If combRnn_param is defined the robustness is being applied to a combination of RNN
 
         # Define variables' name as in :py:func:`combineRnnPred`.See the said function for more about
         # the parameters
@@ -1193,7 +1202,7 @@ def robustness(df_out_block_pfOpf,
     # Replace the values of periods given by the mask by the value of hvProd with No control
     hvProd_robust_df[mask_vrise_per] = df_out_block_pfOpf.loc[per_index2[mask_vrise_per], [ctrld_hvProdName]]
 
-    # Replace the values of hvProd_robust_df in the inpu df_out_block_pfOpf
+    # Replace the values of hvProd_robust_df in the input df_out_block_pfOpf
     df_out_block_pfOpf.loc[per_index2, [ctrld_hvProdName]] = hvProd_robust_df.loc[per_index2, 'hvProd_robust']
 
 
@@ -1227,7 +1236,7 @@ def block_prod(df_yTilde_opt,
         Starting index. Important to use this starting index and set it to the
         length of a day in the case of the RNN. This is due to the fact that
         the prediction needs a whole day of data to be produced. Especially the
-        first prediction must be that of the the first index of the second day
+        first prediction must be that of the first index of the second day
         of the testing set since the whole first day (of the testing set) data
         is used.
 
@@ -1247,13 +1256,13 @@ def block_prod(df_yTilde_opt,
                                     * cur_hvProd_max / ctrld_hvProd_max)
 
     # Extract the part of the
-    df_hvProd_controled = df_yTilde_opt.loc[per_index2[starting_index:],
+    df_hvProd_controlled = df_yTilde_opt.loc[per_index2[starting_index:],
                                             ctrld_hvProdName]
 
     # Implement the actual prod
     df_yTilde_opt.loc[per_index2[starting_index:],
                       [ctrld_hvProdName]] = (np.minimum(df_hvProd_noControl_upscaled,
-                                                        df_hvProd_controled)
+                                                        df_hvProd_controlled)
                                              )
 
 
