@@ -213,7 +213,7 @@ def check_parResultsNames(par_result_name: str):
         raise TypeError(' ``gather_results()`` can only handle string as argument')
 
 
-def check_robustControlParams(df_out_block_pf_opf, combRnn_param):
+def check_robustnessParams(df_out_block_pf_opf, combRnn_param):
     """Check the concordance between ``df_out_block_pf_opf`` and ``combRnn_param`` """
 
     # When ``df_out_block_pf_opf`` has only one column, it implies that it is the first
