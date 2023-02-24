@@ -32,6 +32,8 @@ pp = pandapower
 ipp = ipyparallel
 
 
+# ------------------------------------------------------------------------------------
+
 ##############################         FUNCTIONS          #########################################
 
 def readAndReshape_excelFile(file_name: str,
@@ -151,11 +153,11 @@ def run_powerflow(network,
         network
         HV buses is extracted after a power flow, an optimal power flow  or both.
         Three values are possible:
-            ``ofp_status`` = False :
+            ``opf_status`` = False :
                 Run a simple power flow i.e., `pandapower.runpp(network)`
-            ``ofp_status`` = True :
+            ``opf_status`` = True :
                 Run an optimal power flow i.e., `pandapower.runopp(network)`
-            ``ofp_status`` = "Both" :
+            ``opf_status`` = "Both" :
                 A power flow is run. Only when the result i.e. the voltage rise
                 detected on hv Prod Buses ``max_vm_pu`` >
                 :py:data:`oriVariables.defAuth_hvBus_vRiseMax`, is the  optimal
@@ -164,7 +166,7 @@ def run_powerflow(network,
     Returns
     -------
     tuple or list
-        The return value depends on ``ofp_status``
+        The return value depends on ``opf_status``
 
     See Also
     --------
@@ -205,7 +207,7 @@ def run_powerflow(network,
 
             list_max_vm_pu.append(hvProd_pf)
 
-    # Return depends on ofp_status
+    # Return depends on opf_status
     if opf_status:
         return list_max_vm_pu, list_sgen_HT
     else:
@@ -224,7 +226,7 @@ def run_powerflow_at(network,
                      opf_status: (bool or str) = False,
                      pred_model: str = None
                      ):
-    """ Run PF or OPF at ``cur_period`` depending on ``opf_status``.
+    """Run PF or OPF at ``cur_period`` depending on ``opf_status``.
 
     Parameters
     ----------
@@ -257,16 +259,16 @@ def run_powerflow_at(network,
                 Copy of all the static generator (hv & lV) in the lower network.
     auth_max_VriseHvBus: float, optional default = :py:data: `oriVariables.defAuth_hvBus_vRiseMax`
         Threshold of maximum voltage allowed on the HV buses of `network`. This
-        parameter is used only when ``ofp_status`` = `"Both"`
+        parameter is used only when ``opf_status`` = `"Both"`
     opf_status: bool or str, optional, default=False
         Optimal power flow status. Whether the maximum voltage rise on the lower
         network HV buses is extracted after a power flow, an optimal power flow
         or both.  Three values are possible:
-            ``ofp_status`` = False :
+            ``opf_status`` = False :
                 Run a simple power flow i.e., `pandapower.runpp(network)`
-            ``ofp_status`` = True :
+            ``opf_status`` = True :
                 Run an optimal power flow i.e., `pandapower.runopp(network)`
-            ``ofp_status`` = "Both" :
+            ``opf_status`` = "Both" :
                 A power flow is run. Only when the result i.e. the voltage rise
                 detected on hv Prod Buses ``max_vm_pu`` > :py:data:`oriVariables.defAuth_hvBus_vRiseMax`,
                 is the  optimal power flow run.
@@ -280,12 +282,12 @@ def run_powerflow_at(network,
 
     Returns
     -------
-    Depends on ``ofp_status``
-        ``ofp_status`` = False
+    Depends on ``opf_status``
+        ``opf_status`` = False
             max_vm_pu_pf
-        ``ofp_status`` = True
+        ``opf_status`` = True
             cur_max_VriseHvBus, (hvProd_afterOPF, lvProd_afterOPF), cur_period
-        ``ofp_status`` = "Both"
+        ``opf_status`` = "Both"
             [max_vm_pu_pf, cur_max_VriseHvBus],(hvProd_afterOPF, lvProd_afterOPF),
             cur_period \n
             where
@@ -310,7 +312,7 @@ def run_powerflow_at(network,
     Raises
     ------
     ValueErrorExeption
-        If ``ofp_status`` is not in [True, False, "Both"]
+        If ``opf_status`` is not in [True, False, "Both"]
 
     Notes
     -----
@@ -430,8 +432,8 @@ def initLowerNet_at(network,
     The following parameters are initialized
         #TODO ?? ADD the Initilized Parameters#
 
-    """
 
+    """
     ##  TODO : Give only the data of the current period to
     ##  the function instead of that of the whole year
 
@@ -508,11 +510,11 @@ def max_vm_pu_at(network,
         Optimal power flow status. Whether the maximum voltage rise on the lower
         network HV buses is extracted after a power flow, an optimal power flow  or
         both. Three values are possible:
-            ``ofp_status`` = False :
+            ``opf_status`` = False :
                 Run a simple power flow i.e., `pandapower.runpp(network)`
-            ``ofp_status`` = True :
+            ``opf_status`` = True :
                 Run an optimal power flow i.e., `pandapower.runopp(network)`
-            ``ofp_status`` = "Both" :
+            ``opf_status`` = "Both" :
                 A power flow is run. Only when the result i.e. the voltage rise
                 detected on hv Prod Buses ``max_vm_pu`` > ``auth_max_VriseHvBus``,
                 is the  optimal  power flow run.
@@ -586,7 +588,7 @@ def max_vm_pu_at(network,
 # ____________________________________________________________________________________________________________
 
 def improve_persinstence(per_extracted_res_df,
-                         prodHT_df,
+                         df_prodHT,
                          auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
                          h_start_end: list = ['11:00', '14:00']):
     # Implement : * Inject all the production as long as max_vm_pu_pf < vm_mu_max, i.e.
@@ -607,7 +609,7 @@ def improve_persinstence(per_extracted_res_df,
     ----------
     per_extracted_res_df :  pandas.DataFrame
         Result given by the persistence model. Output of :py:func:`oriFunctions.extract_par_results`.
-    prodHT_df :  pandas.DataFrame
+    df_prodHT :  pandas.DataFrame
         Dataframe containing data of all the HT producers in the network.
     auth_max_VriseHvBus : float, Optional, Default = :py:data:`oriVariables.defAuth_hvBus_vRiseMax`
         Threshold of maximum voltage allowed on the HV buses.
@@ -829,6 +831,9 @@ def combineRnnPred(model_Vrise_dict,
     mask_per2work = model1_Vrise.index  # Get index of the considered period
     vect_int = np.vectorize(int)  # vectorized version of int
 
+    # Get controled HV prod Name
+    ctrld_hvProdName = ctrlHvProd_model1_out.columns[0]
+
     # Create an empty dataframe i.e. binary threshold
     bin_thresh_df = pd.DataFrame(index=mask_per2work)
 
@@ -841,7 +846,7 @@ def combineRnnPred(model_Vrise_dict,
     bin_thresh_df[['Model_All']] = np.array(bin_thresh_df.sum(axis=1)).reshape((-1, 1))
 
     # Create a new dataframe for the controlled SGEN based on its real values
-    new_p0100_df = ctrlHvProd_model1_out.loc[mask_per2work, ['P0100']]
+    df_ctrlHvProd_toReturn = ctrlHvProd_model1_out.loc[mask_per2work, [ctrld_hvProdName]]
 
     if type(n_models) is str:  # If n_model is a string
         if n_models in model_Vrise_dict.keys():  # Check if the sting input is in the model Dict
@@ -862,9 +867,11 @@ def combineRnnPred(model_Vrise_dict,
         raise ValueError('<n_models> is the wrong type. Must either be an int or a string')
 
     # Use vrise_true_mask to insert predicted values given by model1 at the concerned instants
-    new_p0100_df[vrise_true_mask] = ctrlHvProd_model1_out.loc[mask_per2work].loc[vrise_true_mask, ['P0100']]
+    df_ctrlHvProd_toReturn[vrise_true_mask] = ctrlHvProd_model1_out.loc[mask_per2work[vrise_true_mask],
+                                                                        [ctrld_hvProdName] ]
 
-    return new_p0100_df, bin_thresh_df
+    return df_ctrlHvProd_toReturn, bin_thresh_df
+
 
 # ____________________________________________________________________________________________________________
 # ____________________________________________________________________________________________________________
@@ -911,7 +918,7 @@ def extractParRes_asDf(parallel_result,
     # elm[0] can either be a list of [max_vm_pu_pf : max voltage  before opf
     #                                 max_vm_pu : maximum voltage after opf]
     # or a single float which is  max_vm_pu : maximum voltage after opf.
-    # See the function run_powerflow_at (*args, ofp_status='both', pred_model= 'Pers')
+    # See the function run_powerflow_at (*args, opf_status='both', pred_model= 'Pers')
 
     SumLv_colName = ['SumLv']  # sum of the injected power of all lower voltage producers
     # in the network
@@ -985,6 +992,7 @@ def _upscale_HvLv_prod(prod_hv2upscale_df,
         The upscaled version of the HV producer and LV
 
     """
+
     ###  ----------- Upscale P0100 the controlable HT producer  ---------------  ###
     prodHT_P0100_1mw_df = prod_hv2upscale_df / ctrld_hvProd_max  # Rescale the total HT production for 1mw
     upscaled_prodHT_P0100_df = cur_hvProd_max * prodHT_P0100_1mw_df  # Redefine the HT production based on the rescale
@@ -1052,8 +1060,7 @@ def createDict_prodHtBt_Load(df_pred_in,
               Dataframe of all the static generator in the lower network.
 
     """
-
-    # Instancuate parameters
+    # Instanciate parameters
     upNet_sum_max_lvProd = networks_in.get_upperNet_sum_max_lvProdLoad()[0]
     params_coef_add_bt = networks_in.get_params_coef_add_bt()
     ctrld_hvProd_name = networks_in.get_ctrld_hvProdName()
@@ -1124,13 +1131,13 @@ def robustness(df_out_block_pfOpf,
     combRnn_param: tuple, Optional, Default =(None, None)
         A tuple of parameter to use when applying the function to a combination of
         RNN.
-        ``combRnn_param[0]`` : pandas.Dataframe,
-            Dataframe of binary threshold i.e the second output of
-            :py:func:`combineRnnPred`.
-        ``combRnn_param[1]`` : int or str
-            Number of models which must agree on voltage rise above threshold before a
-            command is sent to the controlled HV producer. This is the fifth input of :
-            py:func:`combineRnnPred`.
+            ``combRnn_param[0]`` : pandas.Dataframe,
+                Dataframe of binary threshold i.e the second output of
+                :py:func:`combineRnnPred`.
+            ``combRnn_param[1]`` : int or str
+                Number of models which must agree on voltage rise above threshold
+                before a command is sent to the controlled HV producer. This is
+                the fourth input of :py:func:`combineRnnPred`.
 
     Raises
     ------
@@ -1349,7 +1356,7 @@ def setNetwork_params(upperNet_file: str,
     # respecting the constraints on the network
     # HV PROD
     ctrld_hvProd_index = networks.get_ctrld_hvProdName(return_index=True)[1]
-    cost_sgen_p0100 = pp.create_poly_cost(lowerNet, ctrld_hvProd_index, 'sgen', cp1_eur_per_mw=-1)
+    cost_sgen_ctrlHvProd = pp.create_poly_cost(lowerNet, ctrld_hvProd_index, 'sgen', cp1_eur_per_mw=-1)
     # LV PROD
     ctrld_lvProd_index = networks.get_ctrld_lvProdName(return_index=True)[1]
     [pp.create_poly_cost(lowerNet, cur_ctrld_lvProd_ind, 'sgen', cp1_eur_per_mw=-2)
