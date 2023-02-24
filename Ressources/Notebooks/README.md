@@ -51,4 +51,4 @@ Make sure to read [Voltage Rise control Block scheme](../Docs/VRiseControlBlockS
 > > - [VoltageRiseBin_Pred](VoltageRiseBin_Pred.ipynb) - Use the previously trained RNN to predict whether a voltage rise will occur or not in the next period
 
 ##### [2021_2022_RNN_Robust_All_Models](2021_2022_RNN_Robust_All_Models.ipynb)
-> >  Combined the prediction of three RNN models to evaluate whether an exceeding of the defined maximum voltage rise will occur in next step. The user with the help of  ``paramUser``  get to choose the combination or the unique model to use. This is an implementation of the Combined RNN prediction described in Section 2.1 of [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf)
+> >  Combine the prediction of three RNN models to evaluate whether an exceeding of the defined maximum voltage rise will occur in next step. The user with the help of  ``paramUser``  get to choose the combination or the unique model to use. This is an implementation of the Combined RNN prediction described in Section 2.1 of [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) in parallel.
