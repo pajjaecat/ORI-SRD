@@ -127,7 +127,7 @@ def run_powerflow(network,
         Dictionary of dataframe. For the first three keys, the corresponding df must indexed by the
         periods of the considered year. The keys must be the following:
             `df_prodHT` :  pandas.DataFrame
-                Power of all Higher voltage producers in the lower network. The colums represent
+                Power of all Higher voltage producers in the lower network. The columns represent
                 each Hv producer.
             `df_prod_bt_total` :  pandas.DataFrame
                 Total power of all lower voltage producers seen  from  the upper Network.
@@ -157,9 +157,9 @@ def run_powerflow(network,
 
     Notes
     -----
-    It is not recommended to use ``run_powerflow(args)`` since its implementaion is not optimal for 
+    It is not recommended to use ``run_powerflow(args)`` since its implementation is not optimal for
     use with parallel engines created with `ipyparallel <https://ipyparallel.readthedocs.io/en/latest/>`_ .
-    We recommand :py:func:`oriFunctions.run_powerflow_at` .
+    We recommend :py:func:`oriFunctions.run_powerflow_at` .
 
     """
 
@@ -231,7 +231,7 @@ def run_powerflow_at(network,
         Dictionary of dataframe. For the first three keys, the corresponding df must indexed by the
         periods of the considered year. The keys must be the following:
             `df_prodHT` : pandas.DataFrame
-                Power of all Higher voltage producers in the lower network. The colums represent
+                Power of all Higher voltage producers in the lower network. The columns represent
                 each Hv producer.
             `df_prod_bt_total` : pandas.DataFrame
                 Total power of all lower voltage producers seen  from  the upper Network.
@@ -285,7 +285,7 @@ def run_powerflow_at(network,
 
     Raises
     ------
-    ValueErrorExeption
+    ValueErrorException
         If ``ofp_status`` is not in [True, False, "Both"]
 
     Notes
@@ -302,7 +302,7 @@ def run_powerflow_at(network,
     checker.check_var_concordance(opf_status, pred_model)
 
     # -- GT1
-    if pred_model == 'Pers':  # if the the prediction model is the persistance,
+    if pred_model == 'Pers':  # if the the prediction model is the persistence,
         cur_period = cur_period - 1
 
     # Initialize the network. See the corresponding function for more explanation
@@ -323,7 +323,7 @@ def run_powerflow_at(network,
 
         # Depending on the prediction model parameter the return is different ----------------
         # For <pred_model = 'Pers'> given that at GT1 the <cur_period = cur_period-1> one must
-        #  reset cur_period to its initial value using <cur_period+1> before ruturning the results
+        #  reset cur_period to its initial value using <cur_period+1> before returning the results
         if pred_model == 'Pers':
             return cur_max_VriseHvBus, (hvProd_afterOPF, lvProd_afterOPF), cur_period + 1
         else:
@@ -346,7 +346,7 @@ def run_powerflow_at(network,
 
         # Depending on the prediction model parameter the return is different ----------------
         # For <pred_model = 'Pers'> given that at GT1 the <cur_period = cur_period-1> one must
-        #  reset cur_period to its initial value using <cur_period+1> before ruturning the results
+        #  reset cur_period to its initial value using <cur_period+1> before returning the results
         if pred_model == 'Pers':
             return [max_vm_pu_pf, cur_max_VriseHvBus], (hvProd_afterOPF, lvProd_afterOPF), cur_period + 1
         else:
@@ -388,7 +388,7 @@ def initLowerNet_at(network,
         Dictionary of dataframe. For the first three keys, the corresponding df must indexed by the
         periods of the considered year. The keys must be the following:
             `df_prodHT` :  pandas.DataFrame
-                Power of all Higher voltage producers in the lower network. The colums represent
+                Power of all Higher voltage producers in the lower network. The columns represent
                 each Hv producer.
             `df_prod_bt_total` :  pandas.DataFrame
                 Total power of all lower voltage producers seen  from  the upper Network.
@@ -400,7 +400,7 @@ def initLowerNet_at(network,
     Notes
     -----
     The following parameters are initialized
-        #TODO ?? ADD the Initilized Parameters#
+        #TODO ?? ADD the Initialized Parameters#
 
 
     """
@@ -424,7 +424,7 @@ def initLowerNet_at(network,
 
     # Initialized maximum power of LV producers
     # Why reinitialize the max power?  Because in the function max_vm_pu_at(*args), the maximum power 
-    # is set to the actual production given opf  constaints .
+    # is set to the actual production given opf  constraints .
     network.sgen.loc[mask_lvProd, 'max_p_mw'] = (df_lowNetSgen_cp[mask_lvProd].max_p_mw)
 
     # Initialize real output of LV producers
@@ -466,7 +466,7 @@ def max_vm_pu_at(network,
         Dictionary of dataframe. For the first three keys, the corresponding df must indexed by the
         periods of the considered year. The keys must be the following:
             `df_prodHT` : pandas.DataFrame
-                Power of all Higher voltage producers in the lower network. The colums represent
+                Power of all Higher voltage producers in the lower network. The columns represent
                 each Hv producer.
             `df_prod_bt_total` : pandas.DataFrame
                 Total power of all lower voltage producers seen  from  the upper Network.
@@ -770,7 +770,7 @@ def combRnnRobustPred(model_Vrise_dict,
 
     Raises
     ------
-    ValueErrorExeption
+    ValueErrorException
         If ``n_models`` is the wrong type or the wrong value.
 
     """
@@ -848,7 +848,7 @@ def extractParRes_asDf(parallel_result,
         
     """
 
-    # Get df_prodHT colums name [] from one of the engines 
+    # Get df_prodHT columns name [] from one of the engines
     df_prodHT_colName = df_prodHT.columns
 
     # Get all the elements from the parallel result in a list
@@ -873,12 +873,12 @@ def extractParRes_asDf(parallel_result,
     if type(parallel_result[0][0]) is list:
         sep_list = [(*elm[0], *elm[1][0], np.array(elm[1][1]).sum(), elm[2])
                     for elm in parallel_result]
-        # Create a colums using 'vm_pu_max' and add the HT producers name
+        # Create a columns using 'vm_pu_max' and add the HT producers name
         colls = ['max_vm_pu_pf', 'max_vm_pu'] + df_prodHT_colName.to_list() + SumLv_colName
     else:
         sep_list = [(elm[0], *elm[1][0], np.array(elm[1][1]).sum(), elm[2])
                     for elm in parallel_result]
-        # Create a colums using 'vm_pu_max' and add the HT producers name
+        # Create a columns using 'vm_pu_max' and add the HT producers name
         colls = ['max_vm_pu'] + df_prodHT_colName.to_list() + SumLv_colName
 
     # Create a data based on all the cols of sep_list except the last one that is the index
@@ -1017,7 +1017,7 @@ def createDict_prodHtBt_Load(df_pred_in,
 
     df_pred = df_pred_in.copy(deep=True)  # Create a copy of the input dataframe
 
-    # If the last 2 digits of an elm of df_pred.columns is decimal, therefore the colums is 
+    # If the last 2 digits of an elm of df_pred.columns is decimal, therefore the columns is
     # that of a HV producer
     hvProd_columns = [elm for elm in df_pred.columns if elm[-4:].isdecimal()]
     df_prodHT = df_pred[hvProd_columns]
@@ -1182,10 +1182,10 @@ def setNetwork_params(upperNet_file: str,
                 network receive only a fraction of coef_add_bt.
             "lowNet" :
                 coef_add_bt is added to the Sum of maximum output of all LV producers (MW) in the
-                lower Network. In consequence, coef_add_bt is shared proportionnaly among all the
+                lower Network. In consequence, coef_add_bt is shared proportionally among all the
                 LV producers on the lower network.
             "lowNet_rand" :
-                coef_add_bt is shared proportionnaly among a randomly selected set of the LV producers
+                coef_add_bt is shared proportionally among a randomly selected set of the LV producers
                 on the lower Network. The randomly selected set consist of half of all LV producers on
                 the lower Network
     params_vRise : tuple

@@ -71,10 +71,10 @@ def readAndReshape_excelFile(f_name:str,
                 network receive only a fraction of coef_add_bt.
             "lowNet":
                 coef_add_bt is added to the Sum of maximum output of all LV producers (MW) in the 
-                lower Network. In consequence, coef_add_bt is shared proportionnaly among all the 
+                lower Network. In consequence, coef_add_bt is shared proportianaly among all the
                 LV producers on the lower network. 
             "lowNet_rand"
-                coef_add_bt is shared proportionnaly among a randomly selected set of the LV producers 
+                coef_add_bt is shared proportianaly among a randomly selected set of the LV producers
                 on the lower Network. The randomly selected set consist of half of all LV producers on
                 the lower Network
                 

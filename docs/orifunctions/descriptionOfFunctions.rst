@@ -76,10 +76,10 @@ readAndReshape_excelFile
 
 
 
-robustControl
-*************
+robustness
+***********
 
-.. autofunction:: oriFunctions.robustControl
+.. autofunction:: oriFunctions.robustness
 
 
 
