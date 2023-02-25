@@ -10,16 +10,23 @@ OriClass - Python library with List of all classes used in the
 
 
 """
+import os
+
 import ipyparallel
 import joblib
 import matplotlib.pyplot as plt
 import numpy
-import os
 import pandapower
 import pandas
 import seaborn
 
 import checker
+from oriVariables import (defAuth_hvBus_vRiseMax,
+                          defAuth_hvBus_vRiseMin,
+                          default_hv_voltage,
+                          default_lv_voltage,
+                          Δt
+                          )
 
 pd = pandas
 np = numpy
@@ -28,18 +35,6 @@ ipp = ipyparallel
 sbn = seaborn
 
 # ------------------------------------------------------------------------------------
-
-
-from oriVariables import (defAuth_hvBus_vRiseMax,
-                          defAuth_hvBus_vRiseMin,
-                          defAuth_lvBus_vRiseMax,
-                          defAuth_lvBus_vRiseMin,
-                          default_hv_voltage,
-                          default_lv_voltage,
-                          Δt
-                          )
-
-
 ##############################         Class          #########################################
 class CreateParEngines:
     """Create an instance of ``n_e`` parallel engines.
@@ -121,13 +116,16 @@ class CreateParEngines:
         # Set variables
         self._run_periodIndex = run_periodIndex
         self._pred_model = parameters_dict['pred_model']
-        self._opf_status = opf_status;
+        self._opf_status = opf_status
 
         if clean:  # Clear the localspace of all engines if clean is True and reaload modules
 
             self.dview.clear()
             with self._rc[:].sync_imports():
-                import numpy, pandapower, pandas, par_oriFunctions
+                import numpy
+                import pandapower
+                import pandas
+                import par_oriFunctions
 
         # Share the total number of period in df_prodHT.index among all the created engines
         self.dview.scatter('period_part', run_periodIndex)
@@ -385,8 +383,8 @@ class InitNetworks:
         self._coef_add_bt_dist = coef_add_bt_dist
 
         # Checking
-        checker._check_network_order(self)
-        checker._check_coef_add_bt_and_dist(self)
+        checker.check_network_order(self)
+        checker.check_coef_add_bt_and_dist(self)
 
         # Extract LowerVoltage Producers # Their names is None i.e. nan is the _lowerNet.sgen
         self._lowerNet_sgenLvCopy = self._lowerNet.sgen[self._lowerNet.sgen.name.isna()]
@@ -507,7 +505,7 @@ class InitNetworks:
         """
 
         # Check the existence of the controlled_hvProdName
-        checker._check_hvProdName_in_lowerNet(self, controlled_hvProdName)
+        checker.check_hvProdName_in_lowerNet(self, controlled_hvProdName)
 
         # Add a controllable line to the static generators
         self._lowerNet.sgen['controllable'] = False
@@ -547,7 +545,7 @@ class InitNetworks:
         """
 
         # Run a power flow on the lower net only if it is not run already.
-        if not checker._check_resTables_existing(self):
+        if not checker.check_resTables_existing(self):
             self._run_lowerNet()
 
         # Extract a list of  all the activated bus on the run lower network
@@ -576,7 +574,7 @@ class InitNetworks:
         """
 
         # Run a power flow on the lower net only if it is not run already.
-        if not checker._check_resTables_existing(self):
+        if not checker.check_resTables_existing(self):
             self._run_lowerNet()
 
         # Extract a list of  all the activated bus on the run lower network
@@ -733,8 +731,8 @@ class InitNetworks:
 
         Parameters
         ----------
-        hvBus_voltage : float, Optional, Default = ``default_lv_voltage``
-            Voltage of High voltage buses on ``lowerNet``.
+        lvBus_voltage : float, Optional, Default = :py:data:`oriVariables.default_lv_voltage`
+            Voltage of lower voltage buses on ``lowerNet``.
 
         """
         return self._lowerNet_lv_bus_df(lvBus_voltage)
@@ -784,7 +782,7 @@ class SensAnalysisResult:
                          files_in_folder_list):
         # Extract only the plk files in folderlocation
         plk_files_list = [cur_file for cur_file in files_in_folder_list if cur_file.endswith('.plk')]
-        return plk_files_list;
+        return plk_files_list
 
     def _sort_plkFiles_in_folder(self,
                                  plkFiles_in_folder_list):
@@ -894,7 +892,7 @@ class SensAnalysisResult:
         # if fig_params is not given plot the heatmap in a new figure otherwise fig_params must
         # be an axe from plt.subplots()
         # TODO Verify if fig_params is actualy an axe and issue an error in the contrary
-        if fig_params == None:
+        if fig_params is None:
             fig, axx = plt.subplots(figsize=(10, 6), dpi=100)
         else:
             axx = fig_params
@@ -975,11 +973,11 @@ class SensAnalysisResults(SensAnalysisResult):  # This class inherits super prop
         self._models_name = models_name
         self._testSet_startDate = testSet_date[0]
         self._testSet_endDate = testSet_date[1]
-        checker._check_input_concordance(self)
+        checker.check_input_concordance(self)
         self._files_in_folder_list_dict = {}
         self._plkFiles_in_folder_list_dict = {}
         self._sortedPlkFiles_in_folder_list_dict = {}
-        checker._check_numberOf_plk_Files_in_folders(self)
+        checker.check_numberOf_plk_Files_in_folders(self)
         self._P0100_max_range = p_Hv_Lv_range[0]  # Define the maximum power output P0100
         self._bt_add_range = p_Hv_Lv_range[1]
 
@@ -989,8 +987,7 @@ class SensAnalysisResults(SensAnalysisResult):  # This class inherits super prop
         for cur_model_name, cur_model_folder in zip(self._models_name, self._models_folder_location):
             self._files_in_folder_list_dict.update({cur_model_name: os.listdir(cur_model_folder)})
             self._plkFiles_in_folder_list_dict.update({cur_model_name:
-                super()._extractPlkFiles(
-                    self._files_in_folder_list_dict[cur_model_name])
+                super()._extractPlkFiles(self._files_in_folder_list_dict[cur_model_name])
             })
             super()._check_fileName_Format(self._plkFiles_in_folder_list_dict[cur_model_name])
 
@@ -1156,7 +1153,7 @@ class SensAnalysisResults(SensAnalysisResult):  # This class inherits super prop
 
         self._bt = bt
         self._ht = ht
-        checker._check_boxplot_inputs(self, ht, bt)  # Check if boxplot inputs are authorised
+        checker.check_boxplot_inputs(self, ht, bt)  # Check if boxplot inputs are authorised
         # Extract the number of the bt file to read
         bt_file_to_read_index = [file_ind for file_ind, curValue in enumerate(self._bt_add_range)
                                  if curValue == bt][0]
@@ -1223,7 +1220,7 @@ class SensAnalysisResults(SensAnalysisResult):  # This class inherits super prop
         """
 
         # check the exixstence of var_count_dict in the local space of the instance
-        checker._check_countDictAsDf_input_inLocalSpace(self, var_count_dict)
+        checker.check_countDictAsDf_input_inLocalSpace(self, var_count_dict)
 
         # Get the self variable i.e. vRiseOrCapping_count_dict = self._vrise_count_dict
         #                         or vRiseOrCapping_count_dict = self._capping_count_dict
@@ -1276,7 +1273,7 @@ class SensAnalysisResults(SensAnalysisResult):  # This class inherits super prop
                            'capping': '_capping_count_dict'
                            }  # Create a dict
 
-        checker._check_countplot_inputs(self, count_dict_name)
+        checker.check_countplot_inputs(self, count_dict_name)
 
         df_to_plot = self._count_dict_as_dataFrame(self._dict_vars[count_dict_name])
 
@@ -1288,8 +1285,8 @@ class SensAnalysisResults(SensAnalysisResult):  # This class inherits super prop
             fig_ = df_to_plot.plot(marker="*", ls='', ax=fig_params)
             fig_.legend('_')
         fig_.set_xticks(df_to_plot.index)
-        fig_.set(ylabel=('Count'),
-                 xlabel=('HV Max Prod (MW)'),
+        fig_.set(ylabel='Count',
+                 xlabel='HV Max Prod (MW)',
                  title=f'Bt+ = {self._bt} MW, {count_dict_name.capitalize()} ')
         fig_.grid(axis='x', lw=0.2)
 

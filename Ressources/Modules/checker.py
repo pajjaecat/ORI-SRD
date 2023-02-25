@@ -8,14 +8,14 @@
 import pandas
 
 
-def _check_input_concordance(self):
+def check_input_concordance(self):
     """ Check if the inputs (models_folder_location, and models_name) have the same length 
     and raise an exception otherwise """
     if len(self._models_folder_location) != len(self._models_name):
         raise Exception('The inputs must have the same size')
 
 
-def _check_numberOf_plk_Files_in_folders(self):
+def check_numberOf_plk_Files_in_folders(self):
     """ Check if the numbers of plk files in each folder given as argument is the same
     and raise an exception otherwise """
 
@@ -38,14 +38,14 @@ def _check_numberOf_plk_Files_in_folders(self):
     # not present and the folder associated
 
 
-def _check_network_order(self):
+def check_network_order(self):
     """ Make sure the upper network is bigger than the lower one"""
     if len(self._upperNet.bus) < len(self._lowerNet.bus):
         raise Exception('The first input (upper network) has a lower number of bus'
                         'compared to the second input (lower network). ')
 
 
-def _check_boxplot_inputs(self, ht_in, bt_in):
+def check_boxplot_inputs(self, ht_in, bt_in):
     """ Check if the inputs ht_in and bt_in are in the list of authorised value and
         raise and exception otherwise  """
     ht_authorised_values = list(self._P0100_max_range) + ['All']
@@ -57,7 +57,7 @@ def _check_boxplot_inputs(self, ht_in, bt_in):
                             in arange(0., 4., 0.2)""")
 
 
-def _check_countDictAsDf_input_inLocalSpace(self, input_var):
+def check_countDictAsDf_input_inLocalSpace(self, input_var):
     """ Check if input_var that must be either of (1)self._vrise_count_dict or
     (2)self._capping_count_dict is already present in the local space of the instance,
     i.e. vRise_boxplot(*args) has already been executed once
@@ -69,7 +69,7 @@ def _check_countDictAsDf_input_inLocalSpace(self, input_var):
                         calling .*countplot(*args)""")
 
 
-def _check_countplot_inputs(self, dict_name):
+def check_countplot_inputs(self, dict_name):
     """ Check if the input given by the user for countplot(*args) is authorised """
     if dict_name not in self._dict_vars:
         raise Exception(f' The input must be either of {list(self._dict_vars.keys())} ')
@@ -86,8 +86,8 @@ def check_coef_add_bt_dist(coef_add_bt_dist, includeNone=True):
         raise Exception(f' The parameter \'coef_add_bt_dist\' must be either of {authorised_list}')
 
 
-def _check_coef_add_bt_and_dist(self):
-    """ check the condordance between coef_add_bt_and coef_add_bt_dist """
+def check_coef_add_bt_and_dist(self):
+    """ check the concordance between coef_add_bt_and coef_add_bt_dist """
     if type(self._coef_add_bt) == type(self._coef_add_bt_dist):
         if type(self._coef_add_bt) in [int, float]:
             raise Exception(' Wrong type of parameter \'_coef_add_bt\' or \'_coef_add_bt_dist\'')
@@ -97,7 +97,7 @@ def _check_coef_add_bt_and_dist(self):
         check_coef_add_bt_dist(self._coef_add_bt_dist, includeNone=False)
 
 
-def _check_hvProdName_in_lowerNet(self, controlled_hvProdName):
+def check_hvProdName_in_lowerNet(self, controlled_hvProdName):
     """ Check if the name of the controlled HV producer exist in the lower network"""
 
     # Extract name of all HV prod in lower Net
@@ -115,7 +115,7 @@ def check_var_concordance(opf_status=False, pred_model=None):
 
     Parameters
     ----------
-    ofp_status: bool, optional, default = False
+    opf_status: bool, optional, default = False
         Whether the maximum voltage is computed after a normal or optimal power flow or both
         + Normal  =>  **pandapower.runpp(net)**,  ofp_status = False
         + Optimal =>  **pandapower.runopp(net)**, ofp_status = True
@@ -130,7 +130,7 @@ def check_var_concordance(opf_status=False, pred_model=None):
     pred_model_values = ['Pers']
 
     # If the prediction model <pred_mod> is defined,  make sure that the <ofp_status> ='Both'
-    if (pred_model is not None):
+    if pred_model is not None:
         if pred_model not in pred_model_values:  # check if the pred_model value is an authorised
             raise ValueError('<pred_mod> must be either of', pred_model_values)
 
@@ -142,11 +142,12 @@ def check_networkDataDf_columnsOrder(netInput_data_df: pandas.DataFrame):
     """  Check if the input dataframe column are in the expected order.
 
     The columns order **MUST** be  ['Cons', 'Prod_BT', 'P0_n', ...., 'P0_z'] \;
-    where 'Cons'    ==> The total demand, load or consumption on the upper network;
-          'Prod_BT' ==> The total production of all lower voltage producers  on the upper network;
-          'P0_n'    ==> The name of the first higher voltage producer on the lower Network;
-           ...      ==> The name of the other Higher voltage producer on the lower network;
-           'P0_z'   ==> The name of the last Higher voltage producer on the lower network
+    where
+        'Cons'    ==> The total demand, load or consumption on the upper network;
+        'Prod_BT' ==> The total production of all lower voltage producers  on the upper network;
+        'P0_n'    ==> The name of the first higher voltage producer on the lower Network;
+        ...       ==> The name of the other Higher voltage producer on the lower network;
+        'P0_z'    ==> The name of the last Higher voltage producer on the lower network
 
 
     """
@@ -161,7 +162,7 @@ def check_networkDataDf_columnsOrder(netInput_data_df: pandas.DataFrame):
         raise Exception(f'All of the higher voltage producers name MUST start by \'P\' ')
 
 
-def _check_resTables_existing(self):
+def check_resTables_existing(self):
     """ Check if the result tables are present in the _lowerNet pandapower table.
 
     Returns
@@ -203,9 +204,7 @@ def check_robustnessParams(df_out_block_pfOpf, combRnn_param):
 
     if (df_out_block_pfOpf.shape[1] == 1
             and (combRnn_param[0] is None
-                 or combRnn_param[1] is None
-            )):
+                 or combRnn_param[1] is None)):
         raise Exception(f'Since the input ``df_out_block_pfOpf`` has only one column, i.e. is'
                         f' the first output of :py:func:`oriFunctions.combineRnnPred`, the input'
                         f' ``combRnn_param``  **MUST** also be included.')
-
