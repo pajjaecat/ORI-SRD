@@ -102,7 +102,7 @@ def check_bus_connection(network,
     """
 
     for cur_bus in bus_number:  # For each bus
-        for attribute in attr_list_in:  # For each tuple in the attibute list
+        for attribute in attr_list_in:  # For each tuple in the attribute list
             netsub = getattr(network, attribute[0])
             netsub_sub = getattr(netsub, attribute[1])
 
@@ -387,7 +387,7 @@ def run_powerflow_at(network,
         else:
             return [max_vm_pu_pf, cur_max_VriseHvBus], (hvProd_afterOPF, lvProd_afterOPF), cur_period
 
-    elif opf_status == False:  # Run normal power flow  ***************************************************
+    elif not opf_status:  # Run normal power flow  ***************************************************
         return max_vm_pu_at(network, cur_period, lowNet_hv_activBus, dict_df_sgenLoad, opf_status), cur_period
 
     else:
@@ -463,7 +463,7 @@ def initLowerNet_at(network,
     # Initialized maximum power of LV producers
     # Why reinitialize the max power?  Because in the function max_vm_pu_at(*args), the maximum power
     # is set to the actual production given opf  constraints .
-    network.sgen.loc[mask_lvProd, 'max_p_mw'] = (df_lowNetSgen_cp[mask_lvProd].max_p_mw)
+    network.sgen.loc[mask_lvProd, 'max_p_mw'] = df_lowNetSgen_cp[mask_lvProd].max_p_mw
 
     # Initialize real output of LV producers
     prod_bt_total_1mw = df_prod_bt_total.loc[cur_period].values / upNet_sum_max_lvProd
@@ -500,7 +500,7 @@ def max_vm_pu_at(network,
         The period to investigate.
     lowNet_hv_activBus : List
         List of all the higher voltage activated bus in the lower network
-     dict_df_sgenLoad : dict
+    dict_df_sgenLoad : dict
         Dictionary of dataframe. For the first three keys, the corresponding df
         must indexed by the periods of the considered year. The keys must be the
         following:
@@ -877,8 +877,7 @@ def combineRnnPred(model_Vrise_dict,
 
     # Use vrise_true_mask to insert predicted values given by model1 at the concerned instants
     df_ctrlHvProd_toReturn[vrise_true_mask] = ctrlHvProd_model1_out.loc[mask_per2work[vrise_true_mask],
-                                                                        [ctrld_hvProdName]
-    ]
+                                                                        [ctrld_hvProdName] ]
 
     return df_ctrlHvProd_toReturn, bin_thresh_df
 
@@ -1142,7 +1141,7 @@ def robustness(df_out_block_pfOpf,
         A tuple of parameter to use when applying the function to a combination of
         RNN.
             ``combRnn_param[0]`` : pandas.Dataframe,
-                Dataframe of binary threshold i.e the second output of
+                Dataframe of binary threshold i.e. the second output of
                 :py:func:`combineRnnPred`.
             ``combRnn_param[1]`` : int or str
                 Number of models which must agree on voltage rise above threshold
@@ -1257,7 +1256,7 @@ def block_prod(df_yTilde_opt,
 
     # Extract the part of the
     df_hvProd_controlled = df_yTilde_opt.loc[per_index2[starting_index:],
-                                            ctrld_hvProdName]
+                                             ctrld_hvProdName]
 
     # Implement the actual prod
     df_yTilde_opt.loc[per_index2[starting_index:],
@@ -1355,7 +1354,7 @@ def setNetwork_params(upperNet_file: str,
 
     networks = oriClass.InitNetworks(upperNet, lowerNet, coef_add_bt, coef_add_bt_dist)  # Initialize networks
 
-    networks.init_controled_hvProd(ctrld_hvProdName)  # Initialize the controlled HVProd in the lowerNetwork
+    networks.init_controlled_hvProd(ctrld_hvProdName)  # Initialize the controlled HVProd in the lowerNetwork
 
     # Extract HV and LV buses in the Lower Network
     lowerNet_hv_bus_df = networks.get_lowerNet_hv_bus_df(hvBus_voltage=default_hv_voltage)
@@ -1385,8 +1384,4 @@ def setNetwork_params(upperNet_file: str,
     networks.create_lowerNet_sgenDf_copy()  # Create a copy of the Sgens in the lower networks
 
     return networks
-
-
-
-
 
