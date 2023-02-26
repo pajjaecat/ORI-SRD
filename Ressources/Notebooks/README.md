@@ -1,8 +1,7 @@
 All the files (data) called within the notebooks described here are located in [Pickle_files](../Pickle_files). When executing the notebooks, ensure the file location is set correctly (keep the same directory structure as this repository, and it should work just fine) and that all the compressed files (.zip, .7z) are decompressed in the corresponding folder. 
-> As exemple decompress the content of the file [Pickle_files/ElectricNation.zip](../Pickle_files/ElectricNation.zip)  in a the same directory as  [Pickle_files/ElectricNation/]
+> As example decompress the content of the file [Pickle_files/ElectricNation.zip](../Pickle_files/ElectricNation.zip)  in the same directory as  [Pickle_files/ElectricNation/]
 
 
-</br> 
 
 
 ## Brief description of each  notebook
@@ -43,7 +42,7 @@ Make sure to read [Voltage Rise control Block scheme](../Docs/VRiseControlBlockS
 > >  Using a power flow in parallel, compute the maximum voltage rise on the lower network (and convert it into a binary variable) from Jan-01-2020 to  June-01-2022.
 
 ##### Numerical Voltage Rise RNN  
-> > - [VoltageRiseNum_Train](VoltageRiseNum_Train.ipynb) - Create and Train a RNN to predict the value of the maximum Voltage rise. 
+> > - [VoltageRiseNum_Train](VoltageRiseNum_Train.ipynb) - Create and Train an RNN to predict the value of the maximum Voltage rise. 
 > > - [VoltageRiseNum_Pred](VoltageRiseNum_Pred.ipynb) - Use the previously trained RNN to predict the maximum Voltage rise and compare the results to that of a simple power flow. 
 
 ##### Binary Voltage Rise RNN
@@ -52,3 +51,6 @@ Make sure to read [Voltage Rise control Block scheme](../Docs/VRiseControlBlockS
 
 ##### [2021_2022_RNN_Robust_All_Models](2021_2022_RNN_Robust_All_Models.ipynb)
 > >  Combine the prediction of three RNN models to evaluate whether an exceeding of the defined maximum voltage rise will occur in next step. The user with the help of  ``paramUser``  get to choose the combination or the unique model to use. This is an implementation of the Combined RNN prediction described in Section 2.1 of [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) in parallel.
+
+##### [2021_2022_SimRes All_RNN](2021_2022_SimRes All_RNN.ipynb)
+> >  Compare the results of the simulations given by [2021_2022_RNN_Robust_All_Models](2021_2022_RNN_Robust_All_Models.ipynb) when using each or a combination of the RNN models.
