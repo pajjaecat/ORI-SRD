@@ -52,5 +52,5 @@ Make sure to read [Voltage Rise control Block scheme](../Docs/VRiseControlBlockS
 ##### [2021_2022_RNN_Robust_All_Models](2021_2022_RNN_Robust_All_Models.ipynb)
 > >  Combine the prediction of three RNN models to evaluate whether an exceeding of the defined maximum voltage rise will occur in next step. The user with the help of  ``paramUser``  get to choose the combination or the unique model to use. This is an implementation of the Combined RNN prediction described in Section 2.1 of [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) in parallel.
 
-##### [2021_2022_SimRes All_RNN](2021_2022_SimRes All_RNN.ipynb)
+##### [2021_2022_SimRes All_RNN](2021_2022_SimRes\_All_RNN.ipynb)
 > >  Compare the results of the simulations given by [2021_2022_RNN_Robust_All_Models](2021_2022_RNN_Robust_All_Models.ipynb) when using each or a combination of the RNN models.
