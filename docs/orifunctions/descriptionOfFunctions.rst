@@ -138,9 +138,9 @@ Returns
         Output of the function :py:func:`oriClass.CreateParEngines.get_results_asDf`.
 
 .. warning::
-    DO NOT CALL this function from the module :py:mod:`oriFunctions`. This function
-    **Must** be implemented in the local space of each notebook that use it as done in
-    `VoltageRiseBinaryUpdated <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_
+    **DO NOT CALL** this function from the module :py:mod:`oriFunctions`. 
+    This function **Must** be implemented in the local space of each notebook that 
+    use it as done in `VoltageRiseBinaryUpdated <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_
     for instance.
 
 
