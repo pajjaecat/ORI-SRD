@@ -297,34 +297,34 @@ class InitNetworks:
     """ Initialize both the upper and lower level  Networks.
 
 
-        Parameters
-        ----------
-        upperNet : :obj:`pandapower.pandapowerNet`
-            Upper level network.
-        lowerNet : `pandapower.pandapowerNet `
-            Lower level Network
-        coef_add_bt : float, Default = None
-            Value of the added output power for all the LV producers (MW).
-        coef_add_bt_dist : str, Default = None
-            How the upscaling of the maximum output of all lower Voltage producers is
-            done. Three choices are possible
-                None
-                    No upscaling is done.
-                "uppNet"
-                    ``coef_add_bt`` is added to the Sum of maximum output of all
-                    lower   voltage (LV) producers (MW) in the upper Network. In
-                    consequence, the LV producers on the ``lowerNet`` receive only a
-                    fraction of coef_add_bt.
-                "lowNet"
-                    ``coef_add_bt`` is added to the Sum of maximum output of all LV
-                    producers (MW) in the ``lowerNet``. In consequence, coef_add_bt
-                    is shared proportionally among all the LV producers on the
-                    ``lowerNet``.
-                "lowNet_rand"
-                    ``coef_add_bt`` is shared proportionally among a randomly
-                    selected et of the LV  producers on the ``lowerNet``. The
-                    randomly selected set consist  of half of all LV producers on the
-                    on the ``lowerNet``
+    Parameters
+    ----------
+    upperNet : :obj:`pandapower.pandapowerNet`
+        Upper level network.
+    lowerNet : `pandapower.pandapowerNet `
+        Lower level Network
+    coef_add_bt : float, Optional Default = None
+        Value of the added output power for all the LV producers (MW).
+    coef_add_bt_dist : str, Optional, Default = None
+        How the upscaling of the maximum output of all lower Voltage producers is
+        done. Three choices are possible
+            None
+                No upscaling is done.
+            "uppNet"
+                ``coef_add_bt`` is added to the Sum of maximum output of all
+                lower   voltage (LV) producers (MW) in the upper Network. In
+                consequence, the LV producers on the ``lowerNet`` receive only a
+                fraction of coef_add_bt.
+            "lowNet"
+                ``coef_add_bt`` is added to the Sum of maximum output of all LV
+                producers (MW) in the ``lowerNet``. In consequence, coef_add_bt
+                is shared proportionally among all the LV producers on the
+                ``lowerNet``.
+            "lowNet_rand"
+                ``coef_add_bt`` is shared proportionally among a randomly
+                selected et of the LV  producers on the ``lowerNet``. The
+                randomly selected set consist  of half of all LV producers on the
+                on the ``lowerNet``
 
     Attributes
     ----------

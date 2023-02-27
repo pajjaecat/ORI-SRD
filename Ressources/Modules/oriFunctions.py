@@ -292,12 +292,11 @@ def run_powerflow_at(network,
     -------
     Depends on ``opf_status``
         ``opf_status`` = False
-            max_vm_pu_pf
+            max_vm_pu_pf, cur_period
         ``opf_status`` = True
             cur_max_VriseHvBus, (hvProd_afterOPF, lvProd_afterOPF), cur_period
         ``opf_status`` = "Both"
-            [max_vm_pu_pf, cur_max_VriseHvBus],(hvProd_afterOPF, lvProd_afterOPF),
-            cur_period \n
+            [max_vm_pu_pf, cur_max_VriseHvBus],(hvProd_afterOPF, lvProd_afterOPF), cur_period \n
             where
                 max_vm_pu_pf : float
                     Maximum voltage given by the power flow
@@ -329,7 +328,7 @@ def run_powerflow_at(network,
     is greater than  ``auth_max_VriseHvBus``. Simply put, as long as no voltage
     rise above ``auth_max_VriseHvBus`` is detected one does not care about the
     value of the voltage rise on the lv buses.
-    TODO : Consider the auth_max_VriselvBus to run an opf.
+    TODO : Considered the auth_max_VriselvBus to run an opf.
 
     """
 
