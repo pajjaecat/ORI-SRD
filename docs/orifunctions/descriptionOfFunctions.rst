@@ -140,7 +140,7 @@ Returns
 .. warning::
     DO NOT CALL this function from the module :py:mod:`oriFunctions`. This function
     **Must** be implemented in the local space of each notebook that use it as done in
-    `VoltageRiseBinaryUpdated<https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_
+    `VoltageRiseBinaryUpdated <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_
     for instance.
 
 
@@ -172,7 +172,7 @@ Returns
         ---------
         DO NOT CALL this function from the module :py:mod:`oriFunctions`. This function
         **Must** be implemented in the local space of each notebook that use it as done in
-        `VoltageRiseBinaryUpdated<https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_
+        `VoltageRiseBinaryUpdated <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_
         for instance.
 
 
