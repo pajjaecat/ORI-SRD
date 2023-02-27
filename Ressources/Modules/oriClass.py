@@ -843,7 +843,6 @@ class SensAnalysisResult:
 
             for cur_key in cur_file_data_keys_list:  # for each element in the loaded dictionary
                 data_df = cur_file_data[cur_key]['Power Sgen']
-
                 # data_df.iloc[:,0] => Power injected when there is  no control
                 # data_df.iloc[:,1] => Power injected using current controller
                 if end_date is None:
@@ -891,7 +890,7 @@ class SensAnalysisResult:
 
         # if fig_params is not given plot the heatmap in a new figure otherwise fig_params must
         # be an axe from plt.subplots()
-        # TODO Verify if fig_params is actualy an axe and issue an error in the contrary
+        # TODO Verify if fig_params is actually an axe and issue an error in the contrary
         if fig_params is None:
             fig, axx = plt.subplots(figsize=(10, 6), dpi=100)
         else:

@@ -329,7 +329,7 @@ def run_powerflow_at(network,
     is greater than  ``auth_max_VriseHvBus``. Simply put, as long as no voltage
     rise above ``auth_max_VriseHvBus`` is detected one does not care about the
     value of the voltage rise on the lv buses.
-    TODO : Considered the auth_max_VriselvBus to run an opf.
+    TODO : Consider the auth_max_VriselvBus to run an opf.
 
     """
 
