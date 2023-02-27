@@ -189,6 +189,10 @@ Returns
 
         # Gather the results of all the engines in a unique variable.
         results = par_engines.gather_results('par_run_Results')
+        
+        # Wait 2seconds time for gathering the results of parralel computing.
+        # This waiting time could be reduce when using more powerful machines.
+        time.sleep(2)
 
         # Extract results
         extracted_results = par_engines.get_results_asDf()
