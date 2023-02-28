@@ -13,7 +13,7 @@ Description
   description/predictionBin_bloc
   description/prediction_bloc
   description/readAndReshape_excelFile
-  description/robustControl
+  description/robustness
   description/robustPred
   description/run_powerflow
   description/run_powerflow_at
