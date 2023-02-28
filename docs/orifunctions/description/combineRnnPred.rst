@@ -1,4 +1,4 @@
-robustPred
--------------------
+combineRnnPred
+---------------
 
 .. autofunction:: oriFunctions.combineRnnPred
