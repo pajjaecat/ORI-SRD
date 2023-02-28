@@ -1,4 +1,0 @@
-robustControl
--------------------
-
-.. autofunction:: oriFunctions.robustControl
