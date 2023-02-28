@@ -299,7 +299,7 @@ class InitNetworks:
 
     Parameters
     ----------
-    upperNet : :obj:`pandapower.pandapowerNet`
+    upperNet :`pandapower.pandapowerNet`
         Upper level network.
     lowerNet : `pandapower.pandapowerNet `
         Lower level Network
