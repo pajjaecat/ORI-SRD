@@ -18,5 +18,3 @@ Description
   description/run_powerflow
   description/run_powerflow_at
   description/setNetwork_params
-  description/trying
-  
