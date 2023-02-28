@@ -1067,7 +1067,16 @@ def createDict_prodHtBt_Load(df_pred_in,
           `lowerNet_sgenDf_copy` :  pandas.DataFrame
               Dataframe of all the static generator in the lower network.
 
+    Notes
+    -----
+    Add a checking function to make sure that ``cur_hvProd_max`` <= ``ctrld_hvProd_max``.
+    If the constraint does not hold raise an exception. This makes sence because the
+    variation of the controlled Hv Prod can't be higher than the maximum fixed output
+    of the said Hv prod. As example, if ``ctrld_hvProd_max = 4 MW`, ``ctrld_hvProd_max``
+    must be <= 4MW
+
     """
+
     # Instantiate parameters
     upNet_sum_max_lvProd = networks_in.get_upperNet_sum_max_lvProdLoad()[0]
     params_coef_add_bt = networks_in.get_params_coef_add_bt()
