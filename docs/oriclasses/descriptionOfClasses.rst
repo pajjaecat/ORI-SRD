@@ -9,8 +9,6 @@ This section described  all the implemented classes with their associated method
 oriClass.CreateParEngines
 *************************
 
-.. ``oriClass.InitNetworks``
-
 .. autoclass:: oriClass.CreateParEngines
   :members:
   :undoc-members:
@@ -18,9 +16,6 @@ oriClass.CreateParEngines
   
   
   
-  
-.. :class:`oriClass.InitNetworks`
-
 oriClass.InitNetworks
 *********************
 
@@ -32,11 +27,10 @@ oriClass.InitNetworks
 
 
 
-.. :class:`oriClass.SensAnlysisResult`
-oriClass.SensAnlysisResult
-**************************
+oriClass.SensAnalysisResult
+***************************
 
-.. autoclass:: oriClass.SensAnlysisResult
+.. autoclass:: oriClass.SensAnalysisResult 
   :members:
   :undoc-members:
   :show-inheritance: 
@@ -44,13 +38,10 @@ oriClass.SensAnlysisResult
 
 
 
-.. 
-   :class:`oriClass.SensAnlysisResults`
-   
-oriClass.SensAnlysisResults
-***************************
+oriClass.SensAnalysisResults
+****************************
 
-.. autoclass:: oriClass.SensAnlysisResults
+.. autoclass:: oriClass.SensAnalysisResults
   :members:
   :undoc-members:
   :show-inheritance: 

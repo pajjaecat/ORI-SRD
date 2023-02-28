@@ -14,7 +14,7 @@ Description
   description/prediction_bloc
   description/readAndReshape_excelFile
   description/robustness
-  description/robustPred
+  description/combineRnnPred
   description/run_powerflow
   description/run_powerflow_at
   description/setNetwork_params

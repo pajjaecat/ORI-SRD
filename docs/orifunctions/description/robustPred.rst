@@ -1,4 +1,0 @@
-robustPred
--------------------
-
-.. autofunction:: oriFunctions.robustPred

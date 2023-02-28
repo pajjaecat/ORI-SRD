@@ -1,0 +1,4 @@
+combineRnnPred
+---------------
+
+.. autofunction:: oriFunctions.combineRnnPred

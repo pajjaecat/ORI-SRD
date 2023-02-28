@@ -26,10 +26,6 @@ will raise an exception.
 
 .. autoexception:: lumache.InvalidKindError
 
-Trying new Modules import
--------------------------
-.. autofunction:: lumache.readAndReshape_excelFile
-For example:
 
 >>> import lumache
 >>> lumache.get_random_ingredients()
