@@ -1,0 +1,4 @@
+robustControl
+-------------------
+
+.. autofunction:: oriFunctions.robustness
