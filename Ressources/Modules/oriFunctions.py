@@ -818,7 +818,7 @@ def combineRnnPred(model_Vrise_dict,
         If ``n_models`` is the wrong type or the wrong value.
 
     Notes
-    ------
+    -----
     In the future versions, the function **MUST** be recoded such that it follows
     exactly the block scheme  described is section 2.1 of
     `VRiseControlBlockScheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_.
