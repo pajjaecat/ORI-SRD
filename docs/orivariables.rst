@@ -12,28 +12,6 @@ This section lists all the default variables used in the different `notebooks <h
   :show-inheritance:
   
   
-.. 
-     .. autosummary:: 
-       :toctree: generated
-
-       oriVariables
-
-       Trying the module stuf on variables
-       ***********************************
-       In the presence of :py:data:`oriVariables.attr_list`
-
-
-       Autodata
-       **********
-
-       .. autodata:: oriVariables.attr_list
-         :annotation: 
-
-
-       The place for the modules
-       ****************************
-
-.. 
 .. code:: python 
 
   # Create an attribute list to use in functions
