@@ -6,9 +6,6 @@
          :width: 185em
          :align: left
          
-.. |br| raw:: html
-    <br />
-    
 
          
 
