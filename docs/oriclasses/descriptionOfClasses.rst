@@ -30,10 +30,10 @@ oriClass.InitNetworks
 
 
 
-oriClass.SensAnlysisResult
-**************************
+oriClass.SensAnalysisResult
+***************************
 
-.. autoclass:: oriClass.SensAnlysisResult
+.. autoclass:: oriClass.SensAnalysisResult 
   :members:
   :undoc-members:
   :show-inheritance: 
@@ -42,10 +42,10 @@ oriClass.SensAnlysisResult
 
 
    
-oriClass.SensAnlysisResults
-***************************
+oriClass.SensAnalysisResults
+****************************
 
-.. autoclass:: oriClass.SensAnlysisResults
+.. autoclass:: oriClass.SensAnalysisResults
   :members:
   :undoc-members:
   :show-inheritance: 
