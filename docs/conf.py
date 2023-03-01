@@ -34,7 +34,7 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
     "numpydoc",
-    "m2r"
+    "m2r2"
 ]
 
 
