@@ -65,6 +65,7 @@ tqdm==4.64.1
 joblib==1.2.0
 seaborn==0.12.1
 matplotlib==3.5.3
+m2r==0.3.1
 
 # Needed so sphinx can render python's docs as intended and not as 
 # restructured text 
