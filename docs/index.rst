@@ -30,9 +30,11 @@ To help in this endeavour, we have developed the backbone of the project that is
 To implement `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ ,
 check out the sections : 
    - :doc:`howToUse` to get a step by step process to apply to any type of network;
-   - :doc:`Tutorials` to see the differents available tutorials to get inspired of for the implementation.
+   - :doc:`tutorials` to see the differents available tutorials to get inspired of for the implementation.
    
 The remaining section :doc:`orivariables`, :doc:`orifunctions` and :doc:`oriclasses` offer an in-depth view of the main functions used in the :doc:`Tutorials`.  
+
+
 Check out the :doc:`usage` section for further information, including
 how to :ref:`installation` the project.
 
@@ -48,7 +50,7 @@ Contents
 
    Home <self>
    howToUse
-   Tutorials
+   tutorials
    orivariables
    orifunctions
    oriclasses
