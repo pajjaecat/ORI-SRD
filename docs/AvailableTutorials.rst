@@ -1,2 +1,2 @@
-Description of available Tutorials
-==================================
+Tutorials
+===========
