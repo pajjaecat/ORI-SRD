@@ -1,4 +1,4 @@
 Tutorials
 ===========
 
-.. minclude:: ../Ressources/Notebooks/README.md
+.. mdinclude:: ../Ressources/Notebooks/README.md
