@@ -9,12 +9,12 @@
 
 
 ## Architecture
-The available resource is subdivided into six subfolders as follows:
+The available resource is subdivided into six folders as follows:
 - [Notebooks](Notebooks/): Contains all the Notebooks for the different simulations and tutorials. [NotebooksReadMe](Notebooks/README.md) gives more explanation about them. 
-- [Excel_files](Excel_files/): Contains the the networks' inputs as ``.csv`` files 
+- [Excel_files](Excel_files/): Contains the  networks' inputs as ``.csv`` files 
   - Each of the Hv Prod must have its own associated files;
-  - All of the Lv Prods (i.e. all the LV Prods in the Upper network) must be aggregated  in a unique file;
-  - All of the Load  (i.e. all the load in the Upper network) must be aggregated in a unique file.
+  - All the Lv Prods (i.e. all the LV Prods in the Upper network) must be aggregated  in a unique file;
+  - All the Load  (i.e. all the load in the Upper network) must be aggregated in a unique file.
   
 - [Figures](Figures/): Contains figures resulting from the simulations.
 
@@ -26,4 +26,4 @@ The available resource is subdivided into six subfolders as follows:
   
 - [Modules](Modules/): Contains different modules (classes, functions and variables) that are used in all the notebooks. See [ModulesReadMe](Modules/README.md) for more details
 
-- [Docs](Docs/): Contains different documents and presentation which are relavant. See [DocsReadMe](Docs/README.md) for more details
+- [Docs](Docs/): Contains different documents and presentation which are relevant. See [DocsReadMe](Docs/README.md) for more details

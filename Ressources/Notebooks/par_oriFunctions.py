@@ -1,29 +1,31 @@
 # TODO: FInd a way to use the function already defined in OriFunctions in the parallel engines 
 
 
-import pandapower, pandas, numpy
+import numpy
+import pandapower
+import pandas
 from tqdm import tqdm  # Profiling
 
 pd = pandas
-np = numpy 
+np = numpy
 pp = pandapower
 
-
-# tImport variables that each parallel engine will use
+# Import variables that each parallel engine will use
 
 Δt = 1 / 6  # Time frequency 10mn ==> 1Hour/6
 # Default Authorised voltage rise on hv Bus on lower Network
-defAuth_hvBus_vRiseMax = 1.025     
+defAuth_hvBus_vRiseMax = 1.025
 defAuth_hvBus_vRiseMin = 0.95
-defAuth_lvBus_vRiseMax = 1.075  
+defAuth_lvBus_vRiseMax = 1.075
 defAuth_lvBus_vRiseMin = 0.95
 
-
 # Default Authorised voltage on hv and Lv Bus on lower Network
-default_hv_voltage = 20.6      
+default_hv_voltage = 20.6
 default_lv_voltage = 0.4
 
 default_ctrld_hvProd_max = 4.0
+
+
 # ___________________________________________________________________________________________________________________
 # ------------------------------------------------------------------------------------------------------------------
 # ___________________________________________________________________________________________________________________
@@ -66,10 +68,10 @@ def run_powerflow(network: pandapower.auxiliary.pandapowerNet,
                      on hv Prod Buses max_vm_pu > auth_max_VriseHvBus, is the  optimal  power 
                      flow run.
 
-    
+
     """
 
-    # Creating empty list 
+    # Creating empty list
     list_max_vm_pu = []  # Maximum vm_pu at each period considered
     list_sgen_HT = []  # Actual HT generators power after optimal flow
 
@@ -81,9 +83,9 @@ def run_powerflow(network: pandapower.auxiliary.pandapowerNet,
 
         if opf_status:  # Run optimal power flow
             max_vm_pu, (hvProd_afterOPF, lvProd_afterOPF) = run_powerflow_at(network, cur_period,
-                                                                            lowNet_hv_activBus,
-                                                                            sum_max_p_mw_upperNet,
-                                                                            dict_df_sgenLoad, opf_status)
+                                                                             lowNet_hv_activBus,
+                                                                             sum_max_p_mw_upperNet,
+                                                                             dict_df_sgenLoad, opf_status)
             list_max_vm_pu.append(max_vm_pu)
             list_sgen_HT.append(hvProd_afterOPF)
 
@@ -92,7 +94,7 @@ def run_powerflow(network: pandapower.auxiliary.pandapowerNet,
                                                     lowNet_hv_activBus,
                                                     sum_max_p_mw_upperNet,
                                                     dict_df_sgenLoad, opf_status)
-            
+
             list_max_vm_pu.append(hvProd_pf)
     # Return depends on ofp_status
     if opf_status:
@@ -101,9 +103,6 @@ def run_powerflow(network: pandapower.auxiliary.pandapowerNet,
         return list_max_vm_pu
 
 
-
-    
-    
 def run_powerflow_at(network,
                      cur_period,
                      lowNet_hv_activBus: list,
@@ -111,8 +110,8 @@ def run_powerflow_at(network,
                      dict_df_sgenLoad: dict,
                      auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
                      opf_status: (bool or str) = False,
-                     pred_model: str = None 
-                    ):
+                     pred_model: str = None
+                     ):
     """Run PF or OPF at ``cur_period`` depending on ``opf_status``.
 
     Parameters
@@ -211,26 +210,26 @@ def run_powerflow_at(network,
 
     """
 
-    # Check variables congruence 
+    # Check variables congruence
     check_var_concordance(opf_status, pred_model)
 
     # -- GT1
-    if pred_model == 'Pers':  # if the the prediction model is the persistance,
+    if pred_model == 'Pers':  # if  the prediction model is the persistance,
         cur_period = cur_period - 1
 
     # Initialize the network. See the corresponding function for more explanation
     initLowerNet_at(network, cur_period, sum_max_p_mw_upperNet, dict_df_sgenLoad)
 
-    # Get the maximum voltage magnitude of all activated bus to a list. See the 
+    # Get the maximum voltage magnitude of all activated bus to a list. See the
     #                               corresponding function for more explanation
-    if opf_status == True:  # Run optimal power flow ******************************************
+    if opf_status is True:  # Run optimal power flow ******************************************
 
         # get maximum value of vm_pu for the current period after optimal power flow
         cur_max_VriseHvBus = max_vm_pu_at(network, cur_period,
                                           lowNet_hv_activBus,
                                           dict_df_sgenLoad, opf_status)
 
-        # Get the value of HT producer after optimal flow. 
+        # Get the value of HT producer after optimal flow.
         hvProd_afterOPF = list(network.res_sgen[network.sgen.name.notna()].p_mw)
         lvProd_afterOPF = list(network.res_sgen[network.sgen.name.isna()].p_mw)
 
@@ -243,17 +242,17 @@ def run_powerflow_at(network,
             return cur_max_VriseHvBus, (hvProd_afterOPF, lvProd_afterOPF), cur_period
 
     elif opf_status == 'Both':  # Run normal and depending on the situation, also optimal power flow  **
-        # run power flow first 
+        # run power flow first
         cur_max_VriseHvBus = max_vm_pu_at(network, cur_period, lowNet_hv_activBus,
                                           dict_df_sgenLoad, False)
         max_vm_pu_pf = cur_max_VriseHvBus  # Save the maximum voltage given by the power flow
-                                           # before optimizing
+        # before optimizing
         # If the maximum voltage on buses is above the authorized threshold, run optimal power flow
         if cur_max_VriseHvBus > auth_max_VriseHvBus:
             cur_max_VriseHvBus = max_vm_pu_at(network, cur_period, lowNet_hv_activBus,
                                               dict_df_sgenLoad, True)
 
-        # Get the value of HV and LV producers after optimal flow. 
+        # Get the value of HV and LV producers after optimal flow.
         hvProd_afterOPF = list(network.res_sgen[network.sgen.name.notna()].p_mw)
         lvProd_afterOPF = list(network.res_sgen[network.sgen.name.isna()].p_mw)
 
@@ -265,16 +264,12 @@ def run_powerflow_at(network,
         else:
             return [max_vm_pu_pf, cur_max_VriseHvBus], (hvProd_afterOPF, lvProd_afterOPF), cur_period
 
-    elif opf_status == False:  # Run normal power flow  ***************************************************
+    elif opf_status is False:  # Run normal power flow  ***************************************************
         return max_vm_pu_at(network, cur_period, lowNet_hv_activBus, dict_df_sgenLoad, opf_status), cur_period
 
     else:
         raise ValueError('<opf_status> must be either of [True, False, "Both"]')
 
-   
-
-        
-        
 
 # __________________________________________________________________________________________________________________
 # -----------------------------------------------------------------------------------------------------------------
@@ -473,11 +468,10 @@ def max_vm_pu_at(network,
     #        list as well. Hence one can replace the lowNet_hv_activBus by a tuple
     #        of (lowNet_hv_activBus, uppNet_lv_activBus).
 
-            
-            
+
 # ___________________________________________________________________________________________________________________
 # ------------------------------------------------------------------------------------------------------------------
-# ___________________________________________________________________________________________________________________            
+# ___________________________________________________________________________________________________________________
 def improve_persinstence(per_extracted_res_df,
                          df_prodHT,
                          auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
@@ -515,39 +509,34 @@ def improve_persinstence(per_extracted_res_df,
         strategy.
 
     """
-    
-    # Copy the results of the persistence model 
+
+    # Copy the results of the persistence model
     per_improved_res_out = per_extracted_res_df.copy(deep=True)
     per_improved_res = per_extracted_res_df.copy(deep=True)
-    
+
     # Convert index from period to timestamp
     per_improved_res.index = per_improved_res.index.to_timestamp()
-    
 
     # Extract the part of the df one want to work with i.e. the period before h_start
     # and after h_end as -------'11:00'     '14:00'------ for the default value
-    # the period defined between h_start and h_end is not considered since voltage rises 
-    # are known to happen in that interval 
-    working_df = per_improved_res.between_time(h_start_end[1],h_start_end[0])
-    
-    # Extract index of instances where no voltage rise is detected ignoring the last one 
+    # the period defined between h_start and h_end is not considered since voltage rises
+    # are known to happen in that interval
+    working_df = per_improved_res.between_time(h_start_end[1], h_start_end[0])
+
+    # Extract index of instances where no voltage rise is detected ignoring the last one
     # because not present in the inital df df_prodHT
-    var_index = working_df[working_df.max_vm_pu_pf<=auth_vm_mu_max].index.to_period('10T')[:-1]
-    
+    var_index = working_df[working_df.max_vm_pu_pf <= auth_vm_mu_max].index.to_period('10T')[:-1]
+
     # remplace the prediction from the persistence model with the actual production since
     # no voltage rise is detected at these periods
     per_improved_res_out.P0100[var_index] = prodHT_df.P0100[var_index]
-    
 
     return per_improved_res_out, var_index
-    
 
-    
-    
-    
+
 # ___________________________________________________________________________________________________________________
 # ------------------------------------------------------------------------------------------------------------------
-# ___________________________________________________________________________________________________________________          
+# ___________________________________________________________________________________________________________________
 def prediction_bloc(rnn_model,
                     fitting_scaler,
                     history,
@@ -580,20 +569,17 @@ def prediction_bloc(rnn_model,
 
     """
 
-    history_last_ind = history.index[-1]              # Get index of the last period of history
-    in_shape = tuple([1]) + rnn_model.input_shape[1:] # define input shape for the RNN
-    
-    # Scaled the input  based on the fitting scaler 
-    scaled_history = fitting_scaler.transform(history).reshape(in_shape)  
-    
+    history_last_ind = history.index[-1]  # Get index of the last period of history
+    in_shape = tuple([1]) + rnn_model.input_shape[1:]  # define input shape for the RNN
+
+    # Scaled the input  based on the fitting scaler
+    scaled_history = fitting_scaler.transform(history).reshape(in_shape)
+
     pred = rnn_model.predict(scaled_history, verbose=False)  # prediction
     pred_inv_trans = fitting_scaler.inverse_transform(pred)  # inversse transform the prediction
-    
+
     # Return the prediction of the RNN and the time period associated ()
-    return pred_inv_trans, history_last_ind+1
-
-
-
+    return pred_inv_trans, history_last_ind + 1
 
 
 def check_var_concordance(opf_status=False, pred_model=None):
@@ -606,23 +592,21 @@ ofp_status: Boolean = False
     Wether the maximum voltage is computed after a normal or optimal power flow or both
     + Normal  =>  **pandapower.runpp(net)**,  ofp_status = False
     + Optimal =>  **pandapower.runopp(net)**, ofp_status = True
-    + Both    =>  A normal power flow is run. Only when the result i.e. max_vm_pu > threshold, 
+    + Both    =>  A normal power flow is run. Only when the result i.e. max_vm_pu > threshold,
                   is the optimal power flow run.
 pred_model: String
     Which kind of prediction model to use for the all the variables to predict at current period
     + Pers  =>  Persistence model i.e. val(k)= val(k-1)
 
-  
-    """
-    
-    pred_model_values = ['Pers']
-    
-    # If the prediction model <pred_mod> is defined,  make sure that the <ofp_status> ='Both'
-    if(pred_model is not None):
-        if pred_model not in pred_model_values: # check if the pred_model value is an authorised
-            raise ValueError('<pred_mod> must be either of', pred_model_values )      
-            
-        if opf_status != 'Both': # 
-            raise ValueError('Given that <pred_mod> is defined, <ofp_status>  must be  set to <\'Both\'> ')
 
-    
+    """
+
+    pred_model_values = ['Pers']
+
+    # If the prediction model <pred_mod> is defined,  make sure that the <ofp_status> ='Both'
+    if pred_model is not None:
+        if pred_model not in pred_model_values:  # check if the pred_model value is an authorised
+            raise ValueError('<pred_mod> must be either of', pred_model_values)
+
+        if opf_status != 'Both':  #
+            raise ValueError('Given that <pred_mod> is defined, <ofp_status>  must be  set to <\'Both\'> ')
