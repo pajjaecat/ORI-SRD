@@ -34,9 +34,12 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
     "numpydoc",
+    "m2r"
 ]
 
 
+# Added by myself to integrate .md files in rst
+source_suffix = ['.rst', '.md']
 
 
 intersphinx_mapping = {
