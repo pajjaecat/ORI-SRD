@@ -1,5 +1,7 @@
-..
-   .. include:: ../README.rst
+.. note::
+
+   This project and page is under active development.
+
 
 
 .. image:: ../Ressources/Figures/SrdLogo.svg 
@@ -25,9 +27,7 @@ This documentation offers an in-depth view of the main functions used in the tut
 Check out the :doc:`usage` section for further information, including
 how to :ref:`installation` the project.
 
-.. note::
 
-   This project and page is under active development.
 
 
 Contents
@@ -37,6 +37,7 @@ Contents
    :maxdepth: 2
 
    Home <self>
+   howToUse
    orivariables
    orifunctions
    oriclasses
