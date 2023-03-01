@@ -29,8 +29,8 @@ To help in this endeavour, we have developed the backbone of the project that is
    
 To implement the ` The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ ,
 check out the sections : 
-   - :doc:`howToUse` to get a step by step process to apply to any type of network;
-   - :doc:`AvailableTutorials` to see the differents available tutorials to get inspired of for the implementation
+- :doc:`howToUse` to get a step by step process to apply to any type of network;
+- :doc:`AvailableTutorials` to see the differents available tutorials to get inspired of for the implementation
    
 
 
