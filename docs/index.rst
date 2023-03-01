@@ -13,7 +13,10 @@ Welcome to the official documentation of the `ODRI project <https://www.s2e2.fr/
 -----------
 
 ------------
-
+.. image:: https://readthedocs.org/projects/ori-srd/badge/?version=stable
+    :target: https://ori-srd.readthedocs.io/en/stable/?badge=stable
+    :alt: Documentation Status
+    
 .. note::
    This project and page is under active development.
 
