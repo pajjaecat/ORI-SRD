@@ -27,19 +27,14 @@ To help in this endeavour, we have developed the backbone of the project that is
 .. warning:: 
    Please **READ** `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ before reading everything else.
    
-To implement the `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ ,
+To implement `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ ,
 check out the sections : 
    - :doc:`howToUse` to get a step by step process to apply to any type of network;
-   - :doc:`AvailableTutorials` to see the differents available tutorials to get inspired of for the implementation.
+   - :doc:`Tutorials` to see the differents available tutorials to get inspired of for the implementation.
    
-
-
-
-This documentation offers an in-depth view of the main functions used in the tutorials accessible in the folder `~/Ressources/Notebooks/ <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks>`_ of the  `project's GitHub <https://github.com/pajjaecat/ORI-SRD/tree/main>`_. 
-
+The remaining section :doc:`orivariables`, :doc:`orifunctions` and :doc:`oriclasses` offer an in-depth view of the main functions used in the :doc:`Tutorials`.  
 Check out the :doc:`usage` section for further information, including
 how to :ref:`installation` the project.
-
 
 
 
@@ -49,11 +44,11 @@ Contents
 --------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    Home <self>
    howToUse
-   AvailableTutorials
+   Tutorials
    orivariables
    orifunctions
    oriclasses
