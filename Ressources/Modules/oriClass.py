@@ -110,7 +110,7 @@ class CreateParEngines:
 
         """
 
-        checker.check_opf_status(opf_status)  # Raise Error if the OPF type is not well defined
+        checker.check_opf_status(opf_status)  # Raise Error if the OPF type is not well-defined
         checker.check_clean(clean)  # Raise error if clean Not a bool
 
         # Set variables
@@ -118,7 +118,7 @@ class CreateParEngines:
         self._pred_model = parameters_dict['pred_model']
         self._opf_status = opf_status
 
-        if clean:  # Clear the localspace of all engines if clean is True and reaload modules
+        if clean:  # Clear the localspace of all engines if clean is True and reload modules
 
             self.dview.clear()
             with self._rc[:].sync_imports():
@@ -299,11 +299,11 @@ class InitNetworks:
 
     Parameters
     ----------
-    upperNet :`pandapower.pandapowerNet`
+    upperNet : :obj:`pandapower.pandapowerNet`
         Upper level network.
     lowerNet : `pandapower.pandapowerNet `
         Lower level Network
-    coef_add_bt : float, Optional Default = None
+    coef_add_bt : float, Optional, Default = None
         Value of the added output power for all the LV producers (MW).
     coef_add_bt_dist : str, Optional, Default = None
         How the upscaling of the maximum output of all lower Voltage producers is
@@ -323,7 +323,7 @@ class InitNetworks:
             "lowNet_rand"
                 ``coef_add_bt`` is shared proportionally among a randomly
                 selected et of the LV  producers on the ``lowerNet``. The
-                randomly selected set consist  of half of all LV producers on the
+                randomly selected set consist  of half of all LV producers
                 on the ``lowerNet``
 
     Attributes
@@ -332,7 +332,7 @@ class InitNetworks:
     Raises
     ------
     Exception
-        If ``upperNet`` has less buses that ``lowerNet`` or if ``coef_add_bt`` and
+        If ``upperNet`` has fewer buses that ``lowerNet`` or if ``coef_add_bt`` and
         ``coef_add_bt_dist`` are the wrong type.
 
 
@@ -463,10 +463,10 @@ class InitNetworks:
         The minimum and the maximum  authorised thresholds  are set on  the list of
         buses  given by ``lowNet_activatedBus_list`` on the ``lowerNet``.
 
-        This method can be utilised to set the authorized voltage rise on both the
-        higher and  lower voltage Buses.  If the desire is to set the authorized
+        This method can be utilised to set the authorised voltage rise on both the
+        higher and  lower voltage Buses.  If the desire is to set the authorised
         voltage rise on the hv buses, ``lowNet_activatedBus_list`` **MUST** be the
-        list of lowNet_hv_activatedBus. If the desire is to set the authorized
+        list of lowNet_hv_activatedBus. If the desire is to set the authorised
         voltage rise on the lv buses, parameter `lowNet_activatedBus_list`` **MUST**
         be the list  of lowNet_lv_activatedBus.
 
@@ -476,9 +476,9 @@ class InitNetworks:
         lowNet_activatedBus_list : list
             List of all the activated buses on the ``lowerNet``
         min_vm_mu : float, Default = :py:data:`oriVariables.defAuth_hvBus_vRiseMin`
-            Minimum authorized voltage rise on ``lowNet_activatedBus_list``.
+            Minimum authorised voltage rise on ``lowNet_activatedBus_list``.
         max_vm_mu : float, Default = :py:data:`oriVariables.defAuth_hvBus_vRiseMax`
-            Maximum authorized voltage rise on ``lowNet_activatedBus_list``.
+            Maximum authorised voltage rise on ``lowNet_activatedBus_list``.
 
         """
 
@@ -843,6 +843,7 @@ class SensAnalysisResult:
 
             for cur_key in cur_file_data_keys_list:  # for each element in the loaded dictionary
                 data_df = cur_file_data[cur_key]['Power Sgen']
+
                 # data_df.iloc[:,0] => Power injected when there is  no control
                 # data_df.iloc[:,1] => Power injected using current controller
                 if end_date is None:
@@ -987,7 +988,7 @@ class SensAnalysisResults(SensAnalysisResult):  # This class inherits super prop
             self._files_in_folder_list_dict.update({cur_model_name: os.listdir(cur_model_folder)})
             self._plkFiles_in_folder_list_dict.update({cur_model_name:
                 super()._extractPlkFiles(self._files_in_folder_list_dict[cur_model_name])
-            })
+                                                       })
             super()._check_fileName_Format(self._plkFiles_in_folder_list_dict[cur_model_name])
 
             self._sortedPlkFiles_in_folder_list_dict.update({cur_model_name:
