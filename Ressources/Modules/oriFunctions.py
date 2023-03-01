@@ -189,7 +189,7 @@ def run_powerflow(network,
 
     # Creating empty list
     list_max_vm_pu = []  # Maximum vm_pu at each period considered
-    list_sgen_HT = []    # Actual HT generators power after optimal flow
+    list_sgen_HT = []  # Actual HT generators power after optimal flow
 
     # Initiate parameters from inputs
     df_prodHT = dict_df_sgenLoad['df_prodHT']
@@ -369,7 +369,7 @@ def run_powerflow_at(network,
                                           dict_df_sgenLoad, False)
         max_vm_pu_pf = cur_max_VriseHvBus  # Save the maximum voltage given by the power flow
         # before optimizing
-        # If the maximum voltage on buses is above the authorized threshold, run optimal power flow
+        # If the maximum voltage on buses is above the authorised threshold, run optimal power flow
         if cur_max_VriseHvBus > auth_max_VriseHvBus:
             cur_max_VriseHvBus = max_vm_pu_at(network, cur_period, lowNet_hv_activBus,
                                               dict_df_sgenLoad, True)
@@ -600,9 +600,9 @@ def improve_persinstence(per_extracted_res_df,
                          h_start_end: list = ['11:00', '14:00']):
     # Implement : * Inject all the production as long as max_vm_pu_pf < vm_mu_max, i.e.
     # no voltage rise is detected
-    """
+    """     Improve the results given by the persistence model.
 
-    Improve the results given by the persistence model.
+
     If a voltage rise is not predicted by the persistence model at a certain period,
     the controllable sgens is allowed to inject all its power into the grid.
     Otherwise the energy producer can inject at most the predicted power by the
@@ -876,7 +876,7 @@ def combineRnnPred(model_Vrise_dict,
 
     # Use vrise_true_mask to insert predicted values given by model1 at the concerned instants
     df_ctrlHvProd_toReturn[vrise_true_mask] = ctrlHvProd_model1_out.loc[mask_per2work[vrise_true_mask],
-                                                                        [ctrld_hvProdName] ]
+                                                                        [ctrld_hvProdName]]
 
     return df_ctrlHvProd_toReturn, bin_thresh_df
 
@@ -1082,7 +1082,7 @@ def createDict_prodHtBt_Load(df_pred_in,
     params_coef_add_bt = networks_in.get_params_coef_add_bt()
     ctrld_hvProd_name = networks_in.get_ctrld_hvProdName()
 
-    # Check if coef_add_bt_dist is authorized
+    # Check if coef_add_bt_dist is authorised
     checker.check_coef_add_bt_dist(params_coef_add_bt[1])
 
     # Check whether the input dataframe columns are in the expected order
@@ -1249,7 +1249,7 @@ def block_prod(df_yTilde_opt,
 
     """
     # Get controlled HV prod Name
-    ctrld_hvProdName = df_yTilde_opt.columns[0]
+    ctrld_hvProdName = df_hvProd_noControl.columns[0]
 
     # create period index
     per_index2 = (df_yTilde_opt.index.to_timestamp()
@@ -1353,7 +1353,7 @@ def setNetwork_params(upperNet_file: str,
     vm_mu_max_hvBus, vm_mu_min_hvBus = params_vRise[0]
     vm_mu_max_lvBus, vm_mu_min_lvBus = params_vRise[1]
 
-    # Check if coef_add_bt_dist is authorized
+    # Check if coef_add_bt_dist is authorised
     checker.check_coef_add_bt_dist(coef_add_bt_dist)
 
     # Load lower and upper Network
