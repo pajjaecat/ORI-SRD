@@ -25,9 +25,9 @@ ORI's primary goal is to provide tools to help `SRD <https://www.srd-energies.fr
 To help in this endeavour, we have developed the backbone of the project that is  `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_.
 
 .. warning:: 
-   Please **READ** ` The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ before reading everything else.
+   Please **READ** `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ before reading everything else.
    
-To implement the ` The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ ,
+To implement the `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ ,
 check out the sections : 
    - :doc:`howToUse` to get a step by step process to apply to any type of network;
    - :doc:`AvailableTutorials` to see the differents available tutorials to get inspired of for the implementation.
