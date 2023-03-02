@@ -41,3 +41,6 @@ Simulations using `The voltage rise detection block scheme <https://github.com/p
 
 `2021_2022_Persistence <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_Persistence.ipynb>`_ and `2021_2022_Persistence2 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_Persistence2.ipynb>`_
 ****************************************************************************************************************************************************************************************************************************************************************************************
+> > Simulations using the [Voltage Rise control Block scheme](../Docs/VRiseControlBlockScheme.pdf) with the block **PRED** 
+> using persistence of the previous instant as prediction method, respectively for $max\\_ vm\\_ pu = 1.0250$ and $max\\_vm\\_pu = 1.0225$ 
+
