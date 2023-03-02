@@ -28,7 +28,7 @@ List of Tutorials
 ------------------
 
 
-.. _CleanDataSTLaurentDeJourdes:
+.. _RstCleanDataSTLaurentDeJourdes:
 
 `CleanDataSTLaurentDeJourdes <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/CleanDataSTLaurentDeJourdes.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -36,7 +36,7 @@ Clean the network's input data (Hv & Lv Prod, Load demand) and save the results 
 
 
 
-.. _STLaurentDeJourdes_2:
+.. _RstSTLaurentDeJourdes_2:
 
 `STLaurentDeJourdes_2 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/STLaurentDeJourdes_2.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -47,21 +47,21 @@ Simulations of the Voltage rise on Civaux's network when the controlled HV produ
 * Injecting into the network with a maximum Voltage Rise threshold considered on the HV buses.
 
 
-.. _2021_2022_KnownFuture:
+.. _Rst2021_2022_KnownFuture:
 
 `2021_2022_KnownFuture <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_KnownFuture.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Simulations using `The voltage rise detection block scheme_` with the block PRED having a perfect knowledge of the future in parallel to speed up the process.
 
 
-.. _2021_2022_Persistence: 
+.. _Rst2021_2022_Persistence: 
 
 `2021_2022_Persistence <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_Persistence.ipynb>`_ and `2021_2022_Persistence2 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_Persistence2.ipynb>`_
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Simulations using |vRiseBlockScheme|_ with the block **PRED**  using persistence of the previous instant as prediction method, respectively for :math:`max\_ vm\_ pu = 1.0250` and :math:`max\_vm\_pu = 1.0225`.
 
 
-.. _2021_2022_PersistenceRob:
+.. _Rst2021_2022_PersistenceRob:
 
 `2021_2022_PersistenceRob <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_PersistenceRob.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -69,7 +69,7 @@ Simulations using the |vRiseBlockScheme|_ with the block **PRED** using persiste
 
 
 
-.. _RNN_StLaurentDeJourdes:
+.. _RstRNN_StLaurentDeJourdes:
 
 `RNN_Train_StLaurentDeJourdes <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/RNN_Train_StLaurentDeJourdes.ipynb>`_ and `RNN_Sim_StLaurentDeJourdes <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/RNN_Sim_StLaurentDeJourdes.ipynb>`_
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -81,7 +81,7 @@ Simulations using the |vRiseBlockScheme|_ with the block **PRED** using persiste
 
 
 
-.. _2021_2022_RNN:
+.. _Rst2021_2022_RNN:
 
 `2021_2022_RNN <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_RNN.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -90,14 +90,14 @@ Simulations using |vRiseBlockScheme|_ with the block **PRED** based on the RNN c
 
 
 
-.. _VoltageRiseBinaryUpdated:
+.. _RstVoltageRiseBinaryUpdated:
 
 `VoltageRiseBinaryUpdated <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Using a power flow in parallel, compute the maximum voltage rise on the lower network (and convert it into a binary variable) from Jan-01-2020 to June-01-2022.
 
 
-.. _Numerical_VriseRNN:
+.. _RstNumerical_VriseRNN:
 
 Numerical Voltage Rise RNN
 """""""""""""""""""""""""""
@@ -108,7 +108,7 @@ Numerical Voltage Rise RNN
 
 
 
-.. _Binary_VriseRNN:
+.. _RstBinary_VriseRNN:
 
 Binary Voltage Rise RNN
 """""""""""""""""""""""""""
@@ -118,7 +118,7 @@ Binary Voltage Rise RNN
 
 
 
-.. _2021_2022_RNN_Robust_All_Models: 
+.. _Rst2021_2022_RNN_Robust_All_Models: 
 
 `2021_2022_RNN_Robust_All_Models <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_RNN_Robust_All_Models.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -127,16 +127,16 @@ to choose the combination or the unique model to use. This is an implementation 
 
 
 
-.. _2021_2022_SimResAll_RNN:
+.. _Rst2021_2022_SimResAll_RNN:
 
 `2021_2022_SimResAll_RNN <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_SimResAll_RNN.ipynb>`_
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Compare the results of the simulations given by :ref:`_2021_2022_RNN_Robust_All_Models` when using each or a combination of the RNN models.
+Compare the results of the simulations given by :ref:`Rst2021_2022_RNN_Robust_All_Models` when using each or a combination of the RNN models.
 
 
 
 
-.. _SensAnalysisP0100:
+.. _RstSensAnalysisP0100:
 
 `SensAnalysisP0100 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100.ipynb>`_
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -157,7 +157,7 @@ We focus on the total Energy curtailed and the resulting voltage rise above a de
 
 `SensAnalysisP0100_Res <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100_Res.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-The results of the previously performed sensitivity analysis in :ref:`SensAnalysisP0100` are extracted for analytics.
+The results of the previously performed sensitivity analysis in :ref:`RstSensAnalysisP0100` are extracted for analytics.
 
 
 
