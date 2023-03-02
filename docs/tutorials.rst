@@ -49,7 +49,7 @@ Simulations using `The voltage rise detection block scheme <https://github.com/p
 `2021_2022_PersistenceRob <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_PersistenceRob.ipynb>`_
 **********************************************************************************
 Simulations using the `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ with the block 
-> **PRED** using persistence of the previous instant as prediction method.
+**PRED** using persistence of the previous instant as prediction method.
 
 
 
