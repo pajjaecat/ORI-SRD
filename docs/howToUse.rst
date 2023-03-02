@@ -7,6 +7,8 @@ This sections gives an in-depth view of how to efficiently navigate and use the 
 
 1- Download the repository
 --------------------------
+The repository is available  `here <https://github.com/pajjaecat/ORI-SRD>`_. After downloading, make sure to check out it's ` Architecture <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/README.md>`_ to comprehend how the files are organized. 
+
 
 1- Some Definitions
 ------------------
