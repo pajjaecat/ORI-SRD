@@ -6,7 +6,7 @@ This sections gives an in-depth view of how to efficiently navigate and use the 
 
 
 
-Some Definitions
+1- Some Definitions
 ------------------
 
 .. list-table:: 
