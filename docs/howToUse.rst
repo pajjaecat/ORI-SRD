@@ -5,6 +5,10 @@ How to Use
 This sections gives an in-depth view of how to efficiently navigate and use the `Ori's Github Repository <https://github.com/pajjaecat/ORI-SRD>`_.
 
 
+
+Some Definitions
+------------------
+
 .. list-table:: 
    :widths: 25 50
    :header-rows: 1
@@ -20,4 +24,4 @@ This sections gives an in-depth view of how to efficiently navigate and use the 
    * - **Lower Network**
      - The network to study which is a small branch of the Upper Network
 
-
+By defaut, we consider *ST LAURENT* and *CIVAUX* as, respectively, the upper and lower Network.
