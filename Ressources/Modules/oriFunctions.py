@@ -343,8 +343,8 @@ def run_powerflow_at(network,
     initLowerNet_at(network, cur_period, sum_max_p_mw_upperNet, dict_df_sgenLoad)
 
     # Get the maximum voltage magnitude of all activated bus to a list. See the
-    #                               corresponding function for more explanation
-    if opf_status == True:  # Run optimal power flow ******************************************
+    #                                corresponding function for more explanation
+    if opf_status is True:  # Run optimal power flow ******************************************
 
         # get maximum value of vm_pu for the current period after optimal power flow
         cur_max_VriseHvBus = max_vm_pu_at(network, cur_period,
@@ -386,7 +386,7 @@ def run_powerflow_at(network,
         else:
             return [max_vm_pu_pf, cur_max_VriseHvBus], (hvProd_afterOPF, lvProd_afterOPF), cur_period
 
-    elif not opf_status:  # Run normal power flow  ***************************************************
+    elif opf_status is False:  # Run normal power flow  ***************************************************
         return max_vm_pu_at(network, cur_period, lowNet_hv_activBus, dict_df_sgenLoad, opf_status), cur_period
 
     else:
@@ -1368,7 +1368,7 @@ def setNetwork_params(upperNet_file: str,
     lowerNet_hv_bus_df = networks.get_lowerNet_hv_bus_df(hvBus_voltage=default_hv_voltage)
     lowerNet_lv_bus_df = networks.get_lowerNet_lv_bus_df(lvBus_voltage=default_lv_voltage)
 
-    uppNet_sum_max_lvProdLoad = networks.get_upperNet_sum_max_lvProdLoad()  # To use later in functions
+    # uppNet_sum_max_lvProdLoad = networks.get_upperNet_sum_max_lvProdLoad()  # To use later in functions
 
     # Extract the actives HV buses in the lower Network
     lowerNet_hv_activBus = networks.get_lowerNet_hvActivatedBuses(lowerNet_hv_bus_df.index)
