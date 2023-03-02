@@ -131,7 +131,7 @@ to choose the combination or the unique model to use. This is an implementation 
 
 `2021_2022_SimResAll_RNN <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_SimResAll_RNN.ipynb>`_
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Compare the results of the simulations given by 2021_2022_RNN_Robust_All_Models_ when using each or a combination of the RNN models.
+Compare the results of the simulations given by :ref:`_2021_2022_RNN_Robust_All_Models` when using each or a combination of the RNN models.
 
 
 
