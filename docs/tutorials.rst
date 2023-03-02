@@ -57,11 +57,13 @@ Simulations using the `The voltage rise detection block scheme <https://github.c
 **PRED** using persistence of the previous instant as prediction method.
 
 
+
 .. _RNN_StLaurentDeJourdes:
 
 `RNN_Train_StLaurentDeJourdes <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/RNN_Train_StLaurentDeJourdes.ipynb>`_ and 
 `RNN_Sim_StLaurentDeJourdes <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/RNN_Sim_StLaurentDeJourdes.ipynb>`_
-*************************************************************************************************************************************************************************
+*********************************************************************************************************************************************
+
 * Create and Train a Recurrent Neural Network `RNN <https://en.wikipedia.org/wiki/Recurrent_neural_network>`_ of type LSTM to predict some values; 
 * Use the previously trained RNN to predict the next :math:`\tilde{X}(k)`and :math:`\tilde{Y}(k)` based on the sliding history :math:`Z(k)` of the 
   past twelve daylight hours. `Figures <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Figures>`_ contains several comparison plots of the real variables 
