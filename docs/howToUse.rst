@@ -55,11 +55,11 @@ Add Files
 
 .. notes::
    This step is only necessary if one wants to apply Ori to networks diferent from from |uppernet| and |lowernet|.
-   
-   - Add networks (lower and upper) files to  `Pickle_files <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Pickle_files>`_;
-   - Add the networks' inputs files to `Excel_files <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Excel_files>`_. 
-      - Each of the Hv Prod must have its own associated files;
-      - All the Lv Prods (i.e. all the LV Prods in the Upper network) must be aggregated in a unique file;
-      - All the Load (i.e. all the load in the Upper network) must be aggregated in a unique file.
-      
+ 
+- Add networks (lower and upper) files to  `Pickle_files <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Pickle_files>`_;
+- Add the networks' inputs files to `Excel_files <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Excel_files>`_. 
+   - Each of the Hv Prod must have its own associated files;
+   - All the Lv Prods (i.e. all the LV Prods in the Upper network) must be aggregated in a unique file;
+   - All the Load (i.e. all the load in the Upper network) must be aggregated in a unique file.
+
 
