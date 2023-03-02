@@ -40,8 +40,9 @@ for new networks configuration please check out the sections :
 The remaining sections :doc:`orivariables`, :doc:`orifunctions` and :doc:`oriclasses` offer an in-depth view of the main functions used in the :doc:`tutorials`.  
 
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+.. 
+         Check out the :doc:`usage` section for further information, including
+         how to :ref:`installation` the project.
 
 
 
@@ -59,4 +60,3 @@ Contents
    orivariables
    orifunctions
    oriclasses
-   api
