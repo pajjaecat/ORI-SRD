@@ -37,7 +37,7 @@ Some Definitions
 
    * - Definitions
      - Meaning
-   * - **LV\lv Prod\Sgens**
+   * - **LV\\lv Prod\\Sgens**
      - Lower voltage generators (producteurs BT)
    * - **HV\hv Prod or Sgens**
      - High voltage generators (producteurs HTA)
@@ -68,3 +68,16 @@ Add Files
    - All the Load (i.e. all the load in the Upper network) must be aggregated in a unique file.
 
 
+
+
+Apply the |vRiseBlockScheme|_ 
+************************************************************************************
+
+
+To apply the |vRiseBlockScheme|_ we propose the following steps. 
+
+
+Define variables
+^^^^^^^^^^^^^^^^^^
+
+The goal here is to define all the dafault variables to use for all simulations in a file. All the necessary variables are described in :ref:`Default variables`
