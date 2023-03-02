@@ -1,13 +1,3 @@
-## Some definition
-
-|    Definition             |                              Meaning                               
-|   --------                |                ----------------------------------------            
-| **LV\lv Prod\Sgens**      |   Lower voltage generators (producteurs BT)                        
-| **HV\hv Prod or Sgens**   |   High voltage generators (producteurs HTA)
-   **Upper Network**        |   The network where is located the Main Poste Source
-   **Lower Network**        |   The network to study which is a small branch of the Upper Network
-
-
 ## Architecture
 The available resource is subdivided into six folders as follows:
 - [Notebooks](Notebooks/): Contains all the Notebooks for the different simulations and tutorials. [NotebooksReadMe](Notebooks/README.md) gives more explanation about them. 
