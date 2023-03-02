@@ -136,6 +136,7 @@ Compare the results of the simulations given by `2021_2022_RNN_Robust_All_Models
 
 
 
+
 .. _SensAnalysisP0100:
 
 `SensAnalysisP0100 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100.ipynb>`_
@@ -149,6 +150,7 @@ Perform a sensitivity analysis of the controlled Hv Prod maximum output dependin
 * Robust RNN Model 3. 
 
 We focus on the total Energy curtailed and the resulting voltage rise above a defined threshold.
+
 
 
 
