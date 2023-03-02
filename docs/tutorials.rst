@@ -11,7 +11,7 @@ This section presents a list of all the Notebooks or tutorials available. You ma
 
 .. _CleanDataSTLaurentDeJourdes:
 
-`CleanDataSTLaurentDeJourdes <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/CleanDataSTLaurentDeJourdes.ipynb>`
-*************************************************************************************************************************************
+`CleanDataSTLaurentDeJourdes <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/CleanDataSTLaurentDeJourdes.ipynb>`_
+**************************************************************************************************************************************
 Clean the network's input data (Hv & Lv Prod, Load demand) and save the results to be recalled when needed.
 
