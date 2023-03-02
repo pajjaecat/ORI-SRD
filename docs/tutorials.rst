@@ -4,7 +4,8 @@
      Apparently the option `m2r_parse_relative_links` can help fix the problem however I don't know yet how to activate it in the conf.py file
 
 
-.. |vRiseBlockScheme| replace :: `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_
+.. |vRiseBlockScheme| replace:: The voltage rise detection block scheme
+.. _vRiseBlockScheme: https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf
 
 
 
@@ -14,7 +15,11 @@ Tutorials
 
 
 .. warning:: 
-     Please **READ** `|vRiseBlockScheme|`  before reading everything else.
+     Please **READ** |vRiseBlockScheme|_  before reading everything else.
+     - |vRiseBlockScheme|_ 
+     - `|vRiseBlockScheme|_`
+     - |vRiseBlockScheme|
+
 
 
 This section presents a list of all the Notebooks or tutorials available. You may draw inspiration from them for the needed usability. This list is also available `here <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks#readme>`_
