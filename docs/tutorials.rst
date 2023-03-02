@@ -1,3 +1,8 @@
+.. 
+     *TODO : load the ReadMe file in the tutorial file. For the moment inclusion is working fine, thanks to the extenxion m2r2, however the links in the md file 
+     are broken in the rendered htlm page. Find a way to fix this problem. 
+     Apparently the option `m2r_parse_relative_links` can help fix the problem however I don't know yet how to activate it in the conf.py file
+
 Tutorials
 ===========
 
@@ -6,7 +11,7 @@ Tutorials
      Please **READ** `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ before reading everything else.
 
 
-This section presents a list of all the Notebooks or tutorials available. You may draw inspiration from them for the needed usability. 
+This section presents a list of all the Notebooks or tutorials available. You may draw inspiration from them for the needed usability. This list is also available `here <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks#readme>`_
 
 
 
