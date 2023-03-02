@@ -5,7 +5,9 @@
 
 
 
+
 .. _The voltage rise detection block scheme: https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf
+
 
 
 Tutorials
@@ -54,105 +56,105 @@ Simulations using `The voltage rise detection block scheme_` with the block PRED
 
 `2021_2022_Persistence <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_Persistence.ipynb>`_ and `2021_2022_Persistence2 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_Persistence2.ipynb>`_
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Simulations using `The voltage rise detection block scheme_` with the block **PRED**  using persistence of the previous instant as prediction method, respectively for :math:`max\_ vm\\_ pu = 1.0250` and :math:`max\\_vm\\_pu = 1.0225`.
+Simulations using `The voltage rise detection block scheme_` with the block **PRED**  using persistence of the previous instant as prediction method, respectively for :math:`max\_ vm\_ pu = 1.0250` and :math:`max\_vm\_pu = 1.0225`.
 
+.. 
+    .. _2021_2022_PersistenceRob:
 
-.. _2021_2022_PersistenceRob:
-
-`2021_2022_PersistenceRob <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_PersistenceRob.ipynb>`_
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Simulations using the `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ with the block 
-**PRED** using persistence of the previous instant as prediction method.
-
-
-
-.. _RNN_StLaurentDeJourdes:
-
-`RNN_Train_StLaurentDeJourdes <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/RNN_Train_StLaurentDeJourdes.ipynb>`_ and `RNN_Sim_StLaurentDeJourdes <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/RNN_Sim_StLaurentDeJourdes.ipynb>`_
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-* Create and Train a Recurrent Neural Network `RNN <https://en.wikipedia.org/wiki/Recurrent_neural_network>`_ of type LSTM to predict some values; 
-* Use the previously trained RNN to predict the next :math:`\tilde{X}(k)`and :math:`\tilde{Y}(k)` based on the sliding history :math:`Z(k)` of the 
-  past twelve daylight hours. `Figures <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Figures>`_ contains several comparison plots of the real variables 
-  and their prediction.
+    `2021_2022_PersistenceRob <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_PersistenceRob.ipynb>`_
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    Simulations using the `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_ with the block 
+    **PRED** using persistence of the previous instant as prediction method.
 
 
 
-.. _2021_2022_RNN:
+    .. _RNN_StLaurentDeJourdes:
 
-`2021_2022_RNN <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_RNN.ipynb>`_
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Simulations using `The voltage rise detection block scheme_` with the block **PRED** based on the RNN created and trained in `RNN_StLaurentDeJourdes_` in parallel.
+    `RNN_Train_StLaurentDeJourdes <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/RNN_Train_StLaurentDeJourdes.ipynb>`_ and `RNN_Sim_StLaurentDeJourdes <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/RNN_Sim_StLaurentDeJourdes.ipynb>`_
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-
-
-.. _VoltageRiseBinaryUpdated:
-
-`VoltageRiseBinaryUpdated <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Using a power flow in parallel, compute the maximum voltage rise on the lower network (and convert it into a binary variable) from Jan-01-2020 to June-01-2022.
-
-
-.. _Numerical_VriseRNN:
-
-Numerical Voltage Rise RNN
-"""""""""""""""""""""""""""
-* `VoltageRiseNum_Train <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseNum_Train.ipynb>`_ - Create and Train an RNN to predict 
-  the value of the maximum voltage rise.
-* `VoltageRiseNum_Pred <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseNum_Pred.ipynb>`_ - Use the previously trained RNN to predict the
-  maximum Voltage rise and compare the results to that of a simple power flow.
+    * Create and Train a Recurrent Neural Network `RNN <https://en.wikipedia.org/wiki/Recurrent_neural_network>`_ of type LSTM to predict some values; 
+    * Use the previously trained RNN to predict the next :math:`\tilde{X}(k)` and :math:`\tilde{Y}(k)` based on the sliding history :math:`Z(k)` of the 
+      past twelve daylight hours. `Figures <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Figures>`_ contains several comparison plots of the real variables 
+      and their prediction.
 
 
 
-.. _Binary_VriseRNN:
+    .. _2021_2022_RNN:
 
-Binary Voltage Rise RNN
-"""""""""""""""""""""""""""
-* `VoltageRiseBin_Train <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBin_Train.ipynb>`_ - Create and train a RNN to Predict a binary variable
-  (1 or 0), whether a voltage rise (above a predefined threshold i.e. 1.0250 ) will occur or not;
-* `VoltageRiseNum_Pred <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBin_Pred.ipynb>`_ - Use the previously trained RNN to predict whether a      voltage rise will occur or not in the next period.
+    `2021_2022_RNN <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_RNN.ipynb>`_
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    Simulations using `The voltage rise detection block scheme_` with the block **PRED** based on the RNN created and trained in `RNN_StLaurentDeJourdes_` in parallel.
 
 
 
-.. _2021_2022_RNN_Robust_All_Models: 
 
-`2021_2022_RNN_Robust_All_Models <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_RNN_Robust_All_Models.ipynb>`_
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Combine the prediction of three RNN models to evaluate whether an exceeding of the defined maximum voltage rise will occur in next step. The user with the help of paramUser get
-to choose the combination or the unique model to use. This is an implementation of the Combined RNN prediction described in Section 2.1 of `The voltage rise detection block scheme_` in parallel.
+    .. _VoltageRiseBinaryUpdated:
 
-
-
-.. _2021_2022_SimResAll_RNN:
-
-`2021_2022_SimResAll_RNN <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_SimResAll_RNN.ipynb>`_
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Compare the results of the simulations given by `2021_2022_RNN_Robust_All_Models_` when using each or a combination of the RNN models.
+    `VoltageRiseBinaryUpdated <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBinaryUpdated.ipynb>`_
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    Using a power flow in parallel, compute the maximum voltage rise on the lower network (and convert it into a binary variable) from Jan-01-2020 to June-01-2022.
 
 
+    .. _Numerical_VriseRNN:
 
-.. _SensAnalysisP0100:
-
-`SensAnalysisP0100 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100.ipynb>`_
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Perform a sensitivity analysis of the controlled Hv Prod maximum output depending on several prediction models:
-
-* Future Known;
-* Robust persistence model (of the previous period);
-* RNN Model1;
-* Robust RNN Model1;
-* Robust RNN Model 3. 
-
-We focus on the total Energy curtailed and the resulting voltage rise above a defined threshold.
+    Numerical Voltage Rise RNN
+    """""""""""""""""""""""""""
+    * `VoltageRiseNum_Train <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseNum_Train.ipynb>`_ - Create and Train an RNN to predict 
+      the value of the maximum voltage rise.
+    * `VoltageRiseNum_Pred <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseNum_Pred.ipynb>`_ - Use the previously trained RNN to predict the
+      maximum Voltage rise and compare the results to that of a simple power flow.
 
 
 
-.. _SensAnalysisP0100_Res:
+    .. _Binary_VriseRNN:
 
-`SensAnalysisP0100_Res <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100_Res.ipynb>`_
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-The results of the previously performed sensitivity analysis in `SensAnalysisP0100_` are extracted for analytics.
+    Binary Voltage Rise RNN
+    """""""""""""""""""""""""""
+    * `VoltageRiseBin_Train <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBin_Train.ipynb>`_ - Create and train a RNN to Predict a binary variable
+      (1 or 0), whether a voltage rise (above a predefined threshold i.e. 1.0250 ) will occur or not;
+    * `VoltageRiseNum_Pred <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBin_Pred.ipynb>`_ - Use the previously trained RNN to predict whether a      voltage rise will occur or not in the next period.
+
+
+
+    .. _2021_2022_RNN_Robust_All_Models: 
+
+    `2021_2022_RNN_Robust_All_Models <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_RNN_Robust_All_Models.ipynb>`_
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    Combine the prediction of three RNN models to evaluate whether an exceeding of the defined maximum voltage rise will occur in next step. The user with the help of paramUser get
+    to choose the combination or the unique model to use. This is an implementation of the Combined RNN prediction described in Section 2.1 of `The voltage rise detection block scheme_` in parallel.
+
+
+
+    .. _2021_2022_SimResAll_RNN:
+
+    `2021_2022_SimResAll_RNN <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_SimResAll_RNN.ipynb>`_
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    Compare the results of the simulations given by `2021_2022_RNN_Robust_All_Models_` when using each or a combination of the RNN models.
+
+
+
+    .. _SensAnalysisP0100:
+
+    `SensAnalysisP0100 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100.ipynb>`_
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    Perform a sensitivity analysis of the controlled Hv Prod maximum output depending on several prediction models:
+
+    * Future Known;
+    * Robust persistence model (of the previous period);
+    * RNN Model1;
+    * Robust RNN Model1;
+    * Robust RNN Model 3. 
+
+    We focus on the total Energy curtailed and the resulting voltage rise above a defined threshold.
+
+
+
+    .. _SensAnalysisP0100_Res:
+
+    `SensAnalysisP0100_Res <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100_Res.ipynb>`_
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    The results of the previously performed sensitivity analysis in `SensAnalysisP0100_` are extracted for analytics.
 
 
 
