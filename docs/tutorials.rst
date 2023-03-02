@@ -154,7 +154,7 @@ We focus on the total Energy curtailed and the resulting voltage rise above a de
 
 
 
-.. _SensAnalysisP0100_Res:
+.. _rstSensAnalysisP0100_Res:
 
 `SensAnalysisP0100_Res <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100_Res.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
