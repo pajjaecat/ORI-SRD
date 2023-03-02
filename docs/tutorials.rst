@@ -16,9 +16,6 @@ Tutorials
 
 .. warning:: 
      Please **READ** |vRiseBlockScheme|_  before reading everything else.
-     - |vRiseBlockScheme|_ 
-     - `|vRiseBlockScheme|_`
-     - |vRiseBlockScheme|
 
 
 
