@@ -17,7 +17,7 @@ Tutorials
 
 
 .. warning:: 
-     Please **READ** |vRiseBlockScheme|_  before reading everything else.
+     Please **READ** vRiseBlockScheme_  before reading everything else.
 
 
 
