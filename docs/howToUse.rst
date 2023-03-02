@@ -1,4 +1,9 @@
-  
+.. |vRiseBlockScheme| replace:: `The voltage rise detection block scheme`
+.. _vRiseBlockScheme: https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf
+
+
+
+
 How to Use
 ===============
 
