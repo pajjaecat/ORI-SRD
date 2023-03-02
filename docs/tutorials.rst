@@ -23,6 +23,6 @@ Clean the network's input data (Hv & Lv Prod, Load demand) and save the results 
 *************************************************************************************************************************
 Simulations of the Voltage rise on Civaux's network when the controlled HV producer is:
 
-     * Not injecting into the network;
-     * Injecting into the network with no constraints considered;
-     * Injecting into the network with a maximum Voltage Rise threshold considered on the HV buses.
+* Not injecting into the network;
+* Injecting into the network with no constraints considered;
+* Injecting into the network with a maximum Voltage Rise threshold considered on the HV buses.
