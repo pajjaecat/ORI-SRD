@@ -124,7 +124,7 @@ Binary Voltage Rise RNN
 `2021_2022_RNN_Robust_All_Models <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_RNN_Robust_All_Models.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Combine the prediction of three RNN models to evaluate whether an exceeding of the defined maximum voltage rise will occur in next step. The user with the help of paramUser get
-to choose the combination or the unique model to use. This is an implementation of the Combined RNN prediction described in Section 2.1 of `The voltage rise detection block scheme_` in parallel.
+to choose the combination or the unique model to use. This is an implementation of the Combined RNN prediction described in Section 2.1 of |vRiseBlockScheme|_ in parallel.
 
 
 
@@ -132,7 +132,7 @@ to choose the combination or the unique model to use. This is an implementation 
 
 `2021_2022_SimResAll_RNN <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_SimResAll_RNN.ipynb>`_
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Compare the results of the simulations given by `2021_2022_RNN_Robust_All_Models_` when using each or a combination of the RNN models.
+Compare the results of the simulations given by 2021_2022_RNN_Robust_All_Models_ when using each or a combination of the RNN models.
 
 
 
@@ -158,7 +158,7 @@ We focus on the total Energy curtailed and the resulting voltage rise above a de
 
 `SensAnalysisP0100_Res <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100_Res.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-The results of the previously performed sensitivity analysis in :ref:`SensAnalysisP0100` are extracted for analytics.
+The results of the previously performed sensitivity analysis in :ref:`_SensAnalysisP0100` are extracted for analytics.
 
 
 
