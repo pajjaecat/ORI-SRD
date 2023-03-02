@@ -15,7 +15,7 @@ Tutorials
 
 
 .. warning:: 
-     Please **READ** `The voltage rise detection block scheme_` before reading everything else.
+     Please **READ** `The voltage rise detection block scheme_`  before reading everything else.
 
 
 This section presents a list of all the Notebooks or tutorials available. You may draw inspiration from them for the needed usability. This list is also available `here <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Notebooks#readme>`_
