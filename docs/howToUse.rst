@@ -71,7 +71,8 @@ Add Files
 
 
 Apply the |vRiseBlockScheme|_ 
-************************************************************************************
+-------------------------------
+**********************************
 
 
 To apply the |vRiseBlockScheme|_ we propose the following steps. 
@@ -80,4 +81,4 @@ To apply the |vRiseBlockScheme|_ we propose the following steps.
 Define variables
 ^^^^^^^^^^^^^^^^^^
 
-The goal here is to define all the dafault variables to use for all simulations in a file. All the necessary variables are described in :ref:`Default variables`
+The goal here is to define all the dafault variables to use for all simulations in a file. All the necessary variables are described in :ref:`defaultVariables`
