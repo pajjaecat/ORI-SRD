@@ -3,11 +3,11 @@
      are broken in the rendered htlm page. Find a way to fix this problem. 
      Apparently the option `m2r_parse_relative_links` can help fix the problem however I don't know yet how to activate it in the conf.py file
 
-.. 
-    .. |vRiseBlockScheme| replace:: `The voltage rise detection block scheme <>`
-    .. _vRiseBlockScheme: https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf
 
-.. |vRiseBlockScheme| replace:: `The voltage rise detection block scheme <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf>`_
+
+.. |vRiseBlockScheme| replace:: `The voltage rise detection block scheme`
+.. _vRiseBlockScheme: https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf
+
 
 
 
