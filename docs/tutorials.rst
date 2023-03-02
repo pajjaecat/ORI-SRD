@@ -6,7 +6,7 @@
 
 
 .. |vRiseBlockScheme| replace:: `The voltage rise detection block scheme`
-.. _vRiseBlockScheme: https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf
+.. _The voltage rise detection block scheme: https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf
 
 
 
@@ -17,7 +17,7 @@ Tutorials
 
 
 .. warning:: 
-     Please **READ** vRiseBlockScheme_  before reading everything else.
+     Please **READ** The voltage rise detection block scheme_  before reading everything else.
 
 
 
