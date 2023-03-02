@@ -1,3 +1,5 @@
+.. _defaultVariables:
+
 
 #############################
      Default variables
