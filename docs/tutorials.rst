@@ -10,11 +10,6 @@
 
 
 
-.. _installation:
-
-Installation
-------------
-
 
 Tutorials
 ==========
