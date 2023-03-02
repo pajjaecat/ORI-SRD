@@ -53,7 +53,7 @@ By default, we consider |uppernet| and |lowernet| as, respectively, the upper an
 Add Files
 ^^^^^^^^^^^^
 
-.. notes::
+.. note::
    This step is only necessary if one wants to apply Ori to networks different  from |uppernet| and |lowernet|.
  
  
