@@ -94,7 +94,7 @@ class NotebookLoader(object):
         Parameters
         ----------
         fullname: str
-            Name of the jupyter notebook, without the extenxion `ipynb`.
+            Name of the jupyter notebook, without the extension `ipynb`.
 
         """
         path = find_notebook(fullname, self.path)
@@ -119,3 +119,13 @@ class NotebookLoader(object):
         save_user_ns = self.shell.user_ns
         self.shell.user_ns = mod.__dict__
 
+        try:
+            for cell in nb.cells:
+                if cell.cell_type == 'code':
+                    # transform the input to executable Python
+                    code = self.shell.input_transformer_manager.transform_cell(cell.source)
+                    # run the code in the module
+                    exec(code, mod.__dict__)
+        finally:
+            self.shell.user_ns = save_user_ns
+        return mod
