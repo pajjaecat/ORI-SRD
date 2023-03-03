@@ -456,15 +456,3 @@ def max_vm_pu_at(network,
         # pandapower.runpm_ac_opf(network) # Run network with Julia Power model:
         # Not converging for the moment, but Do converge when le load demand is low
 
-    else:
-        pandapower.runpp(network)  # Run network
-        # pandapower.runpm_pf(network) # Run network with Julia Power model:
-        # Not converging for the moment, but Do converge when le load demand is low
-
-    # Return the maximum voltage rise over all the HV buses in the lower network for the current instant
-    return network.res_bus.loc[lowNet_hv_activBus, 'vm_pu'].max()
-    # TODO : Return the maximum voltage rise over all the LV buses in the lower network for the current
-    #        instant. In this case one needs to add as input to the function the  net_lv_activBus
-    #        list as well. Hence one can replace the lowNet_hv_activBus by a tuple
-    #        of (lowNet_hv_activBus, uppNet_lv_activBus).
-
