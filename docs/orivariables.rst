@@ -1,6 +1,9 @@
 .. _defaultVariables:
 
 
+.. _rstorivariables:
+
+
 #############################
      Default variables
 #############################
