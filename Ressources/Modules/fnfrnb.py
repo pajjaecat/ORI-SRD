@@ -10,7 +10,7 @@
 # This module is heavily inspired of
 # https://jupyter-notebook.readthedocs.io/en/v6.5.2/examples/Notebook/Importing%20Notebooks.html
 
-# Im using this since, python's direct script (.py) does not allow using ipython magic commands
+# I'm using this since, python's direct script (.py) does not allow using ipython magic commands
 # (% ans %%) such as the one use to run par opf in :func:par_block_pfOpf( ): 
 
 
@@ -57,7 +57,21 @@ def find_notebook(fullname, path=None):
         
         
 class NotebookLoader(object):
-    """Module Loader for Jupyter Notebooks"""
+    """Module Loader for Jupyter Notebooks
+
+    Parameters
+    ----------
+    path : str, Optional, Default=None
+        Relative location of notebook to load.
+
+    Attributes
+    ----------
+    shell :
+        InteractiveShell.instance()
+    path : str
+        Relative location of notebook to load.
+
+    """
     def __init__(self, path=None):
         self.shell = InteractiveShell.instance()
         self.path = path
@@ -66,7 +80,7 @@ class NotebookLoader(object):
         """import a notebook as a module"""
         path = find_notebook(fullname, self.path)
 
-        print ("importing Jupyter notebook from %s" % path)
+        print("importing Jupyter notebook from %s" % path)
 
         # load the notebook object
         with io.open(path, 'r', encoding='utf-8') as f:
