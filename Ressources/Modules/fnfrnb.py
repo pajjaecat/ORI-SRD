@@ -72,7 +72,17 @@ class NotebookLoader(object):
         Relative location of notebook to load.
 
     """
+
     def __init__(self, path=None):
+        """Module Loader for Jupyter Notebooks
+
+        Parameters
+        ----------
+        path : str, Optional, Default=None
+            Relative location of notebook to load.
+
+        """
+
         self.shell = InteractiveShell.instance()
         self.path = path
 
