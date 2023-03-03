@@ -448,11 +448,3 @@ def max_vm_pu_at(network,
         # initLowerNet_at(*args)
         network.sgen.loc[mask_ctrld_lvProd, 'max_p_mw'] = network.sgen.p_mw[mask_ctrld_lvProd]
 
-        pandapower.runopp(network, delta=1e-16)  # Run network
-        # Due to convergence problems, I've decreased the power tolerance as done in
-        # [https://github.com/e2nIEE/pandapower/blob/v2.11.1/tutorials/opf_basic.ipynb] and changed
-        # the initial starting solution of opf
-
-        # pandapower.runpm_ac_opf(network) # Run network with Julia Power model:
-        # Not converging for the moment, but Do converge when le load demand is low
-
