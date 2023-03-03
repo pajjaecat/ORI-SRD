@@ -16,10 +16,11 @@
 
 """ Load a function from a Jupyter notebooks """
 
-import io, os, sys, types
-from IPython import get_ipython
-from nbformat import read
+import io
+import os
+
 from IPython.core.interactiveshell import InteractiveShell
+from nbformat import read
 
 
 def find_notebook(fullname, path=None):
