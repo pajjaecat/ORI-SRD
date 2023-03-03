@@ -436,15 +436,4 @@ def max_vm_pu_at(network,
         ctrld_hvProd_name = list(hvSgen_df[hvSgen_df.controllable].name)[0]
         ctrld_hvProd_ind = list(hvSgen_df[hvSgen_df.controllable].index)[0]
 
-        # update
-        # For optimal flow, given that the sgen P0100 is controllable the optimization
-        # result is to draw the maximum power  with no regard to the actual power provided
-        # at each instant. To alleviate this problem we would rather initialize the maximum
-        # power of the said  producer with the actual production.
-        network.sgen.at[ctrld_hvProd_ind, 'max_p_mw'] = df_prodHT[ctrld_hvProd_name][cur_period]
-
-        # Same process for the controlled LV producers as for the controlled HV Sgen
-        # Note that network.sgen.p_mw has already been initialized in the upper function
-        # initLowerNet_at(*args)
-        network.sgen.loc[mask_ctrld_lvProd, 'max_p_mw'] = network.sgen.p_mw[mask_ctrld_lvProd]
-
+  
