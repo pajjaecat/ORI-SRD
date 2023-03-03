@@ -581,22 +581,3 @@ def prediction_bloc(rnn_model,
     # Return the prediction of the RNN and the time period associated ()
     return pred_inv_trans, history_last_ind + 1
 
-
-def check_var_concordance(opf_status=False, pred_model=None):
-    """
-Check the congruence between the optimal power flow variable and the type of prediction model.
-
-Parameters:
-----------
-ofp_status: Boolean = False
-    Wether the maximum voltage is computed after a normal or optimal power flow or both
-    + Normal  =>  **pandapower.runpp(net)**,  ofp_status = False
-    + Optimal =>  **pandapower.runopp(net)**, ofp_status = True
-    + Both    =>  A normal power flow is run. Only when the result i.e. max_vm_pu > threshold,
-                  is the optimal power flow run.
-pred_model: String
-    Which kind of prediction model to use for the all the variables to predict at current period
-    + Pers  =>  Persistence model i.e. val(k)= val(k-1)
-
-
-    """
