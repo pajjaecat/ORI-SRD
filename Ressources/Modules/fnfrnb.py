@@ -22,12 +22,23 @@ from IPython.core.interactiveshell import InteractiveShell
 
 
 def find_notebook(fullname, path=None):
-    """find a notebook, given its fully qualified name and an optional path
+    """find a notebook, given its fully qualified name and an optional path.    
 
     This turns "foo.bar" into "foo/bar.ipynb"
     and tries turning "Foo_Bar" into "Foo Bar" if Foo_Bar
     does not exist.
+    
+    Parameters
+    ----------
+    fullname: str
+        Name of the jupyter notebook, without the extenxion `ipynb`.
+        
+    Returns
+    -------
+    Notebook path.
+
     """
+    
     name = fullname.rsplit('.', 1)[-1]
     if not path:
         path = ['']
