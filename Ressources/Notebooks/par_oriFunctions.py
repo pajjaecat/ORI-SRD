@@ -600,13 +600,3 @@ pred_model: String
 
 
     """
-
-    pred_model_values = ['Pers']
-
-    # If the prediction model <pred_mod> is defined,  make sure that the <ofp_status> ='Both'
-    if pred_model is not None:
-        if pred_model not in pred_model_values:  # check if the pred_model value is an authorised
-            raise ValueError('<pred_mod> must be either of', pred_model_values)
-
-        if opf_status != 'Both':  #
-            raise ValueError('Given that <pred_mod> is defined, <ofp_status>  must be  set to <\'Both\'> ')
