@@ -420,20 +420,4 @@ def max_vm_pu_at(network,
 
     """
 
-    # Initiate parameters from input
-    df_prodHT = dict_df_sgenLoad['df_prodHT']
-    df_lowNetSgen_cp = dict_df_sgenLoad['lowerNet_sgenDf_copy']
 
-    if opf_status:  # If status is True or 'Both'
-
-        # Create a mask of all controlled LV producer in the lower Network
-        mask_ctrld_lvProd = df_lowNetSgen_cp.name.isna() & df_lowNetSgen_cp.controllable
-
-        # Extract the name and the index of the controlled Higher voltage producer.
-        # This supposed the there is a controllable column in the network, this controllable column
-        # is true for the controlled HV producer
-        hvSgen_df = network.sgen[network.sgen.name.notna()]
-        ctrld_hvProd_name = list(hvSgen_df[hvSgen_df.controllable].name)[0]
-        ctrld_hvProd_ind = list(hvSgen_df[hvSgen_df.controllable].index)[0]
-
-  
