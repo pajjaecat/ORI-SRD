@@ -468,16 +468,3 @@ def max_vm_pu_at(network,
     #        list as well. Hence one can replace the lowNet_hv_activBus by a tuple
     #        of (lowNet_hv_activBus, uppNet_lv_activBus).
 
-
-# ___________________________________________________________________________________________________________________
-# ------------------------------------------------------------------------------------------------------------------
-# ___________________________________________________________________________________________________________________
-def improve_persinstence(per_extracted_res_df,
-                         df_prodHT,
-                         auth_max_VriseHvBus: float = defAuth_hvBus_vRiseMax,
-                         h_start_end: list = ['11:00', '14:00']):
-    # Implement : * Inject all the production as long as max_vm_pu_pf < vm_mu_max, i.e.
-    # no voltage rise is detected
-    """     Improve the results given by the persistence model.
-
-
