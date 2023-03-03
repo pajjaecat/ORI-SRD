@@ -87,7 +87,14 @@ class NotebookLoader(object):
         self.path = path
 
     def load_module(self, fullname):
-        """import a notebook as a module"""
+        """import a notebook as a module
+
+        Parameters
+        ----------
+        fullname: str
+            Name of the jupyter notebook, without the extenxion `ipynb`.
+
+        """
         path = find_notebook(fullname, self.path)
 
         print("importing Jupyter notebook from %s" % path)
