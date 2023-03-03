@@ -882,8 +882,8 @@ class SensAnalysisResult:
                      anotation=False, ):
 
         # Check whether _res_df is already defined i.e self.in_dataFrame()
-        # is already executed once. If yes, thre is no exception, otherwise
-        # execute the funcction
+        # is already executed once. If yes, there is no exception, otherwise
+        # execute the function
         try:
             getattr(self, '_res_df')
         except AttributeError:
