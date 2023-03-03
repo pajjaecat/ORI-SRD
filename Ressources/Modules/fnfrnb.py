@@ -41,3 +41,19 @@ def find_notebook(fullname, path=None):
             return nb_path
         
         
+class NotebookLoader(object):
+    """Module Loader for Jupyter Notebooks"""
+    def __init__(self, path=None):
+        self.shell = InteractiveShell.instance()
+        self.path = path
+
+    def load_module(self, fullname):
+        """import a notebook as a module"""
+        path = find_notebook(fullname, self.path)
+
+        print ("importing Jupyter notebook from %s" % path)
+
+        # load the notebook object
+        with io.open(path, 'r', encoding='utf-8') as f:
+            nb = read(f, 4)
+
