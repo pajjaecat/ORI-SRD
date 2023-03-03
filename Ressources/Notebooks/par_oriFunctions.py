@@ -502,12 +502,6 @@ def improve_persinstence(per_extracted_res_df,
         Hour between which the HV can inject all is production into the network
 
 
-    Returns
-    -------
-    per_improved_res :  pandas.DataFrame
-        Output the improve persistence model improve by the previously described
-        strategy.
-
     """
 
     # Copy the results of the persistence model
@@ -532,52 +526,4 @@ def improve_persinstence(per_extracted_res_df,
     per_improved_res_out.P0100[var_index] = prodHT_df.P0100[var_index]
 
     return per_improved_res_out, var_index
-
-
-# ___________________________________________________________________________________________________________________
-# ------------------------------------------------------------------------------------------------------------------
-# ___________________________________________________________________________________________________________________
-def prediction_bloc(rnn_model,
-                    fitting_scaler,
-                    history,
-                    scaler_features=None
-                    ):
-    """ Prediction bloc Using a RNN (LSTM)
-
-    Predict the values for the the next period.
-
-    Parameters
-    ----------
-    rnn_model : Recurrent neural network
-        The model that will be used to predict the value at the next period.
-    fitting_scaler : Scaler
-        Scaler parameters that are used to transform the training data set
-        fed to the ``rnn_model``
-    history :
-        Non scaled history of the Electrical network.
-    scaler_features : Scaler, optional, default = None
-        Scaler to use for prediction when the number of
-        variables to predict is different from the number of features
-
-    Returns
-    -------
-    tuple of list
-        var_predicted : list of float
-            Prediction of the interest variables at ``pred_period``
-        pred_period :  pandas.Period or str
-            Period for which the prediction is done.
-
-    """
-
-    history_last_ind = history.index[-1]  # Get index of the last period of history
-    in_shape = tuple([1]) + rnn_model.input_shape[1:]  # define input shape for the RNN
-
-    # Scaled the input  based on the fitting scaler
-    scaled_history = fitting_scaler.transform(history).reshape(in_shape)
-
-    pred = rnn_model.predict(scaled_history, verbose=False)  # prediction
-    pred_inv_trans = fitting_scaler.inverse_transform(pred)  # inversse transform the prediction
-
-    # Return the prediction of the RNN and the time period associated ()
-    return pred_inv_trans, history_last_ind + 1
 
