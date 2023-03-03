@@ -18,7 +18,9 @@
 
 import io
 import os
-
+import types
+import sys
+from IPython import get_ipython
 from IPython.core.interactiveshell import InteractiveShell
 from nbformat import read
 
@@ -102,4 +104,18 @@ class NotebookLoader(object):
         # load the notebook object
         with io.open(path, 'r', encoding='utf-8') as f:
             nb = read(f, 4)
+
+        # create the module and add it to sys.modules
+        # if name in sys.modules:
+        #    return sys.modules[name]
+        mod = types.ModuleType(fullname)
+        mod.__file__ = path
+        mod.__loader__ = self
+        mod.__dict__['get_ipython'] = get_ipython
+        sys.modules[fullname] = mod
+
+        # extra work to ensure that magics that would affect the user_ns
+        # actually affect the notebook module's ns
+        save_user_ns = self.shell.user_ns
+        self.shell.user_ns = mod.__dict__
 
