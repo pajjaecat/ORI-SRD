@@ -7,9 +7,10 @@
 
 # fnfrnb : function from notebook
 
-# This module is heavely inspired of https://jupyter-notebook.readthedocs.io/en/v6.5.2/examples/Notebook/Importing%20Notebooks.html
+# This module is heavily inspired of
+# https://jupyter-notebook.readthedocs.io/en/v6.5.2/examples/Notebook/Importing%20Notebooks.html
 
-# Im using this since, python's direct scipt (.py) does not allow using ipython magic commands 
+# Im using this since, python's direct script (.py) does not allow using ipython magic commands
 # (% ans %%) such as the one use to run par opf in :func:par_block_pfOpf( ): 
 
 
@@ -30,9 +31,11 @@ def find_notebook(fullname, path=None):
     
     Parameters
     ----------
-    fullname: str
-        Name of the jupyter notebook, without the extenxion `ipynb`.
-        
+    fullname : str
+        Name of the jupyter notebook, without the extension `ipynb`.
+    path : str, Optional, Default=None
+        Relative location of notebook to load.
+
     Returns
     -------
     Notebook path.
