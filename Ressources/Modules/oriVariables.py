@@ -29,6 +29,8 @@ simResult_folder = f'{modules_folder}simulationResults/'
 lowerNet_file_loc = f'{network_folder}CIVAUX.p'
 """ str : Relative location of the Lower Network file."""
 
+upperNet_file_loc = f'{network_folder}ST LAURENT.p'
+
 
 
 # -----------------------   Default Values to apply to networks  -----------------#
