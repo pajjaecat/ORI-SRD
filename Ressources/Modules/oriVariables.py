@@ -25,6 +25,11 @@ simResult_folder = f'{modules_folder}simulationResults/'
 """str: relative location of the folder containing all the simulation result."""
 
 
+# --------------------         Networks inputs      ---------------------------------   
+lowerNet_file_loc = f'{network_folder}CIVAUX.p'
+""" str : Relative location of the Lower Network file."""
+
+
 
 # -----------------------   Default Values to apply to networks  -----------------#
 
