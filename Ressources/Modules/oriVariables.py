@@ -52,7 +52,9 @@ default_ctrld_hvProd_max = 4.0
 
 #--------------------   Spliting data into several periods ------------------------#
 # These dates must be all included and defined depending on the date in the network
-# input data
+# input data. As preference,  it is advised to use the closest data  for the prediction
+# i.e, previous year for prediction, 6 months before the closest as validation and year
+# before that as training
 
 
 trainVal_split_date = '2021 12 31 23:50'  # Date of training+Validation split data Lower bond
