@@ -109,6 +109,7 @@ class NotebookLoader(object):
         # if name in sys.modules:
         #    return sys.modules[name]
         mod = types.ModuleType(fullname)
+
         mod.__file__ = path
         mod.__loader__ = self
         mod.__dict__['get_ipython'] = get_ipython

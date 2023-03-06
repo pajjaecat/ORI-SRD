@@ -11,28 +11,23 @@ OriClass - Python library with List of all classes used in the
 
 """
 import os
-
-import ipyparallel
+import ipyparallel as ipp
 import joblib
 import matplotlib.pyplot as plt
-import numpy
-import pandapower
-import pandas
-import seaborn
+import numpy as np
+import pandapower as pp
+import pandas as pd
+import seaborn as sbn
 
 import checker
+
 from oriVariables import (defAuth_hvBus_vRiseMax,
                           defAuth_hvBus_vRiseMin,
                           default_hv_voltage,
                           default_lv_voltage,
-                          Δt
-                          )
+                          Δt,
+                          modules_folder)
 
-pd = pandas
-np = numpy
-pp = pandapower
-ipp = ipyparallel
-sbn = seaborn
 
 # ------------------------------------------------------------------------------------
 ##############################         Class          #########################################
@@ -110,7 +105,7 @@ class CreateParEngines:
 
         """
 
-        checker.check_opf_status(opf_status)  # Raise Error if the OPF type is not well-defined
+        checker.check_opf_status(opf_status)  # Raise Error if the OPF type is not well defined
         checker.check_clean(clean)  # Raise error if clean Not a bool
 
         # Set variables
@@ -125,7 +120,13 @@ class CreateParEngines:
                 import numpy
                 import pandapower
                 import pandas
-                import par_oriFunctions
+                import sys
+
+            # Add modules location to Par engines namespace
+            self.dview[f'sys.path.append("{modules_folder}")']
+
+            with self._rc[:].sync_imports():  # import from modules_folder
+                import oriFunctions
 
         # Share the total number of period in df_prodHT.index among all the created engines
         self.dview.scatter('period_part', run_periodIndex)
@@ -289,7 +290,7 @@ class CreateParEngines:
         return self._pred_model
 
     def get_opf_status(self):
-        """Return the optima power flow status"""
+        """Return the optimal power flow status"""
         return self._opf_status
 
 
