@@ -24,14 +24,12 @@ modules_folder = '../Modules/'
 simResult_folder = f'{network_folder}simulationResults/'
 """str: relative location of the folder containing all the simulation result."""
 
-
-# --------------------         Networks inputs      ---------------------------------   
+# --------------------         Networks inputs      ---------------------------------
 lowerNet_file_loc = f'{network_folder}CIVAUX.p'
 """ str : Relative location of the Lower Network file."""
 
 upperNet_file_loc = f'{network_folder}ST LAURENT.p'
-
-
+""" str : Relative location of the upper Network file."""
 
 # -----------------------   Default Values to apply to networks  -----------------#
 
@@ -56,8 +54,7 @@ default_lv_voltage = 0.4
 default_ctrld_hvProd_max = 4.0
 """float : Default maximum output (MW ) of te controlled Hv producer. """
 
-
-#--------------------   Spliting data into several periods ------------------------#
+# --------------------   Spliting data into several periods ------------------------#
 # These dates must be all included and defined depending on the date in the network
 # input data. As preference,  it is advised to use the closest data  for the prediction
 # i.e, previous year for prediction, 6 months before the closest as validation and year
@@ -67,7 +64,7 @@ default_ctrld_hvProd_max = 4.0
 trainVal_split_date = '2021 12 31 23:50'  # Date of training+Validation split data Lower bond
 """str : Training + validation set split date, lower Bound """
 
-train_split_date = '2021 06 01'        # lower date to split training and validation data
+train_split_date = '2021 06 01'  # lower date to split training and validation data
 """str : Training set split date """
 
 testSet_start_date = '2021 06 03'
@@ -84,7 +81,6 @@ testSet_end_date = '2022 06 02'
 
 testSet_end_date_M1 = '2022 06 01'
 """str : Test set end split data """
-
 
 # ************** Training set
 trainSet_start = '2020 01 01'
@@ -137,12 +133,13 @@ testSet_end_M1 = '2022 06 01 23:50'
 testSet_end_M2 = '2022 05 30 23:50'
 """str : Test set start date minus two days """
 
+# --------------------   Others variables ------------------------#
 
-
-#--------------------   Others variables ------------------------#
-
-Δt = 1/6  # Time frequency 10mn ==> 1Hour/6
+Δt = 1 / 6  # Time frequency 10mn ==> 1Hour/6
 """float:  Time frequency,  10mn ==> 1Hour/6"""
+
+pd_Δt = '10T'  # Time frequency 10mn ==> 1Hour/6
+"""str:  Time frequencyfor pandas"""
 
 attr_list = [('bus', 'name'),
              ('load', 'bus'),
@@ -153,12 +150,17 @@ attr_list = [('bus', 'name'),
              ('trafo', 'lv_bus')]
 """list :  Atribute list """
 
-
-h_start_end = ('07:00','18:50')
+h_start_end = ('07:00', '18:50')
 """tuple : Daylight period."""
 
+h_start_end2 = ('06:00', '19:50')
+"""tuple : Daylight period 2."""
 
-h10_start_end = ('07:10','18:50')
-"""tuple : Daylight period ."""
+hp10_start_end = ('07:10', '18:50')
+"""tuple : Daylight period. 10 mn added to the first period"""
 
+hm10_start_end = ('06:50', '18:50')
+"""tuple : Daylight period. 10 mn substracted from the first period"""
 
+ctrld_HvProd_name = 'P0100'
+""" str : Controlled HvProd_name. Set it to ``None`` if Hv Prod has not to be controlled."""
