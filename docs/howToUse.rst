@@ -13,10 +13,10 @@ How to Use
 This section gives an in-depth view of how to efficiently navigate and use the `Ori's Github Repository <https://github.com/pajjaecat/ORI-SRD>`_.
 
 
-******************************
 Set Up Your System
 --------------------
-**********************************
+**********************
+
 
 Download the repository
 ^^^^^^^^^^^^^^^^^^^^^^^^
