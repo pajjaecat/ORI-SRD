@@ -1399,10 +1399,10 @@ def par_block_pfOpf(par_engines,
                     ) -> pandas.DataFrame:
     """ Block PF/OPF using parallels engines.
 
-    Execute a power flow, an optimal power flow, or both depending on ``opf_status``
-    extracted from the parallel engine object ``par_engines``. If ``opf_status`` is
-    "Both", the function is used as the block PF/OPF. If ``opf_status`` is  ``False``,
-    the function is used as the block PF..
+    Execute a power flow, an optimal power flow, or both depending on the ``opf_status``
+    extracted from the :py:class:`oriClass.CreateParEngines` object ``par_engines``. When
+    ``opf_status`` is `` "Both" ``, the function is used as the block PF/OPF. when ``opf_status``
+    is  ``False``, the function is used as the block PF.
 
     Parameters
     ----------
@@ -1417,23 +1417,26 @@ def par_block_pfOpf(par_engines,
         Output of the function :py:func:`oriClass.CreateParEngines.get_results_asDf`.
 
     Warnings
-    ---------
+    --------
     DO NOT CALL this function from the module :py:mod:`oriFunctions`.
     Given that the function makes use of the magic ``%%px`` implemented by ipyparallel,
     it has to be call through a conversion of a jupyter notebook into a module. See
-    `:ref:examples` or `SensAnalysisP0100 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100.ipynb>`_
+    :ref:`examples` or `SensAnalysisP0100 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100.ipynb>`_
     for usage.
 
-    .. examples
+
+    .. examples:
 
     Examples
     --------
     >>> from fnfrnb import NotebookLoader              # Import NotebookLoader from module
     ...                                                # fnfrnb i.e. Function From Notebook
-    ...
-    ... oriPar = NotebookLoader().load_module('parFn') # Create the module oriPar based on
+
+    >>>  oriPar = NotebookLoader().load_module('parFn') # Create the module oriPar based on
     ...                                                # the content of `parFn.ipynb`
+
     Importing parFn.ipynb content as a module
+
     >>> oriPar.par_block_pfOpf(par_engines, pred_model)# Call the parallel block PF/OPF
 
     """
