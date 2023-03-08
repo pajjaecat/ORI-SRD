@@ -102,17 +102,17 @@ The simulations can be run for different models of the prediction block **PRED**
 The first two are easily implementable, while the third is more complex (Advanced User).
 
 Future Known
--------------
+==============
 
 
 
 Persistence
-------------
+============
 
 
 
 Recurrent Neural Network
--------------------------
+========================
 
 
 
