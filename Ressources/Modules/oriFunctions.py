@@ -1439,22 +1439,5 @@ def par_block_pfOpf(par_engines,
 
     """
 
-    # Note that all the variables used in the parallel running MUST be  already sent to the local space of each engine
-    if pred_model_f == 'Pers':
-        # Run problem in parallel
-        % px par_run_Results = [run_powerflow_at(lowerNet, cur_period + 1, lowerNet_hv_activated_bus, sum_max_main_network, dict_df_sgenLoad, vm_mu_max, opf_status, pred_model) for cur_period in period_part]
-    else:
-        % px par_run_Results = [run_powerflow_at(lowerNet, cur_period, lowerNet_hv_activated_bus, sum_max_main_network, dict_df_sgenLoad, vm_mu_max, opf_status) for cur_period in period_part]
-
-    # Gather the results of all the engines in a unique variable.
-    results = par_engines.gather_results('par_run_Results')
-
-    # Wait 2seconds time for gathering the results of parallel computing.
-    # This waiting time could be reduce when using more powerful machines.
-    time.sleep(2)
-
-    # Extract results
-    extracted_results = par_engines.get_results_asDf()
-
-    # Return Extracted results
-    return extracted_results
+    # see parFn.ipynb for the content of the function
+    pass
