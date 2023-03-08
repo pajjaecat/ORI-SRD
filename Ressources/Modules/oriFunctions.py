@@ -16,7 +16,7 @@ import oriClass
 import pandapower
 import pandas
 from tqdm import tqdm  # Profiling
-
+import time
 import checker
 
 # Import all variables from module oriVariables
@@ -1393,3 +1393,68 @@ def setNetwork_params(upperNet_file: str,
 
     return networks
 
+
+def par_block_pfOpf(par_engines,
+                    pred_model_f: str=None
+                    ) -> DataFrame:
+    """ Block PF/OPF using parallels engines.
+
+    Execute a power flow, an optimal power flow, or both depending on ``opf_status``
+    extracted from the parallel engine object ``par_engines``. If ``opf_status`` is
+    "Both", the function is used as the block PF/OPF. If ``opf_status`` is  ``False``,
+    the function is used as the block PF..
+
+    Parameters
+    ----------
+    par_engines:  ipyparallel.cluster
+        Parallel engines object,, Instance of  :py:class:`oriClass.CreateParEngines`.
+    pred_model_f: str, Optional, Default = None
+        'Pers' ==> Using persistence model.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Output of the function :py:func:`oriClass.CreateParEngines.get_results_asDf`.
+
+    Warnings
+    ---------
+    DO NOT CALL this function from the module :py:mod:`oriFunctions`.
+    Given that the function makes use of the magic ``%%px`` implemented by ipyparallel,
+    it has to be call through a conversion of a jupyter notebook into a module. See
+    `:ref:examples` or `SensAnalysisP0100 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100.ipynb>`_
+    for usage.
+
+    .. examples
+
+    Examples
+    --------
+    >>> from fnfrnb import NotebookLoader              # Import NotebookLoader from module
+    ...                                                # fnfrnb i.e. Function From Notebook
+    ...
+    ... oriPar = NotebookLoader().load_module('parFn') # Create the module oriPar based on
+    ...                                                # the content of `parFn.ipynb`
+    Importing parFn.ipynb content as a module
+
+    >>> oriPar.par_block_pfOpf(par_engines, pred_model)# Call the parallel block PF/OPF
+
+    """
+
+    # Note that all the variables used in the parallel running MUST be  already sent to the local space of each engine
+    if pred_model_f == 'Pers':
+        # Run problem in parallel
+        % px par_run_Results = [ oriFunctions.run_powerflow_at(lowerNet, cur_period + 1, lowerNet_hv_activated_bus, sum_max_main_network, dict_df_sgenLoad, vm_mu_max, opf_status, pred_model) for cur_period in period_part]
+    else:
+        % px par_run_Results = [ oriFunctions.run_powerflow_at(lowerNet, cur_period, lowerNet_hv_activated_bus, sum_max_main_network, dict_df_sgenLoad, vm_mu_max, opf_status) for cur_period in period_part]
+
+    # Gather the results of all the engines in a unique variable.
+    results = par_engines.gather_results('par_run_Results')
+
+    # Wait 2seconds time for gathering the results of parallel computing.
+    # This waiting time could be reduce when using more powerful machines.
+    time.sleep(2)
+
+    # Extract results
+    extracted_results = par_engines.get_results_asDf()
+
+    # Return Extracted results
+    return extracted_results
