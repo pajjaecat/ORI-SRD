@@ -1421,7 +1421,7 @@ def par_block_pfOpf(par_engines,
     DO NOT CALL this function from the module :py:mod:`oriFunctions`.
     Given that the function makes use of the magic ``%%px`` implemented by ipyparallel,
     it has to be called through a conversion of a jupyter notebook into a module. See
-    :ref:`Examples` or :ref:`exammples` or `SensAnalysisP0100 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100.ipynb>`_
+    `Examples`  or `SensAnalysisP0100 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100.ipynb>`_
     for usage.
 
 
