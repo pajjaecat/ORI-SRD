@@ -1396,7 +1396,7 @@ def setNetwork_params(upperNet_file: str,
 
 def par_block_pfOpf(par_engines,
                     pred_model_f: str=None
-                    ) -> DataFrame:
+                    ) -> pandas.DataFrame:
     """ Block PF/OPF using parallels engines.
 
     Execute a power flow, an optimal power flow, or both depending on ``opf_status``
@@ -1434,10 +1434,9 @@ def par_block_pfOpf(par_engines,
     ... oriPar = NotebookLoader().load_module('parFn') # Create the module oriPar based on
     ...                                                # the content of `parFn.ipynb`
     Importing parFn.ipynb content as a module
-
     >>> oriPar.par_block_pfOpf(par_engines, pred_model)# Call the parallel block PF/OPF
 
     """
 
-    # see parFn.ipynb for the content of the function
+    # see '../Notebooks/parFn.ipynb' for the content of the function
     pass
