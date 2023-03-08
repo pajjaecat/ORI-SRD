@@ -647,7 +647,7 @@ def improve_persinstence(per_extracted_res_df,
 
     # Extract index of instances where no voltage rise is detected ignoring the last one
     # because not present in the initial df df_prodHT
-    var_index = working_df[working_df.max_vm_pu_pf <= auth_max_VriseHvBus].index.to_period('10T')[:-1]
+    var_index = working_df[working_df.max_vm_pu_pf <= auth_max_VriseHvBus].index.to_period(pd_Δt)[:-1]
 
     # Replace the prediction from the persistence model with the actual production since
     # no voltage rise is detected at these periods
@@ -1175,7 +1175,7 @@ def robustness(df_out_block_pfOpf,
                   .to_timestamp()
                   .to_series()
                   .between_time('07:10', '18:50')
-                  .index.to_period('10T'))
+                  .index.to_period(pd_Δt))
 
     # Get controlled HV prod Name
     ctrld_hvProdName = df_hvProd_noControl.columns[0]
@@ -1255,7 +1255,7 @@ def block_prod(df_yTilde_opt,
     per_index2 = (df_yTilde_opt.index.to_timestamp()
                   .to_series()
                   .between_time('07:10', '18:50')
-                  .index.to_period('10T'))
+                  .index.to_period(pd_Δt))
 
     # Upscale the HV prod when no control is applied
     df_hvProd_noControl_upscaled = (df_hvProd_noControl.loc[per_index2[starting_index:],
