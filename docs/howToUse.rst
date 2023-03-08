@@ -3,8 +3,9 @@
 .. |uppernet| replace:: `ST LAURENT`
 .. |lowernet| replace:: `CIVAUX`
 
+#############
 How to Use
-===============
+##############
  
  
  
@@ -63,7 +64,7 @@ Add Files
 - Add networks (lower and upper) files to  `Pickle_files <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Pickle_files>`_;
 - Add the networks' input files to `Excel_files <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Excel_files>`_. 
 
-   - Each of the Hv Prod must have its own associated files;
+   - Each of the Hv Prod must have its own associated file;
    - All the Lv Prods (i.e. all the LV Prods in the Upper network) must be aggregated in a unique file;
    - All the Load (i.e. all the load in the Upper network) must be aggregated in a unique file.
 
@@ -97,8 +98,7 @@ The simulations can be run for different models of the prediction block **PRED**
 #. Persistence;
 #. Recurrent Neural Network.
 
-The first two are easily implementable while the third is a bit complicated (Advanced User)
-
+The first two are easily implementable, while the third is more complex (Advanced User).
 
 
 
