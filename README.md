@@ -1,10 +1,11 @@
 
 <p align="center">
-    <img src=Ressources/Figures/SrdLogo.svg width="300" height="250">
+    <img src=Ressources/Figures/otherImages/SrdLogo.svg width="300" height="250">
 </p>
 
 [![Documentation Status](https://readthedocs.org/projects/ori-srd/badge/?version=stable)](https://ori-srd.readthedocs.io/en/stable/?badge=stable)
 [![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
+[![version103](Ressources/Figures/otherImages/version103.svg)](https://ori-srd.readthedocs.io/en/1.0.3/)
 
 # ORI-SRD
 
