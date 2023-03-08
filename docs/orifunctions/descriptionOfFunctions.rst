@@ -110,6 +110,12 @@ setNetwork_params
 .. autofunction:: oriFunctions.setNetwork_params
 
 
+par_block_pfOpf from function
+*****************************
+
+.. autofunction:: oriFunctions.par_block_pfOpf
+
+
 .. par_block_pfOpf:
 
 par_block_pfOpf
