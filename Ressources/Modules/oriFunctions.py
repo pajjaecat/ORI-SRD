@@ -28,7 +28,8 @@ from oriVariables import (network_folder,
                           defAuth_lvBus_vRiseMin,
                           default_ctrld_hvProd_max,
                           default_hv_voltage,
-                          default_lv_voltage
+                          default_lv_voltage,
+                          pd_Δt
                           )
 
 pd = pandas
