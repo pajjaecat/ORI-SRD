@@ -16,7 +16,6 @@ import oriClass
 import pandapower
 import pandas
 from tqdm import tqdm  # Profiling
-import time
 import checker
 
 # Import all variables from module oriVariables

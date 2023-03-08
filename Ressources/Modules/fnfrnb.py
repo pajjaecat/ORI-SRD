@@ -93,7 +93,7 @@ class NotebookLoader(object):
         Parameters
         ----------
         fullname: str
-            Name of the jupyter notebook, without the extenxion `ipynb`.
+            Name of the jupyter notebook, without the extension `ipynb`.
 
         """
         path = find_notebook(fullname, self.path)
