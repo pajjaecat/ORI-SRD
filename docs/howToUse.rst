@@ -95,7 +95,7 @@ Run Simulations
 ^^^^^^^^^^^^^^^^
 The simulations can be run for different models of the prediction block **PRED**. This section covers three of them, namely 
 
-#. :ref:`Future Known`;
+#. "Future Known",   `Future Known`, ``Future Known``;
 #. Persistence;
 #. Recurrent Neural Network.
 
@@ -103,7 +103,7 @@ The first two are easily implementable, while the third is more complex (Advance
 
 Future Known
 ==============
-
+"RstCleanDataSTLaurentDeJourdes", ``RstCleanDataSTLaurentDeJourdes``
 
 
 Persistence
