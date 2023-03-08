@@ -1401,7 +1401,7 @@ def par_block_pfOpf(par_engines,
 
     Execute a power flow, an optimal power flow, or both depending on the ``opf_status``
     extracted from the :py:class:`oriClass.CreateParEngines` object ``par_engines``. When
-    ``opf_status`` is `` "Both" ``, the function is used as the block PF/OPF. when ``opf_status``
+    ``opf_status`` is ``"Both"``, the function is used as the block PF/OPF. when ``opf_status``
     is  ``False``, the function is used as the block PF.
 
     Parameters
@@ -1420,7 +1420,7 @@ def par_block_pfOpf(par_engines,
     --------
     DO NOT CALL this function from the module :py:mod:`oriFunctions`.
     Given that the function makes use of the magic ``%%px`` implemented by ipyparallel,
-    it has to be call through a conversion of a jupyter notebook into a module. See
+    it has to be called through a conversion of a jupyter notebook into a module. See
     :ref:`examples` or `SensAnalysisP0100 <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100.ipynb>`_
     for usage.
 
