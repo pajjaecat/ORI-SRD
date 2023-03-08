@@ -9,7 +9,6 @@ How to Use
 ##############
  
  
- 
 This section gives an in-depth view of how to efficiently navigate and use the `Ori's Github Repository <https://github.com/pajjaecat/ORI-SRD>`_.
 
 
@@ -101,6 +100,21 @@ The simulations can be run for different models of the prediction block **PRED**
 #. Recurrent Neural Network.
 
 The first two are easily implementable, while the third is more complex (Advanced User).
+
+Future Known
+-------------
+
+
+
+Persistence
+------------
+
+
+
+Recurrent Neural Network
+-------------------------
+
+
 
 
 
