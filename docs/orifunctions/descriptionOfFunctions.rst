@@ -54,6 +54,12 @@ max_vm_pu_at
 
 
 
+par_block_pfOpf
+*************** 
+
+.. autofunction:: oriFunctions.par_block_pfOpf
+
+
 
 predictionBin_bloc
 *******************
@@ -109,11 +115,6 @@ setNetwork_params
 
 .. autofunction:: oriFunctions.setNetwork_params
 
-
-par_block_pfOpf
-*************** 
-
-.. autofunction:: oriFunctions.par_block_pfOpf
 
 
 .. par_block_pfOpf:
