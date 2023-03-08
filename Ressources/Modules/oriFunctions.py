@@ -1442,9 +1442,9 @@ def par_block_pfOpf(par_engines,
     # Note that all the variables used in the parallel running MUST be  already sent to the local space of each engine
     if pred_model_f == 'Pers':
         # Run problem in parallel
-        % px par_run_Results = [ oriFunctions.run_powerflow_at(lowerNet, cur_period + 1, lowerNet_hv_activated_bus, sum_max_main_network, dict_df_sgenLoad, vm_mu_max, opf_status, pred_model) for cur_period in period_part]
+        % px par_run_Results = [run_powerflow_at(lowerNet, cur_period + 1, lowerNet_hv_activated_bus, sum_max_main_network, dict_df_sgenLoad, vm_mu_max, opf_status, pred_model) for cur_period in period_part]
     else:
-        % px par_run_Results = [ oriFunctions.run_powerflow_at(lowerNet, cur_period, lowerNet_hv_activated_bus, sum_max_main_network, dict_df_sgenLoad, vm_mu_max, opf_status) for cur_period in period_part]
+        % px par_run_Results = [run_powerflow_at(lowerNet, cur_period, lowerNet_hv_activated_bus, sum_max_main_network, dict_df_sgenLoad, vm_mu_max, opf_status) for cur_period in period_part]
 
     # Gather the results of all the engines in a unique variable.
     results = par_engines.gather_results('par_run_Results')
