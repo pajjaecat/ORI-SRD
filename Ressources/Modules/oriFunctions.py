@@ -343,7 +343,7 @@ def run_powerflow_at(network,
     initLowerNet_at(network, cur_period, sum_max_p_mw_upperNet, dict_df_sgenLoad)
 
     # Get the maximum voltage magnitude of all activated bus to a list. See the
-    #                                corresponding function for more explanation
+    #                               corresponding function for more explanation
     if opf_status is True:  # Run optimal power flow ******************************************
 
         # get maximum value of vm_pu for the current period after optimal power flow
@@ -1394,8 +1394,11 @@ def setNetwork_params(upperNet_file: str,
     return networks
 
 
+# ____________________________________________________________________________________________________________
+# ____________________________________________________________________________________________________________
+
 def par_block_pfOpf(par_engines,
-                    pred_model_f: str=None
+                    pred_model_f: str = None
                     ) -> pandas.DataFrame:
     """ Block PF/OPF using parallels engines.
 
