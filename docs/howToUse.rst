@@ -75,19 +75,27 @@ Apply the |vRiseBlockScheme|_
 **********************************
 
 
-To apply the |vRiseBlockScheme|_ we propose the following steps. 
+To apply the |vRiseBlockScheme|_, we propose the following steps. 
 
 
 Define variables
 ^^^^^^^^^^^^^^^^^^
 
-The goal here is to define all the dafault variables to use for all simulations in a file. All the necessary variables are described in :ref:`defaultVariables`
+The goal here is to define all the default variables to use for all simulations in a file. All the necessary variables are described in :ref:`defaultVariables` and can be modified there. Remember that modifying a variable's value will affect all the modules and notebooks using the variable. 
 
 
 Clean your data
 ^^^^^^^^^^^^^^^^^
-Cleaning the network's input data is a very important part of the process. There is no step by step to follow in this case because the data might largely vary from a 
-problem to another. An example of how one might apply this process is available in :ref:`RstCleanDataSTLaurentDeJourdes`. 
+Cleaning the network's input data is an essential part of the process. In this case, there is no step-by-step to follow because the data might vastly vary from one problem to another. An example of how one might apply this process is available in :ref:`RstCleanDataSTLaurentDeJourdes`. 
+
+
+Run Simulations
+^^^^^^^^^^^^^^^^
+The simulations can be run for different models of the prediction block **PRED**. This section covers three of them, namely 
+1- Future Known
+2- Persistence
+3- Recurrent Neural Network 
+
 
 
 
