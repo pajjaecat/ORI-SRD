@@ -21,7 +21,7 @@ excel_folder = '../Excel_files/'
 modules_folder = '../Modules/'
 """str: relative location of the modules to be use."""
 
-simResult_folder = f'{modules_folder}simulationResults/'
+simResult_folder = f'{network_folder}simulationResults/'
 """str: relative location of the folder containing all the simulation result."""
 
 

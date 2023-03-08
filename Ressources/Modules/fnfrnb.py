@@ -7,31 +7,30 @@
 
 # fnfrnb : function from notebook
 
-# This module is heavily inspired of
-# https://jupyter-notebook.readthedocs.io/en/v6.5.2/examples/Notebook/Importing%20Notebooks.html
+# This module is heavely inspired of https://jupyter-notebook.readthedocs.io/en/v6.5.2/examples/Notebook/Importing%20Notebooks.html
 
 # I'm using this since, python's direct script (.py) does not allow using ipython magic commands
-# (% ans %%) such as the one use to run par opf in :func:par_block_pfOpf( ): 
+# (% and %%) such as the one use to run par opf in :func:par_block_pfOpf:
 
 
 """ Load a function from a Jupyter notebooks """
 
 import io
 import os
-import types
 import sys
+import types
 from IPython import get_ipython
-from IPython.core.interactiveshell import InteractiveShell
 from nbformat import read
+from IPython.core.interactiveshell import InteractiveShell
 
 
-def find_notebook(fullname, path=None):
-    """find a notebook, given its fully qualified name and an optional path.    
+def find_notebook(fullname: str, path=None):
+    """find a notebook, given its fully qualified name and an optional path.
 
     This turns "foo.bar" into "foo/bar.ipynb"
     and tries turning "Foo_Bar" into "Foo Bar" if Foo_Bar
     does not exist.
-    
+
     Parameters
     ----------
     fullname : str
@@ -44,7 +43,7 @@ def find_notebook(fullname, path=None):
     Notebook path.
 
     """
-    
+
     name = fullname.rsplit('.', 1)[-1]
     if not path:
         path = ['']
@@ -56,8 +55,8 @@ def find_notebook(fullname, path=None):
         nb_path = nb_path.replace("_", " ")
         if os.path.isfile(nb_path):
             return nb_path
-        
-        
+
+
 class NotebookLoader(object):
     """Module Loader for Jupyter Notebooks
 
@@ -99,7 +98,7 @@ class NotebookLoader(object):
         """
         path = find_notebook(fullname, self.path)
 
-        print("importing Jupyter notebook from %s" % path)
+        print(f"Importing {fullname}.ipynb content as a module")
 
         # load the notebook object
         with io.open(path, 'r', encoding='utf-8') as f:
@@ -109,7 +108,6 @@ class NotebookLoader(object):
         # if name in sys.modules:
         #    return sys.modules[name]
         mod = types.ModuleType(fullname)
-
         mod.__file__ = path
         mod.__loader__ = self
         mod.__dict__['get_ipython'] = get_ipython

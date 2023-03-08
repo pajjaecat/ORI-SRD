@@ -18,7 +18,9 @@ Welcome to the official documentation of the `ODRI project <https://www.s2e2.fr/
     :target: https://ori-srd.readthedocs.io/en/stable/?badge=stable
     :alt: Documentation Status
     
-
+.. image :: https://img.shields.io/badge/python-3.7-blue.svg
+    :target: https://www.python.org/downloads/release/python-370/
+         
     
     
 .. note::
