@@ -93,9 +93,11 @@ Run Simulations
 ^^^^^^^^^^^^^^^^
 The simulations can be run for different models of the prediction block **PRED**. This section covers three of them, namely 
 
-#. Future Known
-#. Persistence
-#. Recurrent Neural Network 
+#. Future Known;
+#. Persistence;
+#. Recurrent Neural Network.
+
+The first two are easily implementable while the third is a bit complicated (Advanced User)
 
 
 
