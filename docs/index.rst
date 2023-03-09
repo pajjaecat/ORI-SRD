@@ -1,4 +1,4 @@
-.. image:: ../Ressources/Figures/SrdLogo.svg 
+.. image:: ../Ressources/Figures/otherImages/SrdLogo.svg 
          :width: 185em
          :align: left
          
@@ -18,8 +18,11 @@ Welcome to the official documentation of the `ODRI project <https://www.s2e2.fr/
     :target: https://ori-srd.readthedocs.io/en/stable/?badge=stable
     :alt: Documentation Status
     
-.. image :: https://img.shields.io/badge/python-3.7-blue.svg
+.. image:: https://img.shields.io/badge/python-3.7-blue.svg
     :target: https://www.python.org/downloads/release/python-370/
+    
+.. image:: ../Ressources/Figures/otherImages/version103.svg
+    :target: https://ori-srd.readthedocs.io/en/1.0.3/
          
     
     
@@ -57,8 +60,8 @@ Contents
    :maxdepth: 2
 
    Home <self>
-   howToUse
-   tutorials
-   orivariables
-   orifunctions
-   oriclasses
+   HowToUse/howToUse
+   Tutorials/tutorials
+   orivariables/orivariables
+   orifunctions/orifunctions
+   oriclasses/oriclasses

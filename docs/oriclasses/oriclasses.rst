@@ -4,6 +4,6 @@ This section focuses on the classes described in `oriClass <https://github.com/p
 
 .. toctree::
 
-  list of Classes <oriclasses/listofClasses>
-  oriclasses/descriptionOfClasses
+  list of Classes <listofClasses>
+  descriptionOfClasses
   

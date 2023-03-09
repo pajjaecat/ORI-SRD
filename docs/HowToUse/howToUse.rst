@@ -3,9 +3,10 @@
 .. |uppernet| replace:: `ST LAURENT`
 .. |lowernet| replace:: `CIVAUX`
 
+
+
 How to Use
-===============
- 
+##############
  
  
 This section gives an in-depth view of how to efficiently navigate and use the `Ori's Github Repository <https://github.com/pajjaecat/ORI-SRD>`_.
@@ -13,7 +14,8 @@ This section gives an in-depth view of how to efficiently navigate and use the `
 
 Set Up Your System
 --------------------
-**********************************
+**********************
+
 
 Download the repository
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -63,7 +65,7 @@ Add Files
 - Add networks (lower and upper) files to  `Pickle_files <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Pickle_files>`_;
 - Add the networks' input files to `Excel_files <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Excel_files>`_. 
 
-   - Each of the Hv Prod must have its own associated files;
+   - Each of the Hv Prod must have its own associated file;
    - All the Lv Prods (i.e. all the LV Prods in the Upper network) must be aggregated in a unique file;
    - All the Load (i.e. all the load in the Upper network) must be aggregated in a unique file.
 
@@ -75,19 +77,44 @@ Apply the |vRiseBlockScheme|_
 **********************************
 
 
-To apply the |vRiseBlockScheme|_ we propose the following steps. 
+To apply the |vRiseBlockScheme|_, we propose the following steps. 
 
 
 Define variables
 ^^^^^^^^^^^^^^^^^^
 
-The goal here is to define all the dafault variables to use for all simulations in a file. All the necessary variables are described in :ref:`defaultVariables`
+The goal here is to define all the default variables to use for all simulations in a file. All the necessary variables are described in :ref:`defaultVariables` and can be modified there. Remember that modifying a variable's value will affect all the modules and notebooks using the variable. 
 
 
 Clean your data
 ^^^^^^^^^^^^^^^^^
-Cleaning the network's input data is a very important part of the process. There is no step by step to follow in this case because the data might largely vary from a 
-problem to another. An example of how one might apply this process is available in :ref:`RstCleanDataSTLaurentDeJourdes`. 
+Cleaning the network's input data is an essential part of the process. In this case, there is no step-by-step to follow because the data might vastly vary from one problem to another. An example of how one might apply this process is available in :ref:`RstCleanDataSTLaurentDeJourdes`. 
+
+
+Run Simulations
+^^^^^^^^^^^^^^^^
+The simulations can be run for different models of the prediction block **PRED**. This section covers three of them, namely 
+
+#. "Future Known" , `Future Known`_
+#. Persistence;
+#. Recurrent Neural Network.
+
+The first two are easily implementable, while the third is more complex (Advanced User).
+
+Future Known
+==============
+"RstCleanDataSTLaurentDeJourdes", ``RstCleanDataSTLaurentDeJourdes``
+
+
+Persistence
+============
+
+
+
+Recurrent Neural Network
+========================
+
+
 
 
 

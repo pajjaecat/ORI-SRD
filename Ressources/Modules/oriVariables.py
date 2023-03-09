@@ -60,27 +60,27 @@ default_ctrld_hvProd_max = 4.0
 # i.e, previous year for prediction, 6 months before the closest as validation and year
 # before that as training
 
+#
+# trainVal_split_date = '2021 12 31 23:50'  # Date of training+Validation split data Lower bond
+# """str : Training + validation set split date, lower Bound """
+#
+# train_split_date = '2021 06 01'  # lower date to split training and validation data
+# """str : Training set split date """
+#
+# testSet_start_date = '2021 06 03'
+# """str : Test set start split data """
+#
+# testSet_start_date_M2 = '2021 06 01'
+# """str : Test set start split data minus two days """
+#
+# testSet_start_date_M1 = '2021 06 02'
+# """str : Test set start split data minus one day """
+#
+# testSet_end_date = '2022 06 02'
+# """str : Test set end split data """
 
-trainVal_split_date = '2021 12 31 23:50'  # Date of training+Validation split data Lower bond
-"""str : Training + validation set split date, lower Bound """
-
-train_split_date = '2021 06 01'  # lower date to split training and validation data
-"""str : Training set split date """
-
-testSet_start_date = '2021 06 03'
-"""str : Test set start split data """
-
-testSet_start_date_M2 = '2021 06 01'
-"""str : Test set start split data minus two days """
-
-testSet_start_date_M1 = '2021 06 02'
-"""str : Test set start split data minus one day """
-
-testSet_end_date = '2022 06 02'
-"""str : Test set end split data """
-
-testSet_end_date_M1 = '2022 06 01'
-"""str : Test set end split data """
+# testSet_end_date_M1 = '2022 06 01'
+# """str : Test set end split data """
 
 # ************** Training set
 trainSet_start = '2020 01 01'
@@ -139,7 +139,7 @@ testSet_end_M2 = '2022 05 30 23:50'
 """float:  Time frequency,  10mn ==> 1Hour/6"""
 
 pd_Δt = '10T'  # Time frequency 10mn ==> 1Hour/6
-"""str:  Time frequencyfor pandas"""
+"""str:  Time frequency for pandas"""
 
 attr_list = [('bus', 'name'),
              ('load', 'bus'),
@@ -160,7 +160,7 @@ hp10_start_end = ('07:10', '18:50')
 """tuple : Daylight period. 10 mn added to the first period"""
 
 hm10_start_end = ('06:50', '18:50')
-"""tuple : Daylight period. 10 mn substracted from the first period"""
+"""tuple : Daylight period. 10 mn subtracted from the first period"""
 
 ctrld_HvProd_name = 'P0100'
 """ str : Controlled HvProd_name. Set it to ``None`` if Hv Prod has not to be controlled."""
