@@ -46,9 +46,9 @@ Some Definitions
    * - **Upper Network**
      - The network where is located the Main Poste Source
    * - **Lower Network**
-     - The network to study which is a small branch of the Upper Network
+     - The network to study, which is a small branch of the Upper Network
 
-By default, we consider |uppernet| and |lowernet| as, respectively, the upper and lower Network. 
+By default, we consider |uppernet| and |lowernet| as the upper and lower Network, respectively. 
 
 
 .. warning:: 
@@ -59,7 +59,7 @@ Add Files
 ^^^^^^^^^^^^
 
 .. note::
-   This step is only necessary if one wants to apply Ori to networks different  from |uppernet| and |lowernet|.
+   This step is only necessary if one wants to apply Ori to networks different from |uppernet| and |lowernet|.
  
  
 - Add networks (lower and upper) files to  `Pickle_files <https://github.com/pajjaecat/ORI-SRD/tree/main/Ressources/Pickle_files>`_;
@@ -99,11 +99,11 @@ The simulations can be run for different models of the prediction block **PRED**
 #. `Persistence`_;
 #. `Recurrent Neural Network`_.
 
-The first two are easily implementable, while the third is more complex (Advanced User). For each case, we provide a corresponding tutorial (using the default networks ST LAURENT and CIVAUX ) to get inpired from. 
+The first two are easily implementable, while the third is more complex (Advanced User). For each case, we provide a corresponding tutorial (using the default networks ST LAURENT and CIVAUX ) from which inspiration can be drawn. 
 
 Future Known
 ==============
-For comparaison purposes, the simulations must firstly be run supposing that the prediction block has a perfect knowledge of the future. We provide the tutorial :ref:`Rst2021_2022_KnownFuture` to this case for the defaults networks :py:data:``. 
+For comparison purposes, the simulations must first be run, supposing the prediction block has perfect knowledge of the future. We provide the tutorial :ref:`Rst2021_2022_KnownFuture` to this case for the defaults networks :py:data:``. 
 
 Persistence
 ============
