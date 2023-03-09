@@ -103,7 +103,7 @@ The first two are easily implementable, while the third is more complex (Advance
 
 Future Known
 ==============
-For comparison purposes, the simulations must first be run, supposing the prediction block has perfect knowledge of the future. See:ref:`Rst2021_2022_KnownFuture` 
+For comparison purposes, the simulations must first be run, supposing the prediction block has perfect knowledge of the future. See :ref:`Rst2021_2022_KnownFuture` 
 
 Persistence
 ============
