@@ -99,11 +99,11 @@ The simulations can be run for different models of the prediction block **PRED**
 #. `Persistence`_;
 #. `Recurrent Neural Network`_.
 
-The first two are easily implementable, while the third is more complex (Advanced User).
+The first two are easily implementable, while the third is more complex (Advanced User). For each case, we provide a corresponding tutorial (using the default networks ST LAURENT and CIVAUX ) to get inpired from. 
 
 Future Known
 ==============
-For comparaison purposes, the simulations must be run supposing that the prediction block has a perfect knowledge of the future. We provide the tutorial :ref:`Rst2021_2022_KnownFuture` to get inspiration from. 
+For comparaison purposes, the simulations must firstly be run supposing that the prediction block has a perfect knowledge of the future. We provide the tutorial :ref:`Rst2021_2022_KnownFuture` to this case for the defaults networks :py:data:``. 
 
 Persistence
 ============
