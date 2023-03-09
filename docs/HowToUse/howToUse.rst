@@ -88,7 +88,7 @@ The goal here is to define all the default variables to use for all simulations 
 
 Clean your data
 ^^^^^^^^^^^^^^^^^
-Cleaning the network's input data is an essential part of the process. In this case, there is no step-by-step to follow because the data might vastly vary from one problem to another. An example of how one might apply this process is available in `CleanDataSTLaurentDeJourdes_ `:ref:`RstCleanDataSTLaurentDeJourdes`. 
+Cleaning the network's input data is an essential part of the process. In this case, there is no step-by-step to follow because the data might vastly vary from one problem to another. An example of how one might apply this process is available in `CleanDataSTLaurentDeJourdes`_ :ref:`RstCleanDataSTLaurentDeJourdes`. 
 
 
 Run Simulations
