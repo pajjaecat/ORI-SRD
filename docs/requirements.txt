@@ -69,5 +69,7 @@ numpydoc==1.5.0
     # Needed so sphinx can render python's docs as intended and not as 
     # restructured text 
 m2r2
-    # Needed to include .md files in rst's
+    # Needed to include .md files in rst's.
+    # TODO: The rendered file does not transform the link in the md file into html links. 
+    #       Need to find a way to include that 
 
