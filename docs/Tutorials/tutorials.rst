@@ -29,7 +29,7 @@ List of Tutorials
 ------------------
 
 
-.. _RstCleanDataSTLaurentDeJourdes:
+.. .. _RstCleanDataSTLaurentDeJourdes:
 
 `CleanDataSTLaurentDeJourdes <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/CleanDataSTLaurentDeJourdes.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
