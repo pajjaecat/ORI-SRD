@@ -31,6 +31,11 @@ lowerNet_file_loc = f'{network_folder}CIVAUX.p'
 upperNet_file_loc = f'{network_folder}ST LAURENT.p'
 """ str : Relative location of the upper Network file."""
 
+cleanedData_name = 'StLaurent_cleanedData.pkl'
+"""str : Name+Extension of the cleaned Data """
+
+
+
 # -----------------------   Default Values to apply to networks  -----------------#
 
 defAuth_hvBus_vRiseMax = 1.025
@@ -54,7 +59,7 @@ default_lv_voltage = 0.4
 default_ctrld_hvProd_max = 4.0
 """float : Default maximum output (MW ) of te controlled Hv producer. """
 
-# --------------------   Spliting data into several periods ------------------------#
+# --------------------   Splitting data into several periods ------------------------#
 # These dates must be all included and defined depending on the date in the network
 # input data. As preference,  it is advised to use the closest data  for the prediction
 # i.e, previous year for prediction, 6 months before the closest as validation and year
