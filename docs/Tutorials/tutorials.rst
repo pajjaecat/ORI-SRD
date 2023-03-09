@@ -158,7 +158,7 @@ We focus on the total Energy curtailed and the resulting voltage rise above a de
 
 `SensAnalysisP0100_Res <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/SensAnalysisP0100_Res.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-The results of the previously performed sensitivity analysis in `RstSensAnalysisP0100`_ are extracted for analytics.
+The results of the previously performed sensitivity analysis in `SensAnalysisP0100`_ are extracted for analytics.
 
 
 
