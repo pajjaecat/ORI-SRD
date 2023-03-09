@@ -60,8 +60,8 @@ Contents
    :maxdepth: 2
 
    Home <self>
-   howToUse
-   tutorials
-   orivariables
-   orifunctions
-   oriclasses
+   HowToUse/howToUse
+   Tutorials/tutorials
+   orivariables/orivariables
+   orifunctions/orifunctions
+   oriclasses/oriclasses
