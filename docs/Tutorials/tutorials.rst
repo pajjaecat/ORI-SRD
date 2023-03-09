@@ -151,7 +151,7 @@ Perform a sensitivity analysis of the controlled Hv Prod maximum output dependin
 
 We focus on the total Energy curtailed and the resulting voltage rise above a defined threshold.
 
-let us said `combineRnnPred`_
+let us said `combineRnnPred`_ or `SensAnalysisP0100`_ or again :ref:`combineRnnPred`
 
 
 
