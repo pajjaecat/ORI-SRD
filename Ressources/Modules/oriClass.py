@@ -233,7 +233,7 @@ class CreateParEngines:
             # Collect the parallel results from gather_results(*args)
             parallel_result = self._gathered_results
         else:
-            parallel_result = gathered_results
+            parallel_result = list(gathered_results)
 
         if self._opf_status:  # If the opf is True or "Both" -------------------------------------
             # Get df_prodHT columns name [] from one of the engines

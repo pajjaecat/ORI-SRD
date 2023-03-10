@@ -119,13 +119,13 @@ corresponding tutorial (using the default networks ST LAURENT and CIVAUX ) from 
 out section :ref:`Tutorials`, for a succinct list of all available tutorials.
 
 Future Known
-==============
+=============
 For comparison purposes, the simulations must first be run, supposing the prediction block has perfect knowledge of the
 future. See :ref:`Rst2021_2022_KnownFuture` for the associated tutorials.
 
 Persistence
-============
-
+===========
+The second presen
 
 
 Recurrent Neural Network
