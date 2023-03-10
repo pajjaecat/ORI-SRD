@@ -1055,7 +1055,7 @@ def createDict_prodHtBt_Load(df_pred_in,
     Returns
     -------
     dict of dataframe
-        The created dictionary with its keys being
+        The created dictionary with  its keys being
           `df_prodHT` :  pandas.DataFrame
               Dataframe containing the upscaled (based on ``cur_hvProd_max``) PV power
               of the Higher voltage  producers in lower level network.
