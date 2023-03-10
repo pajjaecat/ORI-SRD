@@ -29,7 +29,8 @@ from oriVariables import (network_folder,
                           default_ctrld_hvProd_max,
                           default_hv_voltage,
                           default_lv_voltage,
-                          pd_Δt
+                          pd_Δt,
+                          hp10_start_end
                           )
 
 pd = pandas
@@ -1054,7 +1055,7 @@ def createDict_prodHtBt_Load(df_pred_in,
     Returns
     -------
     dict of dataframe
-        The created dictionary with the its keys being
+        The created dictionary with its keys being
           `df_prodHT` :  pandas.DataFrame
               Dataframe containing the upscaled (based on ``cur_hvProd_max``) PV power
               of the Higher voltage  producers in lower level network.
@@ -1174,7 +1175,7 @@ def robustness(df_out_block_pfOpf,
     per_index2 = (df_out_block_pfOpf.index
                   .to_timestamp()
                   .to_series()
-                  .between_time('07:10', '18:50')
+                  .between_time(*hp10_start_end)
                   .index.to_period(pd_Δt))
 
     # Get controlled HV prod Name
@@ -1254,7 +1255,7 @@ def block_prod(df_yTilde_opt,
     # create period index
     per_index2 = (df_yTilde_opt.index.to_timestamp()
                   .to_series()
-                  .between_time('07:10', '18:50')
+                  .between_time(*hp10_start_end)
                   .index.to_period(pd_Δt))
 
     # Upscale the HV prod when no control is applied
