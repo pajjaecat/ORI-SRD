@@ -110,11 +110,16 @@ class CreateParEngines:
 
         # Set variables
         self._run_periodIndex = run_periodIndex
-        self._pred_model = parameters_dict['pred_model']
         self._opf_status = opf_status
 
-        if clean:  # Clear the localspace of all engines if clean is True and reload modules
+        # If `pred_model` is not present in the parameters dict
+        # initialise 'self._pred_model' to None
+        try:
+            self._pred_model = parameters_dict['pred_model']
+        except:
+            self._pred_model = None
 
+        if clean:  # Clear the localspace of all engines if clean is True and reload modules
             self.dview.clear()
             with self._rc[:].sync_imports():
                 import numpy
