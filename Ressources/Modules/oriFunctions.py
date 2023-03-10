@@ -1447,13 +1447,22 @@ def par_block_pfOpf(par_engines,
     pass
 
 
-def get_nonCtrld_HvProd_names(HvProd_names_list: list,
+def get_nonCtrld_HvProd_names(hvProd_names_list: list,
                               ctrld_HvProd_name: str):
-    """ Get the list of uncontrolled Hv prod
+    """ Return the list of uncontrolled Hv prods.
+
+    Parameters
+    ----------
+    hvProd_names_list: list of str
+        List of all Hv producers.
+    ctrld_HvProd_name: str
+        Name of the controllable Hv
+
 
     """
 
-    hv_prodName = df_final.columns[2:]          # Extract all HV prod names
-    nonCtrld_HvProd_name = list(set(hv_prodName) # Get the non controllable HV prod names
+    nonCtrld_HvProd_name = list(set(hvProd_names_list) # Get the non controllable HV prod names
                                .difference(set([ctrld_HvProd_name]) )
                               )
+
+    return nonCtrld_HvProd_name
