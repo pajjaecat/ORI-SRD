@@ -116,12 +116,12 @@ that are
 
 The first two are easily implementable, while the third is more complex (Advanced Users). For each case, we provide a
 corresponding tutorial (using the default networks ST LAURENT and CIVAUX ) from which inspiration can be drawn. Check
-out section :ref:`Tutorials`, :ref:`Tutorials`, `Tutorials`_,
+out section :ref:`Tutorials`, for a succinct list of all available tutorials.
 
 Future Known
 ==============
 For comparison purposes, the simulations must first be run, supposing the prediction block has perfect knowledge of the
-future. See :ref:`Rst2021_2022_KnownFuture`
+future. See :ref:`2021_2022_KnownFuture` for the associated tutorials.
 
 Persistence
 ============
