@@ -11,7 +11,6 @@
 
 
 
-
 Tutorials
 ==========
 
@@ -52,7 +51,7 @@ Simulations of the Voltage rise on Civaux's network when the controlled HV produ
 
 `2021_2022_KnownFuture <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_KnownFuture.ipynb>`_
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Simulations using `The voltage rise detection block scheme_` with the block PRED having a perfect knowledge of the future in parallel to speed up the process.
+Simulations using |vRiseBlockScheme|_ with the block PRED having a perfect knowledge of the future in parallel to speed up the process.
 
 
 .. _Rst2021_2022_Persistence: 

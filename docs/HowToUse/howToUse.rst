@@ -116,7 +116,7 @@ that are
 
 The first two are easily implementable, while the third is more complex (Advanced Users). For each case, we provide a
 corresponding tutorial (using the default networks ST LAURENT and CIVAUX ) from which inspiration can be drawn. Check
-out section :ref:`Tutorials` or `tutorials`_
+out section :ref:`Tutorials`, :ref:`Tutorials`, `Tutorials`_,
 
 Future Known
 ==============
