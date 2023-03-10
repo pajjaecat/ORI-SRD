@@ -85,7 +85,8 @@ class CreateParEngines:
                     Buses ``max_vm_pu`` > :py:data:`oriVariables.defAuth_hvBus_vRiseMax`,
                     is the  optimal  power flow run.
         dict_df_sgenLoad : dict
-            TOWRITE
+            Output of oriFc.createDict_prodHtBt_Load, `createDict_prodHtBt_Load`_ or
+            :py:func:`oriFunctions.createDict_prodHtBt_Load` or yet again :func:`oriFunctions.createDict_prodHtBt_Load`
         parameters_dict : dict
             TOWRITE
         clean : bool, Optional

@@ -1448,7 +1448,8 @@ def par_block_pfOpf(par_engines,
 
 
 def get_nonCtrld_HvProd_names(hvProd_names_list: list,
-                              ctrld_HvProd_name: str):
+                              ctrld_HvProd_name: str
+                              ) -> list:
     """ Return the list of uncontrolled Hv prods.
 
     Parameters
@@ -1458,11 +1459,11 @@ def get_nonCtrld_HvProd_names(hvProd_names_list: list,
     ctrld_HvProd_name: str
         Name of the controllable Hv
 
-
     """
 
-    nonCtrld_HvProd_name = list(set(hvProd_names_list) # Get the non controllable HV prod names
-                               .difference(set([ctrld_HvProd_name]) )
-                              )
+    # Get the non-controllable HV prod names
+    nonCtrld_HvProd_name = list(set(hvProd_names_list)
+                                .difference({ctrld_HvProd_name})
+                                )
 
     return nonCtrld_HvProd_name
