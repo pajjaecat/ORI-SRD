@@ -85,7 +85,7 @@ class CreateParEngines:
                     Buses ``max_vm_pu`` > :py:data:`oriVariables.defAuth_hvBus_vRiseMax`,
                     is the  optimal  power flow run.
         dict_df_sgenLoad : dict
-            TOWRITE
+            Output of :py:func:`oriFunctions.createDict_prodHtBt_Load`. See the said function for more.
         parameters_dict : dict
             TOWRITE
         clean : bool, Optional
@@ -110,11 +110,16 @@ class CreateParEngines:
 
         # Set variables
         self._run_periodIndex = run_periodIndex
-        self._pred_model = parameters_dict['pred_model']
         self._opf_status = opf_status
 
-        if clean:  # Clear the localspace of all engines if clean is True and reload modules
+        # If `pred_model` is not present in the parameters dict
+        # initialise 'self._pred_model' to None
+        try:
+            self._pred_model = parameters_dict['pred_model']
+        except:
+            self._pred_model = None
 
+        if clean:  # Clear the localspace of all engines if clean is True and reload modules
             self.dview.clear()
             with self._rc[:].sync_imports():
                 import numpy
@@ -140,7 +145,6 @@ class CreateParEngines:
 
     def gather_results(self, par_result_name: str):
         """ Gather in one variable the results of the parallel engines.
-
 
         Parameters
         ----------
@@ -169,8 +173,21 @@ class CreateParEngines:
 
         return self._gathered_results
 
-    def get_results_asDf(self):
-        """ Extract the result of the parallel engine  in a dataframe.
+    def get_results_asDf(self, gathered_results=None):
+        """ Transform the results of the parallel engines in a dataframe.
+
+        The output dataframe is the transformation of the parallel engine
+        results given as input ``gathered_results``. When the input is
+        omitted (Default), the function get the parallel engine results to
+        transform from the most recent call of :py:func`gather_results`.
+        In this case, please make sure to run :py:func:`gather_results`
+        before running this function.
+
+        Parameters
+        ----------
+        gathered_results: ipyparallel.AsyncMapResult, Optional, Default=None
+            Output of :py:func`gather_results`
+
 
         Returns
         -------
@@ -212,12 +229,13 @@ class CreateParEngines:
         Make sure to run :py:func:`gather_results` before :py:func:`get_results_asDf`
 
         """
+        if gathered_results is None:  # If gathered_results is not given
+            # Collect the parallel results from gather_results(*args)
+            parallel_result = self._gathered_results
+        else:
+            parallel_result = gathered_results
 
-        # Collect the parallel results from gather_results(*args)
-        parallel_result = self._gathered_results
-
-        if self._opf_status:  # If the opf is True or "Both" ----------------------------------------------
-
+        if self._opf_status:  # If the opf is True or "Both" -------------------------------------
             # Get df_prodHT columns name [] from one of the engines
             df_prodHT_colName = self.dview['dict_df_sgenLoad'][-1]['df_prodHT'].columns
 
