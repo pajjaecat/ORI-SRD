@@ -175,8 +175,17 @@ class CreateParEngines:
 
         return self._gathered_results
 
-    def get_results_asDf(self):
-        """ Extract the result of the parallel engine  in a dataframe.
+    def get_results_asDf(self, gathered_results=None):
+        """ Transform the results of the parallel engines  in a dataframe.
+
+        Parameters
+        ----------
+        gathered_results: ipyparallel.AsyncMapResult, Optional, Default=None
+            Output of `gather_results`. If the parameter is not given (=None) the function get the parallel engine
+            results to transform from the last call of `gather_results`.
+
+
+
 
         Returns
         -------
