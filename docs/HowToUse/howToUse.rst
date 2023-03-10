@@ -107,15 +107,16 @@ available in :ref:`RstCleanDataSTLaurentDeJourdes`.
 
 Run Simulations
 ^^^^^^^^^^^^^^^^
-The simulations can be run for different models of the prediction block **PRED**. This section covers three of them,
-namely
+The simulations can be run with different models of the prediction block **PRED**. This section covers three of them,
+that are
 
 #. `Future Known`_
 #. `Persistence`_;
 #. `Recurrent Neural Network`_.
 
-The first two are easily implementable, while the third is more complex (Advanced User). For each case, we provide a
-corresponding tutorial (using the default networks ST LAURENT and CIVAUX ) from which inspiration can be drawn.
+The first two are easily implementable, while the third is more complex (Advanced Users). For each case, we provide a
+corresponding tutorial (using the default networks ST LAURENT and CIVAUX ) from which inspiration can be drawn. Check
+out section :ref:`Tutorials` or `tutorials`_
 
 Future Known
 ==============
