@@ -312,6 +312,8 @@ class CreateParEngines:
         return self._opf_status
 
 
+# ________________________________________________________________________________________________
+# ________________________________________________________________________________________________
 class InitNetworks:
     """ Initialize both the upper and lower level  Networks.
 
@@ -768,6 +770,8 @@ class InitNetworks:
         return self._lowerNet_sgenDf_copy  # return the created copy
 
 
+# ________________________________________________________________________________________________
+# ________________________________________________________________________________________________
 class SensAnalysisResult:
     """
     Initiate the Sensitivity analysis with the folder_location.
@@ -957,7 +961,11 @@ class SensAnalysisResult:
             axx.set(ylabel='P0100 Maximum Prod (MWh)', );
 
 
-class SensAnalysisResults(SensAnalysisResult):  # This class inherits super properties from the  SensAnalysisResult
+# ________________________________________________________________________________________________
+# ________________________________________________________________________________________________
+
+# This class inherits super properties from the  SensAnalysisResult
+class SensAnalysisResults(SensAnalysisResult):
     """
     Initiate the Sensitivity analysis with the folder's (location) associated
     with  each model to consider.
@@ -1006,7 +1014,8 @@ class SensAnalysisResults(SensAnalysisResult):  # This class inherits super prop
         for cur_model_name, cur_model_folder in zip(self._models_name, self._models_folder_location):
             self._files_in_folder_list_dict.update({cur_model_name: os.listdir(cur_model_folder)})
             self._plkFiles_in_folder_list_dict.update({cur_model_name:
-                super()._extractPlkFiles(self._files_in_folder_list_dict[cur_model_name])
+                                                           super()._extractPlkFiles(
+                                                               self._files_in_folder_list_dict[cur_model_name])
                                                        })
             super()._check_fileName_Format(self._plkFiles_in_folder_list_dict[cur_model_name])
 
