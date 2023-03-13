@@ -127,8 +127,11 @@ future. See :ref:`Rst2021_2022_KnownFuture` for the associated tutorials.
 
 Persistence
 ===========
-The second presen
-
+The second type of prediction that we have proposed is the previous period persistence model. Tutorials 
+:ref:`_Rst2021_2022_Persistence` present its usage for two different values of :math:`defAuth\_ hbBus\_ V^{max}_{rise}`.
+Compared to the first case (i.e. :math:`defAuth\_ hbBus\_ V^{max}_{rise} = 1.0250`), the second 
+(i.e. :math:`defAuth\_ hbBus\_ V^{max}_{rise} = 1.0225`) is provided to show how the total number of voltage rise events 
+could be reduced at a price of less yearly energy injection. 
 
 Recurrent Neural Network
 ========================
