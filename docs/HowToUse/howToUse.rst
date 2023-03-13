@@ -40,45 +40,24 @@ contain all the necessary packages and libraries (from the relevant channels) to
 
 Some Definitions
 ^^^^^^^^^^^^^^^^^^
+Here is the definition of some Variables Used in the code.
 
-.. list-table:: Variables Used in code. 
-   :widths: 25 50
-   :header-rows: 1
-
-   * - Definitions
-     - Meaning
-   * - **LV\\lv Prod\\Sgens**
-     - Lower voltage generators (producteurs BT)
-   * - **HV\hv Prod or Sgens**
-     - High voltage generators (producteurs HTA)
-   * - **Upper Network**
-     - The network where is located the Main Poste Source
-   * - **Lower Network**
-     - The network to study, which is a small branch of the Upper Network
-   * - **Voltage Rise**
-     - Elevation de tension
-   * - **Voltage event**
-     - An event where the maximum voltage rise :math:`vm\_ pu\_ max` detected at the output
-      | of the block **PF** is above the defined maximum authorised as input for the block \n 
-      | **PF/OPF** :math:`defAuth\_ hvBus\_ V_{rise}^{max}` that is  \n
-      | :data:`oriVariables.defAuth_hvBus_vRiseMax`  in :ref:`Default Variables`.
-
-By default, we consider |uppernet| and |lowernet| as the upper and lower Network, respectively. 
-
-
-============================  ====================================
+============================  =====================================================================================
          **Definitions**                **Meaning**
-============================  ====================================
+============================  =====================================================================================
 **LV\\lv Prod\\Sgens**         Lower voltage generators (producteurs BT)
 **HV\hv Prod or Sgens**        High voltage generators (producteurs HTA)
 **Upper Network**              The network where is located the Main Poste Source
 **Lower Network**              The network to study, which is a small branch of the Upper Network
 **Voltage Rise**               Elevation de tension
-**Voltage Rise event**         | An event where the maximum voltage rise :math:`vm\_ pu\_ max` detected at
-                               | the output of the block **PF** is above the defined maximum authorised
-                               | as input for the block **PF/OPF** :math:`defAuth\_ hvBus\_ V_{rise}^{max}` that is
-                               | :data:`oriVariables.defAuth_hvBus_vRiseMax` in :ref:`Default Variables`
+**Voltage Rise event**         | An event where the value of the  maximum voltage rise :math:`vm\_ pu\_ max` 
+                               | detected at the output of block **PF** is above that of the maximum authorised threshold  
+                               | :math:`defAuth\_ hvBus\_ V_{rise}^{max}` (defined as :data:`oriVariables.defAuth_hvBus_vRiseMax`) 
+                               | given as input to block **PF/OPF** .
 ============================  ====================================
+
+
+By default, we consider |uppernet| and |lowernet| as the upper and lower Network, respectively. 
 
 
 
