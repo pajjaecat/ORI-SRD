@@ -55,7 +55,10 @@ Some Definitions
      - The network where is located the Main Poste Source
    * - **Lower Network**
      - The network to study, which is a small branch of the Upper Network
-
+   * - **Voltage Rise** 
+     - Elevation de tension 
+ 
+ 
 By default, we consider |uppernet| and |lowernet| as the upper and lower Network, respectively. 
 
 
@@ -125,8 +128,9 @@ future. See :ref:`Rst2021_2022_KnownFuture` for the associated tutorials.
 
 Persistence
 ===========
-The second presen
-
+For the second type of prediction , we have proposed a persistence model based on the previous period. Tutorials 
+:ref:`_Rst2021_2022_Persistence` present its usage for respectively :math:`max\_ vm\_ pu = 1.0250` and :math:`max\_ vm\_ pu = 1.02250`.
+The second case is used to reduced the total numbers of voltage rise event () where the 
 
 Recurrent Neural Network
 ========================
