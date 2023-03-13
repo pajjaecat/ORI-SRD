@@ -58,10 +58,10 @@ Some Definitions
    * - **Voltage Rise**
      - Elevation de tension
    * - **Voltage event**
-     - An event where the maximum voltage rise :math:`vm\_ pu\_ max` detected at the output \n 
-       of the block **PF** is above the defined maximum authorised as input for the block \n 
-       **PF/OPF** :math:`defAuth\_ hvBus\_ V_{rise}^{max}` that is  \n
-       :data:`oriVariables.defAuth_hvBus_vRiseMax`  in :ref:`Default Variables`.
+     - An event where the maximum voltage rise :math:`vm\_ pu\_ max` detected at the output
+      | of the block **PF** is above the defined maximum authorised as input for the block \n 
+      | **PF/OPF** :math:`defAuth\_ hvBus\_ V_{rise}^{max}` that is  \n
+      | :data:`oriVariables.defAuth_hvBus_vRiseMax`  in :ref:`Default Variables`.
 
 By default, we consider |uppernet| and |lowernet| as the upper and lower Network, respectively. 
 
