@@ -32,6 +32,11 @@ extractParRes_asDf
 
 
 
+get_nonCtrld_HvProd_names
+*************************
+
+.. autofunction:: oriFunctions.get_nonCtrld_HvProd_names
+
 
 improve_persinstence
 ********************
