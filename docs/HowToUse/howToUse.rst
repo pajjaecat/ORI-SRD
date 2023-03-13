@@ -68,7 +68,9 @@ By default, we consider |uppernet| and |lowernet| as the upper and lower Network
 
 ============================  ====================================
 **Definitions**                **Meaning**
-
+**LV\\lv Prod\\Sgens**         Lower voltage generators (producteurs BT)
+**HV\hv Prod or Sgens**        High voltage generators (producteurs HTA)
+**Upper Network**             The network where is located the Main Poste Source
 
 ============================  ====================================
 
