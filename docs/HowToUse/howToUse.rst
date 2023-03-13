@@ -50,10 +50,11 @@ We define in this section some Variables used in the code and bellow.
 **Upper Network**              The network where is located the Main Poste Source
 **Lower Network**              The network to study, which is a small branch of the Upper Network
 **Voltage Rise**               Elevation de tension
-**Voltage Rise event**         | An event where the value of the  maximum voltage rise :math:`vm\_ pu\_ max` 
-                               | detected at the output of block **PF** is above that of the maximum authorised threshold  
+**Voltage Rise event**         | An event where the value of the  maximum voltage rise :math:`vm\_ pu\_ max` detected
+                               | at the output of block **PF** is above that of the maximum authorised threshold  
                                | :math:`defAuth\_ hvBus\_ V_{rise}^{max}` (defined as :data:`oriVariables.defAuth_hvBus_vRiseMax`) 
-                               | given as input to block **PF/OPF** .
+                                  given
+                               | as input to block **PF/OPF** .
 ============================  =====================================================================================
 
 
