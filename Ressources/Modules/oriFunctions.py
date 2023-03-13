@@ -266,7 +266,7 @@ def run_powerflow_at(network,
                 Total Load demand seen from the upper Network.
             `lowerNet_sgenDf_copy` : pandas.DataFrame
                 Copy of all the static generator (hv & lV) in the lower network.
-    auth_max_VriseHvBus: float, optional default = :py:data: `oriVariables.defAuth_hvBus_vRiseMax`
+    auth_max_VriseHvBus: float, optional default = :py:data:`oriVariables.defAuth_hvBus_vRiseMax`
         Threshold of maximum voltage allowed on the HV buses of `network`. This
         parameter is used only when ``opf_status`` = `"Both"`
     opf_status: bool or str, optional, default=False
@@ -1073,7 +1073,7 @@ def createDict_prodHtBt_Load(df_pred_in,
     Add a checking function to make sure that ``cur_hvProd_max`` <= ``ctrld_hvProd_max``.
     If the constraint does not hold raise an exception. This makes sence because the
     variation of the controlled Hv Prod can't be higher than the maximum fixed output
-    of the said Hv prod. As example, if ``ctrld_hvProd_max = 4 MW`, ``ctrld_hvProd_max``
+    of the said Hv prod. As example, if ``ctrld_hvProd_max`` = 4 MW, ``ctrld_hvProd_max``
     must be <= 4MW
 
     """
