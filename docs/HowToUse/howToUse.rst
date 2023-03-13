@@ -54,7 +54,7 @@ Here is the definition of some Variables Used in the code.
                                | detected at the output of block **PF** is above that of the maximum authorised threshold  
                                | :math:`defAuth\_ hvBus\_ V_{rise}^{max}` (defined as :data:`oriVariables.defAuth_hvBus_vRiseMax`) 
                                | given as input to block **PF/OPF** .
-============================  ====================================
+============================  =====================================================================================
 
 
 By default, we consider |uppernet| and |lowernet| as the upper and lower Network, respectively. 
