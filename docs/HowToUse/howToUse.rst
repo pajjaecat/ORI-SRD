@@ -40,21 +40,23 @@ contain all the necessary packages and libraries (from the relevant channels) to
 
 Some Definitions
 ^^^^^^^^^^^^^^^^^^
+We define in this section some Variables used in the code and bellow.
 
-.. list-table:: Variables Used in code. 
-   :widths: 25 50
-   :header-rows: 1
+============================  =====================================================================================
+         **Definitions**                **Meaning**
+============================  =====================================================================================
+**LV\\lv Prod\\Sgens**         Lower voltage generators (producteurs BT)
+**HV\hv Prod or Sgens**        High voltage generators (producteurs HTA)
+**Upper Network**              The network where is located the Main Poste Source
+**Lower Network**              The network to study, which is a small branch of the Upper Network
+**Voltage Rise**               Elevation de tension
+**Voltage Rise event**         | An event where the value of the  maximum voltage rise :math:`vm\_ pu\_ max` detected
+                               | at the output of block **PF** is above that of the maximum authorised threshold  
+                               | :math:`defAuth\_ hvBus\_ V_{rise}^{max}` (defined as :data:`oriVariables.defAuth_hvBus_vRiseMax`) 
+                                  given
+                               | as input to block **PF/OPF** .
+============================  =====================================================================================
 
-   * - Definitions
-     - Meaning
-   * - **LV\\lv Prod\\Sgens**
-     - Lower voltage generators (producteurs BT)
-   * - **HV\hv Prod or Sgens**
-     - High voltage generators (producteurs HTA)
-   * - **Upper Network**
-     - The network where is located the Main Poste Source
-   * - **Lower Network**
-     - The network to study, which is a small branch of the Upper Network
 
 By default, we consider |uppernet| and |lowernet| as the upper and lower Network, respectively. 
 
@@ -125,8 +127,11 @@ future. See :ref:`Rst2021_2022_KnownFuture` for the associated tutorials.
 
 Persistence
 ===========
-The second presen
-
+The second type of prediction that we have proposed is the previous period persistence model. Tutorials 
+:ref:`_Rst2021_2022_Persistence` present its usage for two different values of :math:`defAuth\_ hbBus\_ V^{max}_{rise}`.
+Compared to the first case (i.e. :math:`defAuth\_ hbBus\_ V^{max}_{rise} = 1.0250`), the second 
+(i.e. :math:`defAuth\_ hbBus\_ V^{max}_{rise} = 1.0225`) is provided to show how the total number of voltage rise events 
+could be reduced at a price of less yearly energy injection. 
 
 Recurrent Neural Network
 ========================
