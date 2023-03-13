@@ -40,7 +40,7 @@ contain all the necessary packages and libraries (from the relevant channels) to
 
 Some Definitions
 ^^^^^^^^^^^^^^^^^^
-Here is the definition of some Variables Used in the code.
+We define in this section some Variables used in the code and bellow.
 
 ============================  =====================================================================================
          **Definitions**                **Meaning**
@@ -58,10 +58,6 @@ Here is the definition of some Variables Used in the code.
 
 
 By default, we consider |uppernet| and |lowernet| as the upper and lower Network, respectively. 
-
-
-
-
 
 
 .. warning:: 
