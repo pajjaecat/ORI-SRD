@@ -66,6 +66,17 @@ Some Definitions
 By default, we consider |uppernet| and |lowernet| as the upper and lower Network, respectively. 
 
 
+============================  ====================================
+**Definitions**                **Meaning**
+
+
+============================  ====================================
+
+
+
+
+
+
 .. warning:: 
      Please **READ** |vRiseBlockScheme|_ .
      
