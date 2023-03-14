@@ -17,7 +17,6 @@ This section gives an in-depth view of how to efficiently navigate and use the
   
 
 
-
 Set Up Your System
 --------------------
 **********************
@@ -152,15 +151,9 @@ We proposed creation, training and usage of three diferents RNN architecture tha
 
 Sole Use
 ``````````
-- Prediction block **PRED 1** : In :ref:`RstRNN_StLaurentDeJourdes` a created and trained  RNN is used to predict :math:`\tilde{X}(k)` and :math:`\tilde{Y}(k)`. The predicted variables output of **PRED 1** are used together with all the other block of the |vRiseBlockScheme|_ in :ref:`Rst2021_2022_RNN` for using.
-
-- Prediction block **PRED 2**: 
- - :ref:`RstBin_RNN_Train` for creating and training an RNN to predict the binary voltage rise event :math:`bin\_ \widetilde{v^{max}_{rise2}}`;
- - :ref:`RstBin_RNN_Train` for predicting :math:`bin\_ \widetilde{v^{max}_{rise2}}`.
- 
-- Prediction block **PRED 3**: 
- - :ref:`RstNumerical_RNN_Train` for creating and training an RNN to predict the value of the maximum voltage rise  :math:`\widetilde{v^{max}_{rise3}}`;
- - :ref:`RstNumerical_RNN_Pred` For predicting and comparing the prediction of the RNN to that of a simple Power flow.
+- Block **PRED 1** : In :ref:`RstRNN_StLaurentDeJourdes` we present the process of creation and training of an RNN destined to predict :math:`\tilde{X}(k)` and :math:`\tilde{Y}(k)`. The predicted variables, output of **PRED 1** are used together with all the other blocks of the |vRiseBlockScheme|_ in :ref:`Rst2021_2022_RNN`.
+- Block **PRED 2**:  In :ref:`RstBinary_VriseRNN` we present the process of creation and training of an RNN destined the binary voltage rise event :math:`bin\_ \widetilde{v^{max}_{rise2}}`;
+- Block **PRED 3**: in  :ref:`RstNumerical_VriseRNN` we present the process of creation and training of an RNN destined to predict :math:`\widetilde{v^{max}_{rise3}}`. Following, the predicted variables are compared to that of a simple Power flow.
 
 Combined Use
 ``````````````
