@@ -114,8 +114,10 @@ Numerical Voltage Rise RNN
 
 Binary Voltage Rise RNN
 """""""""""""""""""""""""""
+.. _RstBin_RNN_Train:
 * `VoltageRiseBin_Train <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBin_Train.ipynb>`_ - Create and train a RNN to Predict a binary variable
   (1 or 0), whether a voltage rise (above a predefined threshold i.e. 1.0250 ) will occur or not;
+.. _RstBin_RNN_Pred:
 * `VoltageRiseNum_Pred <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseBin_Pred.ipynb>`_ - Use the previously trained RNN to predict whether a      voltage rise will occur or not in the next period.
 
 
