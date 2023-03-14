@@ -150,10 +150,12 @@ The last prediction model implemented is a Recurrent Neural Network (RNN).
 We proposed creation, training and usage of three diferents RNN architecture that can be used solely or combined. 
 
 - Prediction block **PRED 1** : See Tutorials
- - :ref:`RstRNN_StLaurentDeJourdes` for creation, training  and predicting :math:`\tilde{X}(k)` and :math:`\tilde{Y}(k)`
- - :ref:`Rst2021_2022_RNN` for using the RNN's predicted values together with all the other block in the |vRiseBlockScheme|_.
+ - :ref:`RstRNN_StLaurentDeJourdes` for creating, training  and predicting :math:`\tilde{X}(k)` and :math:`\tilde{Y}(k)`
+ - :ref:`Rst2021_2022_RNN` for using **PRED 1** output together with all the other block in the |vRiseBlockScheme|_.
 
 - Prediction block **PRED 2**: 
+ - :ref:`RstNumerical_RNN_Train` for creating and training an RNN to predict the value of the maximum voltage rise 
+  :math:`\widetilde{v^{max}_{rise3}} `
 
 - Prediction block **PRED 3**: 
 
