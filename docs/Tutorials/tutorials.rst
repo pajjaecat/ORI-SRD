@@ -81,6 +81,7 @@ Simulations using the |vRiseBlockScheme|_ with the block **PRED** using persiste
 
 
 
+
 .. _Rst2021_2022_RNN:
 
 `2021_2022_RNN <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/2021_2022_RNN.ipynb>`_
