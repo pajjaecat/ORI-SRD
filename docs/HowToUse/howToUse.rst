@@ -1,4 +1,4 @@
-.. |vRiseBlockScheme| replace:: `The voltage rise detection block scheme`
+.. |vRiseBlockScheme| replace:: `voltage rise detection block scheme`
 .. _vRiseBlockScheme: https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf
 .. |uppernet| replace:: `ST LAURENT`
 .. |lowernet| replace:: `CIVAUX`
@@ -11,6 +11,10 @@ How to Use
  
 This section gives an in-depth view of how to efficiently navigate and use the
 `Ori's Github Repository <https://github.com/pajjaecat/ORI-SRD>`_.
+
+.. warning:: 
+    Please **READ** the |vRiseBlockScheme|_ .
+  
 
 
 Set Up Your System
@@ -61,10 +65,6 @@ We define in this section some Variables used in the code and bellow.
 By default, we consider |uppernet| and |lowernet| as the upper and lower Network, respectively. 
 
 
-.. warning:: 
-     Please **READ** |vRiseBlockScheme|_ .
-     
-  
 Add Files
 ^^^^^^^^^^^^
 
@@ -122,21 +122,53 @@ out section :ref:`Tutorials`, for a succinct list of all available tutorials.
 
 Future Known
 =============
-For comparison purposes, the simulations must first be run, supposing the prediction block has perfect knowledge of the
-future. See :ref:`Rst2021_2022_KnownFuture` for the associated tutorials.
+For comparison purposes and to establish a baseline, the simulations must first be run, supposing the prediction block 
+**PRED** has perfect knowledge of the future. See :ref:`Rst2021_2022_KnownFuture` for the associated tutorials.
+
 
 Persistence
 ===========
-The second type of prediction that we have proposed is the previous period persistence model. Tutorials 
-:ref:`_Rst2021_2022_Persistence` present its usage for two different values of :math:`defAuth\_ hbBus\_ V^{max}_{rise}`.
-Compared to the first case (i.e. :math:`defAuth\_ hbBus\_ V^{max}_{rise} = 1.0250`), the second 
-(i.e. :math:`defAuth\_ hbBus\_ V^{max}_{rise} = 1.0225`) is provided to show how the total number of voltage rise events 
-could be reduced at a price of less yearly energy injection. 
+The second prediction model proposed is the previous period persistence model. Tutorials 
+:ref:`Rst2021_2022_Persistence` present its usage for two different values of :math:`defAuth\_ hvBus\_ V^{max}_{rise}`.
+
+Compared to the first case (i.e., :math:`defAuth\_ hvBus\_ V^{max}_{rise} = 1.0250`), the second 
+(i.e., :math:`defAuth\_ hvBus\_ V^{max}_{rise} = 1.0225`) is provided to show how the total number of voltage rise events 
+could be reduced at a price of less yearly energy injection by the controllable Hv Prod. 
+
+To implement the robust method introduced in section 2 of |vRiseBlockScheme|_, we also provide :ref:`Rst2021_2022_PersistenceRob`.
+
 
 Recurrent Neural Network
 ========================
+The last prediction model implemented is a Recurrent Neural Network (RNN). 
+
+  .. warning ::
+       All the RNNs developed in the :ref:`Tutorials` are tailored for the default networks. Using the same RNN architecture on others
+       networks might not yield the best performance. We **strongly** recommend optimizing your RNN architecture depending on 
+       your networks and the input data. 
+       
+We proposed creation, training and usage of three diferents RNN architecture that can be used solely or combined. 
+
+Sole Use
+``````````
+- Block **PRED 1** : In :ref:`RstRNN_StLaurentDeJourdes` we present the process of creation and training of an RNN destined to predict :math:`\tilde{X}(k)` and :math:`\tilde{Y}(k)`. The predicted variables, output of **PRED 1** are used together with all the other blocks of the |vRiseBlockScheme|_ in :ref:`Rst2021_2022_RNN`.
+- Block **PRED 2**:  In :ref:`RstBinary_VriseRNN` we present the process of creation and training of an RNN destined the binary voltage rise event :math:`bin\_ \widetilde{v^{max}_{rise2}}`;
+- Block **PRED 3**: in  :ref:`RstNumerical_VriseRNN` we present the process of creation and training of an RNN destined to predict :math:`\widetilde{v^{max}_{rise3}}`. Following, the predicted variables are compared to that of a simple Power flow.
+
+Combined Use
+``````````````
+Tutorial :ref:`Rst2021_2022_RNN_Robust_All_Models` shows how we robustly combined the prediction of the three aforementioned RNN models to evaluate 
+whether or not a voltage rise event will occur in next step. The user, thanks to the *paramUser* get to choose the combination or the unique model
+to use. The Results of different combined models are presented in :ref:`Rst2021_2022_SimResAll_RNN`.
 
 
+Go further
+-----------
+**************
+
+
+This section presents extensive tutorials based on the one presented in the previous section and their saved results. Please read the previous 
+section `Apply the |vRiseBlockScheme|_` before diving here.
 
 
 
