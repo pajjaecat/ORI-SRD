@@ -150,17 +150,23 @@ The last prediction model implemented is a Recurrent Neural Network (RNN).
 We proposed creation, training and usage of three diferents RNN architecture that can be used solely or combined. 
 
 
-Numeric Prediction
-````````````````````
-See tutorials 
-- :ref:`RstRNN_StLaurentDeJourdes` for an RNN that 
- 
-
-Binary Prediction
-````````````````````
-Here we talke binra dsfs
+ Numeric Prediction
+ ````````````````````
+ See tutorials 
+   - :ref:`RstRNN_StLaurentDeJourdes` for an RNN that 
 
 
+ Binary Prediction
+ ````````````````````
+ Here we talke binra dsfs
+
+
+
+Go further
+-----------
+**************
+This section presents extensive tutorials based on the one presented in the previous section and their saved results. Please read the previous 
+section `Apply the |vRiseBlockScheme|_ ` before diving here.
 
 
 
