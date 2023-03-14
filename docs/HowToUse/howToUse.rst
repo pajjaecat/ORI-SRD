@@ -7,6 +7,11 @@
 
 How to Use
 ##############
+
+
+ .. warning:: 
+     Please **READ** |vRiseBlockScheme|_ .
+  
  
  
 This section gives an in-depth view of how to efficiently navigate and use the
