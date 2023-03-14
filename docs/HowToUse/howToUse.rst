@@ -154,13 +154,11 @@ We proposed creation, training and usage of three diferents RNN architecture tha
  - :ref:`Rst2021_2022_RNN` for using **PRED 1** output together with all the other block in the |vRiseBlockScheme|_.
 
 - Prediction block **PRED 2**: 
- - :ref:`RstBin_RNN_Train` for creating and training an RNN to predict the binary voltage rise event
-  :math:`bin\_ \widetilde{v^{max}_{rise2}}`;
+ - :ref:`RstBin_RNN_Train` for creating and training an RNN to predict the binary voltage rise event :math:`bin\_ \widetilde{v^{max}_{rise2}}`;
  - :ref:`RstBin_RNN_Train` for predicting :math:`bin\_ \widetilde{v^{max}_{rise2}}`.
  
 - Prediction block **PRED 3**: 
- - :ref:`RstNumerical_RNN_Train` for creating and training an RNN to predict the value of the maximum voltage rise 
- :math:`\widetilde{v^{max}_{rise3}}`;
+ - :ref:`RstNumerical_RNN_Train` for creating and training an RNN to predict the value of the maximum voltage rise  :math:`\widetilde{v^{max}_{rise3}}`;
  - :ref:`RstNumerical_RNN_Pred` For predicting and comparing the prediction of the RNN to that of a simple Power flow.
 
 
