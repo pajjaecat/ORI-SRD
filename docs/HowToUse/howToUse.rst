@@ -149,9 +149,13 @@ The last prediction model implemented is a Recurrent Neural Network (RNN).
        
 We proposed creation, training and usage of three diferents RNN architecture that can be used solely or combined. 
 
- #. Numeric Prediction : See Tutorials: 
-  - :ref:`RstRNN_StLaurentDeJourdes` for creation and training of a RNN to predict :math:`\tilde{X}(k)` and :math:`\tilde{Y}(k)`
-
+ - **PRED 1** : See Tutorials
+  - :ref:`RstRNN_StLaurentDeJourdes` for creation, training  and predicting :math:`\tilde{X}(k)` and :math:`\tilde{Y}(k)`
+  - :ref:`Rst2021_2022_RNN` for using the RNN's predicted values together with all the other block in the |vRiseBlockScheme|_.
+  
+ - **PRED 2**: 
+ 
+ - **PRED 3**: 
 
 
 
