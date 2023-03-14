@@ -157,6 +157,11 @@ Sole Use
 
 Combined Use
 ``````````````
+Tutorial :ref:`Rst2021_2022_RNN_Robust_All_Models` shows how we robustly combined the prediction of the three aforementioned RNN models to evaluate 
+whether or not a voltage rise event will occur in next step. The user, thanks to the *paramUser* get to choose the combination or the unique model
+to use. The Results of different combined models are presented in :ref:`Rst2021_2022_SimResAll_RNN`.
+
+
 Go further
 -----------
 **************
