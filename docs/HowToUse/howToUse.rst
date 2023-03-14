@@ -127,9 +127,9 @@ For comparison purposes and to establish a baseline, the simulations must first 
 
 Persistence
 ===========
-The second prediction type proposed is the previous period persistence model. Tutorials 
+The second prediction model proposed is the previous period persistence model. Tutorials 
 :ref:`Rst2021_2022_Persistence` present its usage for two different values of :math:`defAuth\_ hbBus\_ V^{max}_{rise}`.
-Compared to the first case (i.e. :math:`defAuth\_ hbBus\_ V^{max}_{rise} = 1.0250`), the second 
+Compared to the first case (i.e., :math:`defAuth\_ hbBus\_ V^{max}_{rise} = 1.0250`), the second 
 (i.e. :math:`defAuth\_ hbBus\_ V^{max}_{rise} = 1.0225`) is provided to show how the total number of voltage rise events 
 could be reduced at a price of less yearly energy injection by the controllable Hv Prod. Both previously mentioned tutorials
 do not implement the robust method introduced in section 2 of |vRiseBlockScheme|_ . We provide :ref:`Rst2021_2022_PersistenceRob` 
@@ -137,7 +137,13 @@ for this approach.
 
 Recurrent Neural Network
 ========================
-The last type of prediction model that is implemented is a Recurrent Neural Network. 
+The last prediction model implemented is a Recurrent Neural Network (RNN). 
+
+  .. warning ::
+       All the RNNs developed in the tutorials are tailored for the default networks. Using the same RNN architecture on others
+       networks might not yield the best performance. We **strongly** recommend optimizing your RNN architecture depending on 
+       your networks and the input data. 
+ 
 
 
 
