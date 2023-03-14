@@ -66,10 +66,6 @@ We define in this section some Variables used in the code and bellow.
 By default, we consider |uppernet| and |lowernet| as the upper and lower Network, respectively. 
 
 
-.. warning:: 
-     Please **READ** |vRiseBlockScheme|_ .
-     
-  
 Add Files
 ^^^^^^^^^^^^
 
