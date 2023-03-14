@@ -10,9 +10,8 @@ How to Use
 
 
 
-
- .. warning:: 
-     Please **READ** |vRiseBlockScheme|_ .
+.. warning:: 
+    Please **READ** |vRiseBlockScheme|_ .
   
  
  
