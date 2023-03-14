@@ -152,6 +152,7 @@ We proposed creation, training and usage of three diferents RNN architecture tha
 #. Numeric Prediction
 ``````````````````````
 
+#. Wondering where to go
 
 Go further
 -----------
