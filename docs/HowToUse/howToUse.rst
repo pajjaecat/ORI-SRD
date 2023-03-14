@@ -150,15 +150,12 @@ The last prediction model implemented is a Recurrent Neural Network (RNN).
 We proposed creation, training and usage of three diferents RNN architecture that can be used solely or combined. 
 
 
- Numeric Prediction
- ````````````````````
- See tutorials 
+#. Numeric Prediction
+``````````````````````
+See tutorials 
    - :ref:`RstRNN_StLaurentDeJourdes` for an RNN that 
 
 
- Binary Prediction
- ````````````````````
- Here we talke binra dsfs
 
 
 
