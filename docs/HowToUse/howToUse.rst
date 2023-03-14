@@ -149,7 +149,8 @@ The last prediction model implemented is a Recurrent Neural Network (RNN).
        
 We proposed creation, training and usage of three diferents RNN architecture that can be used solely or combined. 
 
- #. Numeric Prediction
+ #. Numeric Prediction : See Tutorials: 
+    - :ref:`RstRNN_StLaurentDeJourdes` for creation and training of a RNN to predict :math:`\tilde{X}(k)` and :math:`\tilde{Y}(k)`
 
 
 
