@@ -151,7 +151,7 @@ We proposed creation, training and usage of three diferents RNN architecture tha
 
 
 #. Numeric Prediction
-``````````````````````
+
 See tutorials 
    - :ref:`RstRNN_StLaurentDeJourdes` for an RNN that 
 
