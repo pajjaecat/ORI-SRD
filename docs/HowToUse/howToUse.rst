@@ -1,4 +1,4 @@
-.. |vRiseBlockScheme| replace:: `The voltage rise detection block scheme`
+.. |vRiseBlockScheme| replace:: `voltage rise detection block scheme`
 .. _vRiseBlockScheme: https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Docs/VRiseControlBlockScheme.pdf
 .. |uppernet| replace:: `ST LAURENT`
 .. |lowernet| replace:: `CIVAUX`
@@ -13,7 +13,7 @@ This section gives an in-depth view of how to efficiently navigate and use the
 `Ori's Github Repository <https://github.com/pajjaecat/ORI-SRD>`_.
 
 .. warning:: 
-    Please **READ** |vRiseBlockScheme|_ .
+    Please **READ** the |vRiseBlockScheme|_ .
   
 
 
@@ -122,7 +122,7 @@ out section :ref:`Tutorials`, for a succinct list of all available tutorials.
 
 Future Known
 =============
-For comparison purposes, the simulations must first be run, supposing the prediction block has perfect knowledge of the
+For comparison purposes, the simulations must first be run, supposing the prediction block **PRED** has perfect knowledge of the
 future. See :ref:`Rst2021_2022_KnownFuture` for the associated tutorials.
 
 Persistence
@@ -131,10 +131,12 @@ The second type of prediction that we have proposed is the previous period persi
 :ref:`Rst2021_2022_Persistence` present its usage for two different values of :math:`defAuth\_ hbBus\_ V^{max}_{rise}`.
 Compared to the first case (i.e. :math:`defAuth\_ hbBus\_ V^{max}_{rise} = 1.0250`), the second 
 (i.e. :math:`defAuth\_ hbBus\_ V^{max}_{rise} = 1.0225`) is provided to show how the total number of voltage rise events 
-could be reduced at a price of less yearly energy injection. 
+could be reduced at a price of less yearly energy injection. Both previously mentioned tutorials do not implement the robust 
+method introduced in section 2 of |vRiseBlockScheme|_ . For this case we provide :ref:`Rst2021_2022_PersistenceRob`.
 
 Recurrent Neural Network
 ========================
+The third type of prediction model that is implemented is a Recurrent Neural Network. 
 
 
 
