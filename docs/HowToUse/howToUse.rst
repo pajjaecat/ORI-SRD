@@ -150,9 +150,6 @@ The last prediction model implemented is a Recurrent Neural Network (RNN).
 We proposed creation, training and usage of three diferents RNN architecture that can be used solely or combined. 
 
 
-#. Numeric Prediction
-
-
 
 
 Go further
