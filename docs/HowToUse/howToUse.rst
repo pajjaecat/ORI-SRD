@@ -155,7 +155,7 @@ We proposed creation, training and usage of three diferents RNN architecture tha
 
 - Prediction block **PRED 2**: 
  - :ref:`RstBin_RNN_Train` for creating and training an RNN to predict the binary voltage rise event
- :math:`bin\_ \widetilde{v^{max}_{rise2}}`;
+  :math:`bin\_ \widetilde{v^{max}_{rise2}}`;
  - :ref:`RstBin_RNN_Train` for predicting :math:`bin\_ \widetilde{v^{max}_{rise2}}`.
  
 - Prediction block **PRED 3**: 
