@@ -101,8 +101,10 @@ Using a power flow in parallel, compute the maximum voltage rise on the lower ne
 
 Numerical Voltage Rise RNN
 """""""""""""""""""""""""""
+.. _RstNumerical_RNN_Train:
 * `VoltageRiseNum_Train <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseNum_Train.ipynb>`_ - Create and Train an RNN to predict 
   the value of the maximum voltage rise.
+.. _RstNumerical_RNN_Pred:
 * `VoltageRiseNum_Pred <https://github.com/pajjaecat/ORI-SRD/blob/main/Ressources/Notebooks/VoltageRiseNum_Pred.ipynb>`_ - Use the previously trained RNN to predict the
   maximum Voltage rise and compare the results to that of a simple power flow.
 
