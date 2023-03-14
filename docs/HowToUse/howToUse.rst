@@ -155,7 +155,7 @@ We proposed creation, training and usage of three diferents RNN architecture tha
 
 - Prediction block **PRED 2**: 
  - :ref:`RstNumerical_RNN_Train` for creating and training an RNN to predict the value of the maximum voltage rise 
-  :math:`\widetilde{v^{max}_{rise3}} `
+  :math:`\widetilde{v^{max}_{rise3}}`
 
 - Prediction block **PRED 3**: 
 
